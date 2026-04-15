@@ -8,6 +8,7 @@ mermaid.initialize({
   startOnLoad: false,
   theme: 'base',
   securityLevel: 'loose',
+  suppressErrorRendering: true, // 🔥 THIS FIXES YOUR ISSUE
   flowchart: { useMaxWidth: true, htmlLabels: true },
 });
 

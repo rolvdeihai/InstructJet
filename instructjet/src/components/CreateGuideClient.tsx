@@ -237,7 +237,7 @@ export default function CreateGuideClient({ userId }: { userId: string }) {
         .select('slug')
         .single();
       if (error) throw error;
-      window.location.href = `/guide/${data.slug}`;
+      window.location.href = `/guides/${data.slug}`;
     } catch (err) {
       console.error('Publish error:', err);
       alert('Failed to publish guide');

@@ -132,7 +132,7 @@ class MixtralFreeModel:
         if max_tokens is None:
             max_tokens = self.max_tokens
         if temperature is None:
-            temperature = self.temperature
+            temperature = 0.3
 
         def _blocking():
             start = time.time()
@@ -188,7 +188,7 @@ class MixtralFreeModel:
 
     Provide a helpful response"""
 
-        prompt = f"<s>[INST] {system_prompt} [/INST] {question}"
+        prompt = f"<s>[INST] {system_prompt}\n\nNow handle this user request: {question} [/INST]"
 
         try:
             response_text = await self._generate_completion(prompt, max_tokens=512)
@@ -245,7 +245,7 @@ class MixtralFreeModel:
         logger.info(f"Compression completed in {elapsed:.2f}s")
         return summary
 
-    async def generate_efficient_section(self, section_type: str, context: str, max_tokens: int = 200) -> str:
+    async def generate_efficient_section(self, section_type: str, context: str, max_tokens: int = 300) -> str:
         """Generate a compressed, efficient language representation of a section."""
         logger.info(f"Generating efficient representation for section '{section_type}'...")
         start = time.time()
@@ -256,11 +256,24 @@ class MixtralFreeModel:
         logger.info(f"Efficient section generation took {elapsed:.2f}s")
         return efficient
 
-    async def expand_efficient_to_natural(self, efficient_text: str, section_type: str, max_tokens: int = 512) -> str:
+    async def expand_efficient_to_natural(self, efficient_text: str, section_type: str, max_tokens: int = 300) -> str:
         """Expand efficient language into detailed natural language."""
         logger.info(f"Expanding efficient language to natural text for section '{section_type}'...")
         start = time.time()
-        system = f"You are an expert task guide writer. Expand the following efficient language into a detailed, clear, and helpful section titled \"{section_type}\".\nUse markdown formatting, bullet points, subheadings, and ensure it's easy to understand. Make it comprehensive."
+        system = f"""You are an expert task guide writer. 
+        Expand the efficient language into a **short but helpful** section titled "{section_type}".
+
+        STRICT RULES:
+        - Maximum 120 words total.
+        - Use markdown subheadings (###) and bullet points.
+        - No long paragraphs – break into 3-5 bullet points or short phrases.
+        - Skip introductions, conclusions, and fluff.
+        - Keep the tone professional and clear.
+
+        Efficient language:
+        {efficient_text}
+
+        Write the {section_type} section now:"""
         prompt = f"<s>[INST] {system}\n\nEfficient language:\n{efficient_text}\n\nWrite the full {section_type} section now. [/INST]"
         expanded = await self._generate_completion(prompt, max_tokens=max_tokens)
         elapsed = time.time() - start

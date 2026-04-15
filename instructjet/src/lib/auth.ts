@@ -1,3 +1,5 @@
+// src/lib/auth.ts
+
 import bcrypt from 'bcryptjs';
 import { supabaseAdmin } from './supabase-admin';
 
