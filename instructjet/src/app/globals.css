@@ -1,0 +1,26 @@
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+/* Tell Tailwind where to find your template files */
+@source "../../**/*.{js,ts,jsx,tsx,mdx}";
+
+/* Define your custom colors */
+@theme {
+  --color-primary-50: #ffe6e9;
+  --color-primary-100: #ffccd3;
+  --color-primary-200: #ff99a7;
+  --color-primary-300: #ff667b;
+  --color-primary-400: #ff334f;
+  --color-primary-500: #F63049;
+  --color-primary-600: #D02752;
+  --color-primary-700: #8A244B;
+  --color-primary-800: #5C1E3F;
+  --color-primary-900: #2E192E;
+}
+
+/* Base styles */
+@layer base {
+  body {
+    @apply bg-gray-50 text-gray-900;
+  }
+}

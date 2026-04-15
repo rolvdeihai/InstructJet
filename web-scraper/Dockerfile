@@ -1,0 +1,29 @@
+FROM python:3.12-slim
+
+# Install system dependencies for Playwright
+RUN apt-get update && apt-get install -y \
+    curl unzip wget gnupg fonts-liberation libasound2 \
+    libatk1.0-0 libcups2 libdbus-1-3 libdrm2 libgbm1 \
+    libgtk-3-0 libnspr4 libnss3 libx11-xcb1 libxcomposite1 \
+    libxdamage1 libxrandr2 xdg-utils \
+    && rm -rf /var/lib/apt/lists/*
+
+RUN useradd -m -u 1000 user
+ENV PATH="/home/user/.local/bin:$PATH"
+ENV PLAYWRIGHT_BROWSERS_PATH=/home/user/.cache/ms-playwright
+
+WORKDIR /app
+
+COPY ./requirements.txt requirements.txt
+RUN pip install --no-cache-dir --upgrade -r requirements.txt
+
+# Install browsers into the *user’s* cache path
+RUN mkdir -p /home/user/.cache/ms-playwright \
+ && chown -R user:user /home/user/.cache \
+ && playwright install --with-deps
+
+USER user
+COPY --chown=user . /app
+
+EXPOSE 7860
+CMD ["uvicorn", "app:app", "--host", "0.0.0.0", "--port", "7860"]

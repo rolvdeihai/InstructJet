@@ -1,0 +1,6 @@
+.venv
+/.git_hf
+.env
+*.whl
+.venv/
+__pycache__/
