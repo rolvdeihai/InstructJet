@@ -5,7 +5,7 @@ const HF_API_URL = `${process.env.HF_API_BASE_URL}/chat`;
 const FETCH_TIMEOUT_MS = 600_000; // 10 minutes
 
 // The Colab notebook URL (make sure it's public)
-const COLAB_NOTEBOOK_URL = 'https://colab.research.google.com/drive/17BePgGCEGK5oRcjcMsjRMzT0pfXHsiwx?usp=sharing';
+const COLAB_NOTEBOOK_URL = 'https://colab.research.google.com/drive/1MYZeH5mNCEd9bdO8bL2tCL9IRWtd62CG?usp=sharing';
 
 export async function POST(req: NextRequest) {
   const controller = new AbortController();

@@ -4,11 +4,11 @@ import asyncio
 if sys.platform == "win32":
     asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
 
-from fastapi import FastAPI, HTTPException, BackgroundTasks, Form
+from fastapi import FastAPI, HTTPException, BackgroundTasks, Form, WebSocket, WebSocketDisconnect
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse
 from pydantic import BaseModel
-from typing import Dict, List, Optional
+from typing import Dict, List, Optional, Any
 import uuid
 from datetime import datetime
 import tempfile
@@ -16,9 +16,10 @@ import pandas as pd
 import uvicorn
 import os
 import logging
+import base64
 
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
-from scraper import general_web_search   # <-- changed from scrape_lead_by_industry
+from scraper import general_web_search, CaptchaType
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(name)s: %(message)s")
 logger = logging.getLogger(__name__)
@@ -48,22 +49,31 @@ stop_flags: Dict[str, Dict[str, bool]] = {}
 async def captcha_websocket(websocket: WebSocket):
     global captcha_ws
     await websocket.accept()
+    logger.info("✅ WebSocket client connected for CAPTCHA")
     captcha_ws = websocket
     try:
         while True:
-            # Wait for solution from frontend
             data = await websocket.receive_json()
             challenge_id = data.get("challenge_id")
             if challenge_id and challenge_id in pending_captchas:
                 pending_captchas[challenge_id]["solution"] = data
                 pending_captchas[challenge_id]["event"].set()
+                logger.info(f"✅ Received solution for challenge {challenge_id}")
     except WebSocketDisconnect:
+        logger.info("WebSocket client disconnected")
         captcha_ws = None
 
 async def request_captcha_solution(screenshot_bytes: bytes, captcha_type: str) -> Dict[str, Any]:
     """Called by scraper to ask user for CAPTCHA solution."""
     global captcha_ws
+    # Wait up to 5 seconds for a WebSocket client to connect
+    for _ in range(50):
+        if captcha_ws:
+            break
+        await asyncio.sleep(0.1)
+
     if not captcha_ws:
+        logger.error("No WebSocket client connected for CAPTCHA")
         raise HTTPException(status_code=503, detail="No CAPTCHA solver connected")
     challenge_id = str(uuid.uuid4())
     event = asyncio.Event()
@@ -79,19 +89,20 @@ async def request_captcha_solution(screenshot_bytes: bytes, captcha_type: str) -
         "type": captcha_type,
         "image": base64.b64encode(screenshot_bytes).decode()
     })
-    # Wait for solution (timeout 60 seconds)
+    logger.info(f"📸 CAPTCHA challenge sent, waiting for solution (type={captcha_type}, id={challenge_id})")
     try:
         await asyncio.wait_for(event.wait(), timeout=60.0)
         solution = pending_captchas[challenge_id].get("solution")
+        logger.info(f"✅ CAPTCHA solved: {solution}")
         return solution or {"type": "timeout"}
     except asyncio.TimeoutError:
+        logger.warning("⏰ CAPTCHA timeout")
         return {"type": "timeout"}
     finally:
         pending_captchas.pop(challenge_id, None)
 
 async def run_searcher(task_id: str, query: str, max_results: int):
     async def captcha_handler(screenshot: bytes, captcha_type: CaptchaType) -> Dict[str, Any]:
-        # Convert enum to string for JSON
         return await request_captcha_solution(screenshot, captcha_type.value)
     
     try:

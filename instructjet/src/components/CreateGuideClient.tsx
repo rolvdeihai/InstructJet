@@ -22,8 +22,8 @@ export default function CreateGuideClient({ userId }: { userId: string }) {
   const [webSearchEnabled, setWebSearchEnabled] = useState(false);
   const [isSearching, setIsSearching] = useState(false);
 
-  const webSearchApiUrl = process.env.NEXT_PUBLIC_WEB_SEARCH_API_URL;
-  const wsBaseUrl = process.env.NEXT_PUBLIC_WEB_SEARCH_API_URL || window.location.origin;
+  // const webSearchApiUrl = process.env.NEXT_PUBLIC_WEB_SEARCH_API_URL;
+  // const wsBaseUrl = process.env.NEXT_PUBLIC_WEB_SEARCH_API_URL || window.location.origin;
 
   // Create a fresh session on mount
   useEffect(() => {
@@ -64,52 +64,39 @@ export default function CreateGuideClient({ userId }: { userId: string }) {
 
   // Helper: call web search API and return summarized text
   const fetchWebSearchSummary = async (query: string): Promise<string | null> => {
-    if (!webSearchApiUrl) {
-      console.warn('WEB_SEARCH_API_URL not set');
-      return null;
-    }
     try {
-      // 1. Start search task
-      const startRes = await fetch(`${webSearchApiUrl}/api/search`, {
+      const response = await fetch('/api/web-search', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ query, max_results: 5 }),
+        body: JSON.stringify({ query, maxResults: 5 }),
       });
-      const { task_id } = await startRes.json();
-      if (!task_id) throw new Error('No task_id returned');
 
-      // 2. Poll for results
-      let results = null;
-      let attempts = 0;
-      const maxAttempts = 30; // 30 seconds timeout
-      while (attempts < maxAttempts) {
-        await new Promise(r => setTimeout(r, 1000));
-        const statusRes = await fetch(`${webSearchApiUrl}/api/task/${task_id}/results`);
-        if (statusRes.status === 200) {
-          const data = await statusRes.json();
-          results = data.results;
-          break;
-        } else if (statusRes.status === 425) {
-          // Still processing
-          attempts++;
-          continue;
-        } else {
-          throw new Error(`Unexpected status: ${statusRes.status}`);
-        }
+      if (!response.ok) {
+        console.error('Web search API error:', response.status);
+        return null;
       }
-      if (!results || results.length === 0) return null;
 
-      // 3. Summarize top 3 results
-      const topResults = results.slice(0, 3);
-      const summary = topResults.map((r: any, idx: number) => 
-        `${idx+1}. ${r.title}\n   ${r.snippet}\n   Source: ${r.url}`
+      const data = await response.json();
+      if (!data.results || data.results.length === 0) {
+        console.log('No results from web search');
+        return null;
+      }
+
+      // Log which source was used (for debugging)
+      console.log(`[Client] Web search used source: ${data.source} (chain: ${data.allSources?.join(' → ')})`);
+
+      // Format results as before
+      const summary = data.results.map((r: any, idx: number) =>
+        `${idx + 1}. ${r.title}\n   ${r.snippet}\n   Source: ${r.url}`
       ).join('\n\n');
+
       return `Web search results for "${query}":\n\n${summary}`;
     } catch (err) {
-      console.error('Web search failed:', err);
+      console.error('Web search fetch failed:', err);
       return null;
     }
   };
+
 
   const handleSendMessage = async (message: string) => {
     if (!message.trim()) return;
@@ -289,7 +276,7 @@ export default function CreateGuideClient({ userId }: { userId: string }) {
         <GuidePreview content={guideContent} onChange={setGuideContent} />
       </div>
       {/* CAPTCHA modal – floats above everything */}
-      <CaptchaSolver wsUrl={wsBaseUrl} />
+      {/* {webSearchApiUrl && webSearchEnabled && <CaptchaSolver wsUrl={wsBaseUrl} />} */}
     </div>
   );
 }

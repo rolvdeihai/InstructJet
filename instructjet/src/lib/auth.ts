@@ -32,18 +32,28 @@ export async function createSession(userId: string): Promise<string> {
 
 export async function getUserFromSession(token: string | undefined) {
   if (!token) return null;
-  const { data: session, error } = await supabaseAdmin
+
+  // 1. Get session from sessions table (only session data)
+  const { data: session, error: sessionError } = await supabaseAdmin
     .from('sessions')
     .select('user_id, expires_at')
     .eq('token', token)
     .single();
-  if (error || !session) return null;
+
+  if (sessionError || !session) return null;
+
+  // 2. Check if session expired
   if (new Date(session.expires_at) < new Date()) return null;
-  const { data: user } = await supabaseAdmin
+
+  // 3. Fetch the user from users table with all required fields
+  const { data: user, error: userError } = await supabaseAdmin
     .from('users')
-    .select('id, email, full_name, plan_tier')
+    .select('id, email, full_name, plan_tier, current_period_end')
     .eq('id', session.user_id)
     .single();
+
+  if (userError || !user) return null;
+
   return user;
 }
 

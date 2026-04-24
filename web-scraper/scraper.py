@@ -9,6 +9,9 @@ from enum import Enum
 
 from config.browser_config import PlaywrightManager
 from parsel import Selector
+import os
+# from dotenv import load_dotenv
+# load_dotenv()
 
 logger = logging.getLogger(__name__)
 
@@ -20,19 +23,40 @@ class CaptchaType(str, Enum):
     
 async def detect_captcha(page) -> Optional[tuple[CaptchaType, Any]]:
     """Detect CAPTCHA on the page and return (type, element_selector_or_frame)."""
-    # Common CAPTCHA selectors
-    if await page.is_visible("iframe[src*='recaptcha']"):
-        # reCAPTCHA checkbox
-        return CaptchaType.CHECKBOX, "iframe[src*='recaptcha']"
-    if await page.is_visible("iframe[src*='hcaptcha']"):
-        return CaptchaType.CHECKBOX, "iframe[src*='hcaptcha']"
+    # Wait a bit for dynamic content
+    await page.wait_for_timeout(1000)
+    
+    # Check for reCAPTCHA iframe (most common)
+    # Log all iframes
+    iframes = await page.query_selector_all("iframe")
+    logger.info(f"📄 Found {len(iframes)} iframes on page")
+    for i, iframe in enumerate(iframes):
+        src = await iframe.get_attribute("src")
+        logger.info(f"   Iframe {i}: src={src[:100] if src else 'None'}")
+    
+    # Check for reCAPTCHA iframe
+    recaptcha_iframe = await page.query_selector("iframe[src*='recaptcha']")
+    if recaptcha_iframe:
+        is_visible = await recaptcha_iframe.is_visible()
+        logger.info(f"🔍 reCAPTCHA iframe found, visible={is_visible}")
+        if is_visible:
+            return CaptchaType.CHECKBOX, recaptcha_iframe
+    else:
+        logger.info("❌ No reCAPTCHA iframe found")
+    
+    # hCaptcha
+    hcaptcha_iframe = await page.query_selector("iframe[src*='hcaptcha']")
+    if hcaptcha_iframe and await hcaptcha_iframe.is_visible():
+        return CaptchaType.CHECKBOX, hcaptcha_iframe
+    
+    # Text CAPTCHAs (classic)
     if await page.is_visible(".captcha"):
         return CaptchaType.TEXT, ".captcha"
     if await page.is_visible("#captcha"):
         return CaptchaType.TEXT, "#captcha"
-    # Check for text input + image
     if await page.is_visible("img[alt*='captcha']") and await page.is_visible("input[name*='captcha']"):
         return CaptchaType.TEXT, "img[alt*='captcha']"
+    
     return None
 
 async def solve_captcha_interactive(
@@ -54,6 +78,12 @@ async def solve_captcha_interactive(
         if solution.get("type") == "click":
             # Click at relative coordinates inside the element
             await frame.click(position={"x": solution["x"], "y": solution["y"]})
+            # Wait a moment for the checkbox to register
+            await page.wait_for_timeout(1000)
+            # Look for a submit button on the page (common for demo pages)
+            submit_button = await page.query_selector("button[type='submit'], input[type='submit']")
+            if submit_button:
+                await submit_button.click()
         return True
     elif captcha_type == CaptchaType.TEXT:
         # Find the CAPTCHA image
@@ -97,10 +127,14 @@ async def general_web_search(
         return
 
     encoded_query = urllib.parse.quote(query)
-    google_url = f"https://www.google.com/search?q={encoded_query}&hl=en&gl=us"
-    logger.info(f"Searching Google: {google_url}")
+    # google_url = f"https://www.google.com/search?q={encoded_query}&hl=en&gl=us"
+    # logger.info(f"Searching Google: {google_url}")
+    
+    # --- TEST: Force reCAPTCHA demo page ---
+    google_url = "https://www.google.com/recaptcha/api2/demo"
+    logger.info(f"TEST MODE: Going to reCAPTCHA demo page: {google_url}")
 
-    playwright_manager = PlaywrightManager(headless=True)
+    playwright_manager = PlaywrightManager(headless=False)
     seen_urls: Set[str] = set()
     results_yielded = 0
 
@@ -108,6 +142,15 @@ async def general_web_search(
         page = await playwright_manager.start_browser(stealth_on=True)
         await page.goto(google_url, wait_until="domcontentloaded", timeout=60000)
         await page.wait_for_timeout(3000)  # let dynamic content settle
+        
+        if os.environ.get("TEST_CAPTCHA") == "1":
+            logger.info("TEST: Generating fake CAPTCHA")
+            # Take a screenshot of the entire page as fake CAPTCHA image
+            fake_img = await page.screenshot()
+            if on_captcha:
+                solution = await on_captcha(fake_img, CaptchaType.TEXT)
+                logger.info(f"Fake CAPTCHA solved: {solution}")
+            return  # Exit early
 
         # Wait for search results container
         try:

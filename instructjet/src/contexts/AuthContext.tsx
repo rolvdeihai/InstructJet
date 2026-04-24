@@ -10,6 +10,7 @@ interface User {
   email: string;
   full_name: string | null;
   plan_tier: string;
+  current_period_end?: string | null;   // optional because free users may not have it
 }
 
 interface AuthContextType {

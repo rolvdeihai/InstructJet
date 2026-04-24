@@ -1,8 +1,16 @@
+// src/app/page.tsx
+
+'use client';
+
 import Link from 'next/link';
+import { useAuth } from '@/contexts/AuthContext';  // ✅ ADD THIS IMPORT
+import PayPalSubscribeButton from '@/components/PaypalSubscribeButton'; // ✅ Ensure file name matches (or rename file to PayPalSubscribeButton.tsx)
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 
 export default function Home() {
+  const { user, loading } = useAuth();
+  
   return (
     <main className="min-h-screen bg-white">
       <Navbar />
@@ -135,19 +143,35 @@ export default function Home() {
             {/* Premium Plan */}
             <div className="bg-gray-50 rounded-2xl p-8 shadow-md">
               <h3 className="text-2xl font-bold text-gray-900 mb-2">Premium</h3>
-              <p className="text-4xl font-bold text-gray-900 mb-4">$99<span className="text-lg font-normal text-gray-500">/month</span></p>
+              <p className="text-4xl font-bold text-gray-900 mb-4">$19<span className="text-lg font-normal text-gray-500">/month</span></p>
               <ul className="space-y-3 mb-8">
-                <li className="flex items-center"><span className="text-green-500 mr-2">✓</span> 200,000 tokens/month</li>
+                <li className="flex items-center"><span className="text-green-500 mr-2">✓</span> 1,000,000 tokens/month</li>
                 <li className="flex items-center"><span className="text-green-500 mr-2">✓</span> Unlimited guides</li>
                 <li className="flex items-center"><span className="text-green-500 mr-2">✓</span> Priority AI feedback</li>
                 <li className="flex items-center"><span className="text-green-500 mr-2">✓</span> Priority support & onboarding</li>
               </ul>
-              <Link
-                href="/pricing"
-                className="block text-center bg-primary-600 text-white py-3 rounded-xl font-bold hover:bg-primary-700 transition"
-              >
-                Choose Plan
-              </Link>
+              {loading ? (
+                <div className="text-center py-3">Loading...</div>
+              ) : user ? (
+                user.plan_tier === 'premium' ? (
+                  <button disabled className="w-full bg-gray-400 text-white py-3 rounded-xl">
+                    Current Plan
+                  </button>
+                ) : (
+                  <PayPalSubscribeButton
+                    userId={user.id}
+                    onSuccess={() => {
+                      alert('Subscription successful! Refreshing...');
+                      window.location.reload();
+                    }}
+                    onError={(err: any) => alert(err)}
+                  />
+                )
+              ) : (
+                <Link href="/signup" className="block text-center bg-primary-600 text-white py-3 rounded-xl">
+                  Sign up to subscribe
+                </Link>
+              )}
             </div>
           </div>
           <p className="text-center text-gray-500 text-sm mt-8">

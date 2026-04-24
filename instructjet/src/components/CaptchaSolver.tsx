@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 interface CaptchaChallenge {
   challenge_id: string;
@@ -11,31 +11,46 @@ interface CaptchaChallenge {
 export default function CaptchaSolver({ wsUrl }: { wsUrl: string }) {
   const [challenge, setChallenge] = useState<CaptchaChallenge | null>(null);
   const [textAnswer, setTextAnswer] = useState('');
-  const [clickCoords, setClickCoords] = useState<{ x: number; y: number } | null>(null);
+  const wsRef = useRef<WebSocket | null>(null);
+
+  const getWebSocketUrl = () => {
+    let base = wsUrl;
+    if (base.startsWith('http://')) base = base.replace('http://', 'ws://');
+    else if (base.startsWith('https://')) base = base.replace('https://', 'wss://');
+    return `${base}/ws/captcha`;
+  };
 
   useEffect(() => {
-    const ws = new WebSocket(`${wsUrl}/ws/captcha`);
-    ws.onmessage = (event) => {
-      const data = JSON.parse(event.data);
-      setChallenge({
-        challenge_id: data.challenge_id,
-        type: data.type,
-        image: `data:image/png;base64,${data.image}`,
-      });
+    const connect = () => {
+      const ws = new WebSocket(getWebSocketUrl());
+      ws.onopen = () => console.log('✅ WebSocket connected');
+      ws.onmessage = (event) => {
+        const data = JSON.parse(event.data);
+        setChallenge({
+          challenge_id: data.challenge_id,
+          type: data.type,
+          image: `data:image/png;base64,${data.image}`,
+        });
+      };
+      ws.onclose = () => {
+        console.log('WebSocket disconnected, reconnecting...');
+        setTimeout(connect, 1000);
+      };
+      ws.onerror = (err) => console.error('WebSocket error', err);
+      wsRef.current = ws;
     };
-    return () => ws.close();
+    connect();
+    return () => {
+      if (wsRef.current) wsRef.current.close();
+    };
   }, [wsUrl]);
 
   const sendSolution = (solution: any) => {
-    if (!challenge) return;
-    const ws = new WebSocket(`${wsUrl}/ws/captcha`);
-    ws.onopen = () => {
-      ws.send(JSON.stringify({ ...solution, challenge_id: challenge.challenge_id }));
-      ws.close();
-    };
+    if (wsRef.current && wsRef.current.readyState === WebSocket.OPEN) {
+      wsRef.current.send(JSON.stringify({ ...solution, challenge_id: challenge?.challenge_id }));
+    }
     setChallenge(null);
     setTextAnswer('');
-    setClickCoords(null);
   };
 
   if (!challenge) return null;
@@ -92,7 +107,6 @@ export default function CaptchaSolver({ wsUrl }: { wsUrl: string }) {
     );
   }
 
-  // Fallback for other types
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
       <div className="bg-white rounded-lg p-6">
