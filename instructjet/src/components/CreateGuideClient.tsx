@@ -171,28 +171,36 @@ export default function CreateGuideClient({ userId }: { userId: string }) {
   const generateGuideSections = async (prompt: string, sections: string[]) => {
     setGeneratingSections(true);
     setGuideContent('');
-    setCurrentSectionIndex(0);
+    
+    // Step 1: get the compressed representation of the user's request
+    const baseUrl = process.env.NEXT_PUBLIC_HF_API_BASE_URL;
+    const compressRes = await fetch(`${baseUrl}/compress-query`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ prompt }),
+    });
+    const { compressed } = await compressRes.json();
+    
+    // Step 2: generate each section independently using the SAME compressed context
     let fullGuide = '';
     for (let i = 0; i < sections.length; i++) {
       setCurrentSectionIndex(i);
       try {
-        const baseUrl = process.env.NEXT_PUBLIC_HF_API_BASE_URL;
         const response = await fetch(`${baseUrl}/generate-section`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
             section_type: sections[i],
-            context: `User request: ${prompt}\nPrevious sections:\n${fullGuide}`,
-            compress_input: true,
+            compressed_context: compressed,   // 👈 same for every section
+            compress_input: false,            // tell backend to skip Phase 1
           }),
         });
         const data = await response.json();
-        const sectionContent = data.content;
-        fullGuide += `\n\n## ${sections[i]}\n${sectionContent}`;
+        fullGuide += `\n\n## ${sections[i]}\n${data.content}`;
         setGuideContent(fullGuide);
       } catch (err) {
         console.error(`Error generating section ${sections[i]}:`, err);
-        fullGuide += `\n\n## ${sections[i]}\n*Failed to generate this section. Please try again.*`;
+        fullGuide += `\n\n## ${sections[i]}\n*Failed to generate.*`;
         setGuideContent(fullGuide);
       }
     }
