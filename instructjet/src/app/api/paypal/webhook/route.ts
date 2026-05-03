@@ -149,11 +149,11 @@ async function processWebhookEvent(event: PayPalWebhookEvent) {
   }
 
   const now = new Date();
-  const nextMonth = new Date();
-  nextMonth.setDate(now.getDate() + 30);
 
   switch (eventType) {
-    case 'BILLING.SUBSCRIPTION.ACTIVATED':
+    case 'BILLING.SUBSCRIPTION.ACTIVATED': {
+      const nextMonth = new Date();
+      nextMonth.setDate(now.getDate() + 30);
       await supabaseAdmin
         .from('users')
         .update({
@@ -165,12 +165,14 @@ async function processWebhookEvent(event: PayPalWebhookEvent) {
 
       await supabaseAdmin
         .from('token_balances')
-        .update({ subscription_tokens: 1000000 })
+        .update({
+          subscription_tokens: 1000000,
+          last_token_reset: now.toISOString(),
+        })
         .eq('user_id', user.id);
-
-      console.log(`Subscription activated for user ${user.id}`);
       break;
-
+    }
+      
     case 'BILLING.SUBSCRIPTION.CANCELLED':
       await supabaseAdmin
         .from('users')
@@ -190,27 +192,40 @@ async function processWebhookEvent(event: PayPalWebhookEvent) {
       console.log(`Subscription cancelled for user ${user.id}`);
       break;
 
-    case 'BILLING.SUBSCRIPTION.RENEWED':
-      const { data: balance } = await supabaseAdmin
+    case 'BILLING.SUBSCRIPTION.RENEWED': {
+      // Fetch user's last token reset date
+      const { data: tokenData } = await supabaseAdmin
         .from('token_balances')
-        .select('subscription_tokens')
+        .select('subscription_tokens, last_token_reset')
         .eq('user_id', user.id)
-        .single<TokenBalance>();
+        .single();
 
-      const newTokens = (balance?.subscription_tokens || 0) + 1000000;
-      await supabaseAdmin
-        .from('token_balances')
-        .update({ subscription_tokens: newTokens })
-        .eq('user_id', user.id);
+      const lastReset = tokenData?.last_token_reset ? new Date(tokenData.last_token_reset) : null;
+      const monthsSinceReset = lastReset ? (now.getTime() - lastReset.getTime()) / (1000 * 60 * 60 * 24 * 30) : 1;
 
+      if (!lastReset || monthsSinceReset >= 1) {
+        // Reset monthly tokens
+        await supabaseAdmin
+          .from('token_balances')
+          .update({
+            subscription_tokens: 1000000,
+            last_token_reset: now.toISOString(),
+          })
+          .eq('user_id', user.id);
+        console.log(`Monthly tokens reset for user ${user.id}`);
+      } else {
+        console.log(`Skipping token reset for user ${user.id} – already reset within 30 days`);
+      }
+
+      // Update subscription period end (30 days from now)
+      const nextPeriodEnd = new Date();
+      nextPeriodEnd.setDate(now.getDate() + 30);
       await supabaseAdmin
         .from('users')
-        .update({ current_period_end: nextMonth.toISOString() })
+        .update({ current_period_end: nextPeriodEnd.toISOString() })
         .eq('id', user.id);
-
-      console.log(`Renewed +1M tokens for user ${user.id}`);
       break;
-
+    }
     default:
       console.log(`Unhandled event type: ${eventType}`);
   }

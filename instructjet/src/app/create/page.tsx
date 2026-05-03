@@ -1,9 +1,11 @@
-// scr/app/create/page.tsx
+// src/app/create/page.tsx
 
 import { redirect } from 'next/navigation';
 import { cookies } from 'next/headers';
 import { getUserFromSession } from '@/lib/auth';
 import CreateGuideClient from '@/components/CreateGuideClient';
+import Navbar from '@/components/Navbar';
+import Footer from '@/components/Footer';
 
 export default async function CreatePage() {
   const cookieStore = await cookies();
@@ -11,5 +13,10 @@ export default async function CreatePage() {
   const user = await getUserFromSession(sessionToken);
   if (!user) redirect('/login');
 
-  return <CreateGuideClient userId={user.id} />;
+  return (
+    <>
+      <Navbar />
+      <CreateGuideClient userId={user.id} />
+    </>
+  );
 }

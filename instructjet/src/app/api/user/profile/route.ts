@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { supabaseAdmin } from '@/lib/supabase-admin';
 import { getCurrentUser } from '@/lib/session';
+import { comparePassword } from '@/lib/auth';
 
 export async function GET(request: NextRequest) {
   try {
@@ -53,10 +54,31 @@ export async function PATCH(request: NextRequest) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
-    const { fullName } = await request.json();
+    const { fullName, currentPassword } = await request.json();
 
     if (fullName !== undefined && typeof fullName !== 'string') {
       return NextResponse.json({ error: 'Invalid full name' }, { status: 400 });
+    }
+
+    // Require password confirmation for name change
+    if (!currentPassword) {
+      return NextResponse.json({ error: 'Current password required to update profile' }, { status: 400 });
+    }
+
+    // Verify current password
+    const { data: userWithHash } = await supabaseAdmin
+      .from('users')
+      .select('password_hash')
+      .eq('id', user.id)
+      .single();
+
+    if (!userWithHash) {
+      return NextResponse.json({ error: 'User not found' }, { status: 404 });
+    }
+
+    const isValid = await comparePassword(currentPassword, userWithHash.password_hash);
+    if (!isValid) {
+      return NextResponse.json({ error: 'Current password is incorrect' }, { status: 401 });
     }
 
     const { data: updatedUser, error: updateError } = await supabaseAdmin

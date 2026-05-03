@@ -56,6 +56,13 @@ export default function GuidePreview({ content, onChange }: GuidePreviewProps) {
                     </code>
                   );
                 },
+                a({ href, children }) {
+                  return (
+                    <a href={href} target="_blank" rel="noopener noreferrer" className="text-primary-600 hover:underline">
+                      {children}
+                    </a>
+                  );
+                },
               }}
             >
               {content}

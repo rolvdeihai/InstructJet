@@ -1,5 +1,3 @@
-// src/contexts/AuthContext.tsx
-
 'use client';
 
 import React, { createContext, useContext, useEffect, useState } from 'react';
@@ -10,14 +8,14 @@ interface User {
   email: string;
   full_name: string | null;
   plan_tier: string;
-  current_period_end?: string | null;   // optional because free users may not have it
+  current_period_end?: string | null;
 }
 
 interface AuthContextType {
   user: User | null;
   loading: boolean;
   login: (email: string, password: string) => Promise<void>;
-  register: (email: string, password: string, fullName?: string) => Promise<void>;
+  register: (email: string, password: string, fullName?: string, verificationToken?: string) => Promise<void>;
   logout: () => Promise<void>;
 }
 
@@ -29,7 +27,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const router = useRouter();
 
   useEffect(() => {
-    // Fetch current user on mount
     const fetchUser = async () => {
       try {
         const res = await fetch('/api/auth/me');
@@ -58,17 +55,18 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     router.push('/dashboard');
   };
 
-  const register = async (email: string, password: string, fullName?: string) => {
+  // Updated register to accept verificationToken
+  const register = async (email: string, password: string, fullName?: string, verificationToken?: string) => {
     const res = await fetch('/api/auth/register', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email, password, fullName }),
+      body: JSON.stringify({ email, password, fullName, verificationToken }),
     });
     const data = await res.json();
     if (!res.ok) {
       throw new Error(data.error || 'Registration failed');
     }
-    // After registration, log them in automatically
+    // Log the user in after successful registration
     await login(email, password);
   };
 

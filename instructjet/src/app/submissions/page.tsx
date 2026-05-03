@@ -11,6 +11,8 @@ import Footer from '@/components/Footer';
 import Image from 'next/image';
 import Link from 'next/link';
 import { downloadSubmissionPdf } from '@/lib/pdf-utils';
+import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
 
 interface Submission {
   id: string;
@@ -37,7 +39,6 @@ export default function SubmissionsPage() {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedIds, setSelectedIds] = useState<Set<string>>(new Set());
   const [deleting, setDeleting] = useState(false);
-  // Track which submission is being edited and its draft comment
   const [editingId, setEditingId] = useState<string | null>(null);
   const [editCommentValue, setEditCommentValue] = useState('');
 
@@ -90,7 +91,7 @@ export default function SubmissionsPage() {
       setFiltered(enriched);
     }
     setLoading(false);
-    setSelectedIds(new Set()); // clear selection after refresh
+    setSelectedIds(new Set());
   };
 
   const updateApprovalStatus = async (id: string, newStatus: 'approved' | 'rejected') => {
@@ -100,7 +101,6 @@ export default function SubmissionsPage() {
     } else alert('Failed to update');
   };
 
-  // Save edited comment to database
   const saveComment = async (id: string, newComment: string) => {
     const { error } = await supabase
       .from('media_uploads')
@@ -126,7 +126,6 @@ export default function SubmissionsPage() {
     URL.revokeObjectURL(link.href);
   };
 
-  // Generate and download a PDF report for a single submission
   const downloadPDF = async (sub: Submission) => {
     await downloadSubmissionPdf(
       {
@@ -261,7 +260,7 @@ export default function SubmissionsPage() {
                     <p className="text-sm text-gray-500 mt-1">Submitted: {new Date(sub.created_at).toLocaleDateString()}</p>
                     {sub.worker_name && <p className="text-sm text-gray-600 mt-1">Worker: {sub.worker_name}</p>}
                     
-                    {/* Editable Comment Section */}
+                    {/* Editable Comment Section with Markdown Preview */}
                     <div className="mt-2 p-2 bg-gray-50 rounded text-sm">
                       <div className="flex justify-between items-center">
                         <span className="font-medium">Comment:</span>
@@ -298,11 +297,14 @@ export default function SubmissionsPage() {
                           onChange={(e) => setEditCommentValue(e.target.value)}
                           className="w-full mt-1 p-1 border rounded text-sm"
                           rows={3}
+                          placeholder="Markdown supported"
                         />
                       ) : (
-                        <p className="text-gray-700 mt-1 whitespace-pre-wrap">
-                          {sub.ai_comment || 'No comment provided.'}
-                        </p>
+                        <div className="prose prose-sm max-w-none mt-1 text-gray-700">
+                          <ReactMarkdown remarkPlugins={[remarkGfm]}>
+                            {sub.ai_comment || '*No comment provided.*'}
+                          </ReactMarkdown>
+                        </div>
                       )}
                     </div>
 

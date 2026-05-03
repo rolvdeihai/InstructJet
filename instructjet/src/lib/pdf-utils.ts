@@ -1,9 +1,39 @@
-// src/lib/pdf-utils.ts
 import { PDFDocument, StandardFonts } from 'pdf-lib';
 import { rgb } from 'pdf-lib';
 
+// Strip common markdown syntax for plain text rendering in PDF
+function stripMarkdown(text: string): string {
+  if (!text) return '';
+  let result = text;
+  
+  // Remove images ![alt](url)
+  result = result.replace(/!\[([^\]]*)\]\([^)]+\)/g, '$1');
+  // Remove links [text](url) -> text
+  result = result.replace(/\[([^\]]+)\]\([^)]+\)/g, '$1');
+  // Remove bold/italic markers **, __, *, _
+  result = result.replace(/(\*\*|__)(.*?)\1/g, '$2');
+  result = result.replace(/(\*|_)(.*?)\1/g, '$2');
+  // Remove inline code `code`
+  result = result.replace(/`([^`]+)`/g, '$1');
+  // Remove headers #
+  result = result.replace(/^#{1,6}\s+/gm, '');
+  // Convert unordered list items * or - to bullet points
+  result = result.replace(/^[\*\-]\s+/gm, '• ');
+  // Convert ordered list items 1. to "1. " (keep but ensure space)
+  result = result.replace(/^\d+\.\s+/gm, (match) => match);
+  // Remove horizontal rules ---
+  result = result.replace(/^[-*_]{3,}\s*$/gm, '');
+  // Remove blockquote >
+  result = result.replace(/^>\s+/gm, '');
+  // Remove extra newlines
+  result = result.replace(/\n{3,}/g, '\n\n');
+  
+  return result.trim();
+}
+
 function sanitizeText(text: string): string {
-  return text.replace(/[\u{1F300}-\u{1FAFF}]/gu, '');
+  // Also strip markdown for safety
+  return stripMarkdown(text.replace(/[\u{1F300}-\u{1FAFF}]/gu, ''));
 }
 
 function wrapTextIntoLines(
@@ -87,12 +117,16 @@ export async function createSubmissionPdfBlob(
   });
   y -= titleFontSize * 1.8;
 
-  // Metadata lines
+  // Metadata lines (sanitized)
+  const sanitizedGuideTitle = sanitizeText(submission.guideTitle);
+  const sanitizedWorkerName = sanitizeText(submission.workerName || 'Anonymous');
+  const sanitizedStatus = sanitizeText(submission.status);
+  
   const metaLines = [
-    `Guide: ${submission.guideTitle}`,
-    `Worker: ${submission.workerName || 'Anonymous'}`,
+    `Guide: ${sanitizedGuideTitle}`,
+    `Worker: ${sanitizedWorkerName}`,
     `Submitted: ${submission.submissionDate}`,
-    `Status: ${submission.status}`,
+    `Status: ${sanitizedStatus}`,
     `Score: ${submission.score !== null ? `${submission.score}/100` : 'N/A'}`,
     '',
     'Comment:',
@@ -121,13 +155,12 @@ export async function createSubmissionPdfBlob(
     y -= lineHeight;
   }
 
-  // Comment body (with indentation)
-  const commentText = sanitizeText(
-    submission.comment || 'No comment provided.'
-  );
+  // Comment body (stripped of markdown)
+  const rawComment = submission.comment || 'No comment provided.';
+  const strippedComment = sanitizeText(rawComment); // sanitizeText now calls stripMarkdown
   const { lines: commentLines, lineHeight: commentLineHeight } = wrapTextIntoLines(
     font,
-    commentText,
+    strippedComment,
     bodyFontSize,
     maxWidth,
     lineHeightMultiplier

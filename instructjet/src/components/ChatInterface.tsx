@@ -1,7 +1,8 @@
-// src/components/ChatInterface.tsx
 'use client';
 
 import { useState, useRef, useEffect } from 'react';
+import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
 
 interface ChatMessage {
   role: 'user' | 'assistant';
@@ -69,7 +70,31 @@ export default function ChatInterface({
                   : 'bg-white border border-gray-200 text-gray-800'
               }`}
             >
-              <div className="whitespace-pre-wrap text-sm">{msg.content}</div>
+              {msg.role === 'user' ? (
+                <div className="whitespace-pre-wrap text-sm">{msg.content}</div>
+              ) : (
+                <div className="prose prose-sm max-w-none">
+                  <ReactMarkdown
+                    remarkPlugins={[remarkGfm]}
+                    components={{
+                      a({ href, children }) {
+                        return (
+                          <a
+                            href={href}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-primary-600 hover:underline"
+                          >
+                            {children}
+                          </a>
+                        );
+                      },
+                    }}
+                  >
+                    {msg.content}
+                  </ReactMarkdown>
+                </div>
+              )}
             </div>
           </div>
         ))}

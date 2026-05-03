@@ -39,16 +39,27 @@ export default function SettingsPage() {
   const [tokenBalance, setTokenBalance] = useState<TokenBalance | null>(null);
   const [recentTransactions, setRecentTransactions] = useState<TokenTransaction[]>([]);
   
-  // Form states
+  // Profile update
   const [fullName, setFullName] = useState('');
+  const [profilePassword, setProfilePassword] = useState('');
+  const [updatingProfile, setUpdatingProfile] = useState(false);
+  
+  // Email change
+  const [newEmail, setNewEmail] = useState('');
+  const [emailOtp, setEmailOtp] = useState('');
+  const [emailChangePassword, setEmailChangePassword] = useState('');
+  const [emailOtpSent, setEmailOtpSent] = useState(false);
+  const [sendingEmailOtp, setSendingEmailOtp] = useState(false);
+  const [changingEmail, setChangingEmail] = useState(false);
+  
+  // Password change
   const [currentPassword, setCurrentPassword] = useState('');
   const [newPassword, setNewPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
-  
-  // UI states
-  const [loading, setLoading] = useState(true);
-  const [updatingProfile, setUpdatingProfile] = useState(false);
   const [updatingPassword, setUpdatingPassword] = useState(false);
+  
+  // UI state
+  const [loading, setLoading] = useState(true);
   const [message, setMessage] = useState<{ type: 'success' | 'error'; text: string } | null>(null);
 
   useEffect(() => {
@@ -78,6 +89,10 @@ export default function SettingsPage() {
 
   const handleUpdateProfile = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (!profilePassword) {
+      setMessage({ type: 'error', text: 'Current password required to update name' });
+      return;
+    }
     setUpdatingProfile(true);
     setMessage(null);
 
@@ -85,16 +100,15 @@ export default function SettingsPage() {
       const response = await fetch('/api/user/profile', {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ fullName }),
+        body: JSON.stringify({ fullName, currentPassword: profilePassword }),
       });
 
       const data = await response.json();
       if (!response.ok) throw new Error(data.error || 'Failed to update profile');
 
       setProfile(data.user);
+      setProfilePassword('');
       setMessage({ type: 'success', text: 'Profile updated successfully' });
-      
-      // Clear success message after 3 seconds
       setTimeout(() => setMessage(null), 3000);
     } catch (error: any) {
       setMessage({ type: 'error', text: error.message });
@@ -103,37 +117,92 @@ export default function SettingsPage() {
     }
   };
 
+  const handleSendEmailOtp = async () => {
+    if (!newEmail) {
+      setMessage({ type: 'error', text: 'New email is required' });
+      return;
+    }
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(newEmail)) {
+      setMessage({ type: 'error', text: 'Invalid email format' });
+      return;
+    }
+    setSendingEmailOtp(true);
+    setMessage(null);
+    try {
+      const response = await fetch('/api/user/send-email-otp', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ newEmail }),
+      });
+      const data = await response.json();
+      if (!response.ok) throw new Error(data.error);
+      setEmailOtpSent(true);
+      setMessage({ type: 'success', text: 'Verification code sent to new email' });
+      setTimeout(() => setMessage(null), 3000);
+    } catch (error: any) {
+      setMessage({ type: 'error', text: error.message });
+    } finally {
+      setSendingEmailOtp(false);
+    }
+  };
+
+  const handleChangeEmail = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!emailOtp || !emailChangePassword) {
+      setMessage({ type: 'error', text: 'Verification code and current password are required' });
+      return;
+    }
+    setChangingEmail(true);
+    setMessage(null);
+    try {
+      const response = await fetch('/api/user/change-email', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ newEmail, otp: emailOtp, currentPassword: emailChangePassword }),
+      });
+      const data = await response.json();
+      if (!response.ok) throw new Error(data.error);
+      
+      setMessage({ type: 'success', text: 'Email changed successfully. Please log in again.' });
+      // Clear fields
+      setNewEmail('');
+      setEmailOtp('');
+      setEmailChangePassword('');
+      setEmailOtpSent(false);
+      // Logout after 2 seconds to refresh session
+      setTimeout(() => logout(), 2000);
+    } catch (error: any) {
+      setMessage({ type: 'error', text: error.message });
+    } finally {
+      setChangingEmail(false);
+    }
+  };
+
   const handleChangePassword = async (e: React.FormEvent) => {
     e.preventDefault();
-    
     if (newPassword !== confirmPassword) {
       setMessage({ type: 'error', text: 'New passwords do not match' });
       return;
     }
-    
     if (newPassword.length < 6) {
       setMessage({ type: 'error', text: 'Password must be at least 6 characters' });
       return;
     }
-
     setUpdatingPassword(true);
     setMessage(null);
-
     try {
       const response = await fetch('/api/user/change-password', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ currentPassword, newPassword }),
       });
-
       const data = await response.json();
-      if (!response.ok) throw new Error(data.error || 'Failed to change password');
-
+      if (!response.ok) throw new Error(data.error);
       setMessage({ type: 'success', text: 'Password changed successfully' });
       setCurrentPassword('');
       setNewPassword('');
       setConfirmPassword('');
-      
       setTimeout(() => setMessage(null), 3000);
     } catch (error: any) {
       setMessage({ type: 'error', text: error.message });
@@ -178,7 +247,7 @@ export default function SettingsPage() {
           )}
 
           <div className="space-y-6">
-            {/* Profile Section */}
+            {/* Profile Information Section */}
             <div className="bg-white rounded-2xl shadow-md overflow-hidden">
               <div className="px-6 py-4 border-b border-gray-200">
                 <h2 className="text-xl font-semibold text-gray-900">Profile Information</h2>
@@ -194,7 +263,7 @@ export default function SettingsPage() {
                     disabled
                     className="w-full px-3 py-2 border border-gray-300 rounded-lg bg-gray-50 text-gray-500"
                   />
-                  <p className="mt-1 text-xs text-gray-500">Email cannot be changed</p>
+                  <p className="mt-1 text-xs text-gray-500">Email cannot be changed? Use the email change section below.</p>
                 </div>
 
                 <div>
@@ -211,6 +280,19 @@ export default function SettingsPage() {
                   />
                 </div>
 
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    Current Password (required)
+                  </label>
+                  <input
+                    type="password"
+                    value={profilePassword}
+                    onChange={(e) => setProfilePassword(e.target.value)}
+                    required
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-primary-500 focus:border-primary-500"
+                  />
+                </div>
+
                 <div className="flex justify-end">
                   <button
                     type="submit"
@@ -223,7 +305,87 @@ export default function SettingsPage() {
               </form>
             </div>
 
-            {/* Password Change Section */}
+            {/* Change Email Section */}
+            <div className="bg-white rounded-2xl shadow-md overflow-hidden">
+              <div className="px-6 py-4 border-b border-gray-200">
+                <h2 className="text-xl font-semibold text-gray-900">Change Email Address</h2>
+                <p className="text-sm text-gray-500 mt-1">A verification code will be sent to your new email address</p>
+              </div>
+              <form onSubmit={handleChangeEmail} className="p-6 space-y-4">
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">New Email Address</label>
+                  <div className="flex space-x-2">
+                    <input
+                      type="email"
+                      value={newEmail}
+                      onChange={(e) => setNewEmail(e.target.value)}
+                      required
+                      disabled={emailOtpSent}
+                      className="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:ring-primary-500 focus:border-primary-500"
+                      placeholder="new@example.com"
+                    />
+                    {!emailOtpSent ? (
+                      <button
+                        type="button"
+                        onClick={handleSendEmailOtp}
+                        disabled={sendingEmailOtp || !newEmail}
+                        className="px-4 py-2 bg-primary-600 text-white rounded-lg hover:bg-primary-700 disabled:opacity-50 transition"
+                      >
+                        {sendingEmailOtp ? 'Sending...' : 'Send Code'}
+                      </button>
+                    ) : (
+                      <button
+                        type="button"
+                        onClick={() => setEmailOtpSent(false)}
+                        className="px-4 py-2 text-sm text-gray-600 border border-gray-300 rounded-lg hover:bg-gray-50 transition"
+                      >
+                        Change Email
+                      </button>
+                    )}
+                  </div>
+                </div>
+
+                {emailOtpSent && (
+                  <>
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">Verification Code</label>
+                      <input
+                        type="text"
+                        value={emailOtp}
+                        onChange={(e) => setEmailOtp(e.target.value)}
+                        required
+                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-primary-500 focus:border-primary-500"
+                        placeholder="Enter 6-digit code"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">Current Password</label>
+                      <input
+                        type="password"
+                        value={emailChangePassword}
+                        onChange={(e) => setEmailChangePassword(e.target.value)}
+                        required
+                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-primary-500 focus:border-primary-500"
+                      />
+                    </div>
+                  </>
+                )}
+
+                {emailOtpSent && (
+                  <div className="flex justify-end">
+                    <button
+                      type="submit"
+                      disabled={changingEmail}
+                      className="px-6 py-2 bg-primary-600 text-white rounded-lg font-medium hover:bg-primary-700 disabled:opacity-50 transition"
+                    >
+                      {changingEmail ? 'Changing...' : 'Change Email'}
+                    </button>
+                  </div>
+                )}
+              </form>
+            </div>
+
+            {/* Change Password Section */}
             <div className="bg-white rounded-2xl shadow-md overflow-hidden">
               <div className="px-6 py-4 border-b border-gray-200">
                 <h2 className="text-xl font-semibold text-gray-900">Change Password</h2>
@@ -289,7 +451,6 @@ export default function SettingsPage() {
                 <h2 className="text-xl font-semibold text-gray-900">Subscription & Tokens</h2>
               </div>
               <div className="p-6 space-y-6">
-                {/* Current Plan */}
                 <div className="flex justify-between items-center pb-4 border-b border-gray-100">
                   <div>
                     <p className="text-sm text-gray-500">Current Plan</p>
@@ -307,7 +468,6 @@ export default function SettingsPage() {
                   )}
                 </div>
 
-                {/* Token Balance */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl p-4">
                     <p className="text-sm text-gray-600">Subscription Tokens</p>
@@ -342,7 +502,6 @@ export default function SettingsPage() {
                   </a>
                 </div>
 
-                {/* Recent Transactions */}
                 {recentTransactions.length > 0 && (
                   <div className="mt-4">
                     <h3 className="text-sm font-medium text-gray-700 mb-3">Recent Token Activity</h3>
@@ -382,7 +541,6 @@ export default function SettingsPage() {
                   <button
                     onClick={() => {
                       if (confirm('Are you sure you want to delete your account? This action cannot be undone.')) {
-                        // Implement account deletion API call
                         alert('Account deletion not yet implemented in this example');
                       }
                     }}
