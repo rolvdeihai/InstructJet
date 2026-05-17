@@ -299,6 +299,41 @@ class MixtralFreeModel:
 
         loop = asyncio.get_running_loop()
         return await loop.run_in_executor(executor, _blocking)
+    
+    async def generate_response(self, question: str, context: str = "", request_id: str = "") -> str:
+        # Always treat as guide request when this method is called
+        system_prompt = f"""You are an assistant that creates structured guides.
+    When asked to create a guide, respond ONLY with a valid JSON object.
+    Do not include any additional text, explanations, markdown, or code fences.
+    The JSON object must contain the keys "action" and "summary".
+
+    Format:
+    {{"action": "generate_guide", "summary": "Brief summary of the task"}}
+
+    Conversation context:
+    {context}
+
+    Now produce the JSON object for the user's request: {question}"""
+
+        # Wrap with instruction tags (required for Mixtral)
+        prompt = f"<s>[INST] {system_prompt} [/INST]"
+
+        response_text = await self._generate_completion(prompt, max_tokens=150, temperature=0.2, request_id=request_id)
+        if response_text == "CANCELLED":
+            return "CANCELLED"
+
+        # Try to extract JSON – fallback to a default structure
+        import re
+        match = re.search(r'\{[^{}]*"action"\s*:\s*"generate_guide"[^{}]*\}', response_text, re.DOTALL)
+        if match:
+            return match.group(0)
+        else:
+            logger.warning("Model did not return valid JSON for guide request. Using fallback.")
+            return json.dumps({
+                "action": "generate_guide",
+                "summary": "Create a guide based on the conversation.",
+                "sections": ["Overview", "Prerequisites", "Step-by-Step Instructions", "Tools & Assets", "Flow"]
+            })
 
     def clean_question(self, question: str) -> str:
         prefixes = ['!bot', '!ai', '@bot', 'bot,', '!ai_search']
@@ -494,41 +529,6 @@ Now produce the JSON object:"""
             ordered_texts.append(str(value))
 
     return "\n\n".join(ordered_texts)
-
-async def generate_response(self, question: str, context: str = "", request_id: str = "") -> str:
-    # Always treat as guide request when this method is called
-    system_prompt = f"""You are an assistant that creates structured guides.
-When asked to create a guide, respond ONLY with a valid JSON object.
-Do not include any additional text, explanations, markdown, or code fences.
-The JSON object must contain the keys "action" and "summary".
-
-Format:
-{{"action": "generate_guide", "summary": "Brief summary of the task"}}
-
-Conversation context:
-{context}
-
-Now produce the JSON object for the user's request: {question}"""
-
-    # Wrap with instruction tags (required for Mixtral)
-    prompt = f"<s>[INST] {system_prompt} [/INST]"
-
-    response_text = await self._generate_completion(prompt, max_tokens=150, temperature=0.2, request_id=request_id)
-    if response_text == "CANCELLED":
-        return "CANCELLED"
-
-    # Try to extract JSON – fallback to a default structure
-    import re
-    match = re.search(r'\{[^{}]*"action"\s*:\s*"generate_guide"[^{}]*\}', response_text, re.DOTALL)
-    if match:
-        return match.group(0)
-    else:
-        logger.warning("Model did not return valid JSON for guide request. Using fallback.")
-        return json.dumps({
-            "action": "generate_guide",
-            "summary": "Create a guide based on the conversation.",
-            "sections": ["Overview", "Prerequisites", "Step-by-Step Instructions", "Tools & Assets", "Flow"]
-        })
 
 # ---------- Lifespan ----------
 @asynccontextmanager
