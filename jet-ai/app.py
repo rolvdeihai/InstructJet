@@ -443,13 +443,13 @@ Conversation context:
 User query: {user_query}
 
 For each of the following sections, fill the template's placeholders ({{...}}) with concrete, natural values based on the conversation.
-Return ONLY a valid JSON object where keys are section names and values are the completed sentences.
+Return ONLY a valid JSON object where keys are section names and values are strings (the completed sentence).
 
 Sections:
 {json.dumps(sections_info, indent=2)}
 
 Example format for sections {sections}:
-{json.dumps({s: f"Filled content for {s}" for s in sections}, indent=2)}
+{json.dumps({s: f"Example filled content for {s}" for s in sections}, indent=2)}
 
 Now produce the JSON object:"""
 
@@ -460,7 +460,6 @@ Now produce the JSON object:"""
     if response == "CANCELLED":
         return "CANCELLED"
 
-    # If response is empty, fallback to a generic message
     if not response or not response.strip():
         logger.error("Model returned empty response")
         return "I'm sorry, I couldn't generate a response at this time. Please try again."
@@ -472,18 +471,27 @@ Now produce the JSON object:"""
         if start != -1 and end > start:
             json_str = response[start:end]
             filled = json.loads(json_str)
+            logger.debug(f"Parsed JSON: {json.dumps(filled, indent=2)}")
         else:
             raise ValueError("No JSON object found")
     except Exception as e:
         logger.error(f"Failed to parse JSON response: {e}\nRaw response: {response[:500]}")
-        # Fallback: return the raw response (might still be readable)
-        return response
+        return response  # fallback raw
 
-    # Reconstruct the final answer in section order
+    # Reconstruct the final answer in section order, ensuring we have strings
     ordered_texts = []
     for section in sections:
-        text = filled.get(section, f"[Missing section: {section}]")
-        ordered_texts.append(text)
+        value = filled.get(section)
+        if value is None:
+            ordered_texts.append(f"[Missing section: {section}]")
+        elif isinstance(value, str):
+            ordered_texts.append(value)
+        elif isinstance(value, list):
+            # If it's a list, join with newline
+            ordered_texts.append("\n".join(str(item) for item in value))
+        else:
+            # Convert any other type to string
+            ordered_texts.append(str(value))
 
     return "\n\n".join(ordered_texts)
 
@@ -578,7 +586,7 @@ async def chat(request: ChatRequest):
 
         # Summarize context if too long (using LexRank)
         context_to_use = request.context
-        if request.context and count_tokens(request.context) > 200:
+        if request.context and count_tokens(request.context) > 2000:
             logger.info(f"Request {request_id[:8]}: context has {count_tokens(request.context)} tokens, summarizing...")
             summarization_start = time.time()
             context_to_use = smart_summarize_text(request.context, target_tokens=min(int(count_tokens(request.context) / 4), 1200))
