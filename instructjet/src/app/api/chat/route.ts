@@ -1,7 +1,10 @@
+// src/app/api/chat/route.ts
+
 import { NextRequest, NextResponse } from 'next/server';
 import { checkSufficientTokens, deductTokens } from '@/lib/token-manager';
 import { getUserFromSession } from '@/lib/auth';
 import { cookies } from 'next/headers';
+import { triggerGitHubWorkflow } from '@/lib/ai-server'; // ✅ import
 
 const HF_API_URL = `${process.env.HF_API_BASE_URL}/chat`;
 const FETCH_TIMEOUT_MS = 600_000; // 10 minutes
@@ -28,7 +31,6 @@ export async function POST(req: NextRequest) {
     );
   }
 
-  // ✅ Get requestId from frontend
   const { message, context, requestId } = await req.json();
 
   if (!requestId) {
@@ -52,7 +54,6 @@ export async function POST(req: NextRequest) {
 
   const fullContext = `${systemInstruction}\n\nConversation history:\n${context || ''}\n\nUser: ${message}\nAssistant:`;
 
-  // Use client abort signal + timeout signal
   const abortSignal = req.signal;
   const timeoutSignal = AbortSignal.timeout(FETCH_TIMEOUT_MS);
   const combinedSignal = AbortSignal.any([abortSignal, timeoutSignal]);
@@ -60,6 +61,7 @@ export async function POST(req: NextRequest) {
   let assistantMessage: string;
   let queuePosition: number | undefined;
   let aborted = false;
+  let serverStarting = false;
 
   try {
     const response = await fetch(HF_API_URL, {
@@ -68,14 +70,17 @@ export async function POST(req: NextRequest) {
       body: JSON.stringify({
         question: message,
         context: fullContext,
-        request_id: requestId,   // ✅ use frontend-generated ID
+        request_id: requestId,
       }),
       signal: combinedSignal,
     });
 
     if (!response.ok) {
       if (response.status === 404 || response.status === 502 || response.status === 503) {
-        assistantMessage = getServerOfflineMessage();
+        // Server offline – trigger GitHub workflow
+        await triggerGitHubWorkflow();
+        serverStarting = true;
+        assistantMessage = getServerStartingMessage();
       } else {
         throw new Error(`HF API error: ${response.status}`);
       }
@@ -91,23 +96,21 @@ export async function POST(req: NextRequest) {
       aborted = true;
       assistantMessage = '';
     } else if (error.message?.includes('fetch') || error.code === 'ECONNREFUSED') {
-      assistantMessage = getServerOfflineMessage();
+      // Network error – server likely offline
+      await triggerGitHubWorkflow();
+      serverStarting = true;
+      assistantMessage = getServerStartingMessage();
     } else {
       assistantMessage = 'Sorry, an unexpected error occurred. Please try again.';
     }
   }
 
-   // If the request was aborted by the client, do not deduct tokens
   if (aborted) {
     return NextResponse.json({ aborted: true, response: '' });
   }
 
-  // Check if AI is offline
-  const isOffline = assistantMessage.includes('AI server is currently offline') || 
-                    assistantMessage.includes('offline');
-
-  // Deduct tokens only if not offline and not aborted
-  if (!isOffline) {
+  // Do NOT deduct tokens if server is starting (or offline)
+  if (!serverStarting && !assistantMessage.includes('AI server is currently offline')) {
     await deductTokens(user.id, 1000, 'guide_chat', {
       message_length: message.length,
       had_error: false,
@@ -118,22 +121,13 @@ export async function POST(req: NextRequest) {
     response: assistantMessage,
     queue_position: queuePosition,
     request_id: requestId,
+    server_starting: serverStarting, // optional frontend hint
   });
 }
 
-function getServerOfflineMessage(): string {
-  return `⚠️ **The AI server is currently offline.**  
-To use the guide generator, you need to start the server first.  
-
-**How to activate:**  
-1. Click this link to open the Google Colab notebook:  
-   🔗 [Start AI Server on Colab](${COLAB_NOTEBOOK_URL})  
-2. In Colab, click the **"Run all"** button (or run the cells one by one).  
-3. Wait until you see a message like *"Server running on http://localhost:8000"* and the ngrok URL is displayed.  
-4. Once the server is running, return here and try again.  
-
-The server will stay active as long as the Colab tab is open.  
-If it stops, just repeat the steps above.  
-
-*Need help?* Make sure you're signed into Google and have enough free Colab quota.`;
+function getServerStartingMessage(): string {
+  return `🚀 **The AI server is waking up.**  
+We have started the server. It usually takes 2–3 minutes to become ready.  
+Please wait a moment and then try again.  
+(No tokens were deducted for this attempt.)`;
 }

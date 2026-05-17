@@ -1,10 +1,12 @@
+// src/app/api/worker-chat/route.ts
+
 import { NextRequest, NextResponse } from 'next/server';
 import { supabaseAdmin } from '@/lib/supabase-admin';
 import { deductTokens, checkSufficientTokens } from '@/lib/token-manager';
+import { triggerGitHubWorkflow } from '@/lib/ai-server'; // ✅ import
 
 const HF_API_URL = `${process.env.HF_API_BASE_URL}/chat`;
 const FETCH_TIMEOUT_MS = 600_000; // 10 minutes
-const COLAB_NOTEBOOK_URL = 'https://colab.research.google.com/drive/1MYZeH5mNCEd9bdO8bL2tCL9IRWtd62CG?usp=sharing';
 
 export async function POST(req: NextRequest) {
   const { message, guideContent, context, guideId, tokens = 1000, requestId } = await req.json();
@@ -63,6 +65,7 @@ Answer the worker's question clearly and concisely. Use the conversation history
   let assistantMessage: string;
   let queuePosition: number | undefined;
   let aborted = false;
+  let serverStarting = false;
 
   try {
     const response = await fetch(HF_API_URL, {
@@ -71,14 +74,16 @@ Answer the worker's question clearly and concisely. Use the conversation history
       body: JSON.stringify({
         question: message,
         context: fullContext,
-        request_id: requestId,   // pass for cancellation
+        request_id: requestId,
       }),
       signal: combinedSignal,
     });
 
     if (!response.ok) {
       if (response.status === 404 || response.status === 502 || response.status === 503) {
-        assistantMessage = getServerOfflineMessage();
+        await triggerGitHubWorkflow();
+        serverStarting = true;
+        assistantMessage = getServerStartingMessage();
       } else {
         throw new Error(`HF API error: ${response.status}`);
       }
@@ -93,22 +98,20 @@ Answer the worker's question clearly and concisely. Use the conversation history
       aborted = true;
       assistantMessage = '';
     } else if (error.message?.includes('fetch') || error.code === 'ECONNREFUSED') {
-      assistantMessage = getServerOfflineMessage();
+      await triggerGitHubWorkflow();
+      serverStarting = true;
+      assistantMessage = getServerStartingMessage();
     } else {
       assistantMessage = 'Sorry, I encountered an error. Please try again.';
     }
   }
 
-  // If aborted, do not deduct tokens and return early
   if (aborted) {
     return NextResponse.json({ aborted: true, response: '' });
   }
 
-  const isOffline = assistantMessage.includes('AI server is currently offline') || 
-                    assistantMessage.includes('offline');
-
-  // Deduct tokens and update budget only if not offline
-  if (!isOffline) {
+  // Deduct tokens ONLY if server responded normally (not starting)
+  if (!serverStarting && !assistantMessage.includes('waking up')) {
     // 5. Deduct tokens from creator's main balance
     const deduction = await deductTokens(creatorUserId, tokens, 'worker_chat', {
       guide_id: guideId,
@@ -138,11 +141,13 @@ Answer the worker's question clearly and concisely. Use the conversation history
     response: assistantMessage,
     queue_position: queuePosition,
     request_id: requestId,
+    server_starting: serverStarting,
   });
 }
 
-function getServerOfflineMessage(): string {
-  return `⚠️ **The AI server is currently offline.**  
-To use the guide generator, you need to start the server first.  
-🔗 [Start AI Server on Colab](${COLAB_NOTEBOOK_URL})`;
+function getServerStartingMessage(): string {
+  return `🚀 **The AI server is waking up.**  
+We have started the server. It usually takes 2–3 minutes to become ready.  
+Please wait a moment and then try again.  
+(No tokens were deducted for this attempt.)`;
 }
