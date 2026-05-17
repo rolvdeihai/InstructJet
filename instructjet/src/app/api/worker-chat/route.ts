@@ -3,7 +3,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { supabaseAdmin } from '@/lib/supabase-admin';
 import { deductTokens, checkSufficientTokens } from '@/lib/token-manager';
-import { triggerGitHubWorkflow } from '@/lib/ai-server'; // ✅ import
+import { triggerGitHubWorkflow } from '@/lib/ai-server';
 
 const HF_API_URL = `${process.env.HF_API_BASE_URL}/chat`;
 const FETCH_TIMEOUT_MS = 600_000; // 10 minutes
@@ -66,6 +66,7 @@ Answer the worker's question clearly and concisely. Use the conversation history
   let queuePosition: number | undefined;
   let aborted = false;
   let serverStarting = false;
+  let errorOccurred = false;   // ✅ prevent token deduction on generic errors
 
   try {
     const response = await fetch(HF_API_URL, {
@@ -102,6 +103,8 @@ Answer the worker's question clearly and concisely. Use the conversation history
       serverStarting = true;
       assistantMessage = getServerStartingMessage();
     } else {
+      // Unexpected error – do NOT deduct tokens
+      errorOccurred = true;
       assistantMessage = 'Sorry, I encountered an error. Please try again.';
     }
   }
@@ -110,8 +113,12 @@ Answer the worker's question clearly and concisely. Use the conversation history
     return NextResponse.json({ aborted: true, response: '' });
   }
 
-  // Deduct tokens ONLY if server responded normally (not starting)
-  if (!serverStarting && !assistantMessage.includes('waking up')) {
+  // Deduct tokens ONLY if:
+  // - not aborted
+  // - no unexpected error
+  // - server not starting
+  // - not a "waking up" message
+  if (!aborted && !errorOccurred && !serverStarting && !assistantMessage.includes('waking up')) {
     // 5. Deduct tokens from creator's main balance
     const deduction = await deductTokens(creatorUserId, tokens, 'worker_chat', {
       guide_id: guideId,

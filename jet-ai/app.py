@@ -617,26 +617,11 @@ async def chat(request: ChatRequest):
             raise HTTPException(status_code=503, detail="Model not available")
 
         cleaned_question = model.clean_question(request.question)
-        # After cleaning the question (cleaned_question)
-        cleaned_lower = cleaned_question.lower()
-        is_guide_request = (
-            cleaned_question.startswith("@guide") or
-            any(phrase in cleaned_lower for phrase in ["guide", "create a guide", "make a guide", "step by step", "tutorial"])
-        )
-
-        if is_guide_request:
-            # Use the old guide‑specific method
-            response_text = await model.generate_response(cleaned_question, context_to_use, request_id)
-        else:
-            # Use skeleton/template‑based structured answer
-            response_text = await generate_structured_answer(cleaned_question, context_to_use, request_id)
-
-        if response_text == "CANCELLED":
-            return ChatResponse(response="Generation cancelled.", queue_position=queue_position)
-        
         logger.info(f"Request {request_id[:8]}: cleaned question = '{cleaned_question[:100]}...'")
 
-        # Summarize context if too long (using LexRank)
+        # -----------------------------------------------------------------
+        # 1. Prepare context (summarize if too long)
+        # -----------------------------------------------------------------
         context_to_use = request.context
         if request.context and count_tokens(request.context) > 2000:
             logger.info(f"Request {request_id[:8]}: context has {count_tokens(request.context)} tokens, summarizing...")
@@ -644,16 +629,29 @@ async def chat(request: ChatRequest):
             context_to_use = smart_summarize_text(request.context, target_tokens=min(int(count_tokens(request.context) / 4), 1200))
             logger.info(f"Summarization took {time.time()-summarization_start:.3f}s, new token count: {count_tokens(context_to_use)}")
 
-        # Generate answer using skeletons + templates
-        answer_start = time.time()
-        answer = await generate_structured_answer(cleaned_question, context_to_use, request_id)
-        if answer == "CANCELLED":
+        # -----------------------------------------------------------------
+        # 2. Detect if this is a guide request (@guide or keywords)
+        # -----------------------------------------------------------------
+        cleaned_lower = cleaned_question.lower()
+        is_guide_request = (
+            cleaned_question.startswith("@guide") or
+            any(phrase in cleaned_lower for phrase in ["guide", "create a guide", "make a guide", "step by step", "tutorial"])
+        )
+
+        # -----------------------------------------------------------------
+        # 3. Generate response using the appropriate method
+        # -----------------------------------------------------------------
+        if is_guide_request:
+            response_text = await model.generate_response(cleaned_question, context_to_use, request_id)
+        else:
+            response_text = await generate_structured_answer(cleaned_question, context_to_use, request_id)
+
+        if response_text == "CANCELLED":
             return ChatResponse(response="Generation cancelled.", queue_position=queue_position)
 
         total_time = time.time() - overall_start
         logger.info(f"Request {request_id[:8]} completed in {total_time:.3f}s (queue wait {queue_position})")
-        
-        return ChatResponse(response=answer, queue_position=queue_position)
+        return ChatResponse(response=response_text, queue_position=queue_position)
 
     except Exception as e:
         logger.error(f"Error processing request: {e}")
@@ -662,7 +660,7 @@ async def chat(request: ChatRequest):
     finally:
         await queue_status.release()
         active_request_ids.discard(request_id)
-
+        
 # ---------- The other endpoints (unchanged except minor fixes) ----------
 @app.post("/generate-section", response_model=GenerateSectionResponse)
 async def generate_section_endpoint(request: GenerateSectionRequest):

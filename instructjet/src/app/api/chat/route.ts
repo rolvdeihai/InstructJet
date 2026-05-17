@@ -4,7 +4,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { checkSufficientTokens, deductTokens } from '@/lib/token-manager';
 import { getUserFromSession } from '@/lib/auth';
 import { cookies } from 'next/headers';
-import { triggerGitHubWorkflow } from '@/lib/ai-server'; // ✅ import
+import { triggerGitHubWorkflow } from '@/lib/ai-server';
 
 const HF_API_URL = `${process.env.HF_API_BASE_URL}/chat`;
 const FETCH_TIMEOUT_MS = 600_000; // 10 minutes
@@ -62,6 +62,7 @@ export async function POST(req: NextRequest) {
   let queuePosition: number | undefined;
   let aborted = false;
   let serverStarting = false;
+  let errorOccurred = false;   // ✅ prevent token deduction on generic errors
 
   try {
     const response = await fetch(HF_API_URL, {
@@ -77,7 +78,6 @@ export async function POST(req: NextRequest) {
 
     if (!response.ok) {
       if (response.status === 404 || response.status === 502 || response.status === 503) {
-        // Server offline – trigger GitHub workflow
         await triggerGitHubWorkflow();
         serverStarting = true;
         assistantMessage = getServerStartingMessage();
@@ -96,11 +96,12 @@ export async function POST(req: NextRequest) {
       aborted = true;
       assistantMessage = '';
     } else if (error.message?.includes('fetch') || error.code === 'ECONNREFUSED') {
-      // Network error – server likely offline
       await triggerGitHubWorkflow();
       serverStarting = true;
       assistantMessage = getServerStartingMessage();
     } else {
+      // Unexpected error – do NOT deduct tokens
+      errorOccurred = true;
       assistantMessage = 'Sorry, an unexpected error occurred. Please try again.';
     }
   }
@@ -109,8 +110,19 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ aborted: true, response: '' });
   }
 
-  // Do NOT deduct tokens if server is starting (or offline)
-  if (!serverStarting && !assistantMessage.includes('AI server is currently offline')) {
+  // Deduct tokens ONLY if:
+  // - not aborted
+  // - no unexpected error
+  // - server not starting
+  // - not an offline message
+  // - not a "waking up" message
+  if (
+    !aborted &&
+    !errorOccurred &&
+    !serverStarting &&
+    !assistantMessage.includes('AI server is currently offline') &&
+    !assistantMessage.includes('waking up')
+  ) {
     await deductTokens(user.id, 1000, 'guide_chat', {
       message_length: message.length,
       had_error: false,
@@ -121,7 +133,7 @@ export async function POST(req: NextRequest) {
     response: assistantMessage,
     queue_position: queuePosition,
     request_id: requestId,
-    server_starting: serverStarting, // optional frontend hint
+    server_starting: serverStarting,
   });
 }
 
