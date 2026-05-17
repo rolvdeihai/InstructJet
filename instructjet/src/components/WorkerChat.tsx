@@ -509,7 +509,7 @@ export default function WorkerChat({ guideId, guideTitle }: WorkerChatProps) {
         </div>
       )}
 
-      <div className="flex items-center space-x-2 mb-2">
+      {/* <div className="flex items-center space-x-2 mb-2">
         <button
           type="button"
           onClick={() => setInput(prev => prev + '@guide ')}
@@ -517,8 +517,8 @@ export default function WorkerChat({ guideId, guideTitle }: WorkerChatProps) {
         >
           @guide
         </button>
-        <span className="text-xs text-gray-500">(Optional helper)</span>
-      </div>
+        <span className="text-xs text-gray-500">(Add @guide to generate a guide)</span>
+      </div> */}
 
       <div className="flex space-x-2">
         <textarea

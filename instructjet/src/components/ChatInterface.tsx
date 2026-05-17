@@ -18,7 +18,6 @@ interface ChatInterfaceProps {
   onToggleWebSearch?: () => void;
   onStopGeneration?: () => void;
   queuePosition?: number | null;
-  onInsertGuide?: () => void;  // new prop
 }
 
 export default function ChatInterface({
@@ -30,7 +29,6 @@ export default function ChatInterface({
   onToggleWebSearch,
   onStopGeneration,
   queuePosition = null,
-  onInsertGuide,  // destructure new prop
 }: ChatInterfaceProps) {
   const [input, setInput] = useState('');
   const messagesEndRef = useRef<HTMLDivElement>(null);
@@ -75,6 +73,13 @@ export default function ChatInterface({
       <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
     </svg>
   );
+
+  const handleInsertGuide = () => {
+    setInput(prev => '@guide ' + prev);
+    if (textareaRef.current) {
+      textareaRef.current.focus();
+    }
+  };
 
   return (
     <div className="flex flex-col h-full bg-gray-50">
@@ -163,17 +168,15 @@ export default function ChatInterface({
 
       <form onSubmit={handleSubmit} className="border-t border-gray-200 p-4 bg-white">
         <div className="flex items-center space-x-2 mb-2">
-          {onInsertGuide && (
-            <button
-              type="button"
-              onClick={onInsertGuide}
-              className="text-xs bg-gray-100 hover:bg-gray-200 px-2 py-1 rounded"
-            >
-              @guide
-            </button>
-          )}
+          <button
+            type="button"
+            onClick={handleInsertGuide}
+            className="text-xs bg-gray-100 hover:bg-gray-200 px-2 py-1 rounded"
+          >
+            @guide
+          </button>
           <span className="text-xs text-gray-500">
-            Start your message with @guide to generate a guide
+            Add @guide to generate a guide
           </span>
         </div>
         <div className="flex space-x-2">

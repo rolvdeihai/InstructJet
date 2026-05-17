@@ -495,6 +495,41 @@ Now produce the JSON object:"""
 
     return "\n\n".join(ordered_texts)
 
+async def generate_response(self, question: str, context: str = "", request_id: str = "") -> str:
+    # Always treat as guide request when this method is called
+    system_prompt = f"""You are an assistant that creates structured guides.
+When asked to create a guide, respond ONLY with a valid JSON object.
+Do not include any additional text, explanations, markdown, or code fences.
+The JSON object must contain the keys "action" and "summary".
+
+Format:
+{{"action": "generate_guide", "summary": "Brief summary of the task"}}
+
+Conversation context:
+{context}
+
+Now produce the JSON object for the user's request: {question}"""
+
+    # Wrap with instruction tags (required for Mixtral)
+    prompt = f"<s>[INST] {system_prompt} [/INST]"
+
+    response_text = await self._generate_completion(prompt, max_tokens=150, temperature=0.2, request_id=request_id)
+    if response_text == "CANCELLED":
+        return "CANCELLED"
+
+    # Try to extract JSON – fallback to a default structure
+    import re
+    match = re.search(r'\{[^{}]*"action"\s*:\s*"generate_guide"[^{}]*\}', response_text, re.DOTALL)
+    if match:
+        return match.group(0)
+    else:
+        logger.warning("Model did not return valid JSON for guide request. Using fallback.")
+        return json.dumps({
+            "action": "generate_guide",
+            "summary": "Create a guide based on the conversation.",
+            "sections": ["Overview", "Prerequisites", "Step-by-Step Instructions", "Tools & Assets", "Flow"]
+        })
+
 # ---------- Lifespan ----------
 @asynccontextmanager
 async def lifespan(app: FastAPI):
@@ -582,6 +617,23 @@ async def chat(request: ChatRequest):
             raise HTTPException(status_code=503, detail="Model not available")
 
         cleaned_question = model.clean_question(request.question)
+        # After cleaning the question (cleaned_question)
+        cleaned_lower = cleaned_question.lower()
+        is_guide_request = (
+            cleaned_question.startswith("@guide") or
+            any(phrase in cleaned_lower for phrase in ["guide", "create a guide", "make a guide", "step by step", "tutorial"])
+        )
+
+        if is_guide_request:
+            # Use the old guide‑specific method
+            response_text = await model.generate_response(cleaned_question, context_to_use, request_id)
+        else:
+            # Use skeleton/template‑based structured answer
+            response_text = await generate_structured_answer(cleaned_question, context_to_use, request_id)
+
+        if response_text == "CANCELLED":
+            return ChatResponse(response="Generation cancelled.", queue_position=queue_position)
+        
         logger.info(f"Request {request_id[:8]}: cleaned question = '{cleaned_question[:100]}...'")
 
         # Summarize context if too long (using LexRank)

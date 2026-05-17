@@ -395,25 +395,6 @@ export default function CreateGuideClient({ userId }: { userId: string }) {
   return (
     <div className="flex h-screen pt-16">
       <div className="w-1/2 border-r border-gray-200 flex flex-col">
-        <div className="flex items-center space-x-2 px-4 py-2 bg-gray-50 border-b">
-          <button
-            type="button"
-            onClick={() => {
-              const textarea = document.querySelector('textarea[placeholder*="Describe the task"]') as HTMLTextAreaElement;
-              if (textarea) {
-                textarea.value = '@guide ' + textarea.value;
-                textarea.focus();
-                // Trigger input event to update React state
-                const event = new Event('input', { bubbles: true });
-                textarea.dispatchEvent(event);
-              }
-            }}
-            className="text-xs bg-gray-200 hover:bg-gray-300 px-2 py-1 rounded"
-          >
-            @guide
-          </button>
-          <span className="text-xs text-gray-600">Add @guide to generate a guide</span>
-        </div>
         <ChatInterface
           messages={messages}
           onSendMessage={handleSendMessage}
