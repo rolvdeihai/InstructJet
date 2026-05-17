@@ -1,0 +1,1569 @@
+[
+  {
+    "text": "To start, {user} will explain the core idea behind {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Then, {user} will demonstrate how {topic} works in a real-world scenario.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "After that, {user} will compare {topic} with {alternative} to highlight key differences.",
+    "placeholders": [
+      "user",
+      "topic",
+      "alternative"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Next, {user} will walk through the steps required to implement {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Following this, {user} will analyze the impact of {topic} on {industry}.",
+    "placeholders": [
+      "user",
+      "topic",
+      "industry"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "To illustrate, {user} will present a case study involving {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Subsequently, {user} will discuss the challenges associated with {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Moving forward, {user} will outline the future trends for {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "As a next step, {user} will explore the relationship between {topic} and {related_concept}.",
+    "placeholders": [
+      "user",
+      "topic",
+      "related_concept"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Then, {user} will provide practical tips for applying {topic} in {context}.",
+    "placeholders": [
+      "user",
+      "topic",
+      "context"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Afterward, {user} will summarize the main points about {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "In the next segment, {user} will answer common questions about {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Then, {user} will explore the historical background of {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Following that, {user} will list the prerequisites for learning {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Next, {user} will examine the pros and cons of {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "After that, {user} will demonstrate how to debug common issues in {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Then, {user} will show how {topic} integrates with {tool}.",
+    "placeholders": [
+      "user",
+      "topic",
+      "tool"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Moving on, {user} will compare different approaches to {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Subsequently, {user} will present a step-by-step guide for {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Then, {user} will discuss the ethical considerations of {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "After that, {user} will evaluate the performance of {topic} in {scenario}.",
+    "placeholders": [
+      "user",
+      "topic",
+      "scenario"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Next, {user} will elaborate on the key features of {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Then, {user} will provide examples of {topic} in action.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Following this, {user} will address potential misconceptions about {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Afterward, {user} will explain the underlying principles of {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Then, {user} will show how to optimize {topic} for {purpose}.",
+    "placeholders": [
+      "user",
+      "topic",
+      "purpose"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Next, {user} will break down the components of {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Subsequently, {user} will highlight common pitfalls in {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Then, {user} will discuss the scalability of {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "After that, {user} will compare {topic} with {competing_topic}.",
+    "placeholders": [
+      "user",
+      "topic",
+      "competing_topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Moving forward, {user} will outline the roadmap for mastering {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Then, {user} will demonstrate the setup process for {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Next, {user} will explain how {topic} affects {field}.",
+    "placeholders": [
+      "user",
+      "topic",
+      "field"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Following that, {user} will review best practices for {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Then, {user} will dive into advanced techniques for {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Afterward, {user} will share resources for further learning about {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Next, {user} will examine the limitations of {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Then, {user} will show how to customize {topic} for {use_case}.",
+    "placeholders": [
+      "user",
+      "topic",
+      "use_case"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Subsequently, {user} will test the reliability of {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "After that, {user} will discuss the cost implications of {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Then, {user} will illustrate the workflow for {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Moving on, {user} will evaluate the security aspects of {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Next, {user} will highlight key takeaways about {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Then, {user} will compare the efficiency of {topic} versus {alternative}.",
+    "placeholders": [
+      "user",
+      "topic",
+      "alternative"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Following that, {user} will explore the community support for {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Afterward, {user} will demonstrate a live example of {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Then, {user} will discuss the maintenance requirements for {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Next, {user} will summarize the evolution of {topic} over time.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Subsequently, {user} will present a framework for understanding {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Finally, {user} will conclude with actionable recommendations for {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Can you explain how {topic} flows from start to finish?",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Describe the step-by-step process of {topic} in detail.",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "What is the sequential workflow involved in {topic} as it moves through different stages?",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "Outline the flow of events for {topic}.",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "How does {user} perceive the flow of {topic}?",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Walk me through the typical flow of {topic} from initiation to completion.",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Explain the logical progression of steps in {topic} and how they connect.",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Can you map out the entire flow of {topic} including all decision points and loops?",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "What triggers the start of the flow for {topic}?",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Describe the flow of {topic} for {user} in a simplified manner.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "How does {topic} transition between its main phases?",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Provide a detailed flowchart of {topic} with all possible branches.",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "What are the key milestones in the flow of {topic}?",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Show the data flow in {topic} from input to output.",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Explain how {topic} flows in a real-world scenario for {user}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "List the steps in the flow of {topic} in order.",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Describe the workflow for {topic} including dependencies.",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "How is the flow of {topic} optimized for efficiency?",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Trace the path of {topic} through the system and highlight bottlenecks.",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "What is the starting point of the flow for {topic}?",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Illustrate the flow of {topic} with a diagram description.",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Explain the cyclical nature of the flow in {topic}.",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "How does {user} interact with the flow of {topic}?",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Break down the flow of {topic} into sub-processes.",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Describe the feedback loops within the flow of {topic}.",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "What ends the flow of {topic}?",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Compare the flow of {topic} before and after improvements.",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Detail the flow of {topic} from the perspective of {user}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "Is the flow of {topic} linear or branching?",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Explain the handoffs in the flow of {topic} between teams.",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "How does the flow of {topic} handle exceptions or errors?",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "What are the inputs and outputs of the flow for {topic}?",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Describe the flow of {topic} for a beginner audience.",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Analyze the flow of {topic} and suggest improvements for {user}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "Summarize the flow of {topic} in three steps.",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "What role does {user} play in the flow of {topic}?",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Explain the parallel flows that exist in {topic}.",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Provide a comprehensive overview of the flow for {topic} across different contexts.",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "What is the first action in the flow of {topic}?",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Describe the flow of {topic} using a timeline.",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "How can the flow of {topic} be automated for {user}?",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "Identify the critical path in the flow of {topic}.",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Explain the flow of {topic} in terms of energy or information.",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Describe the flow of {topic} and its impact on {user}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "What are the main phases of the flow in {topic}?",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "How does the flow of {topic} change over time?",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Detail the flow of {topic} from a systems thinking perspective.",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "Map the user journey in the flow of {topic}.",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "What are the common pitfalls in the flow of {topic}?",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Explain the flow of {topic} in a way that {user} can easily follow.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "Let's walk through the {topic} flow step by step.",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Here's how {user} can navigate the {process} smoothly.",
+    "placeholders": [
+      "user",
+      "process"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "The {system} flow begins with {action} and ends with {result}.",
+    "placeholders": [
+      "system",
+      "action",
+      "result"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "First, {user} should initiate the {task} by clicking {button}.",
+    "placeholders": [
+      "user",
+      "task",
+      "button"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "After that, the {module} will process the {input} automatically.",
+    "placeholders": [
+      "module",
+      "input"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "If {condition} occurs, the flow redirects to the {fallback} step.",
+    "placeholders": [
+      "condition",
+      "fallback"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "This diagram illustrates the flow of {data} through {component}.",
+    "placeholders": [
+      "data",
+      "component"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "The {process} flow involves {user}, {system}, and {output}.",
+    "placeholders": [
+      "user",
+      "system",
+      "output"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "To complete the {action}, simply follow the {steps} outlined here.",
+    "placeholders": [
+      "action",
+      "steps"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Each step in the {workflow} triggers {event} sequentially.",
+    "placeholders": [
+      "workflow",
+      "event"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "The flow chart shows how {user} moves from {start} to {end}.",
+    "placeholders": [
+      "user",
+      "start",
+      "end"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "When {user} enters {input}, the system validates it against {rule}.",
+    "placeholders": [
+      "user",
+      "input",
+      "rule"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "This flow ensures that {topic} is handled efficiently.",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Let's trace the path of {request} from {source} to {destination}.",
+    "placeholders": [
+      "request",
+      "source",
+      "destination"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "The {process} begins with {step1}, then proceeds to {step2}.",
+    "placeholders": [
+      "process",
+      "step1",
+      "step2"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "If {user} selects {option}, the flow branches to {branch}.",
+    "placeholders": [
+      "user",
+      "option",
+      "branch"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "The overall flow of {system} is designed for {goal}.",
+    "placeholders": [
+      "system",
+      "goal"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Error handling in this flow occurs when {error} is detected.",
+    "placeholders": [
+      "error"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Follow the sequence: {action1} → {action2} → {action3}.",
+    "placeholders": [
+      "action1",
+      "action2",
+      "action3"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "The flow uses {method} to transfer {data} between nodes.",
+    "placeholders": [
+      "method",
+      "data"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "This section describes the flow for {user} to {action}.",
+    "placeholders": [
+      "user",
+      "action"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "During the flow, {system} checks {condition} before proceeding.",
+    "placeholders": [
+      "system",
+      "condition"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "The {process} flow is optimized for {metric} improvement.",
+    "placeholders": [
+      "process",
+      "metric"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Here's a visual representation of the {topic} flow.",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "The flow starts with {user} providing {input} to the system.",
+    "placeholders": [
+      "user",
+      "input"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "After {event}, the flow moves to the {next} stage automatically.",
+    "placeholders": [
+      "event",
+      "next"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "To understand the flow, consider the interaction between {component1} and {component2}.",
+    "placeholders": [
+      "component1",
+      "component2"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "The flow diagram highlights the key decision point at {step}.",
+    "placeholders": [
+      "step"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "This {flow_type} is common in {domain} applications.",
+    "placeholders": [
+      "flow_type",
+      "domain"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "The flow ensures that {requirement} is met for {user}.",
+    "placeholders": [
+      "requirement",
+      "user"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "In this flow, {user} can {action} without {restriction}.",
+    "placeholders": [
+      "user",
+      "action",
+      "restriction"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Let's examine the flow of {resource} through the pipeline.",
+    "placeholders": [
+      "resource"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "The {process} flow includes {number} main stages.",
+    "placeholders": [
+      "process",
+      "number"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Each iteration of the flow updates {variable} accordingly.",
+    "placeholders": [
+      "variable"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "The flow starts when {user} triggers {action} via the interface.",
+    "placeholders": [
+      "user",
+      "action"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "This flowchart demonstrates the {topic} workflow clearly.",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "The flow uses {algorithm} to decide the next step.",
+    "placeholders": [
+      "algorithm"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "If {user} encounters {issue}, the flow provides {solution}.",
+    "placeholders": [
+      "user",
+      "issue",
+      "solution"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "The flow for {task} requires {user} to follow {sequence}.",
+    "placeholders": [
+      "task",
+      "user",
+      "sequence"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "This section explains the flow from {start} to {finish}.",
+    "placeholders": [
+      "start",
+      "finish"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "The flow involves {user}, {system}, and {external_service}.",
+    "placeholders": [
+      "user",
+      "system",
+      "external_service"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "At each step, {user} can {action} to influence the flow.",
+    "placeholders": [
+      "user",
+      "action"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "The flow terminates when {condition} is satisfied.",
+    "placeholders": [
+      "condition"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "To optimize the flow, consider {factor} for better performance.",
+    "placeholders": [
+      "factor"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "The flow chart includes {number} decision points.",
+    "placeholders": [
+      "number"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "This flow is triggered by {event} and processed by {handler}.",
+    "placeholders": [
+      "event",
+      "handler"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "The flow ensures that {data} is validated before {action}.",
+    "placeholders": [
+      "data",
+      "action"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "In the {process} flow, {user} must complete {step} first.",
+    "placeholders": [
+      "process",
+      "user",
+      "step"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "The flow of {information} is critical for {outcome}.",
+    "placeholders": [
+      "information",
+      "outcome"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "This example shows a typical {topic} flow in action.",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "The flow can be customized based on {user} preferences.",
+    "placeholders": [
+      "user"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "{user} explains the flow of {topic} step by step.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Let's trace the flow of {topic} from start to finish.",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "The flow of {topic} begins with {step1} and ends with {step2}.",
+    "placeholders": [
+      "topic",
+      "step1",
+      "step2"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "{user} demonstrates the workflow for {task}.",
+    "placeholders": [
+      "user",
+      "task"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Here is a simplified flow diagram for {topic}.",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "The process flow for {topic} involves {number} key stages.",
+    "placeholders": [
+      "topic",
+      "number"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Follow along as we map out the flow of {topic}.",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "This section covers the flow of {topic} in detail.",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "{user} walks through the entire flow of {topic} from initiation to completion.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Understanding the flow of {topic} requires examining each {component}.",
+    "placeholders": [
+      "topic",
+      "component"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "The flow of {topic} can be broken down into {step1}, {step2}, and {step3}.",
+    "placeholders": [
+      "topic",
+      "step1",
+      "step2",
+      "step3"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "In this flow, {user} shows how {topic} transitions between {state1} and {state2}.",
+    "placeholders": [
+      "user",
+      "topic",
+      "state1",
+      "state2"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Let's visualize the flow of {topic} using a {diagram_type} diagram.",
+    "placeholders": [
+      "topic",
+      "diagram_type"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "The key to mastering {topic} is understanding its flow from input to output.",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Each step in the flow of {topic} builds on the previous one.",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "{user} highlights the critical decision points in the flow of {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "The flow for {topic} starts with {action} and proceeds through {stages}.",
+    "placeholders": [
+      "topic",
+      "action",
+      "stages"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "This flow chart illustrates the sequence of events in {topic}.",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "We will now examine the flow of {topic} in a real-world scenario.",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "The flow of {topic} is optimized for {goal}.",
+    "placeholders": [
+      "topic",
+      "goal"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "{user} identifies bottlenecks in the flow of {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "A clear flow for {topic} ensures {benefit}.",
+    "placeholders": [
+      "topic",
+      "benefit"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "The flow diagram for {topic} shows {aspect}.",
+    "placeholders": [
+      "topic",
+      "aspect"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Let's step through the flow of {topic} with {user}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "The flow of {topic} is designed to achieve {outcome}.",
+    "placeholders": [
+      "topic",
+      "outcome"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "This flow chart outlines the main steps for {task}.",
+    "placeholders": [
+      "task"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Understanding the flow of {topic} is crucial for {audience}.",
+    "placeholders": [
+      "topic",
+      "audience"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "The flow of {topic} can be represented as a {type} diagram.",
+    "placeholders": [
+      "topic",
+      "type"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Now, let's dive deep into the flow of {topic} and analyze each component thoroughly.",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "In this comprehensive walkthrough, {user} explains the entire flow of {topic} with examples.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "The flow of {topic} involves multiple phases: {phase1}, {phase2}, and {phase3}, each with its own objectives.",
+    "placeholders": [
+      "topic",
+      "phase1",
+      "phase2",
+      "phase3"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "To fully grasp {topic}, we need to trace the flow from initial input through processing to final output.",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "This detailed flow diagram breaks down {topic} into {number} distinct steps, each explained by {user}.",
+    "placeholders": [
+      "topic",
+      "number",
+      "user"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "Let's follow the flow of {topic} through {system}, noting how data transforms at each stage.",
+    "placeholders": [
+      "topic",
+      "system"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "The flow of {topic} is complex, but we can simplify it by focusing on the core {elements}.",
+    "placeholders": [
+      "topic",
+      "elements"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "In this section, {user} provides a step-by-step breakdown of the flow for {topic}, including common pitfalls.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "We will model the flow of {topic} using a {methodology} approach, highlighting key interactions.",
+    "placeholders": [
+      "topic",
+      "methodology"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "To implement {topic} successfully, one must understand the flow of data and control between {components}.",
+    "placeholders": [
+      "topic",
+      "components"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "The flow of {topic} is iterative; each cycle refines the process until {condition} is met.",
+    "placeholders": [
+      "topic",
+      "condition"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "This comprehensive flow analysis for {topic} reveals opportunities for optimization and automation.",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "By examining the flow of {topic} from multiple perspectives, {user} uncovers underlying patterns.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "The flow of {topic} can be mapped to a {framework} to standardize processes across teams.",
+    "placeholders": [
+      "topic",
+      "framework"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "Let's simulate the flow of {topic} in a controlled environment to test its robustness.",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "In this tutorial, {user} demonstrates the flow of {topic} using a live example with real data.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "The flow for {topic} requires careful orchestration of {resources} to ensure smooth execution.",
+    "placeholders": [
+      "topic",
+      "resources"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "A deep understanding of the flow of {topic} helps in designing more efficient {systems}.",
+    "placeholders": [
+      "topic",
+      "systems"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "We will now explore the flow of {topic} in detail, covering both normal and edge cases.",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "The flow of {topic} is a journey from {start_point} to {end_point}, with many lessons along the way.",
+    "placeholders": [
+      "topic",
+      "start_point",
+      "end_point"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "As {user} explores the {topic}, the flow of ideas leads to a breakthrough in understanding.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "long"
+  }
+]

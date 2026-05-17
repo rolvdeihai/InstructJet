@@ -4,20 +4,26 @@ import asyncio
 import time
 import traceback
 import json
-from fastapi import FastAPI, HTTPException, Request
+import re
+import uuid
+from concurrent.futures import ThreadPoolExecutor
+from typing import Set, List, Dict, Any
+
+from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from llama_cpp import Llama
 from contextlib import asynccontextmanager
 from huggingface_hub import hf_hub_download
+from sentence_transformers import SentenceTransformer, util
+import tiktoken
 
-# Configure logging
+# ---------- Logging ----------
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 # ---------- CPU optimizations ----------
 def optimize_for_cpu():
-    """Apply CPU-specific optimizations (optional)."""
     os.environ['OMP_NUM_THREADS'] = str(os.cpu_count())
     os.environ['KMP_BLOCKTIME'] = '1'
     os.environ['KMP_AFFINITY'] = 'granularity=fine,compact,1,0'
@@ -31,33 +37,160 @@ def optimize_for_cpu():
 
 optimize_for_cpu()
 
-# ---------- Queue management ----------
+# ---------- Token counting ----------
+try:
+    encoding = tiktoken.get_encoding("cl100k_base")
+    logger.debug("Token counter initialized")
+except:
+    encoding = None
+    logger.warning("tiktoken not available, using fallback token counting")
+
+def count_tokens(text: str) -> int:
+    if encoding:
+        return len(encoding.encode(text))
+    else:
+        return len(text.split())
+
+# ---------- Fast summarization using LexRank (same as before) ----------
+def smart_summarize_text(text: str, target_tokens: int = 800) -> str:
+    original_tokens = count_tokens(text)
+    if original_tokens <= target_tokens:
+        return text
+
+    target_sentences = max(2, min(20, int(target_tokens / 25)))
+    try:
+        # Ensure NLTK punkt is available
+        import nltk
+        try:
+            nltk.data.find('tokenizers/punkt')
+        except LookupError:
+            nltk.download('punkt')
+        from sumy.parsers.plaintext import PlaintextParser
+        from sumy.nlp.tokenizers import Tokenizer
+        from sumy.summarizers.lex_rank import LexRankSummarizer
+        parser = PlaintextParser.from_string(text, Tokenizer("english"))
+        summarizer = LexRankSummarizer()
+        summary_sentences = summarizer(parser.document, target_sentences)
+        summary = ' '.join(str(sentence) for sentence in summary_sentences)
+        if count_tokens(summary) > target_tokens:
+            words = summary.split()
+            target_words = int(target_tokens * 1.3)
+            summary = ' '.join(words[:target_words])
+        return summary.strip() if summary else text[:int(target_tokens * 4)]
+    except Exception as e:
+        logger.error(f"LexRank summarization error: {e}")
+        words = text.split()
+        target_words = int(target_tokens * 1.3)
+        return ' '.join(words[:target_words])
+
+# ---------- Load skeletons and templates ----------
+SKELETONS_PATH = "skeletons.json"
+TEMPLATES_DIR = "templates_by_section"
+
+def load_skeletons() -> List[Dict[str, Any]]:
+    with open(SKELETONS_PATH, "r", encoding="utf-8") as f:
+        return json.load(f)
+
+def load_all_templates() -> Dict[str, List[Dict[str, Any]]]:
+    """Load all JSON files from TEMPLATES_DIR, keyed by section name.
+       Converts 'templates_acknowledgement.json' -> 'acknowledgment' (removing 'templates_' and '.json').
+    """
+    templates = {}
+    if not os.path.exists(TEMPLATES_DIR):
+        logger.warning(f"Templates directory {TEMPLATES_DIR} not found")
+        return templates
+    for filename in os.listdir(TEMPLATES_DIR):
+        if not filename.endswith(".json"):
+            continue
+        # Extract section name: e.g., 'templates_acknowledgement.json' -> 'acknowledgement'
+        section = filename.replace("templates_", "").replace(".json", "")
+        filepath = os.path.join(TEMPLATES_DIR, filename)
+        try:
+            with open(filepath, "r", encoding="utf-8") as f:
+                data = json.load(f)
+                if isinstance(data, list):
+                    templates[section] = data
+                else:
+                    logger.warning(f"File {filename} does not contain a list, skipping")
+        except Exception as e:
+            logger.error(f"Error loading {filename}: {e}")
+    logger.info(f"Loaded templates for sections: {list(templates.keys())}")
+    return templates
+
+SKELETONS = load_skeletons()
+SECTION_TEMPLATES = load_all_templates()
+
+# ---------- Embedder for skeleton selection ----------
+embedder = SentenceTransformer('all-MiniLM-L6-v2')
+
+def select_best_skeleton(user_query: str, context: str = "") -> Dict[str, Any]:
+    """Return the skeleton dict with highest similarity to the user input."""
+    full_input = f"{context}\n{user_query}".strip()
+    start_time = time.time()
+    query_emb = embedder.encode(full_input, convert_to_tensor=True)
+    descriptions = [s["description"] for s in SKELETONS]
+    desc_embs = embedder.encode(descriptions, convert_to_tensor=True)
+    scores = util.cos_sim(query_emb, desc_embs)[0]
+    best_idx = scores.argmax().item()
+    best_skeleton = SKELETONS[best_idx]   
+    # ---------- ADD the following lines ----------
+    elapsed = time.time() - start_time
+    logger.info(f"Skeleton selection took {elapsed:.3f}s")
+    logger.info(f"Selected skeleton: {best_skeleton['id']} (score: {scores[best_idx].item():.3f}) - {best_skeleton['description']}")
+    return SKELETONS[best_idx]
+
+# ---------- Queue management (same as merged version) ----------
 class QueueStatus:
     def __init__(self, max_concurrent: int = 1):
         self.max_concurrent = max_concurrent
         self.active_tasks = 0
-        self.pending_queue = []
+        self.pending_queue = []          # list of (future, request_id)
         self._lock = asyncio.Lock()
-    
-    async def acquire(self):
+
+    async def wait_and_acquire(self, request_id: str) -> int:
         async with self._lock:
             if self.active_tasks < self.max_concurrent:
                 self.active_tasks += 1
-                return True, 0
+                return 0
             else:
                 position = len(self.pending_queue) + 1
                 future = asyncio.Future()
-                self.pending_queue.append(future)
-                return False, position
-    
+                self.pending_queue.append((future, request_id))
+        try:
+            await future
+        except asyncio.CancelledError:
+            async with self._lock:
+                for i, (f, rid) in enumerate(self.pending_queue):
+                    if rid == request_id:
+                        self.pending_queue.pop(i)
+                        break
+            raise
+        async with self._lock:
+            self.active_tasks += 1
+            for i, (f, rid) in enumerate(self.pending_queue):
+                if rid == request_id:
+                    self.pending_queue.pop(i)
+                    break
+            return position
+
     async def release(self):
         async with self._lock:
             self.active_tasks -= 1
             if self.pending_queue:
-                future = self.pending_queue.pop(0)
-                future.set_result(True)
-                self.active_tasks += 1
-    
+                future, _ = self.pending_queue[0]
+                if not future.done():
+                    future.set_result(True)
+
+    async def cancel_queued_request(self, request_id: str) -> bool:
+        async with self._lock:
+            for i, (future, rid) in enumerate(self.pending_queue):
+                if rid == request_id:
+                    self.pending_queue.pop(i)
+                    if not future.done():
+                        future.cancel()
+                    return True
+        return False
+
     def get_status(self):
         return {
             "active": self.active_tasks,
@@ -67,7 +200,14 @@ class QueueStatus:
 
 queue_status = QueueStatus(max_concurrent=1)
 
-# ---------- The model class with local GGUF model ----------
+# ---------- Global executor and active requests ----------
+executor = ThreadPoolExecutor(max_workers=1)
+active_request_ids: Set[str] = set()
+
+# ---------- Global model variable ----------
+model = None
+
+# ---------- Model class (unchanged from merged version) ----------
 class MixtralFreeModel:
     def __init__(self, model_path: str = None):
         self.model_name = "ministral-3.3b"
@@ -114,7 +254,7 @@ class MixtralFreeModel:
         except Exception as e:
             logger.error(f"Failed to load GGUF model: {e}")
             raise
-        
+
     async def warm_up(self) -> None:
         logger.info("Warming up model with test inference...")
         start_time = time.time()
@@ -125,11 +265,18 @@ class MixtralFreeModel:
         except Exception as e:
             logger.warning(f"Model warm-up failed: {e}")
 
-    async def _generate_completion(self, prompt: str, max_tokens: int = None, temperature: float = None) -> str:
+    async def _generate_completion(self, prompt: str, max_tokens: int = None, temperature: float = None, request_id: str = "") -> str:
+        if request_id and request_id not in active_request_ids:
+            return "CANCELLED"
+
         if max_tokens is None:
             max_tokens = self.max_tokens
         if temperature is None:
             temperature = 0.3
+
+        # Log prompt length (approx tokens) before call
+        prompt_tokens = len(prompt.split()) * 0.75   # rough estimate
+        logger.info(f"LLM call: request_id={request_id[:8]}... max_tokens={max_tokens}, temp={temperature}, prompt_len≈{int(prompt_tokens)}")
 
         def _blocking():
             start = time.time()
@@ -143,63 +290,15 @@ class MixtralFreeModel:
                 stream=False
             )
             elapsed = time.time() - start
-            logger.debug(f"Blocking completion took {elapsed:.2f}s")
+            # Log the actual completion tokens used
+            usage = response.get('usage', {})
+            completion_tokens = usage.get('completion_tokens', 0)
+            total_tokens = usage.get('total_tokens', 0)
+            logger.info(f"LLM completion finished in {elapsed:.3f}s → {completion_tokens} generated tokens (total {total_tokens})")
             return response['choices'][0]['text'].strip()
 
-        return await asyncio.to_thread(_blocking)
-
-    async def generate_response(self, question: str, context: str = "") -> str:
-        is_guide_request = any(phrase in question.lower() for phrase in 
-                            ["guide", "create a guide", "make a guide", "step by step", "tutorial"])
-
-        if is_guide_request:
-            system_prompt = f"""You are an assistant that creates structured guides.
-        When asked to create a guide, you MUST respond with ONLY a valid JSON object.
-        Do not include any additional text, explanations, markdown, or code fences.
-        The JSON object must contain the keys "action" and "summary".
-
-        Format:
-        {{"action": "generate_guide", "summary": "Brief summary of the task"}}
-
-        Conversation context:
-        {context}
-
-        Now produce the JSON object for the user's request:"""
-        else:
-            system_prompt = f"""You are a helpful, accurate, and context-aware assistant. Use the conversation history below to provide a relevant and useful answer to the question.
-
-    IMPORTANT:
-    - Answer in the same language as the question
-    - Be concise but comprehensive
-    - Use the conversation context when relevant
-    - If the context doesn't contain relevant information, use your general knowledge
-
-    Conversation history:
-    {context}
-
-    Provide a helpful response"""
-
-        prompt = f"<s>[INST] {system_prompt}\n\nNow handle this user request: {question} [/INST]"
-
-        try:
-            response_text = await self._generate_completion(prompt, max_tokens=512)
-
-            if is_guide_request:
-                import re
-                match = re.search(r'\{[^{}]*"action"\s*:\s*"generate_guide"[^{}]*\}', response_text, re.DOTALL)
-                if match:
-                    return match.group(0)
-                else:
-                    logger.warning("Model did not return valid JSON for guide request. Using fallback.")
-                    return json.dumps({
-                        "action": "generate_guide",
-                        "summary": "Create a guide based on the conversation.",
-                        "sections": ["Overview", "Prerequisites", "Step-by-Step Instructions", "Tools & Assets", "Flow"]
-                    })
-            return response_text
-        except Exception as e:
-            logger.error(f"Error in generation: {str(e)}")
-            return "I apologize, but I'm having trouble responding right now."
+        loop = asyncio.get_running_loop()
+        return await loop.run_in_executor(executor, _blocking)
 
     def clean_question(self, question: str) -> str:
         prefixes = ['!bot', '!ai', '@bot', 'bot,', '!ai_search']
@@ -213,50 +312,6 @@ class MixtralFreeModel:
                 return cleaned
         return original_question
 
-    async def compress_input(self, text: str, max_tokens: int = 500) -> str:
-        if len(text.split()) < max_tokens:
-            return text
-        logger.info(f"Compressing input of {len(text.split())} words...")
-        start = time.time()
-        prompt = f"<s>[INST] Summarize the following text into a concise, structured form (bullet points or key-value pairs) keeping all essential details. Use at most {max_tokens} tokens.\n\nText:\n{text}\n\nSummary: [/INST]"
-        summary = await self._generate_completion(prompt, max_tokens=max_tokens, temperature=0.5)
-        elapsed = time.time() - start
-        logger.info(f"Compression completed in {elapsed:.2f}s")
-        return summary
-
-    async def generate_efficient_section(self, section_type: str, context: str, max_tokens: int = 300) -> str:
-        logger.info(f"Generating efficient representation for '{section_type}'...")
-        start = time.time()
-        system = f"You are an expert task guide writer. Generate content for the section \"{section_type}\" in an efficient language format.\nUse a structured format like:\n- Key point 1: details\n- Key point 2: details\nOr use JSON if appropriate. Keep it concise and use at most {max_tokens} tokens."
-        prompt = f"<s>[INST] {system}\n\nContext: {context}\nGenerate the efficient language for {section_type} section. [/INST]"
-        efficient = await self._generate_completion(prompt, max_tokens=max_tokens)
-        elapsed = time.time() - start
-        logger.info(f"Efficient section generation took {elapsed:.2f}s")
-        return efficient
-
-    async def expand_efficient_to_natural(self, efficient_text: str, section_type: str, max_tokens: int = 300) -> str:
-        logger.info(f"Expanding efficient language to natural text for section '{section_type}'...")
-        start = time.time()
-        system = f"""You are an expert task guide writer. 
-        Expand the efficient language into a **short but helpful** section titled "{section_type}".
-
-        STRICT RULES:
-        - Maximum 120 words total.
-        - Use markdown subheadings (###) and bullet points.
-        - No long paragraphs – break into 3-5 bullet points or short phrases.
-        - Skip introductions, conclusions, and fluff.
-        - Keep the tone professional and clear.
-
-        Efficient language:
-        {efficient_text}
-
-        Write the {section_type} section now:"""
-        prompt = f"<s>[INST] {system}\n\nEfficient language:\n{efficient_text}\n\nWrite the full {section_type} section now. [/INST]"
-        expanded = await self._generate_completion(prompt, max_tokens=max_tokens)
-        elapsed = time.time() - start
-        logger.info(f"Expansion took {elapsed:.2f}s")
-        return expanded
-    
     async def generate_flow_diagram(self, context: str) -> str:
         prompt = f"""[INST] You are an expert at creating Mermaid flowcharts for task guides.
 
@@ -303,25 +358,133 @@ class MixtralFreeModel:
             C --> D[End]
             ```"""
 
-    async def generate_section(self, section_type: str, context: str, compress_input: bool = True) -> str:
-        total_start = time.time()
-        if section_type.lower() == "flow":
-            return await self.generate_flow_diagram(context)
-        logger.info(f"Starting section generation for '{section_type}' (compress_input={compress_input})")
-        if compress_input and len(context.split()) > 1500:
-            context = await self.compress_input(context, max_tokens=1000)
+# ---------- Template filling function ----------
+async def fill_template(section_name: str, template_obj: Dict[str, Any],
+                        user_query: str, context: str, request_id: str) -> str:
+    """
+    Given a template object like {"text": "Start by {action}.", "placeholders": ["action"], ...}
+    use the LLM to replace placeholders with concrete values from the conversation.
+    """
+    template_text = template_obj["text"]
+    
+    start_time = time.time()
+    
+    # If no placeholders, just return the template
+    if not template_obj.get("placeholders"):
+        return template_text
+
+    # Ask the model to fill the template directly (few-shot)
+    prompt = f"""You are a helpful assistant that fills placeholders in sentence templates.
+
+Given the template and the conversation, replace every {{placeholder}} with a concrete, natural value.
+Return ONLY the filled sentence, nothing else.
+
+Template: {template_text}
+
+Conversation context:
+{context}
+
+User query: {user_query}
+
+Filled sentence:"""
+
+    filled = await model._generate_completion(prompt, max_tokens=150, temperature=0.3, request_id=request_id)
+    if filled == "CANCELLED":
+        return "CANCELLED"
+    # Sanity: if the model failed to replace placeholders, fallback to removing braces
+    if re.search(r'\{[^}]+\}', filled):
+        # Still has placeholders – try to fill with a simpler method
+        # Extract placeholders and ask for values as JSON
+        placeholders = template_obj["placeholders"]
+        json_prompt = f"""Extract values for the placeholders: {placeholders}
+Context: {context}
+User: {user_query}
+
+Return ONLY a JSON object, e.g.: {{"action": "install", "user": "you"}}
+JSON:"""
+        json_response = await model._generate_completion(json_prompt, max_tokens=150, temperature=0.2, request_id=request_id)
+        try:
+            values = json.loads(json_response)
+        except:
+            values = {p: f"[{p}]" for p in placeholders}
+        try:
+            filled = template_text.format(**values)
+        except:
+            # Last resort: remove braces
+            filled = re.sub(r'\{[^}]+\}', '___', template_text)
+            
+        # At the end, before returning:
+        elapsed = time.time() - start_time
+        logger.info(f"Template filling for '{section_name}' took {elapsed:.3f}s → result: {filled[:80]}...")
+    return filled.strip()
+
+# ---------- Skeleton-based answer generation ----------
+async def generate_structured_answer(user_query: str, context: str, request_id: str) -> str:
+    skeleton = select_best_skeleton(user_query, context)
+    sections = skeleton["sections"]
+    logger.info(f"Selected skeleton '{skeleton['id']}' with sections {sections}")
+
+    # Prepare a list of templates (or fallback instruction)
+    sections_info = []
+    for section in sections:
+        templates = SECTION_TEMPLATES.get(section, [])
+        if templates:
+            chosen = templates[0]  # or selection logic
+            sections_info.append({"section": section, "template": chosen["text"]})
         else:
-            logger.info(f"Input context size OK: {len(context.split())} words")
-        efficient = await self.generate_efficient_section(section_type, context)
-        expanded = await self.expand_efficient_to_natural(efficient, section_type)
-        total_time = time.time() - total_start
-        logger.info(f"Total section generation time: {total_time:.2f}s")
-        return expanded
+            sections_info.append({"section": section, "template": None})
 
-# ---------- Global model variable ----------
-model = None
+    # Build prompt that asks for JSON
+    prompt = f"""You are a helpful assistant that fills placeholders in sentence templates.
 
-# ---------- Lifespan context manager ----------
+Conversation context:
+{context}
+
+User query: {user_query}
+
+For each of the following sections, fill the template’s placeholders ({{...}}) with concrete, natural values based on the conversation.
+Return ONLY a valid JSON object where keys are section names and values are the completed sentences.
+
+Sections:
+{json.dumps(sections_info, indent=2)}
+
+Example output format:
+{{
+  "interest_comment": "I'm really interested in chess strategies.",
+  "problem_analysis": "The core challenge for you is that chess content lacks scalability.",
+  "recommendation": "I highly recommend focusing on opening tutorials due to their exceptional engagement."
+}}
+
+Now produce the JSON object:"""
+
+    response = await model._generate_completion(prompt, max_tokens=600, temperature=0.3, request_id=request_id)
+    if response == "CANCELLED":
+        return "CANCELLED"
+
+    # Extract JSON from response (model might add extra text)
+    try:
+        # Find the first { and last }
+        start = response.find('{')
+        end = response.rfind('}') + 1
+        if start != -1 and end > start:
+            json_str = response[start:end]
+            filled = json.loads(json_str)
+        else:
+            raise ValueError("No JSON object found")
+    except Exception as e:
+        logger.error(f"Failed to parse JSON response: {e}\nRaw response: {response}")
+        # Fallback: return raw response (still usable)
+        return response
+
+    # Reconstruct the final answer in section order
+    ordered_texts = []
+    for section in sections:
+        text = filled.get(section, f"[Missing section: {section}]")
+        ordered_texts.append(text)
+
+    return "\n\n".join(ordered_texts)
+
+# ---------- Lifespan ----------
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     global model
@@ -331,43 +494,31 @@ async def lifespan(app: FastAPI):
         model = MixtralFreeModel()
         await model.warm_up()
         total_time = time.time() - start_total
-        logger.info(f"Model initialized and warmed up successfully in {total_time:.2f}s")
+        logger.info(f"Model initialized successfully in {total_time:.2f}s")
     except Exception as e:
         logger.error(f"Failed to initialize model: {e}")
         model = None
     yield
-    logger.info("Shutting down, releasing model resources.")
+    logger.info("Shutting down...")
     model = None
-    logger.info("Shutdown complete.")
+    executor.shutdown(wait=False)
 
 # ---------- FastAPI app ----------
-app = FastAPI(
-    title="Free AI Response API",
-    description="Uses local GGUF model with queue management",
-    version="1.0",
-    lifespan=lifespan
-)
+app = FastAPI(title="Structured AI API", description="Uses skeletons and templates to generate responses", version="3.0", lifespan=lifespan)
+app.add_middleware(CORSMiddleware, allow_origins=["*"], allow_credentials=True, allow_methods=["*"], allow_headers=["*"])
 
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=["*"],
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
-
-# Request/Response models
 class ChatRequest(BaseModel):
     question: str
     context: str = ""
+    request_id: str = ""
 
 class ChatResponse(BaseModel):
     response: str
+    queue_position: int = 0
 
 class GenerateSectionRequest(BaseModel):
     section_type: str
-    context: str = ""               # legacy, optional
-    compressed_context: str = None  # new field (skip efficient phase)
+    context: str = ""
     compress_input: bool = True
 
 class GenerateSectionResponse(BaseModel):
@@ -379,119 +530,125 @@ class CompressQueryRequest(BaseModel):
 class CompressQueryResponse(BaseModel):
     compressed: str
 
-# ---------- Endpoints ----------
+class CancelRequest(BaseModel):
+    request_id: str
+
 @app.get("/")
 async def root():
-    return {"message": "Free AI Response API is running. Use POST /chat, POST /generate-section, or POST /compress-query."}
+    return {"message": "Structured AI API running. Use POST /chat, /generate-section, /compress-query, /cancel"}
 
 @app.get("/queue-status")
 async def get_queue_status():
     return queue_status.get_status()
 
+@app.post("/cancel")
+async def cancel_request(cancel: CancelRequest):
+    if await queue_status.cancel_queued_request(cancel.request_id):
+        active_request_ids.discard(cancel.request_id)
+        return {"status": "cancelled (queued)"}
+    if cancel.request_id in active_request_ids:
+        active_request_ids.remove(cancel.request_id)
+        return {"status": "cancelled (active)"}
+    return {"status": "not_found"}
+
 @app.post("/chat", response_model=ChatResponse)
 async def chat(request: ChatRequest):
-    queue_start = time.time()
-    can_process, queue_position = await queue_status.acquire()
-    queue_wait = time.time() - queue_start
+    overall_start = time.time()
+    request_id = request.request_id or str(uuid.uuid4())
+    active_request_ids.add(request_id)
 
-    if not can_process:
-        logger.info(f"Request queued at position {queue_position}")
-        return {"status": "queued", "queue_position": queue_position}
-
-    logger.info(f"Request started processing after queue wait {queue_wait:.3f}s")
-    req_start = time.time()
     try:
+        queue_position = await queue_status.wait_and_acquire(request_id)
+    except asyncio.CancelledError:
+        active_request_ids.discard(request_id)
+        return ChatResponse(response="Cancelled (was in queue).", queue_position=0)
+
+    try:
+        if request_id not in active_request_ids:
+            return ChatResponse(response="CANCELLED", queue_position=queue_position)
+
         if model is None:
             raise HTTPException(status_code=503, detail="Model not available")
+
         cleaned_question = model.clean_question(request.question)
-        response_text = await model.generate_response(cleaned_question, request.context)
-        total_time = time.time() - req_start
-        logger.info(f"Chat request completed in {total_time:.2f}s (queue wait {queue_wait:.3f}s)")
-        return ChatResponse(response=response_text)
+        logger.info(f"Request {request_id[:8]}: cleaned question = '{cleaned_question[:100]}...'")
+
+        # Summarize context if too long (using LexRank)
+        context_to_use = request.context
+        if request.context and count_tokens(request.context) > 200:
+            logger.info(f"Request {request_id[:8]}: context has {count_tokens(request.context)} tokens, summarizing...")
+            summarization_start = time.time()
+            context_to_use = smart_summarize_text(request.context, target_tokens=min(int(count_tokens(request.context) / 4), 1200))
+            logger.info(f"Summarization took {time.time()-summarization_start:.3f}s, new token count: {count_tokens(context_to_use)}")
+
+        # Generate answer using skeletons + templates
+        answer_start = time.time()
+        answer = await generate_structured_answer(cleaned_question, context_to_use, request_id)
+        if answer == "CANCELLED":
+            return ChatResponse(response="Generation cancelled.", queue_position=queue_position)
+
+        total_time = time.time() - overall_start
+        logger.info(f"Request {request_id[:8]} completed in {total_time:.3f}s (queue wait {queue_position})")
+        
+        return ChatResponse(response=answer, queue_position=queue_position)
+
     except Exception as e:
         logger.error(f"Error processing request: {e}")
         logger.error(traceback.format_exc())
         raise HTTPException(status_code=500, detail="Internal server error")
     finally:
         await queue_status.release()
+        active_request_ids.discard(request_id)
 
+# ---------- The other endpoints (unchanged except minor fixes) ----------
 @app.post("/generate-section", response_model=GenerateSectionResponse)
 async def generate_section_endpoint(request: GenerateSectionRequest):
-    queue_start = time.time()
-    can_process, queue_position = await queue_status.acquire()
-    queue_wait = time.time() - queue_start
-
-    if not can_process:
-        return {"status": "queued", "queue_position": queue_position}
-
-    logger.info(f"Section generation started after queue wait {queue_wait:.3f}s")
+    request_id = "section_" + str(uuid.uuid4())
+    active_request_ids.add(request_id)
     try:
+        queue_position = await queue_status.wait_and_acquire(request_id)
+        if request_id not in active_request_ids:
+            return GenerateSectionResponse(content="CANCELLED")
         if model is None:
             raise HTTPException(status_code=503, detail="Model not available")
-
-        # SPECIAL CASE: Flow section -> generate Mermaid diagram
         if request.section_type.lower() == "flow":
-            # For Flow, we ignore compressed_context and always generate a diagram
-            # But we can optionally use compressed_context as additional context
-            if request.compressed_context:
-                context = request.compressed_context
-            else:
-                context = request.context
-            diagram = await model.generate_flow_diagram(context)
-            total_time = time.time() - queue_start
-            logger.info(f"Flow diagram generated in {total_time:.2f}s")
+            diagram = await model.generate_flow_diagram(request.context)
             return GenerateSectionResponse(content=diagram)
-
-        # Normal sections: use compressed_context if provided, else efficient+expand
-        if request.compressed_context:
-            efficient_repr = request.compressed_context
-            logger.info(f"Using provided compressed context for section '{request.section_type}'")
-        else:
-            context_to_use = request.context
-            if request.compress_input and len(context_to_use.split()) > 1500:
-                logger.info("Input context large, compressing...")
-                context_to_use = await model.compress_input(context_to_use, max_tokens=1000)
-            efficient_repr = await model.generate_efficient_section(request.section_type, context_to_use)
-
-        expanded = await model.expand_efficient_to_natural(efficient_repr, request.section_type)
-
-        total_time = time.time() - queue_start
-        logger.info(f"Generate-section request completed in {total_time:.2f}s (queue wait {queue_wait:.3f}s)")
-        return GenerateSectionResponse(content=expanded)
+        ctx = request.context
+        if request.compress_input and count_tokens(ctx) > 1500:
+            ctx = smart_summarize_text(ctx, target_tokens=1000)
+        prompt = f"<s>[INST] Write the '{request.section_type}' section (markdown, max 300 tokens). Context: {ctx} [/INST]"
+        generated = await model._generate_completion(prompt, max_tokens=400, temperature=0.4, request_id=request_id)
+        if generated == "CANCELLED":
+            return GenerateSectionResponse(content="Cancelled")
+        return GenerateSectionResponse(content=generated.strip())
+    except asyncio.CancelledError:
+        return GenerateSectionResponse(content="Stopped.")
     except Exception as e:
-        logger.error(f"Error generating section: {e}")
         logger.error(traceback.format_exc())
-        raise HTTPException(status_code=500, detail="Internal server error")
+        raise HTTPException(status_code=500, detail=str(e))
     finally:
         await queue_status.release()
+        active_request_ids.discard(request_id)
 
 @app.post("/compress-query", response_model=CompressQueryResponse)
 async def compress_query_endpoint(request: CompressQueryRequest):
-    queue_start = time.time()
-    can_process, queue_position = await queue_status.acquire()
-    queue_wait = time.time() - queue_start
-
-    if not can_process:
-        return {"status": "queued", "queue_position": queue_position}
-
-    logger.info(f"Compress-query started after queue wait {queue_wait:.3f}s")
+    request_id = "compress_" + str(uuid.uuid4())
+    active_request_ids.add(request_id)
     try:
-        if model is None:
-            raise HTTPException(status_code=503, detail="Model not available")
-
-        # Use generate_efficient_section with a special context to compress the user prompt
-        compressed = await model.generate_efficient_section(
-            section_type="QueryCompression",
-            context=f"User request: {request.prompt}\nProduce a dense, efficient representation (bullet points or key-value pairs) of the user's intent, steps, and requirements. Keep under 300 tokens."
-        )
-        total_time = time.time() - queue_start
-        logger.info(f"Compress-query completed in {total_time:.2f}s")
+        queue_position = await queue_status.wait_and_acquire(request_id)
+        if request_id not in active_request_ids:
+            return CompressQueryResponse(compressed="CANCELLED")
+        compressed = smart_summarize_text(request.prompt, target_tokens=300)
         return CompressQueryResponse(compressed=compressed)
+    except asyncio.CancelledError:
+        return CompressQueryResponse(compressed="")
     except Exception as e:
-        logger.error(f"Error compressing query: {e}")
-        raise HTTPException(status_code=500, detail="Internal server error")
+        logger.error(traceback.format_exc())
+        raise HTTPException(status_code=500, detail=str(e))
     finally:
         await queue_status.release()
+        active_request_ids.discard(request_id)
 
 if __name__ == "__main__":
     import uvicorn

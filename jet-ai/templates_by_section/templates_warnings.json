@@ -1,0 +1,1708 @@
+[
+  {
+    "text": "Warning: {user}, your {topic} request has been flagged.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Attention {user}: The {topic} system requires immediate review.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Caution: {user} has exceeded the {topic} limit.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Alert: {user}, {topic} access is restricted.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Notice: {user} must update {topic} credentials.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Warning: {user}, your {topic} session is about to expire.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Heads up {user}: {topic} data may be outdated.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Alert: {user} has unsaved changes in {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Warning: {user} is attempting to access {topic} without permission.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Caution: {user}, the {topic} feature is experimental.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Warning: {user}, your {topic} password will expire in {days} days.",
+    "placeholders": [
+      "user",
+      "topic",
+      "days"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Alert for {user}: The {topic} server will undergo maintenance on {date}.",
+    "placeholders": [
+      "user",
+      "topic",
+      "date"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Attention {user}: {topic} usage has reached {percentage}% capacity.",
+    "placeholders": [
+      "user",
+      "topic",
+      "percentage"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Heads up {user}: The {topic} report for {month} is overdue.",
+    "placeholders": [
+      "user",
+      "topic",
+      "month"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Warning: {user}, your {topic} subscription will renew on {date}.",
+    "placeholders": [
+      "user",
+      "topic",
+      "date"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Notice: {user} has {count} pending {topic} notifications.",
+    "placeholders": [
+      "user",
+      "count",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Caution: {user}, the {topic} file size exceeds the {limit} MB limit.",
+    "placeholders": [
+      "user",
+      "topic",
+      "limit"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Alert: {user}, {topic} synchronization failed for {device}.",
+    "placeholders": [
+      "user",
+      "topic",
+      "device"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Warning: {user}, {topic} activity detected from {location}.",
+    "placeholders": [
+      "user",
+      "topic",
+      "location"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Attention {user}: {topic} credentials were last changed on {date}.",
+    "placeholders": [
+      "user",
+      "topic",
+      "date"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Warning: {user} has {count} failed login attempts for {topic}.",
+    "placeholders": [
+      "user",
+      "count",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Alert: {user}, the {topic} backup for {date} is missing.",
+    "placeholders": [
+      "user",
+      "topic",
+      "date"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Heads up {user}: {topic} version {version} is deprecated.",
+    "placeholders": [
+      "user",
+      "topic",
+      "version"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Caution: {user}, {topic} settings have been changed by {admin}.",
+    "placeholders": [
+      "user",
+      "topic",
+      "admin"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Notice: {user}, your {topic} trial ends in {days} days.",
+    "placeholders": [
+      "user",
+      "topic",
+      "days"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Warning: {user}, {topic} operation aborted due to {reason}.",
+    "placeholders": [
+      "user",
+      "topic",
+      "reason"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Alert: {user}, {topic} response time exceeds {seconds} seconds.",
+    "placeholders": [
+      "user",
+      "topic",
+      "seconds"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Attention {user}: {topic} quota is at {percentage}% - please reduce usage.",
+    "placeholders": [
+      "user",
+      "topic",
+      "percentage"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Heads up {user}: {topic} scheduled maintenance on {date} from {start} to {end}.",
+    "placeholders": [
+      "user",
+      "topic",
+      "date",
+      "start",
+      "end"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "Warning: {user}, your {topic} account has been inactive for {days} days and will be suspended.",
+    "placeholders": [
+      "user",
+      "topic",
+      "days"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "Attention {user}: The {topic} database is corrupted. Contact {admin} immediately.",
+    "placeholders": [
+      "user",
+      "topic",
+      "admin"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "Alert: {user}, {topic} certificate will expire on {date}. Renew within {days} days to avoid disruption.",
+    "placeholders": [
+      "user",
+      "topic",
+      "date",
+      "days"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "Caution: {user}, {topic} usage has increased by {percentage}% this month. Review your {plan}.",
+    "placeholders": [
+      "user",
+      "topic",
+      "percentage",
+      "plan"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "Warning: {user}, {topic} integration with {service} may be affected by upcoming changes.",
+    "placeholders": [
+      "user",
+      "topic",
+      "service"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "Notice: {user}, your {topic} data will be archived on {date} unless you take action.",
+    "placeholders": [
+      "user",
+      "topic",
+      "date"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "Heads up {user}: {topic} performance issues detected due to {reason}. Expected resolution by {time}.",
+    "placeholders": [
+      "user",
+      "topic",
+      "reason",
+      "time"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "Alert: {user}, multiple {topic} errors reported from {source}. Please check logs.",
+    "placeholders": [
+      "user",
+      "topic",
+      "source"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "Warning: {user}, {topic} storage is at {percentage}% capacity. Delete unnecessary files soon.",
+    "placeholders": [
+      "user",
+      "topic",
+      "percentage"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "Attention {user}: {topic} security audit found {count} vulnerabilities. Patch by {date}.",
+    "placeholders": [
+      "user",
+      "topic",
+      "count",
+      "date"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "Caution: {user}, {topic} configuration differs from recommended settings for {environment}.",
+    "placeholders": [
+      "user",
+      "topic",
+      "environment"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "Warning: {user}, your {topic} API key was shared with {entity}. Revoke if not authorized.",
+    "placeholders": [
+      "user",
+      "topic",
+      "entity"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "Notice: {user}, the {topic} system will be down for {hours} hours on {date} for upgrades.",
+    "placeholders": [
+      "user",
+      "topic",
+      "hours",
+      "date"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "Alert: {user}, {topic} temperature is above {threshold}°C. Immediate action required.",
+    "placeholders": [
+      "user",
+      "topic",
+      "threshold"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "Heads up {user}: {topic} dependencies have changed. Update your {project} accordingly.",
+    "placeholders": [
+      "user",
+      "topic",
+      "project"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "Warning: {user}, {topic} billing cycle ends soon. Outstanding balance of {amount} due.",
+    "placeholders": [
+      "user",
+      "topic",
+      "amount"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "Attention {user}: {topic} license expires in {days} days. Renew to avoid service interruption.",
+    "placeholders": [
+      "user",
+      "topic",
+      "days"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "Caution: {user}, {topic} data transfer over {limit} GB may incur extra charges.",
+    "placeholders": [
+      "user",
+      "topic",
+      "limit"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "Warning: {user}, {topic} session timeout set to {seconds} seconds is too low for your workflow.",
+    "placeholders": [
+      "user",
+      "topic",
+      "seconds"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "Notice: {user}, {topic} compliance requires action by {date}. See {link} for details.",
+    "placeholders": [
+      "user",
+      "topic",
+      "date",
+      "link"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "Alert: {user}, {topic} replication lag is {time}. Data may be inconsistent across regions.",
+    "placeholders": [
+      "user",
+      "topic",
+      "time"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "Warning: {user}, your {topic} access will expire soon.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Caution: {user}, the {system} requires immediate attention.",
+    "placeholders": [
+      "user",
+      "system"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Alert: {user}, {topic} usage has exceeded the limit.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Notice: {user}, your {action} may lead to data loss.",
+    "placeholders": [
+      "user",
+      "action"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Warning: {user}, invalid {input} detected in {module}.",
+    "placeholders": [
+      "user",
+      "input",
+      "module"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Heads up: {user}, {topic} is currently unavailable.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Urgent: {user}, update your {account} details by {date}.",
+    "placeholders": [
+      "user",
+      "account",
+      "date"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Warning: {user}, your {session} will timeout in {minutes} minutes.",
+    "placeholders": [
+      "user",
+      "session",
+      "minutes"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Important: {user}, {topic} requires a {password} reset.",
+    "placeholders": [
+      "user",
+      "topic",
+      "password"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Caution: {user}, the {server} is running low on {resource}.",
+    "placeholders": [
+      "user",
+      "server",
+      "resource"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Alert: {user}, {number} failed login attempts from {ip}.",
+    "placeholders": [
+      "user",
+      "number",
+      "ip"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Warning: {user}, {software} version {version} is outdated.",
+    "placeholders": [
+      "user",
+      "software",
+      "version"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Notice: {user}, {file} contains {type} that may be harmful.",
+    "placeholders": [
+      "user",
+      "file",
+      "type"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Heads up: {user}, {topic} is scheduled for maintenance on {date}.",
+    "placeholders": [
+      "user",
+      "topic",
+      "date"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Urgent: {user}, your {subscription} will renew automatically.",
+    "placeholders": [
+      "user",
+      "subscription"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Warning: {user}, {action} will delete {items} permanently.",
+    "placeholders": [
+      "user",
+      "action",
+      "items"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Caution: {user}, {temperature} exceeds safe operating range.",
+    "placeholders": [
+      "user",
+      "temperature"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Alert: {user}, unauthorized access attempt from {location}.",
+    "placeholders": [
+      "user",
+      "location"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Notice: {user}, {topic} has been flagged for review by {admin}.",
+    "placeholders": [
+      "user",
+      "topic",
+      "admin"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Warning: {user}, your {device} battery is critically low.",
+    "placeholders": [
+      "user",
+      "device"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Heads up: {user}, {network} connectivity issues may affect {service}.",
+    "placeholders": [
+      "user",
+      "network",
+      "service"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Urgent: {user}, please verify your {identity} within {hours} hours.",
+    "placeholders": [
+      "user",
+      "identity",
+      "hours"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Warning: {user}, {document} has not been saved in {minutes} minutes.",
+    "placeholders": [
+      "user",
+      "document",
+      "minutes"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Caution: {user}, {process} is using {percent}% of CPU resources.",
+    "placeholders": [
+      "user",
+      "process",
+      "percent"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Alert: {user}, {storage} space is almost full ({percent}% used).",
+    "placeholders": [
+      "user",
+      "storage",
+      "percent"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Notice: {user}, {topic} has been updated to version {version}.",
+    "placeholders": [
+      "user",
+      "topic",
+      "version"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Warning: {user}, {role} privileges will be revoked on {date}.",
+    "placeholders": [
+      "user",
+      "role",
+      "date"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Heads up: {user}, {email} address is not verified.",
+    "placeholders": [
+      "user",
+      "email"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Urgent: {user}, {payment} method is expiring soon.",
+    "placeholders": [
+      "user",
+      "payment"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Warning: {user}, {action} cannot be undone. Proceed with caution.",
+    "placeholders": [
+      "user",
+      "action"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Caution: {user}, {api} rate limit reached for {endpoint}.",
+    "placeholders": [
+      "user",
+      "api",
+      "endpoint"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Alert: {user}, {database} replication lag exceeds {seconds} seconds.",
+    "placeholders": [
+      "user",
+      "database",
+      "seconds"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Notice: {user}, {topic} compliance review required by {deadline}.",
+    "placeholders": [
+      "user",
+      "topic",
+      "deadline"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Warning: {user}, {encryption} key is due for rotation.",
+    "placeholders": [
+      "user",
+      "encryption"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Heads up: {user}, {application} will restart in {minutes} minutes.",
+    "placeholders": [
+      "user",
+      "application",
+      "minutes"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Urgent: {user}, {certificate} will expire in {days} days.",
+    "placeholders": [
+      "user",
+      "certificate",
+      "days"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Warning: {user}, {project} budget has exceeded {amount}.",
+    "placeholders": [
+      "user",
+      "project",
+      "amount"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Caution: {user}, {log} files are consuming excessive disk space.",
+    "placeholders": [
+      "user",
+      "log"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Alert: {user}, {sensor} reading is outside normal range.",
+    "placeholders": [
+      "user",
+      "sensor"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Notice: {user}, {task} has been pending for {days} days.",
+    "placeholders": [
+      "user",
+      "task",
+      "days"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Warning: {user}, {backup} failed for {system} at {time}.",
+    "placeholders": [
+      "user",
+      "backup",
+      "system",
+      "time"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Heads up: {user}, {license} will expire on {date}.",
+    "placeholders": [
+      "user",
+      "license",
+      "date"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Urgent: {user}, {report} generation encountered an error.",
+    "placeholders": [
+      "user",
+      "report"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Warning: {user}, {queue} has {number} pending items.",
+    "placeholders": [
+      "user",
+      "queue",
+      "number"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Caution: {user}, {update} is available for {software}.",
+    "placeholders": [
+      "user",
+      "update",
+      "software"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Alert: {user}, {domain} registration is about to expire.",
+    "placeholders": [
+      "user",
+      "domain"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Notice: {user}, {workflow} has been paused by {manager}.",
+    "placeholders": [
+      "user",
+      "workflow",
+      "manager"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Warning: {user}, {connection} to {server} is unstable.",
+    "placeholders": [
+      "user",
+      "connection",
+      "server"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Heads up: {user}, {cache} hit ratio is below {threshold}%.",
+    "placeholders": [
+      "user",
+      "cache",
+      "threshold"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Urgent: {user}, {password} must be changed every {days} days.",
+    "placeholders": [
+      "user",
+      "password",
+      "days"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "{user}, please be aware that {topic} may cause unexpected side effects.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Warning: {topic} is not suitable for {user}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Attention {user}: {topic} requires careful handling.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Important warning regarding {topic}: proceed with caution if you are {user}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "{user}, do not ignore this warning about {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "This is a warning: {topic} could lead to serious consequences for {user}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Heads up {user}! {topic} may contain hidden risks.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Warning: {topic} should only be used by {user} under supervision.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "{user}, note that {topic} has been flagged as potentially dangerous.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Caution: {topic} may not be compatible with {user}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Warning for {user}: {topic} involves high voltage.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "{user}, beware of {topic} as it can cause allergic reactions.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Alert: {topic} is restricted for {user} unless authorized.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Warning: {topic} may be addictive for {user}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "{user}, it is critical to understand the risks of {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Danger: {topic} must be kept away from {user}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Warning: {topic} has been known to cause dizziness in {user}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Important safety notice regarding {topic} for {user}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "{user}, please read the warning label on {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Warning: {topic} may contain traces of {substance}.",
+    "placeholders": [
+      "user",
+      "topic",
+      "substance"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "{user}, use {topic} only as directed.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Caution: {topic} is extremely flammable near {user}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Warning: {topic} may cause nausea in {user}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Heads up: {topic} is not recommended for {user}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Attention: {topic} has a risk of electric shock for {user}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Warning: {topic} should be stored away from {user}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Important: {topic} may interact negatively with {user}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Warning: {topic} is under recall; contact {user} for details.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Alert {user}: {topic} may cause skin irritation.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Warning: {topic} is not to be ingested by {user}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "{user}, this is a mandatory warning about {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Caution: {topic} can be hazardous to {user} if mishandled.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Warning: {topic} may cause drowsiness in {user}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Notice: {topic} requires {user} to wear protective gear.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Warning: {topic} has been banned for {user} in some regions.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Be careful {user}: {topic} is slippery when wet.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Warning: {topic} may cause breathing difficulties in {user}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Alert: {topic} is known to the state of {user} to cause cancer.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Warning: {topic} should not be used near {user}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "{user}, please consult a doctor before using {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Caution: {topic} may impair {user} ability to drive.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Warning: {topic} contains {ingredient} which may be harmful to {user}.",
+    "placeholders": [
+      "user",
+      "topic",
+      "ingredient"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "Heads up {user}: {topic} is known to cause birth defects.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Important: {topic} must be disposed of properly by {user}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Warning: {topic} may explode if handled by {user}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Attention: {topic} is only for external use by {user}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Warning: {topic} can cause severe burns on {user}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "{user}, avoid contact with {topic} as it may cause injury.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Warning: {topic} is not tested for safety on {user}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Final warning {user}: {topic} poses a serious threat.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Warning: {user}, your {topic} session will expire in {minutes} minutes.",
+    "placeholders": [
+      "user",
+      "topic",
+      "minutes"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Attention {user}: The {system} will undergo maintenance at {time}.",
+    "placeholders": [
+      "user",
+      "system",
+      "time"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Caution: {topic} usage has exceeded {percentage}% of the allowed limit.",
+    "placeholders": [
+      "topic",
+      "percentage"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Alert: {user}, your {account} has been locked due to multiple failed attempts.",
+    "placeholders": [
+      "user",
+      "account"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Warning: The {server} will restart in {countdown} seconds. Please save your work.",
+    "placeholders": [
+      "server",
+      "countdown"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Important: {user}, your {subscription} for {service} expires on {date}.",
+    "placeholders": [
+      "user",
+      "subscription",
+      "service",
+      "date"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Notice: {topic} data is approaching the storage limit of {limit} GB.",
+    "placeholders": [
+      "topic",
+      "limit"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Warning: {user}, you have {count} unread messages in {folder}.",
+    "placeholders": [
+      "user",
+      "count",
+      "folder"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Heads up: The {feature} will be deprecated in version {version}. Please update your code.",
+    "placeholders": [
+      "feature",
+      "version"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Alert: {user}, your {device} battery is critically low at {level}%.",
+    "placeholders": [
+      "user",
+      "device",
+      "level"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Warning: {topic} detection indicates {risk} risk level. Proceed with caution.",
+    "placeholders": [
+      "topic",
+      "risk"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Important: {user}, please verify your {email} address to continue using {service}.",
+    "placeholders": [
+      "user",
+      "email",
+      "service"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Caution: The {process} is using {cpu}% CPU. Consider terminating it if unnecessary.",
+    "placeholders": [
+      "process",
+      "cpu"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Warning: {user}, your {project} has {overdue} overdue tasks.",
+    "placeholders": [
+      "user",
+      "project",
+      "overdue"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Alert: {topic} has reached critical threshold of {value}. Immediate action required.",
+    "placeholders": [
+      "topic",
+      "value"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Notice: {user}, there are {updates} pending updates for {software}.",
+    "placeholders": [
+      "user",
+      "updates",
+      "software"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Warning: The {network} connection is unstable. Data may be lost.",
+    "placeholders": [
+      "network"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Attention {user}: Your {file} is too large ({size} MB) to upload. Please compress it.",
+    "placeholders": [
+      "user",
+      "file",
+      "size"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Caution: {topic} contains sensitive information. Ensure proper permissions.",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Warning: {user}, you are about to delete {count} {items}. This action cannot be undone.",
+    "placeholders": [
+      "user",
+      "count",
+      "items"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Alert: {service} will be unavailable from {start} to {end} for maintenance.",
+    "placeholders": [
+      "service",
+      "start",
+      "end"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Important: {user}, your {password} password will expire in {days} days.",
+    "placeholders": [
+      "user",
+      "password",
+      "days"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Warning: {topic} data is inconsistent. Please run {tool} to fix it.",
+    "placeholders": [
+      "topic",
+      "tool"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Heads up: {user}, the {deadline} for {project} is approaching. Complete pending tasks.",
+    "placeholders": [
+      "user",
+      "deadline",
+      "project"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Caution: {device} temperature is {temp}°C. Reduce load to prevent overheating.",
+    "placeholders": [
+      "device",
+      "temp"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Warning: {user}, your {account} has been accessed from a new {location}.",
+    "placeholders": [
+      "user",
+      "account",
+      "location"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Alert: {topic} requires {permission} permission to proceed.",
+    "placeholders": [
+      "topic",
+      "permission"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Notice: {user}, you have {notifications} unread notifications. Check them soon.",
+    "placeholders": [
+      "user",
+      "notifications"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Warning: The {database} connection failed. Retrying in {retry} seconds.",
+    "placeholders": [
+      "database",
+      "retry"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Important: {user}, your {license} for {software} will expire on {date}. Renew now.",
+    "placeholders": [
+      "user",
+      "license",
+      "software",
+      "date"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Caution: {topic} contains {virus} malware. Scan your system immediately.",
+    "placeholders": [
+      "topic",
+      "virus"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Warning: {user}, you have {attempts} remaining login attempts before lockout.",
+    "placeholders": [
+      "user",
+      "attempts"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Alert: {system} detected unusual activity from {ip}. Please verify your identity.",
+    "placeholders": [
+      "system",
+      "ip"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Heads up: {user}, the {queue} is full. Processing may be delayed.",
+    "placeholders": [
+      "user",
+      "queue"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Warning: {topic} version {version} is outdated. Upgrade to {newVersion}.",
+    "placeholders": [
+      "topic",
+      "version",
+      "newVersion"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Important: {user}, your {document} has unsaved changes. Save before closing.",
+    "placeholders": [
+      "user",
+      "document"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Caution: The {process} has been running for {duration}. Check for infinite loops.",
+    "placeholders": [
+      "process",
+      "duration"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Warning: {user}, {topic} is not compatible with {browser} browser.",
+    "placeholders": [
+      "user",
+      "topic",
+      "browser"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Alert: {service} usage is at {percentage}% of quota. Upgrade your plan soon.",
+    "placeholders": [
+      "service",
+      "percentage"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Notice: {user}, your {file} is in a format that may not be supported.",
+    "placeholders": [
+      "user",
+      "file"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Warning: The {directory} has {size} GB of data. Consider archiving old files.",
+    "placeholders": [
+      "directory",
+      "size"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Heads up: {user}, {topic} has been flagged for review by {reviewer}.",
+    "placeholders": [
+      "user",
+      "topic",
+      "reviewer"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Caution: {device} is running low on memory ({free} MB free). Close some applications.",
+    "placeholders": [
+      "device",
+      "free"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Warning: {user}, your {order} is delayed due to {reason}.",
+    "placeholders": [
+      "user",
+      "order",
+      "reason"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Alert: {system} encountered an error in {module}. Check logs for details.",
+    "placeholders": [
+      "system",
+      "module"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Important: {user}, you are about to exceed the {limit} limit for {resource}.",
+    "placeholders": [
+      "user",
+      "limit",
+      "resource"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Warning: {topic} has been modified by {editor}. Review changes if needed.",
+    "placeholders": [
+      "topic",
+      "editor"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Heads up: {user}, the {event} starts in {time}. Prepare accordingly.",
+    "placeholders": [
+      "user",
+      "event",
+      "time"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Caution: {topic} is in {status} state. Actions may have limited effect.",
+    "placeholders": [
+      "topic",
+      "status"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Warning: {user}, your {session} has been idle for {minutes} minutes. It will timeout soon.",
+    "placeholders": [
+      "user",
+      "session",
+      "minutes"
+    ],
+    "length": "medium"
+  }
+]

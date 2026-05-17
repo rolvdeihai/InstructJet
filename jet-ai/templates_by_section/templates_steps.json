@@ -1,0 +1,1581 @@
+[
+  {
+    "text": "Start by {action}.",
+    "placeholders": [
+      "action"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Next, {user} should {action}.",
+    "placeholders": [
+      "user",
+      "action"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Then, apply {topic}.",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Finally, check {result}.",
+    "placeholders": [
+      "result"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "First, gather {items}.",
+    "placeholders": [
+      "items"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Now, {user} can {action}.",
+    "placeholders": [
+      "user",
+      "action"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "After that, test {topic}.",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Begin with {step}.",
+    "placeholders": [
+      "step"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Proceed to {action}.",
+    "placeholders": [
+      "action"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Complete by {action}.",
+    "placeholders": [
+      "action"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "To start, {user} needs {tool}.",
+    "placeholders": [
+      "user",
+      "tool"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Once done, move to {next_step}.",
+    "placeholders": [
+      "next_step"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Then, {user} must {action} carefully.",
+    "placeholders": [
+      "user",
+      "action"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Now, prepare {topic} for {task}.",
+    "placeholders": [
+      "topic",
+      "task"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Before continuing, verify {condition}.",
+    "placeholders": [
+      "condition"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Next, apply {substance} to {area}.",
+    "placeholders": [
+      "substance",
+      "area"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "After that, {user} should wait {duration}.",
+    "placeholders": [
+      "user",
+      "duration"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Finally, check if {result} is correct.",
+    "placeholders": [
+      "result"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "First, ensure {item} is ready.",
+    "placeholders": [
+      "item"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Then, {user} can add {component}.",
+    "placeholders": [
+      "user",
+      "component"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Start by assembling {parts}.",
+    "placeholders": [
+      "parts"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Now, adjust {setting} for best results.",
+    "placeholders": [
+      "setting"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "After completing, save {file}.",
+    "placeholders": [
+      "file"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Proceed with {action} until {condition}.",
+    "placeholders": [
+      "action",
+      "condition"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Before moving on, {user} must {action}.",
+    "placeholders": [
+      "user",
+      "action"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Next, insert {object} into {place}.",
+    "placeholders": [
+      "object",
+      "place"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Then, tighten {screw} with {tool}.",
+    "placeholders": [
+      "screw",
+      "tool"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Finally, review {output} for errors.",
+    "placeholders": [
+      "output"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "First, {user} should prepare {material}.",
+    "placeholders": [
+      "user",
+      "material"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Now, connect {cable} to {port}.",
+    "placeholders": [
+      "cable",
+      "port"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "To begin, open {application} and log in.",
+    "placeholders": [
+      "application"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "Then, navigate to {section} and select {option}.",
+    "placeholders": [
+      "section",
+      "option"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "After that, {user} should input {data} into {field}.",
+    "placeholders": [
+      "user",
+      "data",
+      "field"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "Next, verify that {item} matches the specifications in {document}.",
+    "placeholders": [
+      "item",
+      "document"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "Once verified, proceed to {step} while keeping {condition} in mind.",
+    "placeholders": [
+      "step",
+      "condition"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "If {error} occurs, {user} should restart from {step}.",
+    "placeholders": [
+      "error",
+      "user",
+      "step"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "For {task}, first gather {tools} and {materials}.",
+    "placeholders": [
+      "task",
+      "tools",
+      "materials"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "Then, apply {substance} evenly over {surface} using {applicator}.",
+    "placeholders": [
+      "substance",
+      "surface",
+      "applicator"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "Allow {duration} for {process} to complete before {action}.",
+    "placeholders": [
+      "duration",
+      "process",
+      "action"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "Finally, test {system} by running {test_case} and recording {results}.",
+    "placeholders": [
+      "system",
+      "test_case",
+      "results"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "First, {user} must log in to {platform} with {credentials}.",
+    "placeholders": [
+      "user",
+      "platform",
+      "credentials"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "Next, create a new {file} and name it {filename}.",
+    "placeholders": [
+      "file",
+      "filename"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "Then, import {data} from {source} into the project.",
+    "placeholders": [
+      "data",
+      "source"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "After importing, clean {data} by removing {duplicates}.",
+    "placeholders": [
+      "data",
+      "duplicates"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "Now, run {analysis} on the cleaned data set.",
+    "placeholders": [
+      "analysis"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "Review the results and identify {trends} or {anomalies}.",
+    "placeholders": [
+      "trends",
+      "anomalies"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "Based on findings, {user} should adjust {parameters} accordingly.",
+    "placeholders": [
+      "user",
+      "parameters"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "Finally, generate a {report} summarizing the {outcome}.",
+    "placeholders": [
+      "report",
+      "outcome"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "To complete, save all changes and exit {application}.",
+    "placeholders": [
+      "application"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "As a last step, {user} should backup {data} to {location}.",
+    "placeholders": [
+      "user",
+      "data",
+      "location"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "First, {user} should identify the main goal of {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "{user}, start by gathering all necessary materials for {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "The next step is to outline the key points of {topic}.",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "{user} must now define the scope of {topic} clearly.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Begin by researching {topic} thoroughly.",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Now, {user} should break down {topic} into smaller tasks.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "After understanding {topic}, create a step-by-step plan for {user}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "{user}, the third step involves analyzing the data related to {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Once {user} has completed the initial setup, move on to the core of {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Next, prioritize the elements of {topic} based on importance.",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "For {user}, the crucial step is to test the assumptions about {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Finally, {user} should review the results of {topic} and adjust.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Step four: implement the solution for {topic} as planned by {user}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "At this point, {user} needs to document the progress on {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Then, {user} can proceed to the next phase of {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "The initial step for {user} is to set clear objectives for {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "After that, {user} should brainstorm ideas around {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Now, draft a preliminary version of {topic} for {user}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "{user} must ensure all resources for {topic} are available.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Subsequently, {user} should refine the approach to {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "The next action for {user} is to validate the findings on {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Before moving forward, {user} needs to confirm the prerequisites of {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Step two involves organizing the information about {topic} for {user}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Now, {user} should collaborate with others on {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "The final step is to present the outcomes of {topic} to {user}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "First, {user} must understand the basics of {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Then, create a timeline for completing {topic} by {user}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "After that, {user} should assign tasks for {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Next, monitor the progress of {topic} regularly.",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Now, {user} can optimize the process for {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "The fifth step is to evaluate the effectiveness of {topic} for {user}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "At the start, {user} should list all assumptions about {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Then, {user} needs to gather feedback on {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Afterwards, iterate on the design of {topic} based on input.",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "The next milestone for {user} is to finalize the plan for {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Now, {user} should prepare the final report on {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Step one: define the problem statement for {topic} with {user}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Then, {user} must collect data relevant to {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "After collection, {user} should analyze the data for {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Now, draw conclusions from the analysis of {topic} for {user}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Finally, implement the changes suggested by {topic} for {user}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "The first action item is to schedule a meeting about {topic} for {user}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Then, {user} should create a prototype of {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "After testing, {user} can refine the prototype of {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Now, {user} needs to document the steps taken for {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Next, share the progress on {topic} with stakeholders.",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "For {user}, the penultimate step is to review the budget for {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Then, {user} should adjust the timeline for {topic} if needed.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Finally, celebrate the completion of {topic} with {user}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "The last step is to archive all materials related to {topic} for {user}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "First, {user} should {action} to begin the process.",
+    "placeholders": [
+      "user",
+      "action"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Next, gather all necessary {materials} for the {topic}.",
+    "placeholders": [
+      "materials",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Then, {user} must carefully {action} the {object}.",
+    "placeholders": [
+      "user",
+      "action",
+      "object"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "After that, check the {condition} to ensure everything is correct.",
+    "placeholders": [
+      "condition"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Finally, {user} can {action} the completed {topic}.",
+    "placeholders": [
+      "user",
+      "action",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "To start, {user} needs to {action} the {item}.",
+    "placeholders": [
+      "user",
+      "action",
+      "item"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Begin by {action} the {component} of the {system}.",
+    "placeholders": [
+      "action",
+      "component",
+      "system"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Proceed to {action} the {part} as instructed.",
+    "placeholders": [
+      "action",
+      "part"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Now, {user} should {action} the {tool} carefully.",
+    "placeholders": [
+      "user",
+      "action",
+      "tool"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Ensure that the {item} is {state} before moving on.",
+    "placeholders": [
+      "item",
+      "state"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "The first step is to {action} the {topic} thoroughly.",
+    "placeholders": [
+      "action",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Next, {user} will need to {action} the {object} with {tool}.",
+    "placeholders": [
+      "user",
+      "action",
+      "object",
+      "tool"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "After preparing the {materials}, {user} can begin the {process}.",
+    "placeholders": [
+      "materials",
+      "user",
+      "process"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Then, apply the {substance} to the {surface} evenly.",
+    "placeholders": [
+      "substance",
+      "surface"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Once the {component} is in place, secure it with {fastener}.",
+    "placeholders": [
+      "component",
+      "fastener"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "For the next step, {user} must {action} the {assembly}.",
+    "placeholders": [
+      "user",
+      "action",
+      "assembly"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Check the {parameter} to confirm the {result} is correct.",
+    "placeholders": [
+      "parameter",
+      "result"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Now, {user} should {action} the {device} according to the {guide}.",
+    "placeholders": [
+      "user",
+      "action",
+      "device",
+      "guide"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Repeat the {action} until the {condition} is achieved.",
+    "placeholders": [
+      "action",
+      "condition"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Finally, verify the {output} against the {standard}.",
+    "placeholders": [
+      "output",
+      "standard"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "To begin, {user} should {action} the {item} to initiate the {process}.",
+    "placeholders": [
+      "user",
+      "action",
+      "item",
+      "process"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "First, gather all required {materials} and {tools} for the {topic}.",
+    "placeholders": [
+      "materials",
+      "tools",
+      "topic"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "Next, {user} must carefully {action} the {component} using the {tool}.",
+    "placeholders": [
+      "user",
+      "action",
+      "component",
+      "tool"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "After that, align the {part} with the {marker} to ensure proper fit.",
+    "placeholders": [
+      "part",
+      "marker"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "Then, secure the {assembly} by {action} the {fastener} tightly.",
+    "placeholders": [
+      "assembly",
+      "action",
+      "fastener"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "Once the {step} is complete, {user} should {action} the {system}.",
+    "placeholders": [
+      "step",
+      "user",
+      "action",
+      "system"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "Now, test the {function} by {action} the {control}.",
+    "placeholders": [
+      "function",
+      "action",
+      "control"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "If the {result} is not as expected, {user} should {action} the {adjustment}.",
+    "placeholders": [
+      "result",
+      "user",
+      "action",
+      "adjustment"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "Continue by {action} the {item} until it reaches the {target} state.",
+    "placeholders": [
+      "action",
+      "item",
+      "target"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "Finally, inspect the {output} for any {defects} before finishing.",
+    "placeholders": [
+      "output",
+      "defects"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "Start by {action} the {surface} to prepare it for {treatment}.",
+    "placeholders": [
+      "action",
+      "surface",
+      "treatment"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Then, {user} should mix the {ingredients} in the {container}.",
+    "placeholders": [
+      "user",
+      "ingredients",
+      "container"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Apply the mixture to the {area} using a {tool}.",
+    "placeholders": [
+      "area",
+      "tool"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Allow the {substance} to set for {time} minutes.",
+    "placeholders": [
+      "substance",
+      "time"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "After drying, {user} can {action} the {surface}.",
+    "placeholders": [
+      "user",
+      "action",
+      "surface"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "For best results, repeat the {step} two or three times.",
+    "placeholders": [
+      "step"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Now, {user} should {action} the {object} to remove any {residue}.",
+    "placeholders": [
+      "user",
+      "action",
+      "object",
+      "residue"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Then, measure the {dimension} using a {measuring_tool}.",
+    "placeholders": [
+      "dimension",
+      "measuring_tool"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Mark the {position} with a {marker} for accuracy.",
+    "placeholders": [
+      "position",
+      "marker"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Cut the {material} along the {line} carefully.",
+    "placeholders": [
+      "material",
+      "line"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Assemble the {parts} in the order specified by the {instructions}.",
+    "placeholders": [
+      "parts",
+      "instructions"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Connect the {wire} to the {terminal} securely.",
+    "placeholders": [
+      "wire",
+      "terminal"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Turn on the {device} and check for {operation}.",
+    "placeholders": [
+      "device",
+      "operation"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "If the {indicator} lights up, the {step} was successful.",
+    "placeholders": [
+      "indicator",
+      "step"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Otherwise, {user} should {action} the {component} again.",
+    "placeholders": [
+      "user",
+      "action",
+      "component"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Once satisfied, {user} can proceed to the next {phase}.",
+    "placeholders": [
+      "user",
+      "phase"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Finally, clean up the {work_area} and store all {tools}.",
+    "placeholders": [
+      "work_area",
+      "tools"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Document the {results} for future reference.",
+    "placeholders": [
+      "results"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "This completes the {topic} process.",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Remember to {action} the {item} regularly for maintenance.",
+    "placeholders": [
+      "action",
+      "item"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "First, {user} should identify the main goal of the {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Begin by gathering all necessary materials for {topic}.",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Next, {user} must analyze the key components of {topic} in detail.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "To start, {user} needs to research the background of {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Then, create a clear outline for your work on {topic}.",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "After that, {user} should break down the {topic} into smaller tasks.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Now, implement the first step of the {topic} plan.",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Following this, {user} must test the initial results of {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Proceed to refine the approach based on feedback about {topic}.",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Next, document each action taken regarding {topic}.",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Then, {user} should collaborate with team members on {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "After this, evaluate the progress made on {topic} so far.",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Now, adjust the strategy for {topic} as needed.",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Finally, {user} should present the completed {topic} to stakeholders.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "To begin, {user} must define the scope of {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Then, collect relevant data about {topic} from reliable sources.",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "After collecting data, {user} should organize it for {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Next, draft a preliminary version of the {topic} report.",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Then, review the draft for errors and improvements in {topic}.",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Now, {user} must finalize the {topic} document.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "First, schedule a meeting to discuss the {topic} plan.",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Then, assign roles for each part of the {topic} project.",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "After that, {user} should set milestones for {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Next, monitor the timeline for {topic} regularly.",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Then, address any issues that arise during {topic} execution.",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Now, {user} should update the documentation for {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Finally, conduct a post-mortem analysis of {topic}.",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "To start, brainstorm ideas related to {topic}.",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Then, select the best approach for tackling {topic}.",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "After that, {user} should prototype the solution for {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Next, test the prototype thoroughly for {topic}.",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Then, iterate on the design based on test results for {topic}.",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Now, {user} should deploy the final version of {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "First, {user} must understand the requirements of {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Then, create a mockup for the {topic} interface.",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "After that, get approval from stakeholders for {topic}.",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Next, code the core functionality of {topic}.",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Then, perform unit testing on each module of {topic}.",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Now, integrate all modules of {topic} into a system.",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Finally, {user} should launch the {topic} product.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "To begin, {user} must clarify the objectives of {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Then, research best practices for {topic}.",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "After that, {user} should create a timeline for {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Next, allocate resources needed for {topic}.",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Then, execute the first phase of {topic}.",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Now, {user} must communicate progress on {topic} to the team.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Finally, celebrate the completion of {topic}.",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "First, {user} should prioritize tasks for {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Then, eliminate any obstacles for {topic}.",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "After that, {user} must review the success criteria for {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  }
+]

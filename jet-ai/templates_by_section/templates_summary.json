@@ -1,0 +1,1751 @@
+[
+  {
+    "text": "{user} provides a concise overview of {topic}, highlighting key findings and implications.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "In summary, {user} concludes that {topic} is essential for understanding {context}.",
+    "placeholders": [
+      "user",
+      "topic",
+      "context"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "This section summarizes the main points of {topic} as discussed by {user}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "To recap, {user} emphasizes the importance of {topic} in {field}.",
+    "placeholders": [
+      "user",
+      "topic",
+      "field"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Overall, {user}'s analysis of {topic} reveals significant insights into {subject}.",
+    "placeholders": [
+      "user",
+      "topic",
+      "subject"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "A brief summary of {topic} by {user} shows that {key_point} is crucial.",
+    "placeholders": [
+      "user",
+      "topic",
+      "key_point"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Summarizing the discussion, {user} notes that {topic} has implications for {area}.",
+    "placeholders": [
+      "user",
+      "topic",
+      "area"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "In conclusion, {user} synthesizes the key aspects of {topic} and their relevance to {field}.",
+    "placeholders": [
+      "user",
+      "topic",
+      "field"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "The summary of {topic} by {user} underscores the need for further research in {area}.",
+    "placeholders": [
+      "user",
+      "topic",
+      "area"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Here, {user} provides a succinct recap of {topic}, focusing on {aspect}.",
+    "placeholders": [
+      "user",
+      "topic",
+      "aspect"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "To summarize, {user} argues that {topic} is pivotal in understanding {concept}.",
+    "placeholders": [
+      "user",
+      "topic",
+      "concept"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "In this summary, {user} distills the core ideas of {topic} into actionable insights.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Wrapping up, {user} reiterates that {topic} has far-reaching effects on {domain}.",
+    "placeholders": [
+      "user",
+      "topic",
+      "domain"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "A summary of {topic} from {user} indicates that {finding} is noteworthy.",
+    "placeholders": [
+      "user",
+      "topic",
+      "finding"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Briefly, {user} covers the main points of {topic}, including {detail}.",
+    "placeholders": [
+      "user",
+      "topic",
+      "detail"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "In summary, the discussion on {topic} by {user} highlights {key_issue}.",
+    "placeholders": [
+      "user",
+      "topic",
+      "key_issue"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Summarizing, {user} points out that {topic} is critical for {goal}.",
+    "placeholders": [
+      "user",
+      "topic",
+      "goal"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "The key takeaway from {user}'s summary of {topic} is that {point} matters.",
+    "placeholders": [
+      "user",
+      "topic",
+      "point"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Overall, {user} summarizes {topic} by emphasizing {theme} and {theme2}.",
+    "placeholders": [
+      "user",
+      "topic",
+      "theme",
+      "theme2"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "In recapping {topic}, {user} draws attention to {aspect} and its implications.",
+    "placeholders": [
+      "user",
+      "topic",
+      "aspect"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "This summary by {user} condenses the essence of {topic} into a few key points.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "To conclude, {user} offers a summary of {topic} that underscores {importance}.",
+    "placeholders": [
+      "user",
+      "topic",
+      "importance"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Summarizing the key themes, {user} shows how {topic} relates to {context}.",
+    "placeholders": [
+      "user",
+      "topic",
+      "context"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "In brief, {user} outlines the major findings on {topic} from {source}.",
+    "placeholders": [
+      "user",
+      "topic",
+      "source"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "The summary of {topic} provided by {user} captures the essence of the debate.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Wrapping up, {user} encapsulates the arguments about {topic} in a clear manner.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "In this recap, {user} highlights the most critical aspects of {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "To sum up, {user} asserts that {topic} is a foundational element of {field}.",
+    "placeholders": [
+      "user",
+      "topic",
+      "field"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "A concise summary of {topic} by {user} reveals that {insight} is key.",
+    "placeholders": [
+      "user",
+      "topic",
+      "insight"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Summarizing, {user} identifies {topic} as a central factor in {outcome}.",
+    "placeholders": [
+      "user",
+      "topic",
+      "outcome"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "In the final analysis, {user} summarizes {topic} with a focus on {element}.",
+    "placeholders": [
+      "user",
+      "topic",
+      "element"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "This summary encapsulates the primary lessons from {topic} as seen by {user}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "To recap briefly, {user} notes that {topic} influences {aspect} significantly.",
+    "placeholders": [
+      "user",
+      "topic",
+      "aspect"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "In summary, the exploration of {topic} by {user} yields valuable conclusions.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Summarizing the content, {user} stresses the relevance of {topic} to {audience}.",
+    "placeholders": [
+      "user",
+      "topic",
+      "audience"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "The takeaway from {user}'s summary of {topic} is that {takeaway} is vital.",
+    "placeholders": [
+      "user",
+      "topic",
+      "takeaway"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "In conclusion, {user} provides a summary that ties {topic} to broader trends.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "A brief overview of {topic} by {user} highlights the role of {factor}.",
+    "placeholders": [
+      "user",
+      "topic",
+      "factor"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Wrapping things up, {user} summarizes {topic} by pinpointing {key}.",
+    "placeholders": [
+      "user",
+      "topic",
+      "key"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "In summary, {user}'s analysis of {topic} underscores the need for {action}.",
+    "placeholders": [
+      "user",
+      "topic",
+      "action"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Summarizing the key points, {user} illustrates how {topic} impacts {domain}.",
+    "placeholders": [
+      "user",
+      "topic",
+      "domain"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "To conclude, {user} offers a summary of {topic} that emphasizes {theme}.",
+    "placeholders": [
+      "user",
+      "topic",
+      "theme"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "In recapitulation, {user} highlights the main ideas of {topic} and their importance.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "This summary distills the complex topic of {topic} into simple insights from {user}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Briefly summarizing, {user} shows that {topic} is more about {aspect} than {other}.",
+    "placeholders": [
+      "user",
+      "topic",
+      "aspect",
+      "other"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "The summary of {topic} by {user} reinforces the idea that {concept} is central.",
+    "placeholders": [
+      "user",
+      "topic",
+      "concept"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "In summary, {user} connects {topic} to {real_world_issue} effectively.",
+    "placeholders": [
+      "user",
+      "topic",
+      "real_world_issue"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "To wrap up, {user} provides a summary that captures the spirit of {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Summarizing the discussion, {user} concludes that {topic} requires attention to {detail}.",
+    "placeholders": [
+      "user",
+      "topic",
+      "detail"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "In the end, {user} summarizes {topic} by stressing the significance of {factor}.",
+    "placeholders": [
+      "user",
+      "topic",
+      "factor"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "{user} provides a concise summary of {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "In summary, {user} highlights the key points of {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "This summary by {user} covers the essential aspects of {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "To summarize, {topic} involves {key_aspect} and {key_aspect2}.",
+    "placeholders": [
+      "topic",
+      "key_aspect",
+      "key_aspect2"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Overall, {user} concludes that {topic} is important for {audience}.",
+    "placeholders": [
+      "user",
+      "topic",
+      "audience"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "A brief summary of {topic} is provided by {user}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Here is a quick overview of {topic} as summarized by {user}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "In short, {topic} can be understood through {concept}.",
+    "placeholders": [
+      "topic",
+      "concept"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "This text summarizes the main ideas of {topic} for {audience}.",
+    "placeholders": [
+      "topic",
+      "audience"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "{user} offers a succinct summary of {topic} from {source}.",
+    "placeholders": [
+      "user",
+      "topic",
+      "source"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "The following summary by {user} outlines the key findings on {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "In summary, {user} discusses the implications of {topic} for {field}.",
+    "placeholders": [
+      "user",
+      "topic",
+      "field"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "To conclude, {topic} has several important aspects including {aspect1}, {aspect2}, and {aspect3}.",
+    "placeholders": [
+      "topic",
+      "aspect1",
+      "aspect2",
+      "aspect3"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "This summary encapsulates the core arguments about {topic} presented by {user}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Overall, the main points of {topic} as summarized by {user} are {point1}, {point2}, and {point3}.",
+    "placeholders": [
+      "user",
+      "topic",
+      "point1",
+      "point2",
+      "point3"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "In this section, {user} provides a comprehensive summary of {topic} and its relevance to {context}.",
+    "placeholders": [
+      "user",
+      "topic",
+      "context"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Summarizing {topic}, {user} emphasizes the importance of {key_idea}.",
+    "placeholders": [
+      "user",
+      "topic",
+      "key_idea"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "The summary of {topic} by {user} covers background, methodology, and results.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "In brief, {topic} is characterized by {characteristic} and {characteristic2} according to {user}.",
+    "placeholders": [
+      "user",
+      "topic",
+      "characteristic",
+      "characteristic2"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "This summary highlights the most critical elements of {topic} for {stakeholder}.",
+    "placeholders": [
+      "topic",
+      "stakeholder"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "To summarize, {user} breaks down {topic} into {component1}, {component2}, and {component3}.",
+    "placeholders": [
+      "user",
+      "topic",
+      "component1",
+      "component2",
+      "component3"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "The key takeaway from this summary of {topic} is {takeaway}.",
+    "placeholders": [
+      "topic",
+      "takeaway"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "In summary, {user} synthesizes information from {source1} and {source2} to explain {topic}.",
+    "placeholders": [
+      "user",
+      "source1",
+      "source2",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "This section offers a summary of {topic} focusing on {focus_area}.",
+    "placeholders": [
+      "topic",
+      "focus_area"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Overall, the summary of {topic} by {user} provides a clear overview of the subject.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Here, {user} summarizes {topic} and its impact on {industry}.",
+    "placeholders": [
+      "user",
+      "topic",
+      "industry"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "In summary, the author {user} argues that {topic} is crucial for {reason}.",
+    "placeholders": [
+      "user",
+      "topic",
+      "reason"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "This summary condenses the main findings of {topic} into a few key points: {point1}, {point2}.",
+    "placeholders": [
+      "topic",
+      "point1",
+      "point2"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "To sum up, {topic} as described by {user} involves {process} and {outcome}.",
+    "placeholders": [
+      "user",
+      "topic",
+      "process",
+      "outcome"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "The following is a summary of {topic} based on the analysis by {user}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "In this detailed summary, {user} explores the nuances of {topic} and its implications for {field}.",
+    "placeholders": [
+      "user",
+      "topic",
+      "field"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "To summarize the entire discussion, {topic} is a multifaceted issue that includes {aspect1}, {aspect2}, and {aspect3}, as noted by {user}.",
+    "placeholders": [
+      "user",
+      "topic",
+      "aspect1",
+      "aspect2",
+      "aspect3"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "This summary by {user} provides an in-depth look at {topic}, covering its history, current state, and future directions.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "In conclusion, the summary of {topic} reveals that {key_finding1}, {key_finding2}, and {key_finding3} are the most significant outcomes.",
+    "placeholders": [
+      "topic",
+      "key_finding1",
+      "key_finding2",
+      "key_finding3"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "Overall, {user} summarizes {topic} by examining {dimension1}, {dimension2}, and {dimension3} in detail.",
+    "placeholders": [
+      "user",
+      "topic",
+      "dimension1",
+      "dimension2",
+      "dimension3"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "This comprehensive summary of {topic} addresses the challenges and opportunities as outlined by {user}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "In summary, the author {user} provides a thorough analysis of {topic}, highlighting {point1}, {point2}, and {point3}.",
+    "placeholders": [
+      "user",
+      "topic",
+      "point1",
+      "point2",
+      "point3"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "To recap, {topic} is summarized by {user} through the lens of {perspective}, offering insights into {area}.",
+    "placeholders": [
+      "user",
+      "topic",
+      "perspective",
+      "area"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "This section summarizes the key arguments of {topic}, including {argument1}, {argument2}, and the conclusions drawn by {user}.",
+    "placeholders": [
+      "user",
+      "topic",
+      "argument1",
+      "argument2"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "In this summary, {user} distills the essence of {topic} into a coherent narrative that spans {time_period}.",
+    "placeholders": [
+      "user",
+      "topic",
+      "time_period"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "The summary of {topic} presented here by {user} integrates findings from multiple studies and perspectives.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "To summarize, {topic} can be broken down into {part1}, {part2}, and {part3}, each of which is explored by {user}.",
+    "placeholders": [
+      "user",
+      "topic",
+      "part1",
+      "part2",
+      "part3"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "In closing, this summary of {topic} by {user} underscores the importance of {theme} for {community}.",
+    "placeholders": [
+      "user",
+      "topic",
+      "theme",
+      "community"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "This extensive summary of {topic} covers the methodology, results, and implications as discussed by {user}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "Overall, the summary of {topic} by {user} serves as a valuable resource for understanding {concept}.",
+    "placeholders": [
+      "user",
+      "topic",
+      "concept"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "In summary, {user} presents a holistic view of {topic}, addressing {issue1}, {issue2}, and {issue3}.",
+    "placeholders": [
+      "user",
+      "topic",
+      "issue1",
+      "issue2",
+      "issue3"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "This summary of {topic} by {user} is structured around key themes such as {theme1} and {theme2}.",
+    "placeholders": [
+      "user",
+      "topic",
+      "theme1",
+      "theme2"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "To conclude the summary, {topic} is a complex subject that requires understanding of {element1}, {element2}, and {element3}, as explained by {user}.",
+    "placeholders": [
+      "user",
+      "topic",
+      "element1",
+      "element2",
+      "element3"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "In this summary, {user} effectively synthesizes the main ideas of {topic} and their relevance to {audience}.",
+    "placeholders": [
+      "user",
+      "topic",
+      "audience"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "This comprehensive overview summarizes {topic} from the perspective of {user}, highlighting both strengths and weaknesses.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "{user} has demonstrated a strong understanding of {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "In summary, {topic} remains a critical area for {user} to explore further.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "The key takeaway from {topic} is its impact on {field}.",
+    "placeholders": [
+      "topic",
+      "field"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Overall, {user} has made significant progress in {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "To conclude, {topic} offers valuable insights into {aspect}.",
+    "placeholders": [
+      "topic",
+      "aspect"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "This analysis of {topic} highlights the importance of {factor}.",
+    "placeholders": [
+      "topic",
+      "factor"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "In brief, {user} should prioritize {topic} for future growth.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "To summarize, the evidence supports {user}'s stance on {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "In summary, {topic} reveals a complex relationship between {factor1} and {factor2}.",
+    "placeholders": [
+      "topic",
+      "factor1",
+      "factor2"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Overall, the findings suggest that {user} excels in {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "To conclude, {topic} requires a deeper understanding of {concept}.",
+    "placeholders": [
+      "topic",
+      "concept"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "In summary, the data indicates a shift in {topic} towards {direction}.",
+    "placeholders": [
+      "topic",
+      "direction"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Overall, {user} has effectively addressed the challenges in {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "In brief, the research underscores the importance of {topic} in {field}.",
+    "placeholders": [
+      "topic",
+      "field"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "To summarize, {topic} has evolved significantly over {timeframe}.",
+    "placeholders": [
+      "topic",
+      "timeframe"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "In summary, the key points from {topic} include {point1}, {point2}, and {point3}.",
+    "placeholders": [
+      "topic",
+      "point1",
+      "point2",
+      "point3"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Overall, {user} has shown growth in {topic} through {effort}.",
+    "placeholders": [
+      "user",
+      "topic",
+      "effort"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "To conclude, the analysis of {topic} reveals a need for {action}.",
+    "placeholders": [
+      "topic",
+      "action"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "In summary, {topic} remains a pivotal area for {user}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Overall, the results demonstrate that {topic} contributes to {outcome}.",
+    "placeholders": [
+      "topic",
+      "outcome"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "To summarize, {user} has achieved notable success in {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "In brief, the study confirms that {topic} influences {variable}.",
+    "placeholders": [
+      "topic",
+      "variable"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "In summary, {topic} can be understood through the lens of {theory}.",
+    "placeholders": [
+      "topic",
+      "theory"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Overall, the evidence points to {topic} as a key driver of {change}.",
+    "placeholders": [
+      "topic",
+      "change"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "To conclude, {user} has provided a thorough analysis of {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "In summary, the main argument is that {topic} requires {resource}.",
+    "placeholders": [
+      "topic",
+      "resource"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Overall, the discussion highlights the relevance of {topic} to {audience}.",
+    "placeholders": [
+      "topic",
+      "audience"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "To summarize, {user} has identified several opportunities in {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "In brief, the findings suggest that {topic} is influenced by {factor}.",
+    "placeholders": [
+      "topic",
+      "factor"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "In summary, the analysis of {topic} shows a pattern of {trend}.",
+    "placeholders": [
+      "topic",
+      "trend"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Overall, {user} has made a compelling case for {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "To conclude, {topic} has implications for {field} and beyond.",
+    "placeholders": [
+      "topic",
+      "field"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "In summary, the research on {topic} provides a foundation for {future_work}.",
+    "placeholders": [
+      "topic",
+      "future_work"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Overall, the key insight is that {topic} shapes {outcome}.",
+    "placeholders": [
+      "topic",
+      "outcome"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "To summarize, {user} has effectively communicated the importance of {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "In brief, the data supports the hypothesis that {topic} relates to {variable}.",
+    "placeholders": [
+      "topic",
+      "variable"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "In summary, the discussion reveals that {topic} is a multifaceted issue.",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Overall, the contributions of {user} to {topic} are noteworthy.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "To conclude, the study underscores the complexity of {topic}.",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "In summary, {topic} has been analyzed from multiple perspectives including {perspective1} and {perspective2}.",
+    "placeholders": [
+      "topic",
+      "perspective1",
+      "perspective2"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "Overall, the findings from {topic} suggest that {conclusion}.",
+    "placeholders": [
+      "topic",
+      "conclusion"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "To summarize, {user} has demonstrated proficiency in {topic} through {example}.",
+    "placeholders": [
+      "user",
+      "topic",
+      "example"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "In brief, the evidence indicates that {topic} is crucial for {goal}.",
+    "placeholders": [
+      "topic",
+      "goal"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "In summary, the report on {topic} concludes that {solution} is needed.",
+    "placeholders": [
+      "topic",
+      "solution"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Overall, the analysis shows that {topic} has both benefits and drawbacks, including {benefit} and {drawback}.",
+    "placeholders": [
+      "topic",
+      "benefit",
+      "drawback"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "To conclude, {user} has successfully integrated {topic} into {context}.",
+    "placeholders": [
+      "user",
+      "topic",
+      "context"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "In summary, the key findings from {topic} are that {finding1} and {finding2}.",
+    "placeholders": [
+      "topic",
+      "finding1",
+      "finding2"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "Overall, the research on {topic} emphasizes the need for {action} and {strategy}.",
+    "placeholders": [
+      "topic",
+      "action",
+      "strategy"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "To summarize, {user} has provided a comprehensive overview of {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "In brief, the analysis concludes that {topic} is essential for {field}.",
+    "placeholders": [
+      "topic",
+      "field"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "{user} has shown strong understanding of {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "In summary, {user} demonstrated expertise in {topic} across multiple areas.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Overall, {user} performed well in {topic} with room for growth in {skill}.",
+    "placeholders": [
+      "user",
+      "topic",
+      "skill"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "To conclude, {user} has achieved proficiency in {topic} and contributed to {project}.",
+    "placeholders": [
+      "user",
+      "topic",
+      "project"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "This summary highlights {user}'s progress in {topic}, particularly in {area}.",
+    "placeholders": [
+      "user",
+      "topic",
+      "area"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "In conclusion, {user} effectively applied {topic} principles to solve {problem}.",
+    "placeholders": [
+      "user",
+      "topic",
+      "problem"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Summarizing {user}'s work: strong grasp of {topic}, though {challenge} remains.",
+    "placeholders": [
+      "user",
+      "topic",
+      "challenge"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "The key takeaway is that {user} excels in {topic} and shows potential in {skill}.",
+    "placeholders": [
+      "user",
+      "topic",
+      "skill"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Overall, {user} delivered solid results in {topic}, with notable achievements in {task}.",
+    "placeholders": [
+      "user",
+      "topic",
+      "task"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "To summarize, {user} has developed a comprehensive understanding of {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "In brief, {user} demonstrated competence in {topic} and collaboration in {team}.",
+    "placeholders": [
+      "user",
+      "topic",
+      "team"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "This summary captures {user}'s growth in {topic} over {time_period}.",
+    "placeholders": [
+      "user",
+      "topic",
+      "time_period"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Summarizing the findings: {user} showed mastery of {topic} but needs improvement in {skill}.",
+    "placeholders": [
+      "user",
+      "topic",
+      "skill"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Overall, {user} contributed significantly to {project} through expertise in {topic}.",
+    "placeholders": [
+      "user",
+      "project",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "In conclusion, {user} has proven ability in {topic} and leadership in {role}.",
+    "placeholders": [
+      "user",
+      "topic",
+      "role"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "The summary indicates {user} is proficient in {topic} and ready for {next_step}.",
+    "placeholders": [
+      "user",
+      "topic",
+      "next_step"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "To wrap up, {user} achieved the goal of {goal} through application of {topic}.",
+    "placeholders": [
+      "user",
+      "goal",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Overall, {user} demonstrated strong analytical skills in {topic} and {domain}.",
+    "placeholders": [
+      "user",
+      "topic",
+      "domain"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Summarizing the performance: {user} met expectations in {topic} and exceeded in {area}.",
+    "placeholders": [
+      "user",
+      "topic",
+      "area"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "In summary, {user} has a solid foundation in {topic} with further potential in {skill}.",
+    "placeholders": [
+      "user",
+      "topic",
+      "skill"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Briefly, {user} successfully applied {topic} to achieve {outcome}.",
+    "placeholders": [
+      "user",
+      "topic",
+      "outcome"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "The main conclusion is that {user} shows promise in {topic} and {another_topic}.",
+    "placeholders": [
+      "user",
+      "topic",
+      "another_topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Overall, {user}'s work in {topic} reflects dedication and understanding.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "To summarize, {user} contributed to {project} by leveraging {topic} skills.",
+    "placeholders": [
+      "user",
+      "project",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "In conclusion, {user} has demonstrated growth in {topic} since {start_date}.",
+    "placeholders": [
+      "user",
+      "topic",
+      "start_date"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Summarizing the results: {user} achieved {metric} in {topic} through {method}.",
+    "placeholders": [
+      "user",
+      "metric",
+      "topic",
+      "method"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "Overall, {user} showed improvement in {topic} and consistency in {behavior}.",
+    "placeholders": [
+      "user",
+      "topic",
+      "behavior"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "In brief, {user} demonstrated initiative in {topic} and collaboration with {team}.",
+    "placeholders": [
+      "user",
+      "topic",
+      "team"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "The summary shows {user} has a good grasp of {topic}, especially in {subtopic}.",
+    "placeholders": [
+      "user",
+      "topic",
+      "subtopic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "To conclude, {user} effectively used {topic} to solve {challenge}.",
+    "placeholders": [
+      "user",
+      "topic",
+      "challenge"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Overall, {user} displayed proficiency in {topic} and adaptability in {situation}.",
+    "placeholders": [
+      "user",
+      "topic",
+      "situation"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Summarizing the analysis: {user} identified key insights in {topic} for {project}.",
+    "placeholders": [
+      "user",
+      "topic",
+      "project"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "In summary, {user} has achieved the learning objectives in {topic} and {related_topic}.",
+    "placeholders": [
+      "user",
+      "topic",
+      "related_topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "The key conclusion is that {user} can apply {topic} effectively in real-world scenarios.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Overall, {user} contributed to {team} by sharing expertise in {topic}.",
+    "placeholders": [
+      "user",
+      "team",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "To summarize, {user} demonstrated critical thinking in {topic} and problem-solving in {task}.",
+    "placeholders": [
+      "user",
+      "topic",
+      "task"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "In conclusion, {user} has made significant progress in {topic} and shows promise for {future_role}.",
+    "placeholders": [
+      "user",
+      "topic",
+      "future_role"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "Summarizing the feedback: {user} excels in {topic} but needs to work on {weakness}.",
+    "placeholders": [
+      "user",
+      "topic",
+      "weakness"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Briefly, {user} mastered {topic} and delivered {result}.",
+    "placeholders": [
+      "user",
+      "topic",
+      "result"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Overall, {user} showed a deep understanding of {topic} and its application to {field}.",
+    "placeholders": [
+      "user",
+      "topic",
+      "field"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "In summary, {user} has grown in {topic} through {effort} and {practice}.",
+    "placeholders": [
+      "user",
+      "topic",
+      "effort",
+      "practice"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "To wrap up, {user} demonstrated leadership in {topic} and mentorship of {peers}.",
+    "placeholders": [
+      "user",
+      "topic",
+      "peers"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "The summary concludes that {user} is well-versed in {topic} and ready for {challenge}.",
+    "placeholders": [
+      "user",
+      "topic",
+      "challenge"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Overall, {user} showed creativity in {topic} and precision in {task}.",
+    "placeholders": [
+      "user",
+      "topic",
+      "task"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Summarizing the outcomes: {user} achieved {goal} by applying {topic}.",
+    "placeholders": [
+      "user",
+      "goal",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "In brief, {user} has a firm grasp of {topic} and can articulate {concept}.",
+    "placeholders": [
+      "user",
+      "topic",
+      "concept"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Overall, {user} demonstrated persistence in {topic} and improvement in {skill}.",
+    "placeholders": [
+      "user",
+      "topic",
+      "skill"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "To conclude, {user} has built a strong portfolio in {topic} through {project}.",
+    "placeholders": [
+      "user",
+      "topic",
+      "project"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "The summary shows {user} effectively communicated {topic} to {audience}.",
+    "placeholders": [
+      "user",
+      "topic",
+      "audience"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "In summary, {user} has demonstrated all key competencies in {topic} and {skill_sets}.",
+    "placeholders": [
+      "user",
+      "topic",
+      "skill_sets"
+    ],
+    "length": "long"
+  }
+]

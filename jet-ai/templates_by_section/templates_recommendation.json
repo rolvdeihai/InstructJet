@@ -1,0 +1,1779 @@
+[
+  {
+    "text": "I highly recommend {user} for {topic} due to their exceptional skills.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Based on my experience, {user} would be a great fit for {role} at {company}.",
+    "placeholders": [
+      "user",
+      "role",
+      "company"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "It is my pleasure to recommend {user} for the {position} position. They demonstrated outstanding {skill} and {quality} during our collaboration.",
+    "placeholders": [
+      "user",
+      "position",
+      "skill",
+      "quality"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "I endorse {user} for {topic} without reservation.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "{user} has consistently proven their expertise in {field} and would be an asset to any team.",
+    "placeholders": [
+      "user",
+      "field"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "I strongly recommend {user} for {opportunity}. Their work ethic and {attribute} are truly impressive.",
+    "placeholders": [
+      "user",
+      "opportunity",
+      "attribute"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Having worked with {user} on {project}, I can confidently say they excel at {skill} and {skill2}.",
+    "placeholders": [
+      "user",
+      "project",
+      "skill",
+      "skill2"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "I recommend {user} for {role} because of their dedication and {quality}.",
+    "placeholders": [
+      "user",
+      "role",
+      "quality"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "{user} is an outstanding {profession} who brings {trait} and {trait2} to every task.",
+    "placeholders": [
+      "user",
+      "profession",
+      "trait",
+      "trait2"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "It is without hesitation that I recommend {user} for {program}. Their {skill} and {experience} are top-notch.",
+    "placeholders": [
+      "user",
+      "program",
+      "skill",
+      "experience"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "I have had the pleasure of working with {user} and can attest to their {attribute} in {field}.",
+    "placeholders": [
+      "user",
+      "attribute",
+      "field"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "For anyone seeking a talented {profession}, {user} is the ideal candidate.",
+    "placeholders": [
+      "user",
+      "profession"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "I recommend {user} wholeheartedly for {position}. They combine {skill} with {quality} seamlessly.",
+    "placeholders": [
+      "user",
+      "position",
+      "skill",
+      "quality"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "{user} demonstrated remarkable {ability} while leading {team} on {project}.",
+    "placeholders": [
+      "user",
+      "ability",
+      "team",
+      "project"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "I am confident that {user} will excel in {role} at {organization}.",
+    "placeholders": [
+      "user",
+      "role",
+      "organization"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "This recommendation is for {user}, who possesses exceptional {skill} and {quality}.",
+    "placeholders": [
+      "user",
+      "skill",
+      "quality"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "I have observed {user} grow into a leader in {field}, and I highly recommend them for {opportunity}.",
+    "placeholders": [
+      "user",
+      "field",
+      "opportunity"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "{user} is a brilliant {profession} with a knack for {skill}. They would be perfect for {role}.",
+    "placeholders": [
+      "user",
+      "profession",
+      "skill",
+      "role"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "I recommend {user} for {award} based on their contributions to {cause}.",
+    "placeholders": [
+      "user",
+      "award",
+      "cause"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Without a doubt, {user} is one of the best {profession}s I have worked with.",
+    "placeholders": [
+      "user",
+      "profession"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "I endorse {user} for {scholarship} because of their academic excellence in {subject}.",
+    "placeholders": [
+      "user",
+      "scholarship",
+      "subject"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "{user} has a unique ability to {skill} and inspires everyone around them.",
+    "placeholders": [
+      "user",
+      "skill"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "I highly recommend {user} for {job}. Their {attribute} and {attribute2} make them stand out.",
+    "placeholders": [
+      "user",
+      "job",
+      "attribute",
+      "attribute2"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "It was a privilege to mentor {user}. They show great promise in {field}.",
+    "placeholders": [
+      "user",
+      "field"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "I recommend {user} without reservation for {role}. They consistently deliver {result}.",
+    "placeholders": [
+      "user",
+      "role",
+      "result"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "{user} is a dedicated professional who excels at {skill} and {skill2}.",
+    "placeholders": [
+      "user",
+      "skill",
+      "skill2"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "For a candidate with strong {quality} and {quality2}, look no further than {user}.",
+    "placeholders": [
+      "user",
+      "quality",
+      "quality2"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "I have seen {user} handle complex {task} with ease, making them ideal for {position}.",
+    "placeholders": [
+      "user",
+      "task",
+      "position"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "I recommend {user} for {fellowship} due to their innovative thinking in {area}.",
+    "placeholders": [
+      "user",
+      "fellowship",
+      "area"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "{user} brings enthusiasm and {trait} to every project, which is why I recommend them.",
+    "placeholders": [
+      "user",
+      "trait"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "My recommendation for {user} is based on their outstanding performance in {role}.",
+    "placeholders": [
+      "user",
+      "role"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "I confidently endorse {user} for {program}. Their {skill} and {experience} are unmatched.",
+    "placeholders": [
+      "user",
+      "program",
+      "skill",
+      "experience"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "{user} is a top-tier {profession} with a proven track record in {field}.",
+    "placeholders": [
+      "user",
+      "profession",
+      "field"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "I recommend {user} for {promotion} because they have consistently exceeded expectations.",
+    "placeholders": [
+      "user",
+      "promotion"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Having collaborated with {user} on {initiative}, I can vouch for their {attribute}.",
+    "placeholders": [
+      "user",
+      "initiative",
+      "attribute"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "I give my full recommendation for {user} to join {team} as a {role}.",
+    "placeholders": [
+      "user",
+      "team",
+      "role"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "{user} is a natural leader with strong {skill} and {quality}. Highly recommended for {position}.",
+    "placeholders": [
+      "user",
+      "skill",
+      "quality",
+      "position"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "I recommend {user} for {grant} because their research on {topic} is groundbreaking.",
+    "placeholders": [
+      "user",
+      "grant",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "It is my honor to recommend {user} for {honor}. They exemplify {value}.",
+    "placeholders": [
+      "user",
+      "honor",
+      "value"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "I have no doubt that {user} will thrive in {role} given their {skill} and {drive}.",
+    "placeholders": [
+      "user",
+      "role",
+      "skill",
+      "drive"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "I recommend {user} for {task} based on their meticulous attention to detail.",
+    "placeholders": [
+      "user",
+      "task"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "{user} is an exceptional candidate for {opportunity} with a strong background in {field}.",
+    "placeholders": [
+      "user",
+      "opportunity",
+      "field"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "I endorse {user} for {membership} because they contribute positively to {community}.",
+    "placeholders": [
+      "user",
+      "membership",
+      "community"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "{user} has a remarkable ability to {skill} and {skill2}, making them a great fit for {role}.",
+    "placeholders": [
+      "user",
+      "skill",
+      "skill2",
+      "role"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "I highly recommend {user} for {project} due to their creativity and {trait}.",
+    "placeholders": [
+      "user",
+      "project",
+      "trait"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "My strongest recommendation goes to {user} for {position}. They are a game-changer.",
+    "placeholders": [
+      "user",
+      "position"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "I recommend {user} for {course} because they demonstrate deep understanding of {subject}.",
+    "placeholders": [
+      "user",
+      "course",
+      "subject"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "{user} is a reliable and {adjective} professional who excels in {field}.",
+    "placeholders": [
+      "user",
+      "adjective",
+      "field"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "I am pleased to recommend {user} for {award}. Their {accomplishment} speaks volumes.",
+    "placeholders": [
+      "user",
+      "award",
+      "accomplishment"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "For a candidate with unmatched {quality} and {quality2}, {user} is my top recommendation.",
+    "placeholders": [
+      "user",
+      "quality",
+      "quality2"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Based on your interest in {topic}, I recommend exploring {resource}.",
+    "placeholders": [
+      "topic",
+      "resource"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "For {user}, I suggest starting with {topic} to build a strong foundation.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Considering your goals, {topic} would be a great next step.",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "I recommend {topic} because it aligns perfectly with your interests.",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Given your background in {skill}, I recommend focusing on {topic}.",
+    "placeholders": [
+      "skill",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "To improve in {area}, try using {tool} regularly.",
+    "placeholders": [
+      "area",
+      "tool"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "For best results, combine {topic} with {practice}.",
+    "placeholders": [
+      "topic",
+      "practice"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "A good starting point for {user} is {resource}.",
+    "placeholders": [
+      "user",
+      "resource"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "I strongly recommend {book} for anyone interested in {topic}.",
+    "placeholders": [
+      "book",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "If you want to master {skill}, try {method}.",
+    "placeholders": [
+      "skill",
+      "method"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "For {user}, the best approach is to focus on {topic} first.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Consider using {tool} to streamline your work on {project}.",
+    "placeholders": [
+      "tool",
+      "project"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Your progress in {area} would benefit from {resource}.",
+    "placeholders": [
+      "area",
+      "resource"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "I suggest {user} read {article} for more insights on {topic}.",
+    "placeholders": [
+      "user",
+      "article",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "A practical recommendation is to practice {skill} daily.",
+    "placeholders": [
+      "skill"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "To achieve your goal in {topic}, follow this plan: {plan}.",
+    "placeholders": [
+      "topic",
+      "plan"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Based on your learning style, I recommend combining {resource} with hands-on {practice} to master {topic}.",
+    "placeholders": [
+      "resource",
+      "practice",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "For {user}, I suggest starting with {course} to understand {topic}, then moving to {advanced}.",
+    "placeholders": [
+      "user",
+      "course",
+      "topic",
+      "advanced"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "To build expertise in {field}, I recommend reading {book} and applying its principles to {project}.",
+    "placeholders": [
+      "field",
+      "book",
+      "project"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Given your interest in {topic}, exploring {resource} and discussing it with {peer} would be beneficial.",
+    "placeholders": [
+      "topic",
+      "resource",
+      "peer"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "A solid recommendation is to allocate {time} each day to practice {skill} using {tool}.",
+    "placeholders": [
+      "time",
+      "skill",
+      "tool"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "For tackling {challenge}, I recommend breaking it down into {steps} and focusing on {key_area}.",
+    "placeholders": [
+      "challenge",
+      "steps",
+      "key_area"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "To improve your {skill} quickly, try following {tutorial} and then building your own {project}.",
+    "placeholders": [
+      "skill",
+      "tutorial",
+      "project"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Based on your progress in {topic}, the next logical step is to explore {advanced_topic} using {resource}.",
+    "placeholders": [
+      "topic",
+      "advanced_topic",
+      "resource"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "I recommend that {user} focuses on {topic} first, then gradually incorporates {related_skill}.",
+    "placeholders": [
+      "user",
+      "topic",
+      "related_skill"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "For a comprehensive understanding of {topic}, read {book} and supplement it with {video_series}.",
+    "placeholders": [
+      "topic",
+      "book",
+      "video_series"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Given your goals, the best strategy is to master {core_skill} before moving to {advanced_topic}.",
+    "placeholders": [
+      "core_skill",
+      "advanced_topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "I suggest using {tool} for {task} and then reviewing your work with {colleague}.",
+    "placeholders": [
+      "tool",
+      "task",
+      "colleague"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "To stay motivated while learning {topic}, set small milestones like {milestone} and reward yourself.",
+    "placeholders": [
+      "topic",
+      "milestone"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "For {user}, I recommend joining {community} to get feedback on your {project} related to {topic}.",
+    "placeholders": [
+      "user",
+      "community",
+      "project",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "A practical approach is to first understand {concept} through {resource}, then apply it to {real_world_example}.",
+    "placeholders": [
+      "concept",
+      "resource",
+      "real_world_example"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Based on your strengths in {area}, I recommend diving deeper into {specialization} using {advanced_resource}.",
+    "placeholders": [
+      "area",
+      "specialization",
+      "advanced_resource"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "For maximum growth, combine theoretical learning from {book} with practical experience in {project}.",
+    "placeholders": [
+      "book",
+      "project"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "I recommend that {user} focuses on {topic} for the next {timeframe} and tracks progress using {tool}.",
+    "placeholders": [
+      "user",
+      "topic",
+      "timeframe",
+      "tool"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "To overcome {obstacle}, try {technique} and seek guidance from {mentor} who excels in {field}.",
+    "placeholders": [
+      "obstacle",
+      "technique",
+      "mentor",
+      "field"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Given your interest in {topic}, I highly recommend attending {event} and networking with {expert}.",
+    "placeholders": [
+      "topic",
+      "event",
+      "expert"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "For a structured learning path, start with {course}, then take {advanced_course}, and finally work on {capstone}.",
+    "placeholders": [
+      "course",
+      "advanced_course",
+      "capstone"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "Based on your experience with {skill}, I recommend deepening your knowledge through {resource} and applying it to a complex {project} that involves {topic}, then iterating based on feedback from {peer}.",
+    "placeholders": [
+      "skill",
+      "resource",
+      "project",
+      "topic",
+      "peer"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "To achieve mastery in {field}, follow this three-step plan: first, study {foundation} using {book}; second, practice with {tool}; third, teach {concept} to others.",
+    "placeholders": [
+      "field",
+      "foundation",
+      "book",
+      "tool",
+      "concept"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "For {user}, I recommend a personalized approach: start with {assessment} to identify gaps, then focus on {weak_area} using {resource}, and finally challenge yourself with {advanced_project}.",
+    "placeholders": [
+      "user",
+      "assessment",
+      "weak_area",
+      "resource",
+      "advanced_project"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "Given your goal of {goal}, the best path is to first build a foundation in {topic} through {intro_course}, then specialize in {subtopic} using {specialized_resource}, and later apply to {real_world_scenario}.",
+    "placeholders": [
+      "goal",
+      "topic",
+      "intro_course",
+      "subtopic",
+      "specialized_resource",
+      "real_world_scenario"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "To excel in {area}, I recommend a multi-faceted approach: read {book} for theory, use {tool} for practice, join {community} for support, and take {course} for structured learning.",
+    "placeholders": [
+      "area",
+      "book",
+      "tool",
+      "community",
+      "course"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "For a comprehensive improvement in {skill}, start by identifying your learning style, then choose {resource} that matches, set a schedule of {frequency}, and measure progress with {metric}.",
+    "placeholders": [
+      "skill",
+      "resource",
+      "frequency",
+      "metric"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "Based on your interests in {topic1} and {topic2}, I recommend exploring {interdisciplinary_field} through {book} and {online_course}, then creating a project that merges both.",
+    "placeholders": [
+      "topic1",
+      "topic2",
+      "interdisciplinary_field",
+      "book",
+      "online_course"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "To transition into {career}, I suggest learning {core_skill} via {course}, gaining experience through {internship}, building a portfolio with {project}, and networking at {event}.",
+    "placeholders": [
+      "career",
+      "core_skill",
+      "course",
+      "internship",
+      "project",
+      "event"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "For {user}, a strategic recommendation is to first master {prerequisite} using {resource}, then tackle {main_topic} with {advanced_tool}, and finally mentor others to solidify understanding.",
+    "placeholders": [
+      "user",
+      "prerequisite",
+      "resource",
+      "main_topic",
+      "advanced_tool"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "Given the complexity of {topic}, I recommend a phased approach: phase 1 - learn basics from {book}; phase 2 - practice with {tutorial}; phase 3 - build {project}; phase 4 - review with {expert}.",
+    "placeholders": [
+      "topic",
+      "book",
+      "tutorial",
+      "project",
+      "expert"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "To accelerate your learning in {field}, combine these strategies: use {spaced_repetition} for memorization, apply concepts in {project}, get feedback from {mentor}, and iterate frequently.",
+    "placeholders": [
+      "field",
+      "spaced_repetition",
+      "project",
+      "mentor"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "For a holistic development in {area}, I recommend balancing theory from {book} with practice via {tool}, collaboration in {team}, and reflection through {journal}.",
+    "placeholders": [
+      "area",
+      "book",
+      "tool",
+      "team",
+      "journal"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "Based on your performance in {previous_topic}, the next step is to deepen understanding of {advanced_concept} using {resource}, then apply to {complex_problem}, and finally publish findings in {forum}.",
+    "placeholders": [
+      "previous_topic",
+      "advanced_concept",
+      "resource",
+      "complex_problem",
+      "forum"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "I highly recommend {user} for {topic} based on their exceptional skills.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "It is my pleasure to recommend {user} for {position} at {company}.",
+    "placeholders": [
+      "user",
+      "position",
+      "company"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Without hesitation, I endorse {user} for {role} due to their outstanding performance.",
+    "placeholders": [
+      "user",
+      "role"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "{user} would be a fantastic addition to {team} and I recommend them highly.",
+    "placeholders": [
+      "user",
+      "team"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "I strongly recommend {user} for {opportunity} as they consistently deliver results.",
+    "placeholders": [
+      "user",
+      "opportunity"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Given {user}'s expertise in {field}, I am confident they will excel in {position}.",
+    "placeholders": [
+      "user",
+      "field",
+      "position"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "I have worked closely with {user} on {project} and can attest to their dedication and skill in {area}.",
+    "placeholders": [
+      "user",
+      "project",
+      "area"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "For any organization seeking a talented {role}, I wholeheartedly recommend {user}.",
+    "placeholders": [
+      "user",
+      "role"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "During their time at {company}, {user} demonstrated remarkable {skill} and leadership in {context}.",
+    "placeholders": [
+      "user",
+      "company",
+      "skill",
+      "context"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "I am writing to recommend {user} for {program} as they possess the perfect blend of {trait1} and {trait2}.",
+    "placeholders": [
+      "user",
+      "program",
+      "trait1",
+      "trait2"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "{user} is one of the most {adjective} individuals I have met, and I recommend them for any {type} role.",
+    "placeholders": [
+      "user",
+      "adjective",
+      "type"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "From my experience, {user} excels in {skill} and would be a great fit for {position} at {company}.",
+    "placeholders": [
+      "user",
+      "skill",
+      "position",
+      "company"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "I am pleased to recommend {user} for {award} because of their contributions to {field}.",
+    "placeholders": [
+      "user",
+      "award",
+      "field"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Having supervised {user} for {duration}, I can confirm their ability to handle {task} with expertise.",
+    "placeholders": [
+      "user",
+      "duration",
+      "task"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "{user} consistently exceeds expectations in {area}, making them an ideal candidate for {role}.",
+    "placeholders": [
+      "user",
+      "area",
+      "role"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "It is without reservation that I recommend {user} for {position}, as they bring {quality} and {skill}.",
+    "placeholders": [
+      "user",
+      "position",
+      "quality",
+      "skill"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "I endorse {user} for {opportunity} because of their innovative approach to {topic}.",
+    "placeholders": [
+      "user",
+      "opportunity",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "During the {project} project, {user} showed exceptional {skill} and teamwork, which I highly recommend.",
+    "placeholders": [
+      "user",
+      "project",
+      "skill"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "For anyone needing a {role} with strong {skill}, I recommend {user} without hesitation.",
+    "placeholders": [
+      "user",
+      "role",
+      "skill"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "{user} has been an invaluable asset to {team} and I am confident they will succeed in {position}.",
+    "placeholders": [
+      "user",
+      "team",
+      "position"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "I am glad to recommend {user} for {role} after witnessing their growth and performance in {field}.",
+    "placeholders": [
+      "user",
+      "role",
+      "field"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "{user}'s work on {project} demonstrates their mastery of {skill}, and I recommend them for {position}.",
+    "placeholders": [
+      "user",
+      "project",
+      "skill",
+      "position"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "It is my distinct pleasure to recommend {user} for {honor} due to their dedication to {cause}.",
+    "placeholders": [
+      "user",
+      "honor",
+      "cause"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "I have no doubt that {user} will thrive in {role} given their ability to {action} and {action2}.",
+    "placeholders": [
+      "user",
+      "role",
+      "action",
+      "action2"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Based on their track record, I recommend {user} for {position} at {organization}.",
+    "placeholders": [
+      "user",
+      "position",
+      "organization"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "{user} combines {trait} with {skill}, making them an excellent candidate for {role}.",
+    "placeholders": [
+      "user",
+      "trait",
+      "skill",
+      "role"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "I am confident that {user} will bring great value to {team} as a {role}, and I recommend them highly.",
+    "placeholders": [
+      "user",
+      "team",
+      "role"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "During their tenure at {company}, {user} consistently demonstrated {quality} and {skill}.",
+    "placeholders": [
+      "user",
+      "company",
+      "quality",
+      "skill"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "I recommend {user} for {opportunity} because they are a natural leader in {field}.",
+    "placeholders": [
+      "user",
+      "opportunity",
+      "field"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Having collaborated with {user} on {task}, I can vouch for their expertise and recommend them for {role}.",
+    "placeholders": [
+      "user",
+      "task",
+      "role"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "{user} is a top performer in {area} and I strongly recommend them for {position}.",
+    "placeholders": [
+      "user",
+      "area",
+      "position"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "It gives me great confidence to recommend {user} for {role} based on their achievements in {field}.",
+    "placeholders": [
+      "user",
+      "role",
+      "field"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "I highly endorse {user} for {program} as they possess the necessary {skill} and {quality}.",
+    "placeholders": [
+      "user",
+      "program",
+      "skill",
+      "quality"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "From my observation, {user} is exceptional at {task} and would be perfect for {role}.",
+    "placeholders": [
+      "user",
+      "task",
+      "role"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "I am writing to wholeheartedly recommend {user} for {position} at {company}.",
+    "placeholders": [
+      "user",
+      "position",
+      "company"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "{user} has a proven track record in {field} and I recommend them for any challenging {role}.",
+    "placeholders": [
+      "user",
+      "field",
+      "role"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "I confidently recommend {user} for {opportunity} because of their outstanding {skill} and dedication.",
+    "placeholders": [
+      "user",
+      "opportunity",
+      "skill"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "During {project}, {user} displayed remarkable {quality} and {skill}, making them ideal for {role}.",
+    "placeholders": [
+      "user",
+      "project",
+      "quality",
+      "skill",
+      "role"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "It is my honor to recommend {user} for {award} as they have significantly impacted {field}.",
+    "placeholders": [
+      "user",
+      "award",
+      "field"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "I recommend {user} for {position} without any reservations, as they are a {trait} professional.",
+    "placeholders": [
+      "user",
+      "position",
+      "trait"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Having mentored {user}, I can say they are ready for {role} and I recommend them fully.",
+    "placeholders": [
+      "user",
+      "role"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "{user}'s ability to {action} sets them apart, and I recommend them for {position}.",
+    "placeholders": [
+      "user",
+      "action",
+      "position"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "I am pleased to provide this recommendation for {user} for {role} based on their {skill}.",
+    "placeholders": [
+      "user",
+      "role",
+      "skill"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "In my experience, {user} is a standout {role} and I recommend them for any {type} position.",
+    "placeholders": [
+      "user",
+      "role",
+      "type"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "I enthusiastically recommend {user} for {opportunity} because of their passion for {topic}.",
+    "placeholders": [
+      "user",
+      "opportunity",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "After working with {user} on {project}, I am convinced they are the best choice for {role}.",
+    "placeholders": [
+      "user",
+      "project",
+      "role"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "For a {role} position, I cannot recommend {user} enough due to their {skill} and {quality}.",
+    "placeholders": [
+      "user",
+      "role",
+      "skill",
+      "quality"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "I have seen {user} excel in {field} and I recommend them for {position} at {organization}.",
+    "placeholders": [
+      "user",
+      "field",
+      "position",
+      "organization"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "{user} is a dedicated professional with strong {skill}, and I highly recommend them for {role}.",
+    "placeholders": [
+      "user",
+      "skill",
+      "role"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "It is with great pleasure that I recommend {user} for {role} at {company}, as they exceed all expectations.",
+    "placeholders": [
+      "user",
+      "role",
+      "company"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "I recommend that {user} explore {topic} further.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "For {user}, I suggest focusing on {topic} to improve outcomes.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Given your interest in {topic}, I recommend {user} try {resource}.",
+    "placeholders": [
+      "user",
+      "topic",
+      "resource"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "It would be beneficial for {user} to consider {topic} as a next step.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "I strongly recommend that {user} allocate more time to {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "To achieve better results, {user} should prioritize {topic} and {secondary_topic}.",
+    "placeholders": [
+      "user",
+      "topic",
+      "secondary_topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "A key recommendation for {user} is to integrate {topic} into daily practice.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Based on the analysis, {user} would benefit from exploring {topic} in depth.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "I advise {user} to seek additional resources on {topic} to enhance understanding.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "For maximum impact, {user} should combine {topic} with {other_topic}.",
+    "placeholders": [
+      "user",
+      "topic",
+      "other_topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "It is recommended that {user} start with {topic} before moving to advanced concepts.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "To address the challenges, {user} might consider {topic} as a viable solution.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "I suggest {user} engage with {topic} through {method}.",
+    "placeholders": [
+      "user",
+      "topic",
+      "method"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "A practical recommendation for {user} is to apply {topic} in real-world scenarios.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "To build on current progress, {user} should delve into {topic} next.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "I encourage {user} to discuss {topic} with peers for diverse perspectives.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Given the data, {user} should focus on {topic} to drive improvement.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "It would be wise for {user} to allocate resources toward {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "I recommend that {user} set specific goals related to {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "To accelerate learning, {user} should practice {topic} regularly.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "A strategic recommendation is for {user} to leverage {topic} in combination with {skill}.",
+    "placeholders": [
+      "user",
+      "topic",
+      "skill"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "I propose that {user} explore {topic} using {tool} for better insights.",
+    "placeholders": [
+      "user",
+      "topic",
+      "tool"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "For sustained growth, {user} should incorporate {topic} into their routine.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "It is advisable for {user} to seek mentorship in {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Based on feedback, {user} may want to revisit {topic} with a fresh perspective.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "I strongly urge {user} to consider {topic} as a priority area.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "To overcome obstacles, {user} should adopt {topic} as a guiding principle.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "A key takeaway is that {user} should invest time in {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "I recommend that {user} attend workshops on {topic} to gain hands-on experience.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "For better alignment, {user} should map {topic} to their long-term goals.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "It would be beneficial for {user} to read {book} on {topic}.",
+    "placeholders": [
+      "user",
+      "book",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "To refine skills, {user} should practice {topic} in {context}.",
+    "placeholders": [
+      "user",
+      "topic",
+      "context"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "I suggest {user} break down {topic} into smaller, manageable steps.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Given the complexity, {user} should approach {topic} systematically.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "A crucial recommendation is for {user} to master {topic} before advancing.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "I advise {user} to document progress on {topic} for reflection.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "To foster innovation, {user} should experiment with {topic} in new ways.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "It is recommended that {user} collaborate with experts on {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "For immediate action, {user} should address {topic} first.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "I recommend that {user} use {technique} to master {topic}.",
+    "placeholders": [
+      "user",
+      "technique",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "To maximize efficiency, {user} should automate aspects of {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "A thoughtful recommendation is for {user} to reflect on {topic} regularly.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Based on trends, {user} should pivot toward {topic} for future relevance.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "I encourage {user} to teach {topic} to others to deepen understanding.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "It would be productive for {user} to set milestones in {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "To avoid pitfalls, {user} should research common mistakes in {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "I suggest {user} join a community focused on {topic} for support.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "A bold recommendation is for {user} to challenge assumptions about {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "For holistic development, {user} should balance {topic} with {other_activity}.",
+    "placeholders": [
+      "user",
+      "topic",
+      "other_activity"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "I recommend that {user} create a personalized plan for mastering {topic} over {timeframe}.",
+    "placeholders": [
+      "user",
+      "topic",
+      "timeframe"
+    ],
+    "length": "long"
+  }
+]

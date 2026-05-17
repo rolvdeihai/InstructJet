@@ -1,0 +1,1569 @@
+[
+  {
+    "text": "Could you please clarify what {user} meant by {topic}?",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "To ensure I understand correctly, are you saying that {topic} is {condition}?",
+    "placeholders": [
+      "topic",
+      "condition"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "I need a bit more clarification on {topic}—specifically regarding {aspect}.",
+    "placeholders": [
+      "topic",
+      "aspect"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Can you elaborate on what you mean by {term} in the context of {topic}?",
+    "placeholders": [
+      "term",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Just to clarify, does {user} want {action} or something else?",
+    "placeholders": [
+      "user",
+      "action"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "I'm a bit confused about {topic}. Could you explain it in simpler terms?",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "For clarity, could you confirm whether {topic} is {option_a} or {option_b}?",
+    "placeholders": [
+      "topic",
+      "option_a",
+      "option_b"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Let me clarify: are you referring to {topic} as it relates to {context}?",
+    "placeholders": [
+      "topic",
+      "context"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "I want to make sure I'm on the same page. Did you mean that {statement}?",
+    "placeholders": [
+      "statement"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Could you clarify the timeline for {project}? Specifically, when is {milestone} due?",
+    "placeholders": [
+      "project",
+      "milestone"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "To clarify, {user} stated that {topic} is important. Do you agree?",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "I need clarification on the {attribute} of {topic}. Can you provide more details?",
+    "placeholders": [
+      "attribute",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "What exactly does {term} mean in this context? I want to avoid any misunderstanding.",
+    "placeholders": [
+      "term"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Could you clarify the difference between {item_a} and {item_b}?",
+    "placeholders": [
+      "item_a",
+      "item_b"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "I'm not sure I follow. Are you suggesting that {topic} should be {action}?",
+    "placeholders": [
+      "topic",
+      "action"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "For clarification, could you repeat that point about {topic}? I want to make sure I heard correctly.",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Can you clarify your stance on {issue}? It seemed a bit ambiguous.",
+    "placeholders": [
+      "issue"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "To be clear, {user} expects {outcome} from this {process}. Is that correct?",
+    "placeholders": [
+      "user",
+      "outcome",
+      "process"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "I need you to clarify the {step} in the {procedure}. What exactly should I do?",
+    "placeholders": [
+      "step",
+      "procedure"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Could you specify which {item} you're referring to? There are multiple options for {topic}.",
+    "placeholders": [
+      "item",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Just to clarify, does {policy} apply to {situation} or not?",
+    "placeholders": [
+      "policy",
+      "situation"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Can you elaborate on the {reason} behind {decision}? I want to understand better.",
+    "placeholders": [
+      "reason",
+      "decision"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "I'm seeking clarification on the {data} you mentioned. Where does it come from?",
+    "placeholders": [
+      "data"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "To clarify, are we prioritizing {goal_a} over {goal_b}?",
+    "placeholders": [
+      "goal_a",
+      "goal_b"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Could you clarify the {role} of {person} in this {project}?",
+    "placeholders": [
+      "role",
+      "person",
+      "project"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "I need clarification on the {budget} for {task}. Is it sufficient?",
+    "placeholders": [
+      "budget",
+      "task"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "What do you mean by {phrase}? I want to ensure we're aligned on {topic}.",
+    "placeholders": [
+      "phrase",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Can you clarify the {criteria} for success on {project}?",
+    "placeholders": [
+      "criteria",
+      "project"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "For clarity, could you provide an example of {concept}?",
+    "placeholders": [
+      "concept"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "I'm a bit unclear about the {timeline}. When does {phase} start?",
+    "placeholders": [
+      "timeline",
+      "phase"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "To clarify, {user} requested {change}. Is that still the plan?",
+    "placeholders": [
+      "user",
+      "change"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Could you explain what {term} means in the context of {field}?",
+    "placeholders": [
+      "term",
+      "field"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "I need you to clarify your point about {topic}. Did you mean {interpretation_a} or {interpretation_b}?",
+    "placeholders": [
+      "topic",
+      "interpretation_a",
+      "interpretation_b"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "Just to be clear, are you saying that {topic} is not {condition}?",
+    "placeholders": [
+      "topic",
+      "condition"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Can you clarify the {source} of the information for {topic}?",
+    "placeholders": [
+      "source",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "I want to clarify the {scope} of {project}. What is included?",
+    "placeholders": [
+      "scope",
+      "project"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Could you clarify the {method} used to achieve {result}?",
+    "placeholders": [
+      "method",
+      "result"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "For clarification, does {rule} apply to {situation} in all cases?",
+    "placeholders": [
+      "rule",
+      "situation"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "I'm not sure I understand the {purpose} of {action}. Can you explain?",
+    "placeholders": [
+      "purpose",
+      "action"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "To clarify, should we focus on {priority} first, or is there another order?",
+    "placeholders": [
+      "priority"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Can you clarify the {frequency} of {event}? How often does it occur?",
+    "placeholders": [
+      "frequency",
+      "event"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "I need clarification on the {format} of the {deliverable}. What should it look like?",
+    "placeholders": [
+      "format",
+      "deliverable"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Could you clarify what {user} meant by {phrase}? It seemed important.",
+    "placeholders": [
+      "user",
+      "phrase"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Just to clarify, are we assuming {assumption} for this {scenario}?",
+    "placeholders": [
+      "assumption",
+      "scenario"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "I'm seeking clarification on the {impact} of {decision} on {team}.",
+    "placeholders": [
+      "impact",
+      "decision",
+      "team"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Can you elaborate on the {benefit} of {approach}? I want to understand its value.",
+    "placeholders": [
+      "benefit",
+      "approach"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "To clarify the {process}, could you walk me through {step} again?",
+    "placeholders": [
+      "process",
+      "step"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "I need clarification on the {deadline} for {task}. Is it flexible?",
+    "placeholders": [
+      "deadline",
+      "task"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Could you clarify the {relationship} between {item_a} and {item_b}?",
+    "placeholders": [
+      "relationship",
+      "item_a",
+      "item_b"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "For clarity, could you confirm that {user} approved {plan}?",
+    "placeholders": [
+      "user",
+      "plan"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "I'm a bit confused about the {strategy} for {goal}. Can you break it down?",
+    "placeholders": [
+      "strategy",
+      "goal"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Could you clarify what {user} meant by {topic}?",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "I'm not entirely sure I understand your point about {topic}. Can you elaborate?",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "To ensure I'm following correctly, are you saying that {user} believes {topic} is {characteristic}?",
+    "placeholders": [
+      "user",
+      "topic",
+      "characteristic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Let me see if I have this right: you're suggesting that {topic} should be {action} because of {reason}?",
+    "placeholders": [
+      "topic",
+      "action",
+      "reason"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "Can you clarify what you mean by {term} in the context of {topic}?",
+    "placeholders": [
+      "term",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "I'm a bit confused about the relationship between {topic1} and {topic2}. Could you explain?",
+    "placeholders": [
+      "topic1",
+      "topic2"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Just to clarify, when you mentioned {detail}, did you mean {interpretation1} or {interpretation2}?",
+    "placeholders": [
+      "detail",
+      "interpretation1",
+      "interpretation2"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "Could you restate your point about {topic} in simpler terms?",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "I'm not sure I follow the connection between {concept1} and {concept2}. Can you clarify?",
+    "placeholders": [
+      "concept1",
+      "concept2"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "To make sure we're on the same page, are you arguing that {topic} is {adjective} because of {evidence}?",
+    "placeholders": [
+      "topic",
+      "adjective",
+      "evidence"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "What exactly do you mean by {phrase}?",
+    "placeholders": [
+      "phrase"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Can you give an example of what you mean by {topic}?",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "I need a bit more context on {topic}. How does it relate to {other_topic}?",
+    "placeholders": [
+      "topic",
+      "other_topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Let me clarify: are you saying that {user} should {action} regarding {topic}?",
+    "placeholders": [
+      "user",
+      "action",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Could you explain the reasoning behind your statement about {topic}?",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "I'm trying to understand your perspective. Do you mean that {topic} is {state}?",
+    "placeholders": [
+      "topic",
+      "state"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Just to be clear, is your main concern about {topic} related to {aspect}?",
+    "placeholders": [
+      "topic",
+      "aspect"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Can you clarify the timeline you mentioned for {event}?",
+    "placeholders": [
+      "event"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "I'm not sure if I interpreted your comment correctly. Did you mean that {topic} should be handled by {user}?",
+    "placeholders": [
+      "topic",
+      "user"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "To avoid misunderstanding, could you define {term} as you're using it here?",
+    "placeholders": [
+      "term"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "I'm a bit lost on the part about {detail}. Could you walk me through it?",
+    "placeholders": [
+      "detail"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "When you say {statement}, are you implying that {implication}?",
+    "placeholders": [
+      "statement",
+      "implication"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Can you clarify whether {topic} is a cause or an effect in this context?",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "I'm not clear on how {user} plans to address {issue}. Can you elaborate?",
+    "placeholders": [
+      "user",
+      "issue"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Just to confirm, are you recommending {action} for {topic}?",
+    "placeholders": [
+      "action",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Could you break down your argument about {topic} step by step?",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "I'm struggling to see how {example} supports your point about {topic}. Can you explain?",
+    "placeholders": [
+      "example",
+      "topic"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "Do you mean that {topic} is {adjective} in all cases, or just under {condition}?",
+    "placeholders": [
+      "topic",
+      "adjective",
+      "condition"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "I need clarification: is {topic} the main focus, or is it {other_topic}?",
+    "placeholders": [
+      "topic",
+      "other_topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Can you provide more details on {aspect} of {topic}?",
+    "placeholders": [
+      "aspect",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Let me see if I understand: you believe that {topic} leads to {outcome} because of {reason}?",
+    "placeholders": [
+      "topic",
+      "outcome",
+      "reason"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "What is the specific {term} you are referring to in {document}?",
+    "placeholders": [
+      "term",
+      "document"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "I'm not sure I agree with your interpretation of {topic}. Could you elaborate on your reasoning?",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Could you clarify the difference between {concept1} and {concept2} as you see it?",
+    "placeholders": [
+      "concept1",
+      "concept2"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Just to be certain, are you suggesting that {user} should change their approach to {topic}?",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "I'm not following how {event} relates to {topic}. Can you connect the dots?",
+    "placeholders": [
+      "event",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Can you specify what you mean by {vague_term} in your last message?",
+    "placeholders": [
+      "vague_term"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "To clarify, are you prioritizing {priority1} over {priority2} in this situation?",
+    "placeholders": [
+      "priority1",
+      "priority2"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "I'm a bit fuzzy on the criteria for {topic}. Could you list them?",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "When you mentioned {example}, did you intend it as a {role} or a {alternative_role}?",
+    "placeholders": [
+      "example",
+      "role",
+      "alternative_role"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "Could you explain how {user} expects to achieve {goal} with {method}?",
+    "placeholders": [
+      "user",
+      "goal",
+      "method"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "I need a clearer picture of {scenario}. What are the key variables?",
+    "placeholders": [
+      "scenario"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Let me rephrase to check: are you arguing that {topic} is {state} because of {cause}?",
+    "placeholders": [
+      "topic",
+      "state",
+      "cause"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "Can you clarify the role of {user} in the {project}?",
+    "placeholders": [
+      "user",
+      "project"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "I'm not sure what you mean by {phrase}. Is it related to {context}?",
+    "placeholders": [
+      "phrase",
+      "context"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Could you elaborate on the implications of {topic} for {stakeholder}?",
+    "placeholders": [
+      "topic",
+      "stakeholder"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Just to verify, did you say that {topic} should be {action} by {deadline}?",
+    "placeholders": [
+      "topic",
+      "action",
+      "deadline"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "I need more clarity on the {step} of the process. What happens next?",
+    "placeholders": [
+      "step"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Can you explain why {topic} is important in this context?",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "I'm trying to reconcile your statement with {fact}. Could you clarify the discrepancy?",
+    "placeholders": [
+      "fact"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Could {user} please elaborate on {topic}?",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "I'm not entirely clear about {topic}. Could you explain it further, {user}?",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "To ensure I understand correctly, {user}, are you saying that {topic} involves {aspect}?",
+    "placeholders": [
+      "user",
+      "topic",
+      "aspect"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Let me see if I got this right: {topic} means {definition}, correct?",
+    "placeholders": [
+      "topic",
+      "definition"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Could you clarify what you mean by {term} in the context of {topic}?",
+    "placeholders": [
+      "term",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "I need a bit more detail on {point} from your previous message about {topic}.",
+    "placeholders": [
+      "point",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Sorry, {user}, could you rephrase {sentence}? I want to make sure I understand.",
+    "placeholders": [
+      "user",
+      "sentence"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "When you mention {concept}, are you referring to {interpretation}?",
+    "placeholders": [
+      "concept",
+      "interpretation"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "I'm confused about the relationship between {item1} and {item2}. Can you explain?",
+    "placeholders": [
+      "item1",
+      "item2"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Just to clarify, did you intend to say that {statement}?",
+    "placeholders": [
+      "statement"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Could you provide an example of {concept} to help me understand?",
+    "placeholders": [
+      "concept"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "I want to confirm: {user}, do you mean that {scenario} is accurate?",
+    "placeholders": [
+      "user",
+      "scenario"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "In your explanation of {topic}, what role does {factor} play?",
+    "placeholders": [
+      "topic",
+      "factor"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Could you break down {complex_idea} into simpler terms?",
+    "placeholders": [
+      "complex_idea"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "I think I misunderstood {point}. Can you clarify what you actually said?",
+    "placeholders": [
+      "point"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Regarding {topic}, did you imply that {implication}?",
+    "placeholders": [
+      "topic",
+      "implication"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Let me double-check: {user}, you said {quote}. Does that mean {paraphrase}?",
+    "placeholders": [
+      "user",
+      "quote",
+      "paraphrase"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "I'm not sure I follow. How does {step} lead to {result}?",
+    "placeholders": [
+      "step",
+      "result"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Could you specify which {aspect} of {topic} you are referring to?",
+    "placeholders": [
+      "aspect",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "To clarify, is {option1} or {option2} the correct interpretation?",
+    "placeholders": [
+      "option1",
+      "option2"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "I need clarification on {detail}. What exactly did you mean?",
+    "placeholders": [
+      "detail"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Could you expand on your point about {topic}? I'd like to understand better.",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Sorry if this is basic, but what does {term} mean in this context?",
+    "placeholders": [
+      "term"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "You mentioned {topic}. Could you tell me more about {subtopic}?",
+    "placeholders": [
+      "topic",
+      "subtopic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "I'm reading your response about {subject}. Did you mean {meaning1} or {meaning2}?",
+    "placeholders": [
+      "subject",
+      "meaning1",
+      "meaning2"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "Let me summarize to see if I understand: {summary}. Is that correct, {user}?",
+    "placeholders": [
+      "summary",
+      "user"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "Could you clarify the difference between {concept_a} and {concept_b}?",
+    "placeholders": [
+      "concept_a",
+      "concept_b"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "I'm a bit lost. Can you walk me through {process} again?",
+    "placeholders": [
+      "process"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "In your statement about {topic}, what evidence supports {claim}?",
+    "placeholders": [
+      "topic",
+      "claim"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Just to ensure accuracy, {user}, is it true that {fact}?",
+    "placeholders": [
+      "user",
+      "fact"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Could you define {term} more precisely? I'm getting confused.",
+    "placeholders": [
+      "term"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "I need more context around {event}. What happened before that?",
+    "placeholders": [
+      "event"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "You said {statement}. Does that imply {consequence}?",
+    "placeholders": [
+      "statement",
+      "consequence"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Could you please clarify your position on {issue}?",
+    "placeholders": [
+      "issue"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "I'm not clear about the timeline. When did {action} occur?",
+    "placeholders": [
+      "action"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "To help me understand, could you compare {topic} to {example}?",
+    "placeholders": [
+      "topic",
+      "example"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Let me rephrase: are you saying that {situation} is likely?",
+    "placeholders": [
+      "situation"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "I'd like to clarify the assumptions behind {argument}.",
+    "placeholders": [
+      "argument"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Could you elaborate on why {reason} leads to {outcome}?",
+    "placeholders": [
+      "reason",
+      "outcome"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Sorry to ask again, but what exactly is {term}?",
+    "placeholders": [
+      "term"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "In your previous message, you mentioned {point}. Can you give an example?",
+    "placeholders": [
+      "point"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "I'm having trouble with the logic. How does {premise} support {conclusion}?",
+    "placeholders": [
+      "premise",
+      "conclusion"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "Could you clarify whether {option} is correct or not?",
+    "placeholders": [
+      "option"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "I want to be sure: {user}, did you say {statement}?",
+    "placeholders": [
+      "user",
+      "statement"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "What are the key factors in {topic}? I need more detail.",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Could you explain the significance of {detail} in {context}?",
+    "placeholders": [
+      "detail",
+      "context"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "I'm unclear about the sequence. What happens after {step}?",
+    "placeholders": [
+      "step"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "To verify my understanding, {user}, you believe that {belief}. Is that right?",
+    "placeholders": [
+      "user",
+      "belief"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "Could you provide more specifics on how {method} works?",
+    "placeholders": [
+      "method"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "I need a clearer explanation of {topic}. Can you simplify it?",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Could you clarify what {user} meant by {topic}?",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "I’m not sure I understand {topic}; could you elaborate?",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Can you explain {topic} in more detail?",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "What does {user} mean when referring to {topic}?",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Could we get a clearer definition of {topic}?",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "I need clarification on {topic} regarding {detail}.",
+    "placeholders": [
+      "topic",
+      "detail"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Is {topic} the same as {concept}?",
+    "placeholders": [
+      "topic",
+      "concept"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Can you rephrase that point about {topic}?",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Could you specify what {user} intended with {topic}?",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "I’m confused by the term {topic} in this context.",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Could you clarify the relationship between {topic} and {other_topic}?",
+    "placeholders": [
+      "topic",
+      "other_topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "What exactly does {user} mean by {phrase}?",
+    "placeholders": [
+      "user",
+      "phrase"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "I need more clarity on {topic} before proceeding.",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Can you break down {topic} into simpler terms?",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Could you clarify the difference between {concept_a} and {concept_b}?",
+    "placeholders": [
+      "concept_a",
+      "concept_b"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "What is the intended meaning of {topic} in this discussion?",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "I’d like to understand {topic} better; can you explain?",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Could you provide an example of {topic} to clarify?",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "What does {user} mean by that statement about {topic}?",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "I’m not following; can you clarify the point about {topic}?",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Could you explain how {topic} relates to {context}?",
+    "placeholders": [
+      "topic",
+      "context"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Can you elaborate on what {user} said regarding {topic}?",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "I need a clearer explanation of {topic} and its implications for {project}.",
+    "placeholders": [
+      "topic",
+      "project"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Could you walk me through the process of {topic} step by step?",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "I’m unclear on how {topic} affects {outcome}; could you clarify?",
+    "placeholders": [
+      "topic",
+      "outcome"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "What specific aspects of {topic} are you referring to when you mention {detail}?",
+    "placeholders": [
+      "topic",
+      "detail"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Could you clarify what {user} meant by that comment about {topic} in the context of {situation}?",
+    "placeholders": [
+      "user",
+      "topic",
+      "situation"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "I don’t fully grasp {topic}; can you explain it using a real-world example involving {example}?",
+    "placeholders": [
+      "topic",
+      "example"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Could you provide more context on how {topic} was derived from {source}?",
+    "placeholders": [
+      "topic",
+      "source"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "What do you mean by {phrase} in relation to {topic}?",
+    "placeholders": [
+      "phrase",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "I need clarification on the distinction between {concept_a} and {concept_b} as they apply to {topic}.",
+    "placeholders": [
+      "concept_a",
+      "concept_b",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Can you expand on the key points of {topic} that {user} mentioned?",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Could you clarify the timeline or sequence of events for {topic}?",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "I’m unsure about the significance of {topic} in this discussion; can you explain?",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "What evidence supports the claim about {topic} made by {user}?",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Could you detail the criteria used to define {topic} in this context?",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "I’m having trouble understanding {topic}; can you break it down into {number} parts?",
+    "placeholders": [
+      "topic",
+      "number"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "What are the underlying assumptions behind {topic} as presented by {user}?",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Could you clarify how {topic} aligns with {goal}?",
+    "placeholders": [
+      "topic",
+      "goal"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "I need a deeper explanation of {topic} to connect it with {other_topic}.",
+    "placeholders": [
+      "topic",
+      "other_topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Could you specify what {user} means by {phrase} in the discussion about {topic}?",
+    "placeholders": [
+      "user",
+      "phrase",
+      "topic"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "I’m seeking clarification on the methodology behind {topic} and how it impacts {result}, as mentioned by {user}.",
+    "placeholders": [
+      "topic",
+      "result",
+      "user"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "To ensure I understand correctly, could you elaborate on the relationship between {topic_a}, {topic_b}, and {topic_c}?",
+    "placeholders": [
+      "topic_a",
+      "topic_b",
+      "topic_c"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "I’m confused by the statement that {topic} leads to {outcome}; can you clarify the reasoning and provide supporting examples from {source}?",
+    "placeholders": [
+      "topic",
+      "outcome",
+      "source"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "Could you clarify the specific steps involved in {topic} and how each step contributes to the overall {goal}?",
+    "placeholders": [
+      "topic",
+      "goal"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "I need a thorough explanation of {topic} including its origins, key components, and how it applies to {scenario}, as mentioned by {user}.",
+    "placeholders": [
+      "topic",
+      "scenario",
+      "user"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "What exactly did {user} mean when they said {quote} in reference to {topic}? Can you unpack that?",
+    "placeholders": [
+      "user",
+      "quote",
+      "topic"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "I’d like to clarify the implications of {topic} for {project}, including any potential risks or benefits you foresee.",
+    "placeholders": [
+      "topic",
+      "project"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "Could you provide a detailed example that illustrates {topic} in practice, highlighting how it addresses {issue}?",
+    "placeholders": [
+      "topic",
+      "issue"
+    ],
+    "length": "long"
+  }
+]

@@ -1,0 +1,1579 @@
+[
+  {
+    "text": "Welcome, {user}. Today we explore {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Hello {user}, let's dive into the world of {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Hi {user}! Ready to learn about {topic}?",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Greetings, {user}. This is an introduction to {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "{user}, what you need to know about {topic} starts here.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Hey {user}, we'll cover {topic} in this session.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "In this intro, {user}, we discuss {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Let's begin, {user}, with an overview of {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "This is for you, {user}: a quick start on {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "{user}, here's a brief look at {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Welcome, {user}. Today we explore {topic} and its importance in {context}.",
+    "placeholders": [
+      "user",
+      "topic",
+      "context"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Hello {user}, let's dive into the world of {topic}. This is a foundational overview.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Hi {user}! Ready to learn about {topic}? We'll start with the basics.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Greetings, {user}. This is an introduction to {topic}, covering key concepts.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "{user}, what you need to know about {topic} starts here. Let's get started.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Hey {user}, we'll cover {topic} in this session. It's a beginner-friendly intro.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "In this intro, {user}, we discuss {topic} and why it matters for {field}.",
+    "placeholders": [
+      "user",
+      "topic",
+      "field"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Let's begin, {user}, with an overview of {topic}. We'll touch on {aspect}.",
+    "placeholders": [
+      "user",
+      "topic",
+      "aspect"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "This is for you, {user}: a quick start on {topic}. No prior knowledge needed.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "{user}, here's a brief look at {topic}. We'll explore its core ideas.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Welcome, {user}. Today we explore {topic} and its importance in {context}. Let's begin with an overview.",
+    "placeholders": [
+      "user",
+      "topic",
+      "context"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "Hello {user}, let's dive into the world of {topic}. This is a foundational overview designed for beginners.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "Hi {user}! Ready to learn about {topic}? We'll start with the basics and build up gradually.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "Greetings, {user}. This is an introduction to {topic}, covering key concepts and setting the stage for deeper learning.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "{user}, what you need to know about {topic} starts here. Let's get started with a comprehensive overview.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "Hey {user}, we'll cover {topic} in this session. It's a beginner-friendly intro that assumes no prior experience.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "In this intro, {user}, we discuss {topic} and why it matters for {field}. We'll explore several key aspects.",
+    "placeholders": [
+      "user",
+      "topic",
+      "field"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "Let's begin, {user}, with an overview of {topic}. We'll touch on {aspect} and then move to practical examples.",
+    "placeholders": [
+      "user",
+      "topic",
+      "aspect"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "This is for you, {user}: a quick start on {topic}. No prior knowledge needed, just curiosity.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "{user}, here's a brief look at {topic}. We'll explore its core ideas and why they're relevant today.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "Welcome, {user}. Today we explore {topic} and its importance in {context}. Let's start.",
+    "placeholders": [
+      "user",
+      "topic",
+      "context"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Hello {user}, let's dive into {topic}. This will be quick.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Hi {user}! Ready for {topic}?",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Greetings, {user}. Intro to {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "{user}, here's {topic} basics.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Hey {user}, starting {topic} now.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "In this intro, {user}, we cover {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Let's begin {topic}, {user}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "For {user}: intro to {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "{user}, brief intro: {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Welcome, {user}. Today we explore {topic} and its importance in {context}. This will be a foundational overview.",
+    "placeholders": [
+      "user",
+      "topic",
+      "context"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Hello {user}, let's dive into the world of {topic}. This session is designed as a gentle introduction.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Hi {user}! Ready to learn about {topic}? We'll start with the basics and then go deeper.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Greetings, {user}. This is an introduction to {topic}, covering key concepts you need to know.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "{user}, what you need to know about {topic} starts here. We'll build from the ground up.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Hey {user}, we'll cover {topic} in this session. It's perfect for those new to the subject.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "In this intro, {user}, we discuss {topic} and why it matters for {field}. Let's explore together.",
+    "placeholders": [
+      "user",
+      "topic",
+      "field"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Let's begin, {user}, with an overview of {topic}. We'll touch on {aspect} and its relevance.",
+    "placeholders": [
+      "user",
+      "topic",
+      "aspect"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "This is for you, {user}: a quick start on {topic}. No prior knowledge needed, just an open mind.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "{user}, here's a brief look at {topic}. We'll explore its core ideas and how they apply in practice.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Hello {user}, welcome to a deep dive on {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "In this section, we explore the fascinating world of {topic}.",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Let’s start by understanding the basics of {topic} with {user}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Today, {user} will guide you through the essential concepts of {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Welcome, {user}. Together, we will uncover the key aspects of {topic} and its impact on {industry}.",
+    "placeholders": [
+      "user",
+      "topic",
+      "industry"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "Hi {user}, this introduction covers the core ideas behind {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Let’s begin our journey into {topic} with insights from {user}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "This section introduces {topic} and explains why it matters for {audience}.",
+    "placeholders": [
+      "topic",
+      "audience"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Hello everyone, {user} is here to break down {topic} in simple terms.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Welcome to this introductory module on {topic}, designed for {user} and those interested in {field}.",
+    "placeholders": [
+      "user",
+      "topic",
+      "field"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "Let’s kick off with an overview of {topic}.",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "In this opening, {user} sets the stage for {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Here, we lay the groundwork for understanding {topic} and its relevance to {user}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "This introduction will cover the fundamentals of {topic} and how it relates to {concept}.",
+    "placeholders": [
+      "topic",
+      "concept"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Hi {user}, in this section we dive into the origins of {topic} and its evolution over time, with a focus on {aspect}.",
+    "placeholders": [
+      "user",
+      "topic",
+      "aspect"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "Welcome to {topic} 101 with {user}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Let’s explore what {topic} means for {user}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "This section is an introduction to {topic}, aimed at {user} who wants to learn more.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "We start with a look at the key principles of {topic} and their applications in {area}.",
+    "placeholders": [
+      "topic",
+      "area"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Hello {user}, this introductory segment covers the main ideas of {topic} and how they shape {industry}, with examples from {company}.",
+    "placeholders": [
+      "user",
+      "topic",
+      "industry",
+      "company"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "Let’s begin with a simple explanation of {topic}.",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "In this intro, {user} presents the big picture of {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Welcome to a beginner-friendly guide on {topic} curated by {user}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "This opening section explains why {topic} is important for {user} and what you can expect to learn.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Hi {user}, let’s start our exploration of {topic} by understanding its historical context and current significance in {field}.",
+    "placeholders": [
+      "user",
+      "topic",
+      "field"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "Let’s jump into {topic}.",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Here, {user} introduces the core of {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "This introduction is designed to give {user} a solid foundation in {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "We begin by examining the main components of {topic} and how they work together for {purpose}.",
+    "placeholders": [
+      "topic",
+      "purpose"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Welcome, {user}, to this comprehensive introduction on {topic}, where we also touch on its implications for {society} and {technology}.",
+    "placeholders": [
+      "user",
+      "topic",
+      "society",
+      "technology"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "Let’s start with the basics of {topic}.",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "In this section, {user} explains {topic} from scratch.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "This module introduces {topic} and its key ideas for {user}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "We open with a discussion of {topic} and its role in {context}.",
+    "placeholders": [
+      "topic",
+      "context"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Hello {user}, this intro covers the essential concepts of {topic}, including {concept1} and {concept2}, to set the stage for deeper learning.",
+    "placeholders": [
+      "user",
+      "topic",
+      "concept1",
+      "concept2"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "Let’s dive into {topic} together.",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Here, {user} gives a quick overview of {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "This introduction helps {user} understand the fundamental aspects of {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "We start by exploring the definition of {topic} and why it matters for {user}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Hi {user}, in this opening we discuss the background of {topic}, its key features, and how it influences {domain}.",
+    "placeholders": [
+      "user",
+      "topic",
+      "domain"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "Let’s begin our look at {topic}.",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "In this intro, {user} outlines the main points of {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "This section provides an entry point to {topic} for {user}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "We introduce {topic} by focusing on its most important elements and their connections to {user}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Welcome, {user}, to this foundational overview of {topic}, which also highlights its applications in {field} and {industry}.",
+    "placeholders": [
+      "user",
+      "topic",
+      "field",
+      "industry"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "Let’s start with {topic} basics.",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Here, {user} sets up the context for {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "This intro is tailored for {user} to grasp {topic} quickly.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "We begin this lesson by outlining the scope of {topic} and what {user} will learn.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Hi {user}, let’s start with an introduction to {topic}, covering its history, core principles, and relevance to {modern} challenges.",
+    "placeholders": [
+      "user",
+      "topic",
+      "modern"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "Welcome, {user}, to our exploration of {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Today, we dive into the fascinating world of {topic}.",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Hello {user}, let's begin our journey on {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "This introduction covers the key aspects of {topic}.",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Let me start by introducing {topic}.",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "In this section, we'll discuss {topic}.",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Thank you for joining, {user}. Today's topic is {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "As we begin, let's understand what {topic} means.",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Before diving deeper, let's set the stage for {topic}.",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "The goal of this intro is to explain {topic} clearly.",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Starting with {topic}, we'll explore its importance.",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Hi {user}, welcome! Let's start with an overview of {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "This introduction will help you grasp {topic}.",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Let's begin by framing {topic} in a broader context.",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "We'll start with the basics of {topic} before moving on.",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Welcome, {user}. This session focuses on {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Here is a brief intro to {topic}.",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Let's kick off with {topic}.",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Today, {topic} is in the spotlight.",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "We begin with an introduction to {topic}.",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Hello everyone, today we talk about {topic}.",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "In this intro, we'll cover the essentials of {topic}.",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Welcome {user}. This intro will give you a taste of {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Let's start with why {topic} matters.",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Before we go further, let's define {topic}.",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "This section introduces {topic} and its relevance.",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Hi {user}, let's begin our discussion on {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "We'll start with a quick overview of {topic}.",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Understanding {topic} starts here.",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "This intro lays the foundation for {topic}.",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Let's get started with {topic}.",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Welcome to a new session on {topic}.",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Today we begin with {topic}.",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Hello {user}, here is an intro to {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "This introduction will set the context for {topic}.",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Let's start by exploring the concept of {topic}.",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "In this intro, we'll look at the fundamentals of {topic}.",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Welcome {user}. This section is about {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Before we dive in, let's understand {topic}.",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "This intro provides a starting point for {topic}.",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Hi everyone, welcome to {topic}.",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Let's begin with a simple explanation of {topic}.",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "This introduction will cover what you need to know about {topic}.",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "Welcome, {user}. In this intro, we'll break down {topic} step by step.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "Let's start with a broad overview of {topic} and its key elements.",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "This section introduces {topic} by explaining its background and significance.",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "Hi {user}, this intro will help you understand the core ideas of {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "We'll begin by outlining the main aspects of {topic} you need to know.",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "Welcome to this introduction, where we'll explore {topic} in detail.",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "Before exploring deeper, this intro gives you a solid foundation for {topic}.",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "Welcome, {user}, to our discussion on {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Today, we're diving into the world of {topic} with {user}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Hello {user}, let's explore {topic} together.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "This is a brief introduction to {topic} for {user}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Hi {user}, get ready to learn about {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "In this section, {user} will discover the basics of {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Let me start by saying that {topic} is important for {user}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Welcome aboard, {user}. This intro covers {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "For {user}, understanding {topic} begins here.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Hello {user}, we're kicking off with {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "This introduction will help {user} grasp {topic} quickly.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Today, {user} and I will tackle {topic} from the ground up.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Let's begin our journey into {topic}, {user}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Hi {user}, let me introduce you to the fundamentals of {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Welcome to this overview of {topic} designed for {user}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "I'm excited to share {topic} with you, {user}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "This intro sets the stage for {user} to understand {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Hello {user}, let's start with a simple look at {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "For {user}, this is a starting point for exploring {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Today, we focus on {topic} and what it means for {user}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Welcome, {user}, as we break down the essentials of {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Let's get started with {topic}, a key subject for {user}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Hi {user}, I'll walk you through the core ideas of {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "This intro prepares {user} for a deeper dive into {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Welcome to our session on {topic}. Let's begin, {user}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Hey {user}, it's time to explore the world of {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "In this intro, {user} will find the basics of {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Hello {user}, let me set the context for {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Today's topic is {topic}, and we'll start with an overview for {user}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Welcome, {user}, to a quick introduction of {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "For {user}, this is the first step in learning {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Let's begin with a friendly introduction to {topic} for {user}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Hi {user}, I'm here to guide you through the basics of {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "This intro is meant to give {user} a clear picture of {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Welcome, {user}, as we uncover the key points of {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Today, {user} will get a simple breakdown of {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Hello {user}, let's start our exploration of {topic} now.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "This introduction lays the groundwork for {user} on {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "For {user}, this is a great place to begin with {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Welcome to the introduction of {topic}, tailored for {user}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Let's kick off with {topic} and see what it offers {user}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Hi {user}, I'll start by explaining why {topic} matters.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Today, we introduce {topic} in a way that's easy for {user}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Welcome, {user}, to this foundational overview of {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "For {user}, the journey into {topic} starts right here.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Hello {user}, let's begin with a straightforward intro to {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "This intro helps {user} get acquainted with {topic} quickly.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Welcome, {user}, as we define the basics of {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Hi {user}, I'm excited to introduce you to {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Let's start with a brief introduction to {topic} for {user}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  }
+]

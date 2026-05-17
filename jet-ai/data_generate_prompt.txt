@@ -1,0 +1,99 @@
+You are generating high-quality synthetic training data for an AI model that converts natural language into Mermaid.js diagrams and converts Mermaid.js diagrams back into detailed natural language.
+The model should learn to understand semantic structure, workflows, relationships, causality, hierarchy, conditions, and implicit meaning across many domains.
+Generate highly diverse examples.
+For each example:
+1. Create a realistic natural language input.
+   The input may be:
+* a question
+* a conversation
+* a paragraph
+* an email
+* instructions
+* a technical explanation
+* a business workflow
+* a social interaction
+* a story
+* a troubleshooting scenario
+* a scientific explanation
+* a customer support request
+* a system architecture description
+* a daily-life scenario
+* an abstract reasoning example
+2. Infer the underlying semantic structure and workflow.
+3. Generate a semantically accurate Mermaid.js diagram representing the structure.
+4. Generate a detailed expanded natural language explanation reconstructed from the Mermaid diagram.
+5. Generate metadata describing the example.
+Requirements:
+* Use many domains:
+  * business
+  * software engineering
+  * AI systems
+  * education
+  * healthcare
+  * gaming
+  * logistics
+  * finance
+  * legal
+  * HR
+  * marketing
+  * customer support
+  * cybersecurity
+  * science
+  * social relationships
+  * productivity
+  * daily life
+* Include many graph structures:
+  * sequential flows
+  * branching conditions
+  * loops
+  * retries
+  * parallel tasks
+  * hierarchy
+  * state transitions
+  * event chains
+  * feedback loops
+  * approval systems
+  * dependency graphs
+* Include different Mermaid diagram types when appropriate:
+  * flowcharts
+  * sequence diagrams
+  * state diagrams
+  * ER diagrams
+  * gantt charts
+  * mindmaps
+* Preserve semantic richness:
+  * actors
+  * goals
+  * dependencies
+  * emotional tone
+  * platforms
+  * metadata
+  * causal relationships
+  * hidden assumptions
+  * business logic
+* Infer implicit relationships even if they are not explicitly stated.
+* Mermaid syntax must always be valid.
+* Avoid repetitive templates or repetitive wording.
+* Use varied writing styles:
+  * casual
+  * professional
+  * technical
+  * conversational
+  * educational
+  * narrative
+* Include both:
+  * very short/simple examples
+  * highly complex long-form examples
+Output format:
+{
+"input_text": "...",
+"mermaid": "...",
+"expanded_text": "...",
+"metadata": {
+"domain": "...",
+"complexity": "...",
+"graph_features": [...]
+}
+}
+Generate diverse examples with strong semantic variation and realistic structure.
+generate 10 samples for me. Its  just translating normal text into diagram, not a user asking the model directly to do that

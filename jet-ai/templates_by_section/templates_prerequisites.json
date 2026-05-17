@@ -1,0 +1,1606 @@
+[
+  {
+    "text": "{user} must have completed {prerequisite_course} before taking {topic}.",
+    "placeholders": [
+      "user",
+      "prerequisite_course",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Students should be familiar with {prerequisite_topic}.",
+    "placeholders": [
+      "prerequisite_topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Basic knowledge of {prerequisite_skill} is required for {topic}.",
+    "placeholders": [
+      "prerequisite_skill",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "This {topic} assumes prior experience in {prerequisite_field}.",
+    "placeholders": [
+      "topic",
+      "prerequisite_field"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "It is recommended that {user} completes {prerequisite_course} first.",
+    "placeholders": [
+      "user",
+      "prerequisite_course"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "To succeed in {topic}, you need a solid understanding of {prerequisite_concept}.",
+    "placeholders": [
+      "topic",
+      "prerequisite_concept"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Before enrolling in {topic}, {user} must have taken {prerequisite_course} or an equivalent.",
+    "placeholders": [
+      "user",
+      "topic",
+      "prerequisite_course"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "A background in {prerequisite_subject} is strongly advised.",
+    "placeholders": [
+      "prerequisite_subject"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "{user} should have completed at least one course in {prerequisite_domain}.",
+    "placeholders": [
+      "user",
+      "prerequisite_domain"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "This material assumes you already understand {prerequisite_topic}.",
+    "placeholders": [
+      "prerequisite_topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Participants are expected to have prior knowledge of {prerequisite_skill} and {prerequisite_tool}.",
+    "placeholders": [
+      "prerequisite_skill",
+      "prerequisite_tool"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "If you have not studied {prerequisite_subject}, please do so before starting {topic}.",
+    "placeholders": [
+      "prerequisite_subject",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "The prerequisite for {topic} is {prerequisite_course} or permission of instructor.",
+    "placeholders": [
+      "topic",
+      "prerequisite_course"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "You must be comfortable with {prerequisite_concept} and {prerequisite_technique}.",
+    "placeholders": [
+      "prerequisite_concept",
+      "prerequisite_technique"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Completion of {prerequisite_course} is a mandatory prerequisite for {topic}.",
+    "placeholders": [
+      "prerequisite_course",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "{user} needs to demonstrate proficiency in {prerequisite_skill} before proceeding.",
+    "placeholders": [
+      "user",
+      "prerequisite_skill"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Prior coursework in {prerequisite_field} is highly recommended.",
+    "placeholders": [
+      "prerequisite_field"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "This course builds on concepts from {prerequisite_course} and {prerequisite_course2}.",
+    "placeholders": [
+      "prerequisite_course",
+      "prerequisite_course2"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "To get the most out of {topic}, you should already be familiar with {prerequisite_topic}.",
+    "placeholders": [
+      "topic",
+      "prerequisite_topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "A working knowledge of {prerequisite_software} is necessary.",
+    "placeholders": [
+      "prerequisite_software"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "It is assumed that {user} has already taken {prerequisite_course} or its equivalent.",
+    "placeholders": [
+      "user",
+      "prerequisite_course"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Students without a background in {prerequisite_subject} may need to do additional reading.",
+    "placeholders": [
+      "prerequisite_subject"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "This module requires that you have mastered {prerequisite_skill}.",
+    "placeholders": [
+      "prerequisite_skill"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Before attending, please ensure you have completed the prerequisite {prerequisite_activity}.",
+    "placeholders": [
+      "prerequisite_activity"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "{topic} is an advanced course; you must have passed {prerequisite_course} first.",
+    "placeholders": [
+      "topic",
+      "prerequisite_course"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Recommended prerequisite: {prerequisite_course} or concurrent enrollment.",
+    "placeholders": [
+      "prerequisite_course"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "You should have a basic grasp of {prerequisite_concept} and {prerequisite_theory}.",
+    "placeholders": [
+      "prerequisite_concept",
+      "prerequisite_theory"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "No formal prerequisites, but familiarity with {prerequisite_topic} is beneficial.",
+    "placeholders": [
+      "prerequisite_topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "This workshop is intended for those who have already learned {prerequisite_skill}.",
+    "placeholders": [
+      "prerequisite_skill"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Prerequisite: {prerequisite_course} or equivalent experience.",
+    "placeholders": [
+      "prerequisite_course"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "{user} must have a strong foundation in {prerequisite_subject} to enroll in {topic}.",
+    "placeholders": [
+      "user",
+      "prerequisite_subject",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "It is essential that you know {prerequisite_topic} before attempting this section.",
+    "placeholders": [
+      "prerequisite_topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "This class assumes you have completed {prerequisite_course} with a grade of C or better.",
+    "placeholders": [
+      "prerequisite_course"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Participants should have experience with {prerequisite_tool} and {prerequisite_platform}.",
+    "placeholders": [
+      "prerequisite_tool",
+      "prerequisite_platform"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "A prior course in {prerequisite_field} is a prerequisite for this {topic}.",
+    "placeholders": [
+      "prerequisite_field",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "You need to be proficient in {prerequisite_language} to follow along.",
+    "placeholders": [
+      "prerequisite_language"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "This tutorial is suitable for learners who already understand {prerequisite_concept}.",
+    "placeholders": [
+      "prerequisite_concept"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Check your knowledge of {prerequisite_topic} before proceeding with {topic}.",
+    "placeholders": [
+      "prerequisite_topic",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "{user} must have completed at least two semesters of {prerequisite_subject}.",
+    "placeholders": [
+      "user",
+      "prerequisite_subject"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "This is an intermediate level course; prerequisites include {prerequisite_course}.",
+    "placeholders": [
+      "prerequisite_course"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "To fully understand {topic}, you need to be comfortable with {prerequisite_skill}.",
+    "placeholders": [
+      "topic",
+      "prerequisite_skill"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Prior exposure to {prerequisite_topic} is helpful but not mandatory.",
+    "placeholders": [
+      "prerequisite_topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "This module requires that you have already taken {prerequisite_course}.",
+    "placeholders": [
+      "prerequisite_course"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Students should have a working knowledge of {prerequisite_software} and {prerequisite_hardware}.",
+    "placeholders": [
+      "prerequisite_software",
+      "prerequisite_hardware"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "You must have passed {prerequisite_course} or an approved equivalent.",
+    "placeholders": [
+      "prerequisite_course"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "A solid understanding of {prerequisite_theory} is expected for this {topic}.",
+    "placeholders": [
+      "prerequisite_theory",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "This content is for those who have mastered {prerequisite_skill} and {prerequisite_concept}.",
+    "placeholders": [
+      "prerequisite_skill",
+      "prerequisite_concept"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Before you begin, make sure you have completed the prerequisite {prerequisite_activity}.",
+    "placeholders": [
+      "prerequisite_activity"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "No prerequisites, but some experience with {prerequisite_topic} is recommended.",
+    "placeholders": [
+      "prerequisite_topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "To participate, you need to have taken {prerequisite_course} within the last two years.",
+    "placeholders": [
+      "prerequisite_course"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Please ensure {user} has completed {prerequisite_course}.",
+    "placeholders": [
+      "user",
+      "prerequisite_course"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "To get started, {user} should be familiar with {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Before joining, {user} must have a basic understanding of {concept}.",
+    "placeholders": [
+      "user",
+      "concept"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "{user} needs to have completed {prerequisite_level} training.",
+    "placeholders": [
+      "user",
+      "prerequisite_level"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "It is required that {user} knows {prerequisite_skill}.",
+    "placeholders": [
+      "user",
+      "prerequisite_skill"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Make sure {user} has access to {required_tool}.",
+    "placeholders": [
+      "user",
+      "required_tool"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "{user} should have passed {exam_name}.",
+    "placeholders": [
+      "user",
+      "exam_name"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "A background in {subject} is necessary for {user}.",
+    "placeholders": [
+      "user",
+      "subject"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Ensure {user} has installed {software} before starting.",
+    "placeholders": [
+      "user",
+      "software"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "This course requires {user} to have taken {previous_course}.",
+    "placeholders": [
+      "user",
+      "previous_course"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Before proceeding, {user} must review {material}.",
+    "placeholders": [
+      "user",
+      "material"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "{user} is expected to be proficient in {skill}.",
+    "placeholders": [
+      "user",
+      "skill"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "{user} needs a valid {certification}.",
+    "placeholders": [
+      "user",
+      "certification"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Please confirm {user} has completed {module}.",
+    "placeholders": [
+      "user",
+      "module"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "It is mandatory that {user} understands {foundation}.",
+    "placeholders": [
+      "user",
+      "foundation"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "To take this section, {user} must have {experience_level} experience in {field}.",
+    "placeholders": [
+      "user",
+      "experience_level",
+      "field"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Before starting, {user} should have completed {course_name} or have equivalent knowledge of {topic}.",
+    "placeholders": [
+      "user",
+      "course_name",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Make sure {user} is comfortable with {concept_1} and {concept_2} before moving forward.",
+    "placeholders": [
+      "user",
+      "concept_1",
+      "concept_2"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "This lesson assumes {user} has already learned {prerequisite_1} and {prerequisite_2}.",
+    "placeholders": [
+      "user",
+      "prerequisite_1",
+      "prerequisite_2"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Please verify that {user} has {skill_1} and {skill_2} skills.",
+    "placeholders": [
+      "user",
+      "skill_1",
+      "skill_2"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "It is recommended that {user} first completes {tutorial} on {platform}.",
+    "placeholders": [
+      "user",
+      "tutorial",
+      "platform"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "To benefit fully, {user} should have prior exposure to {domain} and {tool}.",
+    "placeholders": [
+      "user",
+      "domain",
+      "tool"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Before joining, {user} needs to pass a test on {subject} and {method}.",
+    "placeholders": [
+      "user",
+      "subject",
+      "method"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "This section builds on {concept_a} and {concept_b}, so {user} should review them first.",
+    "placeholders": [
+      "user",
+      "concept_a",
+      "concept_b"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "{user} must have a working knowledge of {language} and {framework}.",
+    "placeholders": [
+      "user",
+      "language",
+      "framework"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Ensure {user} has read {document} and understands {principle}.",
+    "placeholders": [
+      "user",
+      "document",
+      "principle"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "A prerequisite for this module is that {user} has completed {level} in {area}.",
+    "placeholders": [
+      "user",
+      "level",
+      "area"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "It is expected that {user} can perform {task} without assistance.",
+    "placeholders": [
+      "user",
+      "task"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "This content is for {user} who have already mastered {basics}.",
+    "placeholders": [
+      "user",
+      "basics"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Before enrollment, {user} must provide proof of {qualification}.",
+    "placeholders": [
+      "user",
+      "qualification"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "For success, {user} should be adept at {technique} and {approach}.",
+    "placeholders": [
+      "user",
+      "technique",
+      "approach"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Prior to starting, {user} needs to set up {environment} and configure {settings}.",
+    "placeholders": [
+      "user",
+      "environment",
+      "settings"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "This course assumes {user} has completed {prerequisite_series} and is familiar with {terminology}.",
+    "placeholders": [
+      "user",
+      "prerequisite_series",
+      "terminology"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Please ensure that {user} has the necessary permissions for {system} and {resource}.",
+    "placeholders": [
+      "user",
+      "system",
+      "resource"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "{user} should have successfully finished {course_1} and {course_2} before attempting this.",
+    "placeholders": [
+      "user",
+      "course_1",
+      "course_2"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "It is crucial that {user} understands the fundamentals of {theory} and can apply {practice}.",
+    "placeholders": [
+      "user",
+      "theory",
+      "practice"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Before proceeding, {user} must have a good command of {skill_set} including {specific_skill}.",
+    "placeholders": [
+      "user",
+      "skill_set",
+      "specific_skill"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "To participate, {user} must have completed at least {number} years of experience in {industry}.",
+    "placeholders": [
+      "user",
+      "number",
+      "industry"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "This program is designed for {user} who have already taken {course_A}, {course_B}, and have a basic understanding of {topic_C}.",
+    "placeholders": [
+      "user",
+      "course_A",
+      "course_B",
+      "topic_C"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "Before enrolling, {user} should review the prerequisites: completion of {previous_module}, familiarity with {tool}, and knowledge of {concept}.",
+    "placeholders": [
+      "user",
+      "previous_module",
+      "tool",
+      "concept"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "Please confirm that {user} has the following: a valid {certificate}, access to {software}, and a minimum of {years} years of experience in {domain}.",
+    "placeholders": [
+      "user",
+      "certificate",
+      "software",
+      "years",
+      "domain"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "It is essential that {user} has completed all modules in {track}, passed the {exam}, and is comfortable with {skill_1} and {skill_2}.",
+    "placeholders": [
+      "user",
+      "track",
+      "exam",
+      "skill_1",
+      "skill_2"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "To get the most out of this section, {user} should have prior experience with {technique}, a working knowledge of {language}, and have read {reference_material}.",
+    "placeholders": [
+      "user",
+      "technique",
+      "language",
+      "reference_material"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "This advanced module requires {user} to have mastered {prerequisite_1}, {prerequisite_2}, and to have completed a project in {project_area}.",
+    "placeholders": [
+      "user",
+      "prerequisite_1",
+      "prerequisite_2",
+      "project_area"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "Before starting, ensure {user} meets these criteria: completed {course_X}, achieved a score of at least {score} on {test}, and has experience with {tool}.",
+    "placeholders": [
+      "user",
+      "course_X",
+      "score",
+      "test",
+      "tool"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "The prerequisites for this section are: {user} must have finished {level_1} and {level_2}, understand {core_concept}, and be able to use {application}.",
+    "placeholders": [
+      "user",
+      "level_1",
+      "level_2",
+      "core_concept",
+      "application"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "This course is intended for {user} who have a background in {field}, have completed {specific_training}, and are familiar with {industry_standards}.",
+    "placeholders": [
+      "user",
+      "field",
+      "specific_training",
+      "industry_standards"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "To succeed, {user} should have taken {intro_course}, practiced {skill} for at least {hours} hours, and have access to {resource}.",
+    "placeholders": [
+      "user",
+      "intro_course",
+      "skill",
+      "hours",
+      "resource"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "Please note: {user} must have a solid grasp of {math_concept}, {programming_language}, and {data_structure} before proceeding.",
+    "placeholders": [
+      "user",
+      "math_concept",
+      "programming_language",
+      "data_structure"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "This section requires that {user} has completed the following prerequisites: {list_of_courses}, and has demonstrated proficiency in {area}.",
+    "placeholders": [
+      "user",
+      "list_of_courses",
+      "area"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "Before starting {topic}, ensure you have completed {prerequisite}.",
+    "placeholders": [
+      "topic",
+      "prerequisite"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "This course assumes familiarity with {prerequisite}.",
+    "placeholders": [
+      "prerequisite"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "You must have taken {prerequisite} before enrolling in {topic}.",
+    "placeholders": [
+      "prerequisite",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "A solid understanding of {prerequisite} is required for {topic}.",
+    "placeholders": [
+      "prerequisite",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Please review {prerequisite} concepts if you are not confident.",
+    "placeholders": [
+      "prerequisite"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "We recommend completing {prerequisite} before beginning {topic}.",
+    "placeholders": [
+      "prerequisite",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Check your knowledge of {prerequisite} before proceeding.",
+    "placeholders": [
+      "prerequisite"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "To get the most out of {topic}, you should be comfortable with {prerequisite}.",
+    "placeholders": [
+      "topic",
+      "prerequisite"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "The material in {topic} builds on {prerequisite}.",
+    "placeholders": [
+      "topic",
+      "prerequisite"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "You need prior exposure to {prerequisite} to succeed in {topic}.",
+    "placeholders": [
+      "prerequisite",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "It is expected that you have studied {prerequisite} beforehand.",
+    "placeholders": [
+      "prerequisite"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Make sure you have a working knowledge of {prerequisite} before starting.",
+    "placeholders": [
+      "prerequisite"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "This lesson assumes you have completed {prerequisite}.",
+    "placeholders": [
+      "prerequisite"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Before diving into {topic}, ensure you understand {prerequisite}.",
+    "placeholders": [
+      "topic",
+      "prerequisite"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "You should have taken {prerequisite} prior to this module.",
+    "placeholders": [
+      "prerequisite"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "This is an advanced {topic}; {prerequisite} is mandatory.",
+    "placeholders": [
+      "topic",
+      "prerequisite"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "If you haven't studied {prerequisite}, please do so first.",
+    "placeholders": [
+      "prerequisite"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "The prerequisites for {topic} include {prerequisite}.",
+    "placeholders": [
+      "topic",
+      "prerequisite"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "You must be proficient in {prerequisite} to follow this content.",
+    "placeholders": [
+      "prerequisite"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Have you completed {prerequisite}? If not, start there.",
+    "placeholders": [
+      "prerequisite"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "We strongly suggest reviewing {prerequisite} before proceeding.",
+    "placeholders": [
+      "prerequisite"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Without {prerequisite}, you may struggle with {topic}.",
+    "placeholders": [
+      "prerequisite",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "This tutorial requires that you know {prerequisite}.",
+    "placeholders": [
+      "prerequisite"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Make sure you've gone through {prerequisite} first.",
+    "placeholders": [
+      "prerequisite"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Prior completion of {prerequisite} is essential for {topic}.",
+    "placeholders": [
+      "prerequisite",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "You should be familiar with {prerequisite} to continue.",
+    "placeholders": [
+      "prerequisite"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "This course builds upon knowledge from {prerequisite}.",
+    "placeholders": [
+      "prerequisite"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Before you begin, ensure you have {prerequisite} skills.",
+    "placeholders": [
+      "prerequisite"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "It is recommended that you have taken {prerequisite} recently.",
+    "placeholders": [
+      "prerequisite"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "To understand {topic}, you must first grasp {prerequisite}.",
+    "placeholders": [
+      "topic",
+      "prerequisite"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "We assume you have already studied {prerequisite}.",
+    "placeholders": [
+      "prerequisite"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "This content is for those who have completed {prerequisite}.",
+    "placeholders": [
+      "prerequisite"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "You need {prerequisite} experience to take this course.",
+    "placeholders": [
+      "prerequisite"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Please ensure you are comfortable with {prerequisite} before signing up.",
+    "placeholders": [
+      "prerequisite"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "The prerequisite for this module is {prerequisite}.",
+    "placeholders": [
+      "prerequisite"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "You will need to know {prerequisite} to proceed.",
+    "placeholders": [
+      "prerequisite"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Have you mastered {prerequisite}? If not, review it first.",
+    "placeholders": [
+      "prerequisite"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "This session expects participants to have {prerequisite}.",
+    "placeholders": [
+      "prerequisite"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "We require that you have passed {prerequisite}.",
+    "placeholders": [
+      "prerequisite"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "To follow along, you should have a background in {prerequisite}.",
+    "placeholders": [
+      "prerequisite"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Your success in {topic} depends on your understanding of {prerequisite}.",
+    "placeholders": [
+      "topic",
+      "prerequisite"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "Before you start, make sure you've covered {prerequisite} thoroughly.",
+    "placeholders": [
+      "prerequisite"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "This is not for beginners; you need {prerequisite} knowledge.",
+    "placeholders": [
+      "prerequisite"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "It is crucial that you have completed {prerequisite} first.",
+    "placeholders": [
+      "prerequisite"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "We recommend that you refresh your memory on {prerequisite}.",
+    "placeholders": [
+      "prerequisite"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "The following assumes you have already taken {prerequisite}.",
+    "placeholders": [
+      "prerequisite"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "You must be well-versed in {prerequisite} to benefit from this.",
+    "placeholders": [
+      "prerequisite"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "This material is intended for students who have studied {prerequisite}.",
+    "placeholders": [
+      "prerequisite"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "If you lack {prerequisite}, please complete it before continuing.",
+    "placeholders": [
+      "prerequisite"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "The course assumes you have a working knowledge of {prerequisite} and {prerequisite2}.",
+    "placeholders": [
+      "prerequisite",
+      "prerequisite2"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "{user} should have completed {prerequisite_course}.",
+    "placeholders": [
+      "user",
+      "prerequisite_course"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Before starting {topic}, {user} needs to understand {concept}.",
+    "placeholders": [
+      "user",
+      "topic",
+      "concept"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "It is recommended that {user} has experience with {tool} before proceeding.",
+    "placeholders": [
+      "user",
+      "tool"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "This section assumes {user} knows {prerequisite_topic} thoroughly.",
+    "placeholders": [
+      "user",
+      "prerequisite_topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Please ensure {user} has completed {prerequisite_course} or an equivalent.",
+    "placeholders": [
+      "user",
+      "prerequisite_course"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "To get the most out of this, {user} should first read about {concept}.",
+    "placeholders": [
+      "user",
+      "concept"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "A solid foundation in {subject} is required for {user} before tackling {topic}.",
+    "placeholders": [
+      "user",
+      "subject",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "{user} must have installed {software} version {version} or later.",
+    "placeholders": [
+      "user",
+      "software",
+      "version"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Prior knowledge of {prerequisite_topic} is essential for understanding {topic}.",
+    "placeholders": [
+      "prerequisite_topic",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Make sure {user} is comfortable with {skill} before moving forward.",
+    "placeholders": [
+      "user",
+      "skill"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "This tutorial expects {user} to be familiar with {concept} and {concept2}.",
+    "placeholders": [
+      "user",
+      "concept",
+      "concept2"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Complete the introductory module on {platform} if {user} hasn't already.",
+    "placeholders": [
+      "user",
+      "platform"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "{user} should review the basics of {prerequisite_topic} before diving into {topic}.",
+    "placeholders": [
+      "user",
+      "prerequisite_topic",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "It is assumed that {user} has a {prerequisite_degree} degree or equivalent experience.",
+    "placeholders": [
+      "user",
+      "prerequisite_degree"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "To follow along, {user} needs to have {software} installed and configured.",
+    "placeholders": [
+      "user",
+      "software"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Before taking this section, {user} should have passed {exam_name}.",
+    "placeholders": [
+      "user",
+      "exam_name"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "A minimum of {years} years of experience in {field} is recommended for {user}.",
+    "placeholders": [
+      "user",
+      "years",
+      "field"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "{user} must be proficient in {language} programming language.",
+    "placeholders": [
+      "user",
+      "language"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "This material is intended for {user} who have completed {prerequisite_list}.",
+    "placeholders": [
+      "user",
+      "prerequisite_list"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Please confirm that {user} has access to {resource} before starting.",
+    "placeholders": [
+      "user",
+      "resource"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Understanding {concept} is a prerequisite for {user} in this lesson.",
+    "placeholders": [
+      "user",
+      "concept"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "If {user} hasn't yet studied {prerequisite_topic}, please do so first.",
+    "placeholders": [
+      "user",
+      "prerequisite_topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "This module requires {user} to have completed {course_name} or an equivalent.",
+    "placeholders": [
+      "user",
+      "course_name"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Before proceeding, {user} should be able to {skill_description}.",
+    "placeholders": [
+      "user",
+      "skill_description"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "It is important that {user} understands {prerequisite_concept} before continuing.",
+    "placeholders": [
+      "user",
+      "prerequisite_concept"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "This content is for {user} with prior exposure to {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "To succeed, {user} needs to have completed the {prerequisite_program}.",
+    "placeholders": [
+      "user",
+      "prerequisite_program"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Ensure {user} has read the {document_title} document first.",
+    "placeholders": [
+      "user",
+      "document_title"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "A basic grasp of {subject} is needed for {user} to follow this section.",
+    "placeholders": [
+      "user",
+      "subject"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "{user} should have a working knowledge of {tool} and {tool2}.",
+    "placeholders": [
+      "user",
+      "tool",
+      "tool2"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "This course expects {user} to have completed {prerequisite_course} within the last {time_period}.",
+    "placeholders": [
+      "user",
+      "prerequisite_course",
+      "time_period"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "Before joining, {user} must have submitted the {form_name}.",
+    "placeholders": [
+      "user",
+      "form_name"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "{user} needs to have {skill} at an intermediate level.",
+    "placeholders": [
+      "user",
+      "skill"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "It is assumed that {user} has a {license_type} license.",
+    "placeholders": [
+      "user",
+      "license_type"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "To benefit fully, {user} should have experience with {methodology}.",
+    "placeholders": [
+      "user",
+      "methodology"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Please complete the preparation module on {topic} if {user} hasn't already.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "A prerequisite for this section is that {user} has taken {course_name}.",
+    "placeholders": [
+      "user",
+      "course_name"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "{user} must be able to perform {task} independently.",
+    "placeholders": [
+      "user",
+      "task"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "This lesson assumes {user} is comfortable with {concept} and its applications.",
+    "placeholders": [
+      "user",
+      "concept"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Before starting, {user} should gather the following materials: {materials}.",
+    "placeholders": [
+      "user",
+      "materials"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "To enroll, {user} must have completed {prerequisite_credits} credits in {field}.",
+    "placeholders": [
+      "user",
+      "prerequisite_credits",
+      "field"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "{user} should have a basic understanding of {prerequisite_topic} and {prerequisite_topic2}.",
+    "placeholders": [
+      "user",
+      "prerequisite_topic",
+      "prerequisite_topic2"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "This is an advanced section; {user} should have taken the {course_name} series.",
+    "placeholders": [
+      "user",
+      "course_name"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Make sure {user} has {software} version {version} installed correctly.",
+    "placeholders": [
+      "user",
+      "software",
+      "version"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "{user} must possess a {certification} certification.",
+    "placeholders": [
+      "user",
+      "certification"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "It is recommended that {user} reviews {prerequisite_material} before class.",
+    "placeholders": [
+      "user",
+      "prerequisite_material"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Prior to this, {user} should have completed the {project_name} project.",
+    "placeholders": [
+      "user",
+      "project_name"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "This section is designed for {user} who have already mastered {skill}.",
+    "placeholders": [
+      "user",
+      "skill"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Please ensure {user} has the necessary permissions for {resource}.",
+    "placeholders": [
+      "user",
+      "resource"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "A strong background in {subject} is essential for {user} to proceed.",
+    "placeholders": [
+      "user",
+      "subject"
+    ],
+    "length": "medium"
+  }
+]

@@ -1,0 +1,1553 @@
+[
+  {
+    "text": "Hi {user}, great to see you!",
+    "placeholders": [
+      "user"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Hello {user}, welcome to the {topic} discussion.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Good morning {user}, I hope you're ready for an exciting session on {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "Hey {user}, how's your day going?",
+    "placeholders": [
+      "user"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Greetings {user}, I'm thrilled to have you join us for {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Welcome {user}! We're about to dive into {topic} and your insights are valuable.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "Hi everyone, let's get started!",
+    "placeholders": [],
+    "length": "short"
+  },
+  {
+    "text": "Hello {user}, it's a pleasure to meet you.",
+    "placeholders": [
+      "user"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Good evening {user}, thank you for joining our {topic} webinar.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Hey {team}, I'm looking forward to collaborating on {project} today.",
+    "placeholders": [
+      "team",
+      "project"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Greetings and salutations, {user}! Your presence makes this {event} special.",
+    "placeholders": [
+      "user",
+      "event"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "Hi {user}, thanks for coming to the {topic} session.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Hello {user}, I hope you're having a fantastic day and are excited about {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "Welcome back {user}, we missed you in the last {topic} meeting.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Good day {user}, let's make this {topic} workshop productive.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Hi {user}, it's so good to connect with you about {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Hey there {user}, ready to explore {topic} together?",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Greetings {user}, I appreciate you taking the time to discuss {topic} with me.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "Hello {user}, welcome aboard! Let's talk about {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Hi {user}, nice to see you again. How have you been?",
+    "placeholders": [
+      "user"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Good morning {team}, today we'll focus on {topic} and its impact.",
+    "placeholders": [
+      "team",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Hey {user}, I'm glad you could make it to the {topic} presentation.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Welcome {user}, your expertise on {topic} is highly valued here.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Hi {user}, it's a beautiful day to talk about {topic}, don't you think?",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "Greetings {user}, let's jump right into {topic}!",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Hello {user}, I'm excited to share some ideas about {topic} with you.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Hey {user}, thanks for your patience. Let's start with {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Good afternoon {user}, I hope you're ready for an in-depth look at {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "Hi {user}, it's always a pleasure to discuss {topic} with someone as knowledgeable as you.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "Welcome {user}, let's make the most of our time exploring {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Hey {user}, how's everything going? Ready for {topic}?",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Greetings {user}, I'm looking forward to our conversation about {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Hello {user}, it's great to have you here. Let's dive into {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Hi {user}, I hope you've had a good week. Let's talk about {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Good morning {team}, let's kick off our {topic} discussion.",
+    "placeholders": [
+      "team",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Hey {user}, thanks for joining me to explore {topic} today.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Welcome {user}, your perspective on {topic} will be invaluable.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Hi {user}, it's a pleasure to finally meet you and discuss {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "Greetings {user}, let's get started with our {topic} agenda.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Hello {user}, I'm eager to hear your thoughts on {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Hey {user}, it's been a while! Let's catch up and talk about {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "Good evening {user}, thank you for your time to discuss {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Hi {user}, welcome to the {topic} forum, your input is important.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Welcome {user}, let's begin our journey into {topic} together.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "Hey {user}, I'm happy you're here. Let's explore {topic} in depth.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Greetings {user}, I hope you're as excited about {topic} as I am.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "Hello {user}, nice to connect. Ready to tackle {topic}?",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Hi {user}, your presence is appreciated. Let's discuss {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Good morning {user}, let's have a productive session on {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Hey {user}, thanks for being here. Let's make this {topic} chat great.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "Hello {user}, welcome to our discussion on {topic}!",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Hi {user}, great to see you!",
+    "placeholders": [
+      "user"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Greetings {user}, I hope you're having a wonderful {timeOfDay}.",
+    "placeholders": [
+      "user",
+      "timeOfDay"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Hey {user}, ready to dive into {topic}?",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Good morning {user}, thank you for joining us today to talk about {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Welcome {user}! We're excited to have you here.",
+    "placeholders": [
+      "user"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Hello everyone, and a special welcome to {user} who is joining us for the first time.",
+    "placeholders": [
+      "user"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Hi there {user}, it's a pleasure to meet you.",
+    "placeholders": [
+      "user"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Greetings and salutations, {user}! How are you today?",
+    "placeholders": [
+      "user"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Good evening {user}, I trust you had a productive day.",
+    "placeholders": [
+      "user"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Hey {user}, long time no see! What brings you to {topic}?",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Welcome to {event}, {user}! We're thrilled to have you with us.",
+    "placeholders": [
+      "user",
+      "event"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Hi {user}, thanks for coming to our session on {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Hello {user}, I hope this message finds you well. Let's talk about {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Good day {user}, it's wonderful to see you here.",
+    "placeholders": [
+      "user"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Hey {user}, welcome aboard! We're glad you're here.",
+    "placeholders": [
+      "user"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Greetings {user}, I've been looking forward to our chat about {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Hi {user}, it's always a pleasure to have you join us.",
+    "placeholders": [
+      "user"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Welcome back {user}, we missed you! Ready to explore {topic}?",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Hello {user}, let's get started with {topic} today.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Good afternoon {user}, I hope you're enjoying {event} so far.",
+    "placeholders": [
+      "user",
+      "event"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Hey {user}, nice to see you again! How have you been?",
+    "placeholders": [
+      "user"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Greetings everyone, and a big welcome to our new member {user}.",
+    "placeholders": [
+      "user"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Hi {user}, thanks for taking the time to join us today.",
+    "placeholders": [
+      "user"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Welcome to {community}, {user}! We're happy to have you.",
+    "placeholders": [
+      "user",
+      "community"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Hello {user}, I'm excited to discuss {topic} with you.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Good morning {user}, a new day and a new opportunity to talk about {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Hey {user}, welcome to the conversation on {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Greetings {user}, I hope you're having a fantastic {dayOfWeek}.",
+    "placeholders": [
+      "user",
+      "dayOfWeek"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Hi {user}, it's great to connect with you again.",
+    "placeholders": [
+      "user"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Welcome {user}! We've got a lot to cover on {topic} today.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Hello {user}, I'm glad you could make it to our {event}.",
+    "placeholders": [
+      "user",
+      "event"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Good evening {user}, let's unwind with a chat about {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Hey {user}, welcome! We're starting in just a moment.",
+    "placeholders": [
+      "user"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Greetings {user}, it's an honor to have you with us today.",
+    "placeholders": [
+      "user"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Hi {user}, I hope you're as excited about {topic} as I am.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Welcome to the team, {user}! We're thrilled to have you.",
+    "placeholders": [
+      "user"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Hello {user}, let's jump right into {topic} shall we?",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Good morning {user}, I hope you had a restful night. Ready for {topic}?",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Hey {user}, thanks for joining our community. We value your input on {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Greetings {user}, it's always a pleasure to see a familiar face.",
+    "placeholders": [
+      "user"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Hi {user}, welcome to the discussion. Your perspective on {topic} is valuable.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Welcome back {user}, we've missed your insights on {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Hello {user}, I'm looking forward to hearing your thoughts on {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Good day {user}, I hope everything is going well with you.",
+    "placeholders": [
+      "user"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Hey {user}, welcome to our little corner of the internet.",
+    "placeholders": [
+      "user"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Greetings {user}, thank you for being here. Let's make it a great session on {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Hi {user}, it's so nice to see you! How's your day going?",
+    "placeholders": [
+      "user"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Welcome {user}, we're about to dive into an exciting discussion on {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Hello {user}, I'm delighted to have you join our session on {topic} today.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Hello {user}, welcome!",
+    "placeholders": [
+      "user"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Hi {user}, great to see you!",
+    "placeholders": [
+      "user"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Greetings {user}, how are you?",
+    "placeholders": [
+      "user"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Hey {user}, nice to meet you!",
+    "placeholders": [
+      "user"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Welcome {user}, glad you're here!",
+    "placeholders": [
+      "user"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Good morning {user}, how's your day?",
+    "placeholders": [
+      "user"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Good evening {user}, ready to discuss {topic}?",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Hi {user}, I hope you're having a wonderful day!",
+    "placeholders": [
+      "user"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Hello {user}, it's a pleasure to talk about {topic} with you.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Greetings {user}, welcome to our discussion on {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Hey {user}, thanks for joining us today!",
+    "placeholders": [
+      "user"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Welcome aboard {user}, we're excited to have you!",
+    "placeholders": [
+      "user"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Hi there {user}, let's dive into {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Good afternoon {user}, I trust you're doing well.",
+    "placeholders": [
+      "user"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Hello {user}, it's so good to connect with you again!",
+    "placeholders": [
+      "user"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Hey {user}, welcome to the conversation about {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Greetings {user}, I hope this message finds you well.",
+    "placeholders": [
+      "user"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Hi {user}, let's get started on {topic}!",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Welcome {user}, we're thrilled to have you here today!",
+    "placeholders": [
+      "user"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Good day {user}, how can I assist you with {topic}?",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Hello {user}, it's a pleasure to meet you!",
+    "placeholders": [
+      "user"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Hi {user}, I'm looking forward to our chat about {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Hey {user}, welcome to the team!",
+    "placeholders": [
+      "user"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Greetings {user}, thanks for your interest in {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Good morning {user}, let's make today productive!",
+    "placeholders": [
+      "user"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Hi {user}, I'm glad you could join us for this {topic} session.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Welcome {user}, we're here to help with {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Hello {user}, how are you today? Ready for {topic}?",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Hey {user}, great to have you on board!",
+    "placeholders": [
+      "user"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Good evening {user}, I hope you're ready to explore {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Hi {user}, welcome to our community!",
+    "placeholders": [
+      "user"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Greetings {user}, it's wonderful to see you here!",
+    "placeholders": [
+      "user"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Hello {user}, let's talk about {topic} today.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Hey {user}, thanks for stopping by to discuss {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Welcome {user}, we're here to answer your questions about {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Good morning {user}, I hope you're having a great start to your day!",
+    "placeholders": [
+      "user"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "Hi {user}, it's a pleasure to have you join us for this discussion on {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "Hello {user}, I want to welcome you personally to our {topic} webinar.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "Greetings {user}, we are delighted to have you as part of our {topic} event.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "Hey {user}, I'm so excited you're here to learn about {topic} with us.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "Welcome {user}, thank you for taking the time to join our {topic} session.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "Good afternoon {user}, I hope you're ready for an engaging conversation about {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "Hi {user}, we appreciate your presence and look forward to exploring {topic} together.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "Hello {user}, it's great to see you again; let's pick up where we left off on {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "Greetings {user}, we are happy to welcome you to our {topic} workshop.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "Hey {user}, welcome back! Ready to dive deeper into {topic}?",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Good morning {user}, I hope you're all set for our {topic} meeting.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Hi {user}, thank you for your continued interest in {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Welcome {user}, we have some exciting updates about {topic} to share with you.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "Hello {user}, I'm here to help you get started with {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Hi {user}, how are you today?",
+    "placeholders": [
+      "user"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Hello {user}, welcome to our discussion about {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Good morning {user}, it's a pleasure to have you here. Let's talk about {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Hey {user}, great to see you! Ready to dive into {topic}?",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Greetings {user}, I hope this message finds you well. I wanted to discuss {topic} with you.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Hi there {user}, how's your day going so far?",
+    "placeholders": [
+      "user"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Hello {user}, thank you for joining. We're going to explore {topic} today.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Good evening {user}, I'm glad you could make it. Let's chat about {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Hey {user}, what's up? I've been thinking about {topic} lately.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Salutations {user}, it's an honor to connect with you. Shall we discuss {topic}?",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Hi {user}, welcome aboard! We're excited to talk about {topic} with you.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Hello {user}, I hope you're having a fantastic day. Let's get into {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Good day {user}, it's lovely to see you. How about we start with {topic}?",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Hey {user}, long time no see! What do you think about {topic}?",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Greetings {user}, I'm thrilled to have this conversation. Let's talk about {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Hi {user}, how's everything? I've got some thoughts on {topic} to share.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Hello {user}, nice to meet you. I'm looking forward to our discussion on {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Good afternoon {user}, thanks for stopping by. Let's dive into {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Hey {user}, hope all is well. I wanted to ask you about {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Salutations {user}, your presence is appreciated. Let's explore {topic} together.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Hi {user}, welcome to the community! We're all about {topic} here.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Hello {user}, it's great to connect. I hear you're interested in {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Good morning {user}, what a wonderful day to discuss {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Hey {user}, I'm excited to chat with you about {topic}. Let's get started!",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Greetings {user}, I trust you're doing well. I have some insights on {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Hi {user}, thanks for your time. Let's jump into {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Hello {user}, it's a pleasure to meet you. I think you'll find {topic} fascinating.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Good evening {user}, I hope you're relaxed. Let's talk about {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Hey {user}, how's it going? I've been curious about your thoughts on {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Salutations {user}, it's always nice to see you. Ready for {topic}?",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Hi {user}, welcome! We have a lot to cover about {topic} today.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Hello {user}, I'm glad you're here. Let's make progress on {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Good day {user}, what a great opportunity to discuss {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Hey {user}, I appreciate you joining. Let's talk about {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Greetings {user}, I hope this note finds you happy. Let's chat about {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Hi {user}, how are you? I'm looking forward to our discussion on {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Hello {user}, it's wonderful to have you. Let's delve into {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Good morning {user}, start your day with a chat about {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Hey {user}, what's new? I've been working on {topic} and wanted your input.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Salutations {user}, your expertise on {topic} is valued. Let's connect.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Hi {user}, welcome to the session. We'll be exploring {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Hello {user}, I'm excited to share ideas about {topic} with you.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Good afternoon {user}, hope you're having a productive day. Let's discuss {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Hey {user}, thanks for coming. I think you'll enjoy {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Greetings {user}, I'm pleased to engage with you. Let's talk about {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Hi {user}, how's your day? I have some questions about {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Hello {user}, it's always a pleasure. Let's dive deep into {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Good evening {user}, unwind with a discussion on {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Hey {user}, I've missed our talks. Let's catch up on {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Salutations {user}, welcome to this space. Let's explore {topic} together.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  }
+]

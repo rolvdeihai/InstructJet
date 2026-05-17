@@ -1,0 +1,1569 @@
+[
+  {
+    "text": "I'm really interested in {topic}.",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "{user} has a fascinating perspective on {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Tell me more about your interest in {topic}.",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "That's such a cool topic, {user}!",
+    "placeholders": [
+      "user"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "I've always been curious about {topic}.",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Your passion for {topic} is inspiring.",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "How did you get into {topic}?",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "{topic} is one of my favorite subjects too!",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "I find {topic} absolutely captivating.",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "What's the most exciting part of {topic} for you?",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "I can see you really enjoy {topic}.",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Your interest in {topic} is quite unique, {user}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "I'd love to hear more about {topic} from you.",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "You seem very knowledgeable about {topic}.",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "{topic} is something I've been wanting to explore.",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "I appreciate your enthusiasm for {topic}.",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "What got you started with {topic}?",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Your comment about {topic} really made me think.",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "I'm glad to see someone into {topic}.",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "That's an interesting take on {topic}.",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "I've been reading a lot about {topic} lately.",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Your perspective on {topic} is refreshing, {user}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "I think {topic} is underrated in our community.",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Can you recommend any resources about {topic}?",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "I never thought about {topic} that way before.",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Your involvement in {topic} seems really deep.",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "There's so much to learn about {topic}, right?",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "I appreciate how you connect {topic} to everyday life.",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "What aspect of {topic} fascinates you the most?",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "I've been following {topic} for a while now.",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Your deep dive into {topic} was really impressive.",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "I think {topic} has a lot of untapped potential.",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "How do you stay updated on developments in {topic}?",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Your approach to {topic} is very creative, {user}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "I'm curious about your journey with {topic}.",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "The way you describe {topic} makes it so interesting.",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "I've always wanted to discuss {topic} with someone.",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Your insights on {topic} are really valuable.",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "I'm amazed by your dedication to {topic}.",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "What's the biggest challenge in {topic} right now?",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "I find {topic} to be a great conversation starter.",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "Your passion for {topic} is contagious, {user}. I'd love to hear more about your experiences.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "I've been exploring {topic} as a hobby, and it's been rewarding.",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "The more I learn about {topic}, the more I realize how much I don't know.",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "It's great to find someone who shares my interest in {topic}. What's your favorite part?",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "I think {topic} is a field that will see a lot of growth in the coming years.",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "Your detailed explanation of {topic} helped me understand it better.",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "I've been considering a project related to {topic}, and your comment gave me ideas.",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "There's a whole community around {topic}, and it's wonderful to see you active in it.",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "I appreciate how you break down complex ideas about {topic} into simple concepts.",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "{user} has a keen interest in {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "I find it fascinating how {user} is so passionate about {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "It's really impressive that {user} dedicates so much time to learning about {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "{user} mentioned they enjoy {topic}—that's quite an interesting hobby.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "One thing I noticed is {user}'s deep curiosity about {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "It's clear that {user} has a strong inclination toward {topic} based on our conversation.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "{user} seems to really love discussing {topic} in great detail.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "From what {user} shared, their enthusiasm for {topic} is truly contagious.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "I admire how {user} has turned their interest in {topic} into a real skill.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "{user} told me they spend weekends exploring new aspects of {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "It's no surprise that {user} excels in {topic} given how much they care about it.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "The way {user} talks about {topic} shows they have a genuine passion for it.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "{user} brought up {topic} several times, which suggests it's a major interest.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "I learned that {user} is actively involved in communities related to {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "For {user}, {topic} isn't just a hobby—it's a big part of their life.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "{user}'s eyes light up whenever the conversation turns to {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "It seems {user} has been following {topic} for quite a long time.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "I was amazed by how much {user} knows about {topic}—they really do their research.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "{user} shared some fascinating insights about {topic} that I'd never considered.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "It's obvious that {user} finds {topic} both enjoyable and intellectually stimulating.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "When {user} started talking about {topic}, I could tell it was a favorite subject.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "{user} has a unique perspective on {topic} that makes our discussions very engaging.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "I appreciate that {user} is always eager to share new developments in {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "It's clear that {topic} is more than a passing interest for {user}—it's a passion.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "{user} often reads articles and books about {topic} in their free time.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "I can see why {user} is so drawn to {topic}—it suits their personality perfectly.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "{user} mentioned that {topic} has helped them grow as a person.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "The depth of {user}'s knowledge about {topic} is genuinely impressive.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "From our chat, it's evident that {user} has a natural talent for {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "{user} is the kind of person who can talk about {topic} for hours without getting bored.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Whenever {user} brings up {topic}, I know I'm in for an interesting conversation.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "I've noticed that {user} likes to incorporate {topic} into their daily routine.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "{user} has a very thoughtful approach to understanding {topic} deeply.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "It's wonderful to see how much joy {topic} brings to {user}'s life.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "{user} once explained to me the nuances of {topic} in a way that was truly enlightening.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "I think {user}'s interest in {topic} stems from their curiosity about the world.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "It's no wonder {user} is so knowledgeable about {topic}—they practice it regularly.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "{user} shared with me that {topic} is one of the things they're most passionate about.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "The way {user} describes their experiences with {topic} is both vivid and inspiring.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "I get the sense that {user} could teach a class on {topic} and do a fantastic job.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "For {user}, discussing {topic} always leads to a lively and insightful exchange.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "{user} mentioned that {topic} is a great way for them to unwind after work.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "I can always count on {user} to have an interesting fact about {topic} ready.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "{user} has a habit of connecting everyday things back to {topic}, which I find clever.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "It's obvious that {user} puts a lot of thought into exploring {topic} further.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "{user} and I had a great conversation about {topic} that lasted the whole afternoon.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "I've learned a lot from listening to {user} talk about {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "{user}'s dedication to {topic} is something I truly respect.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "If you want to know more about {topic}, {user} is definitely the person to ask.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "I think {user} finds {topic} to be a perfect outlet for their creativity.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "I find {topic} really fascinating, {user}.",
+    "placeholders": [
+      "topic",
+      "user"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "{user}, your interest in {topic} is genuinely intriguing.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "It's great that you're into {topic}, {user}. I like it too.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "I've always been curious about {topic} as well, {user}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Cool, {user}! {topic} is something I enjoy discussing.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "You know, {user}, {topic} is one of my favorite topics.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "I appreciate that you're passionate about {topic}, {user}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "That's awesome, {user}. I share your enthusiasm for {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "I see you like {topic}, {user}. Do you follow any specific {subtopic}?",
+    "placeholders": [
+      "user",
+      "topic",
+      "subtopic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Your comment about {topic} made me think, {user}. I have a question about {aspect}.",
+    "placeholders": [
+      "user",
+      "topic",
+      "aspect"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "I've been exploring {topic} lately too, {user}. What got you started?",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "You mentioned {topic}, {user}. That's a deep field. Have you read about {related}?",
+    "placeholders": [
+      "user",
+      "topic",
+      "related"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "I love that you're into {topic}, {user}. Have you tried {activity}?",
+    "placeholders": [
+      "user",
+      "topic",
+      "activity"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "It's rare to meet someone interested in {topic}, {user}. What's your favorite part?",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "I think {topic} is underrated, {user}. Glad you brought it up.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Wow, {user}, your knowledge about {topic} is impressive.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "I've been getting into {topic} recently too, {user}. Any tips?",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "That's a cool perspective on {topic}, {user}. I hadn't thought of that.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "{user}, your insights on {topic} are really valuable. Keep sharing!",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "I'm also a big fan of {topic}, {user}. We should chat more.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Interesting take, {user}. I wonder how {topic} connects to {other_topic}.",
+    "placeholders": [
+      "user",
+      "topic",
+      "other_topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "You have a unique approach to {topic}, {user}. Have you considered {alternative}?",
+    "placeholders": [
+      "user",
+      "topic",
+      "alternative"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "I've been following {topic} for years, {user}. It's great to see your interest.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Your enthusiasm for {topic} is contagious, {user}. I might explore it more.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "I love discussing {topic} with people like you, {user}. It's always enlightening.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "That's a deep dive into {topic}, {user}. I appreciate the detail you shared.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "I've always wanted to learn more about {topic}, {user}. Where should I start?",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "You make a great point about {topic}, {user}. It reminds me of {concept}.",
+    "placeholders": [
+      "user",
+      "topic",
+      "concept"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "I think we share a common interest in {topic}, {user}. Let's connect.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Your post about {topic} caught my eye, {user}. I'd love to hear more.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "I'm not an expert in {topic}, {user}, but I find it fascinating.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Thanks for sharing your thoughts on {topic}, {user}. It gave me a new perspective.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "I've been reading about {topic} lately, {user}. What resources do you recommend?",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Your comment on {topic} was very insightful, {user}. I learned something new.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "I'm glad you enjoy {topic}, {user}. It's a great way to spend time.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "I see we both like {topic}, {user}. Do you prefer {option1} or {option2}?",
+    "placeholders": [
+      "user",
+      "topic",
+      "option1",
+      "option2"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Your interest in {topic} is inspiring, {user}. Keep pursuing it.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "I never thought about {topic} that way, {user}. Thanks for the insight.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "I'm curious about your journey with {topic}, {user}. How did you get into it?",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "You mentioned {topic}, {user}. Have you ever visited {place} related to it?",
+    "placeholders": [
+      "user",
+      "topic",
+      "place"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "I think {topic} is fascinating because of {reason}, {user}.",
+    "placeholders": [
+      "user",
+      "topic",
+      "reason"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Your passion for {topic} shines through, {user}. It's wonderful.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "I've been experimenting with {topic} too, {user}. What's your favorite {item}?",
+    "placeholders": [
+      "user",
+      "topic",
+      "item"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "I appreciate how you explained {topic}, {user}. It made it easier to understand.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "That's a great example of {topic}, {user}. It shows your expertise.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "I'm always excited to meet someone interested in {topic}, {user}. Let's talk more.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Your take on {topic} is refreshing, {user}. It challenges the norm.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "I've been meaning to explore {topic}, {user}. Your comment motivates me.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "I think {topic} is a great conversation starter, {user}. Thanks for bringing it up.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Your dedication to {topic} is admirable, {user}. Keep up the good work.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "I love how {user} always talks about {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "It's so cool that {user} is into {topic} too!",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "{topic} is one of my favorite things to discuss with {user}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "I appreciate that {user} shares so much about {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Whenever {user} mentions {topic}, I get really excited.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Your passion for {topic} really shows, {user}!",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "I can talk about {topic} with {user} for hours.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Hearing {user} discuss {topic} makes my day better.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "It's interesting how {user} views {topic} differently.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "I agree with {user} that {topic} is fascinating.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Thanks for introducing me to {topic}, {user}!",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "{user} always has the best insights on {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "I'm curious what {user} thinks about {topic} next.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Your posts about {topic} are always so thoughtful, {user}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "I never get tired of {user}'s perspective on {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "{topic} is something {user} and I both enjoy a lot.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Learning about {topic} from {user} is a real treat.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "I find {user}'s interest in {topic} really inspiring.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Have you seen how deep {user} goes into {topic}? Amazing!",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "There's so much to say about {topic}, and {user} says it well.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "I always look forward to {user}'s updates on {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "It's rare to find someone like {user} who loves {topic} this much.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "The way {user} talks about {topic} makes me want to learn more.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "{user} really knows their stuff when it comes to {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "I admire how {user} approaches {topic} with such enthusiasm.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Every conversation with {user} about {topic} is a joy.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "I'm glad {user} shares their thoughts on {topic} openly.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "If you love {topic}, you should definitely follow {user}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "I could listen to {user} talk about {topic} all day.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "{topic} seems like a perfect fit for {user}'s interests.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "I appreciate how {user} dives deep into {topic} details.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Your enthusiasm for {topic} is contagious, {user}!",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "I love that {user} brings up {topic} in conversations.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "It's awesome that {user} is so passionate about {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "I've learned a lot about {topic} just from following {user}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "The connection {user} makes with {topic} is really special.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "I respect {user}'s dedication to exploring {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Whenever {topic} comes up, I think of {user} immediately.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "It's great to see {user} so engaged with {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "I really enjoy the way {user} breaks down {topic} concepts.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "Your stories about {topic} are always captivating, {user}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "I think {user} has a unique take on {topic} that I love.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "It's obvious how much {topic} means to {user}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "I'm always excited when {user} posts something about {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "I wish more people shared {user}'s perspective on {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "The discussions about {topic} with {user} are always meaningful.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "I'm grateful for {user}'s contributions to the {topic} community.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "You make {topic} so interesting, {user}!",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "I can tell {user} puts a lot of thought into {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "I always learn something new about {topic} from {user}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  }
+]

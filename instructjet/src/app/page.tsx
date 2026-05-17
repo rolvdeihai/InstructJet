@@ -112,6 +112,7 @@ export default function Home() {
                 <li className="flex items-center"><span className="text-green-500 mr-2">✓</span> 5,000 tokens/month</li>
                 <li className="flex items-center"><span className="text-green-500 mr-2">✓</span> 3 active guides</li>
                 <li className="flex items-center"><span className="text-green-500 mr-2">✓</span> Basic AI feedback</li>
+                <li className="flex items-center"><span className="text-green-500 mr-2">✓</span> Limited AI model</li>
                 <li className="flex items-center text-gray-400"><span className="text-gray-400 mr-2">✗</span> Priority support</li>
               </ul>
               <Link
@@ -132,6 +133,7 @@ export default function Home() {
                 <li className="flex items-center"><span className="text-green-500 mr-2">✓</span> 1,000,000 tokens/month</li>
                 <li className="flex items-center"><span className="text-green-500 mr-2">✓</span> Unlimited guides</li>
                 <li className="flex items-center"><span className="text-green-500 mr-2">✓</span> Priority AI feedback</li>
+                <li className="flex items-center"><span className="text-green-500 mr-2">✓</span> Smarter & faster AI model</li>
                 <li className="flex items-center"><span className="text-green-500 mr-2">✓</span> Priority support & onboarding</li>
               </ul>
               {loading ? (

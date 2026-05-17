@@ -64,7 +64,13 @@ export async function POST(request: Request) {
     try {
       await supabaseAdmin
         .from('token_balances')
-        .insert({ user_id: user.id, subscription_tokens: 0, package_tokens: 0 });
+        .insert({ 
+          user_id: user.id, 
+          subscription_tokens: 50000,  // 🔁 changed from 0
+          package_tokens: 0,
+          last_token_reset: new Date().toISOString(),
+          month_year: `${new Date().getFullYear()}-${String(new Date().getMonth() + 1).padStart(2, '0')}`
+        });
     } catch (tokenError) {
       console.error('Failed to create token balance:', tokenError);
     }

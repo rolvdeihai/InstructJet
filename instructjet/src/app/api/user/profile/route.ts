@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { supabaseAdmin } from '@/lib/supabase-admin';
 import { getCurrentUser } from '@/lib/session';
 import { comparePassword } from '@/lib/auth';
+import { getUserTokenBalance } from '@/lib/token-manager'; // 👈 new import
 
 export async function GET(request: NextRequest) {
   try {
@@ -21,24 +22,25 @@ export async function GET(request: NextRequest) {
       return NextResponse.json({ error: 'User not found' }, { status: 404 });
     }
 
-    // Fetch token balance
-    const { data: tokenBalance } = await supabaseAdmin
-      .from('token_balances')
-      .select('subscription_tokens, package_tokens, month_year')
-      .eq('user_id', user.id)
-      .single();
+    // 🔁 Use token-manager to get balance (automatically handles monthly reset)
+    const balance = await getUserTokenBalance(user.id);
+    const currentMonth = new Date().toISOString().slice(0, 7); // YYYY-MM
 
     // Fetch recent token transactions (last 10)
     const { data: recentTransactions } = await supabaseAdmin
       .from('token_transactions')
-      .select('id, amount, source, feature, metadata, created_at')
+      .select('id, amount, feature, metadata, created_at')
       .eq('user_id', user.id)
       .order('created_at', { ascending: false })
-      .limit(10);
+      .limit(50);
 
     return NextResponse.json({
       user: fullUser,
-      tokenBalance: tokenBalance || { subscription_tokens: 0, package_tokens: 0, month_year: null },
+      tokenBalance: {
+        subscription_tokens: balance.subscription_tokens,
+        package_tokens: balance.package_tokens,
+        month_year: currentMonth,
+      },
       recentTransactions: recentTransactions || [],
     });
   } catch (error) {

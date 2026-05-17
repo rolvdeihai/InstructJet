@@ -1,0 +1,37 @@
+name: Start AI Server
+
+on:
+  workflow_dispatch:          # manual trigger from GitHub UI
+  repository_dispatch:       # trigger via GitHub API
+    types: [start-server]
+
+jobs:
+  run-server:
+    runs-on: ubuntu-latest
+    timeout-minutes: 360      # 6 hours max (change as needed)
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install pyngrok uvicorn
+
+      - name: Download NLTK punkt (for LexRank)
+        run: |
+          python -c "import nltk; nltk.download('punkt')"
+
+      - name: Start server with ngrok
+        working-directory: ./jet-ai          # ⬅️ add this line
+        env:
+          NGROK_AUTH_TOKEN: ${{ secrets.NGROK_AUTH_TOKEN }}
+        run: |
+          python run_server.py

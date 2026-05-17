@@ -1,0 +1,1546 @@
+[
+  {
+    "text": "I'm sorry, {user}. I encountered an error while processing your request about {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "My apologies, {user}. Something went wrong.",
+    "placeholders": [
+      "user"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Apologies for the error, {user}. Please try again later.",
+    "placeholders": [
+      "user"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "I'm sorry, but I couldn't complete the task due to an unexpected error. Could you please rephrase your request, {user}?",
+    "placeholders": [
+      "user"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "An error occurred while processing {topic}. I apologize for the inconvenience, {user}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Sorry, {user}. I'm having trouble with {topic}. Please try again.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "I apologize, {user}. There was a technical glitch. Let me try again.",
+    "placeholders": [
+      "user"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "My sincerest apologies, {user}. I encountered an error while handling your request about {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Oops, something went wrong, {user}. I'm sorry.",
+    "placeholders": [
+      "user"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "I'm sorry, {user}. The system encountered an error. Please wait a moment and try again.",
+    "placeholders": [
+      "user"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Apologies, {user}. I failed to retrieve information about {topic} due to an error.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Sorry about that, {user}. An error prevented me from completing your request.",
+    "placeholders": [
+      "user"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "I apologize for the error, {user}. Could you please try your request again?",
+    "placeholders": [
+      "user"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "My apologies, {user}. There seems to be a problem with {topic}. Please bear with me.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "I'm sorry, but I encountered an error while searching for {topic}. Please try again later, {user}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Sorry, {user}. An unexpected error occurred. Let me know if you need help with something else.",
+    "placeholders": [
+      "user"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "I apologize, {user}. I'm unable to process {topic} right now due to an error.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Oops! Something went wrong, {user}. Please try your request again.",
+    "placeholders": [
+      "user"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "My apologies, {user}. The system encountered an error while handling your request.",
+    "placeholders": [
+      "user"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "I'm sorry, {user}. There was an error with {topic}. I'll try to fix it.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Apologies for the inconvenience, {user}. An error occurred while processing your request about {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Sorry, {user}. I encountered an error. Please try again in a few moments.",
+    "placeholders": [
+      "user"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "I apologize, {user}. Something went wrong with {topic}. Could you please rephrase?",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "My apologies, {user}. I couldn't complete the action due to an error. Please try again.",
+    "placeholders": [
+      "user"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "I'm sorry, {user}. An error prevented me from accessing information about {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Oops, an error occurred! Sorry, {user}.",
+    "placeholders": [
+      "user"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Apologies, {user}. I encountered a problem while working on {topic}. Please try again.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Sorry, {user}. There was a system error. Let me know if you need assistance with something else.",
+    "placeholders": [
+      "user"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "I apologize for the error, {user}. It seems I'm having trouble with {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "My apologies, {user}. An error occurred while I was processing your request.",
+    "placeholders": [
+      "user"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "I'm sorry, {user}. I encountered an error with {topic}. Please try again later.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Oops, sorry {user}! Something went wrong. Please try again.",
+    "placeholders": [
+      "user"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Apologies, {user}. I couldn't find information about {topic} due to an error.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "I'm sorry, {user}. An unexpected error occurred while processing your request. Please try again.",
+    "placeholders": [
+      "user"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Sorry, {user}. There was an error with the system. Please wait a moment.",
+    "placeholders": [
+      "user"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "I apologize, {user}. I encountered an error while trying to help with {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "My apologies, {user}. Something went wrong. Could you please try your request again?",
+    "placeholders": [
+      "user"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Oops, an error happened, {user}. Sorry for the trouble.",
+    "placeholders": [
+      "user"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "I'm sorry, {user}. I failed to process {topic} due to an error. Please try again.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Apologies, {user}. The system encountered an error while handling {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Sorry, {user}. There was an error. Let me know if you need further help.",
+    "placeholders": [
+      "user"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "I apologize, {user}. I'm experiencing an error with {topic}. Please try again later.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "My apologies, {user}. An error occurred. I'm working to fix it.",
+    "placeholders": [
+      "user"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "I'm sorry, {user}. Something went wrong while processing your request about {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Oops, sorry {user}! An error prevented me from completing the task.",
+    "placeholders": [
+      "user"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Apologies, {user}. I encountered an error while searching for {topic}. Please try again.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "I'm sorry, {user}. There was a technical error. Please try your request again.",
+    "placeholders": [
+      "user"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Sorry, {user}. I couldn't help with {topic} due to an error. My apologies.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "I apologize, {user}. An error occurred. Please bear with me.",
+    "placeholders": [
+      "user"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "My apologies, {user}. I encountered an error while processing {topic}. Please try again.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Sorry {user}, I encountered an error while processing your request about {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "My apologies {user}, something went wrong.",
+    "placeholders": [
+      "user"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "I apologize for the error, {user}. Please try again later.",
+    "placeholders": [
+      "user"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Oops! An error occurred while handling your {topic} request. Sorry {user}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "We're sorry {user}, but we encountered a technical glitch with {action}.",
+    "placeholders": [
+      "user",
+      "action"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "I apologize for the inconvenience, {user}. The {system} is currently unavailable.",
+    "placeholders": [
+      "user",
+      "system"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Sorry for the trouble {user}, an unexpected error occurred in {module}.",
+    "placeholders": [
+      "user",
+      "module"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "My deepest apologies {user}, I failed to complete {task} due to an error.",
+    "placeholders": [
+      "user",
+      "task"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Error detected! Sorry {user}, please check your {input} and retry.",
+    "placeholders": [
+      "user",
+      "input"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Apologies {user}, the {service} is down for maintenance.",
+    "placeholders": [
+      "user",
+      "service"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "I'm sorry {user}, but I couldn't process your {request} due to a system error.",
+    "placeholders": [
+      "user",
+      "request"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Sorry {user}, an error occurred while fetching {data}. Please try again.",
+    "placeholders": [
+      "user",
+      "data"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "My apologies, {user}. The {operation} failed due to an internal error.",
+    "placeholders": [
+      "user",
+      "operation"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Oops! Something went wrong. Sorry {user}, we'll fix {issue} soon.",
+    "placeholders": [
+      "user",
+      "issue"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "I apologize {user}, but {feature} is currently experiencing issues.",
+    "placeholders": [
+      "user",
+      "feature"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Sorry {user}, an error occurred with your {account}. Please contact support.",
+    "placeholders": [
+      "user",
+      "account"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "We regret the error {user}. Our team is looking into {problem}.",
+    "placeholders": [
+      "user",
+      "problem"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Apologies {user}, the {database} connection failed.",
+    "placeholders": [
+      "user",
+      "database"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "I'm sorry {user}, but {action} cannot be completed right now due to an error.",
+    "placeholders": [
+      "user",
+      "action"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Sorry for the error {user}, please refresh and try {task} again.",
+    "placeholders": [
+      "user",
+      "task"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "My apologies {user}, the {system} encountered a critical error.",
+    "placeholders": [
+      "user",
+      "system"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Oops! Sorry {user}, an error occurred while saving {document}.",
+    "placeholders": [
+      "user",
+      "document"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "I apologize for the error {user}, your {settings} could not be updated.",
+    "placeholders": [
+      "user",
+      "settings"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Sorry {user}, we encountered a problem with {network}. Please try later.",
+    "placeholders": [
+      "user",
+      "network"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "We apologize {user}, an error prevented {process} from completing.",
+    "placeholders": [
+      "user",
+      "process"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Error: {user}, your {session} has expired. Please log in again.",
+    "placeholders": [
+      "user",
+      "session"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Sorry {user}, an error occurred in {workflow}. We are working on it.",
+    "placeholders": [
+      "user",
+      "workflow"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "My apologies {user}, the {server} is not responding.",
+    "placeholders": [
+      "user",
+      "server"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "I'm sorry {user}, but {payment} failed due to a system error.",
+    "placeholders": [
+      "user",
+      "payment"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Apologies {user}, an error occurred while loading {page}.",
+    "placeholders": [
+      "user",
+      "page"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Sorry {user}, we couldn't validate your {credentials}. Error occurred.",
+    "placeholders": [
+      "user",
+      "credentials"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Oops! Sorry {user}, an error in {algorithm} caused this issue.",
+    "placeholders": [
+      "user",
+      "algorithm"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "I apologize {user}, the {report} generation failed due to an error.",
+    "placeholders": [
+      "user",
+      "report"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "We're sorry {user}, an error occurred with your {subscription}.",
+    "placeholders": [
+      "user",
+      "subscription"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Sorry for the error {user}, please verify your {details} and try again.",
+    "placeholders": [
+      "user",
+      "details"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "My apologies {user}, the {upload} failed due to a server error.",
+    "placeholders": [
+      "user",
+      "upload"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Error: {user}, unable to process {request} at this time. Sorry.",
+    "placeholders": [
+      "user",
+      "request"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "I'm sorry {user}, but {authentication} failed due to an error.",
+    "placeholders": [
+      "user",
+      "authentication"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Apologies {user}, the {notification} system encountered an error.",
+    "placeholders": [
+      "user",
+      "notification"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Sorry {user}, an error occurred while syncing {data}. Please retry.",
+    "placeholders": [
+      "user",
+      "data"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Oops! Sorry {user}, the {backup} process failed due to an error.",
+    "placeholders": [
+      "user",
+      "backup"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "We apologize {user}, an error occurred in {pipeline}.",
+    "placeholders": [
+      "user",
+      "pipeline"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "My apologies {user}, the {integration} with {service} failed.",
+    "placeholders": [
+      "user",
+      "integration",
+      "service"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Sorry {user}, an error occurred while generating {content}.",
+    "placeholders": [
+      "user",
+      "content"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "I'm sorry {user}, but {update} could not be applied due to an error.",
+    "placeholders": [
+      "user",
+      "update"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Error: {user}, the {query} failed. Please modify and try again.",
+    "placeholders": [
+      "user",
+      "query"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Apologies {user}, the {dashboard} is temporarily unavailable due to an error.",
+    "placeholders": [
+      "user",
+      "dashboard"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Sorry {user}, an error occurred with {permissions}. Contact admin.",
+    "placeholders": [
+      "user",
+      "permissions"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "We're sorry {user}, the {conversion} failed due to an internal error.",
+    "placeholders": [
+      "user",
+      "conversion"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Oops! Sorry {user}, an error occurred while processing {file}.",
+    "placeholders": [
+      "user",
+      "file"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Sorry, {user}, I couldn't find any information on {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Apologies, {user}, but I'm unable to process your request about {topic} right now.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "My apologies, {user}. An error occurred while fetching data for {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Sorry about that, {user}. I ran into an issue with {action}.",
+    "placeholders": [
+      "user",
+      "action"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Oops! Something went wrong while processing your {request_type}.",
+    "placeholders": [
+      "request_type"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "I'm sorry, {user}, but I don't have enough information about {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Apologies for the inconvenience, {user}. There was a system error.",
+    "placeholders": [
+      "user"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Sorry, I couldn't complete the {task} due to an unexpected error.",
+    "placeholders": [
+      "task"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "My mistake, {user}. Let me try again with {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "I apologize, {user}, but that {item} is not available right now.",
+    "placeholders": [
+      "user",
+      "item"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Sorry, {user}, I encountered an error while searching for {query}.",
+    "placeholders": [
+      "user",
+      "query"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Apologies, {user}. It seems I can't access {source} at the moment. Please try again later.",
+    "placeholders": [
+      "user",
+      "source"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "I'm sorry, {user}, but something went wrong when I tried to {action}. Let me check.",
+    "placeholders": [
+      "user",
+      "action"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Oops! I apologize, {user}. There was a glitch while processing your {request_type} request.",
+    "placeholders": [
+      "user",
+      "request_type"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "My apologies, {user}. I couldn't retrieve the {resource} due to a temporary issue.",
+    "placeholders": [
+      "user",
+      "resource"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Sorry for the trouble, {user}. An error occurred with the {system} service.",
+    "placeholders": [
+      "user",
+      "system"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "I'm afraid I can't {action} right now, {user}. Please try again shortly.",
+    "placeholders": [
+      "user",
+      "action"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Apologies, {user}, but your {item} request failed due to a network error.",
+    "placeholders": [
+      "user",
+      "item"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Sorry, {user}. I found an error in the data for {topic}. Let me correct it.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "My apologies for the inconvenience, {user}. The {feature} is currently unavailable.",
+    "placeholders": [
+      "user",
+      "feature"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "I apologize, {user}, but I'm unable to understand your request about {topic}. Could you rephrase?",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Sorry, {user}. An error prevented me from saving your {document}.",
+    "placeholders": [
+      "user",
+      "document"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Oops! Something went wrong with {process}. I'm sorry, {user}.",
+    "placeholders": [
+      "process",
+      "user"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "I'm sorry, {user}, but I can't process {data} at this time. Please check back later.",
+    "placeholders": [
+      "user",
+      "data"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Apologies, {user}. There was a problem with the {connection}. Let me try again.",
+    "placeholders": [
+      "user",
+      "connection"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "My apologies, {user}. I couldn't find any results for {query} due to an error.",
+    "placeholders": [
+      "user",
+      "query"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Sorry, {user}, but the {service} is down. I'll notify you when it's back up.",
+    "placeholders": [
+      "user",
+      "service"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "I apologize for the error, {user}. Your {task} could not be completed as expected.",
+    "placeholders": [
+      "user",
+      "task"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Oops! I'm sorry, {user}. There was an issue with the {database}.",
+    "placeholders": [
+      "user",
+      "database"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "My apologies, {user}. I encountered a problem while generating {content}.",
+    "placeholders": [
+      "user",
+      "content"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "I apologize, {user}, but I'm having trouble with {topic}. Let me investigate.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Sorry, {user}. An unexpected error occurred during {operation}. Please try again.",
+    "placeholders": [
+      "user",
+      "operation"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "My apologies for the inconvenience, {user}. I couldn't access {file}.",
+    "placeholders": [
+      "user",
+      "file"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "I'm sorry, {user}, but there was a technical glitch with {component}. Rest assured, it's being fixed.",
+    "placeholders": [
+      "user",
+      "component"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "Apologies, {user}. I encountered an error while trying to {action} for {topic}. Please try again later or contact support.",
+    "placeholders": [
+      "user",
+      "action",
+      "topic"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "Oops! Something went wrong with your {request_type} request, {user}. I'm looking into it and will update you soon.",
+    "placeholders": [
+      "user",
+      "request_type"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "I apologize for the error, {user}. The {system} encountered a problem while processing {data}. I suggest trying again in a few minutes.",
+    "placeholders": [
+      "user",
+      "system",
+      "data"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "Sorry, {user}, but I couldn't complete the {task} due to a server error. I've reported the issue to the team.",
+    "placeholders": [
+      "user",
+      "task"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "My apologies, {user}. There was an issue with {feature} that prevented me from providing information on {topic}. I'll work on fixing it.",
+    "placeholders": [
+      "user",
+      "feature",
+      "topic"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "I'm sorry, {user}, but an error occurred while fetching data from {source}. Please verify your {parameter} and try again.",
+    "placeholders": [
+      "user",
+      "source",
+      "parameter"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "Apologies for the inconvenience, {user}. I was unable to {action} because the {resource} is temporarily unavailable. I'll notify you when it's resolved.",
+    "placeholders": [
+      "user",
+      "action",
+      "resource"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "Oops! I apologize, {user}. A bug in the {application} caused an error while processing your {item}. The development team has been alerted.",
+    "placeholders": [
+      "user",
+      "application",
+      "item"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "I'm sorry, {user}, but I can't process your request for {topic} right now due to a network issue. Please try again later or check your connection.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "My apologies, {user}. There was an error in the {module} that affected your {task}. I'll ensure it's corrected as soon as possible.",
+    "placeholders": [
+      "user",
+      "module",
+      "task"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "Sorry, {user}, but I encountered a problem with {process}. This may be due to a temporary outage. I'll keep you posted.",
+    "placeholders": [
+      "user",
+      "process"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "I apologize for the trouble, {user}. An error occurred while generating {content} for {topic}. Please refresh and try again.",
+    "placeholders": [
+      "user",
+      "content",
+      "topic"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "Oops! I'm sorry, {user}. There was a glitch in the {system} that prevented me from completing {action}. I'm working on a fix.",
+    "placeholders": [
+      "user",
+      "system",
+      "action"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "My apologies, {user}. I couldn't access {database} to retrieve information about {topic}. This is likely a temporary issue.",
+    "placeholders": [
+      "user",
+      "database",
+      "topic"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "I'm sorry, {user}, but an unexpected error occurred while processing your {request_type}. I've logged the issue and will get back to you.",
+    "placeholders": [
+      "user",
+      "request_type"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "Apologies, {user}. I was unable to {action} due to a problem with {service}. Please try again later or contact support if the issue persists.",
+    "placeholders": [
+      "user",
+      "action",
+      "service"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "Sorry {user}, it looks like something went wrong with your {topic} request.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Oops! We encountered an error processing your {action}.",
+    "placeholders": [
+      "action"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "We apologize {user}, but the {system} is currently unavailable due to an unexpected error.",
+    "placeholders": [
+      "user",
+      "system"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Our apologies, the {feature} feature is experiencing issues right now.",
+    "placeholders": [
+      "feature"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Sorry, an error occurred while saving your {data_type}. Please try again.",
+    "placeholders": [
+      "data_type"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "We're sorry {user}, but your {task} could not be completed due to a server error.",
+    "placeholders": [
+      "user",
+      "task"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Error: {error_code}. We apologize for the inconvenience.",
+    "placeholders": [
+      "error_code"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Apologies {user}, we encountered a problem with the {module}. Please refresh.",
+    "placeholders": [
+      "user",
+      "module"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Something went wrong while loading your {page}. We're sorry.",
+    "placeholders": [
+      "page"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "We apologize for the error that occurred during {process}. Our team has been notified.",
+    "placeholders": [
+      "process"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Sorry {user}, the {service} service is temporarily down due to a technical issue.",
+    "placeholders": [
+      "user",
+      "service"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Oops! An error prevented us from updating your {item}.",
+    "placeholders": [
+      "item"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "We're sorry, but your {request_type} request failed due to an internal error.",
+    "placeholders": [
+      "request_type"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Error: Unable to process your {command}. Please try again later.",
+    "placeholders": [
+      "command"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Apologies {user}, the {resource} you requested is currently unavailable due to an error.",
+    "placeholders": [
+      "user",
+      "resource"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "We encountered an error while syncing your {data}. Please check your connection.",
+    "placeholders": [
+      "data"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Sorry, something went wrong with the {payment} process. Please contact support.",
+    "placeholders": [
+      "payment"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Our apologies, but the {upload} failed due to an unexpected error.",
+    "placeholders": [
+      "upload"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Error: {error_message}. We are working to fix this issue.",
+    "placeholders": [
+      "error_message"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "We're sorry {user}, your {session} has expired due to a system error.",
+    "placeholders": [
+      "user",
+      "session"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Apologies for the error in processing your {order}. Our team is investigating.",
+    "placeholders": [
+      "order"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Oops! An error occurred while authenticating your {account}.",
+    "placeholders": [
+      "account"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Sorry {user}, the {database} is currently experiencing issues. Please try later.",
+    "placeholders": [
+      "user",
+      "database"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "We apologize, but your {report} could not be generated due to an error.",
+    "placeholders": [
+      "report"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Error: {error_type}. We apologize for any inconvenience caused.",
+    "placeholders": [
+      "error_type"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "We're sorry {user}, we encountered a problem with {feature}. Please try again.",
+    "placeholders": [
+      "user",
+      "feature"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Apologies, the {notification} system is currently down due to an error.",
+    "placeholders": [
+      "notification"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Sorry, an error occurred while loading your {content}. Please refresh the page.",
+    "placeholders": [
+      "content"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "We apologize for the error that occurred during {operation}. Please try again later.",
+    "placeholders": [
+      "operation"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Oops! Something went wrong with your {subscription} renewal.",
+    "placeholders": [
+      "subscription"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Error: Unable to connect to {server}. We apologize for the inconvenience.",
+    "placeholders": [
+      "server"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "We're sorry {user}, the {file} you requested could not be found due to an error.",
+    "placeholders": [
+      "user",
+      "file"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Apologies, but the {integration} is currently unavailable due to a technical error.",
+    "placeholders": [
+      "integration"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Sorry, an error occurred while processing your {feedback}. Please try again.",
+    "placeholders": [
+      "feedback"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "We apologize for the error in your {dashboard}. Our team is working on it.",
+    "placeholders": [
+      "dashboard"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Oops! The {search} query failed due to an internal error.",
+    "placeholders": [
+      "search"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Error: {error_detail}. We apologize for any trouble this may cause.",
+    "placeholders": [
+      "error_detail"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "We're sorry {user}, but the {plugin} encountered an error. Please disable it.",
+    "placeholders": [
+      "user",
+      "plugin"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Apologies, your {settings} could not be saved due to an error.",
+    "placeholders": [
+      "settings"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Sorry, an error occurred while sending your {message}. Please try again.",
+    "placeholders": [
+      "message"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "We apologize for the error that prevented {action}. Please contact support.",
+    "placeholders": [
+      "action"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Oops! Something went wrong with the {export} process.",
+    "placeholders": [
+      "export"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Error: {error_code}. We are sorry for the inconvenience. Please try again.",
+    "placeholders": [
+      "error_code"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "We're sorry {user}, the {template} you selected is not available due to an error.",
+    "placeholders": [
+      "user",
+      "template"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Apologies, but the {calendar} sync failed due to an unexpected error.",
+    "placeholders": [
+      "calendar"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Sorry, an error occurred while updating your {profile}. Please try later.",
+    "placeholders": [
+      "profile"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "We apologize for the error in processing your {payment}. Our team is investigating.",
+    "placeholders": [
+      "payment"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "Oops! The {document} could not be opened due to an error. We're sorry.",
+    "placeholders": [
+      "document"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Error: {error_message}. Please try again in a few minutes. We apologize.",
+    "placeholders": [
+      "error_message"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "We're sorry {user}, your {workflow} has been interrupted due to a system error. Please restart.",
+    "placeholders": [
+      "user",
+      "workflow"
+    ],
+    "length": "long"
+  }
+]

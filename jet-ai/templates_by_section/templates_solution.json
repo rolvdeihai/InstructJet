@@ -1,0 +1,1845 @@
+[
+  {
+    "text": "Here is a solution for {user} regarding {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "A possible approach to {topic} is {solution}.",
+    "placeholders": [
+      "topic",
+      "solution"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "To solve {problem}, {user} can try {solution}.",
+    "placeholders": [
+      "problem",
+      "user",
+      "solution"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "The solution for {topic} involves {steps}.",
+    "placeholders": [
+      "topic",
+      "steps"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "One effective solution is {solution}.",
+    "placeholders": [
+      "solution"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "For {user}, the recommended solution is {solution}.",
+    "placeholders": [
+      "user",
+      "solution"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "A quick fix for {issue} is {solution}.",
+    "placeholders": [
+      "issue",
+      "solution"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "{solution} can help with {topic}.",
+    "placeholders": [
+      "solution",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Consider using {solution} for {problem}.",
+    "placeholders": [
+      "solution",
+      "problem"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "The best solution is {solution}.",
+    "placeholders": [
+      "solution"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "To address {topic}, {user} should implement {solution}.",
+    "placeholders": [
+      "topic",
+      "user",
+      "solution"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "A comprehensive solution for {problem} includes {steps} and {tools}.",
+    "placeholders": [
+      "problem",
+      "steps",
+      "tools"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "By using {solution}, {user} can overcome {challenge}.",
+    "placeholders": [
+      "solution",
+      "user",
+      "challenge"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "The key to solving {topic} is {solution} combined with {approach}.",
+    "placeholders": [
+      "topic",
+      "solution",
+      "approach"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "One way to resolve {issue} is to {action} and then {action2}.",
+    "placeholders": [
+      "issue",
+      "action",
+      "action2"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "For {user}, a practical solution is {solution} which addresses {aspect}.",
+    "placeholders": [
+      "user",
+      "solution",
+      "aspect"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Implementing {solution} can significantly improve {topic}.",
+    "placeholders": [
+      "solution",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "The proposed solution for {problem} involves {steps} and requires {resources}.",
+    "placeholders": [
+      "problem",
+      "steps",
+      "resources"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "To fix {topic}, {user} can adopt {solution} which offers {benefit}.",
+    "placeholders": [
+      "topic",
+      "user",
+      "solution",
+      "benefit"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "A successful solution for {challenge} is {solution} with {strategy}.",
+    "placeholders": [
+      "challenge",
+      "solution",
+      "strategy"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "The solution to {topic} is straightforward: {solution}.",
+    "placeholders": [
+      "topic",
+      "solution"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Here's how {user} can solve {problem}: {solution}.",
+    "placeholders": [
+      "user",
+      "problem",
+      "solution"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "For {topic}, the answer is {solution}.",
+    "placeholders": [
+      "topic",
+      "solution"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Try {solution} to address {issue}.",
+    "placeholders": [
+      "solution",
+      "issue"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "The solution requires {steps}.",
+    "placeholders": [
+      "steps"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "A detailed solution for {topic} includes {component1}, {component2}, and {component3}.",
+    "placeholders": [
+      "topic",
+      "component1",
+      "component2",
+      "component3"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "To effectively solve {problem}, {user} must first {step1}, then {step2}, and finally {step3}.",
+    "placeholders": [
+      "problem",
+      "user",
+      "step1",
+      "step2",
+      "step3"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "The recommended solution for {issue} involves implementing {solution}, which includes {detail1} and {detail2}.",
+    "placeholders": [
+      "issue",
+      "solution",
+      "detail1",
+      "detail2"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "By following these steps: {step1}, {step2}, and {step3}, {user} can resolve {topic}.",
+    "placeholders": [
+      "step1",
+      "step2",
+      "step3",
+      "user",
+      "topic"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "A proven solution for {challenge} is to use {tool} with {method}, which provides {benefit}.",
+    "placeholders": [
+      "challenge",
+      "tool",
+      "method",
+      "benefit"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "For {user}, the optimal solution is {solution}, which requires {resource1}, {resource2}, and {resource3}.",
+    "placeholders": [
+      "user",
+      "solution",
+      "resource1",
+      "resource2",
+      "resource3"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "To overcome {obstacle}, consider {solution} that leverages {strategy} and {technique}.",
+    "placeholders": [
+      "obstacle",
+      "solution",
+      "strategy",
+      "technique"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "The solution for {topic} can be broken down into {phase1}, {phase2}, and {phase3}.",
+    "placeholders": [
+      "topic",
+      "phase1",
+      "phase2",
+      "phase3"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "One approach to {problem} is {solution}, which emphasizes {aspect}.",
+    "placeholders": [
+      "problem",
+      "solution",
+      "aspect"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "A viable solution is to {action} while considering {factor}.",
+    "placeholders": [
+      "action",
+      "factor"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "To achieve {goal}, {user} should implement {solution} with {feature}.",
+    "placeholders": [
+      "goal",
+      "user",
+      "solution",
+      "feature"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "The solution involves {action} and {action2} to address {issue}.",
+    "placeholders": [
+      "action",
+      "action2",
+      "issue"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "For {topic}, the solution is to {action} using {tool}.",
+    "placeholders": [
+      "topic",
+      "action",
+      "tool"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "An innovative solution for {problem} is {solution}.",
+    "placeholders": [
+      "problem",
+      "solution"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "The simplest solution is {solution}.",
+    "placeholders": [
+      "solution"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "To solve {topic}, {user} needs {solution}.",
+    "placeholders": [
+      "topic",
+      "user",
+      "solution"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "A step-by-step solution for {problem}: first {step1}, then {step2}, and finally {step3}.",
+    "placeholders": [
+      "problem",
+      "step1",
+      "step2",
+      "step3"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "The ultimate solution for {challenge} combines {element1} and {element2} to achieve {result}.",
+    "placeholders": [
+      "challenge",
+      "element1",
+      "element2",
+      "result"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "For {user}, the solution is to adopt {strategy} which includes {tactic1} and {tactic2}.",
+    "placeholders": [
+      "user",
+      "strategy",
+      "tactic1",
+      "tactic2"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "To resolve {issue}, {user} can follow this plan: {plan}.",
+    "placeholders": [
+      "issue",
+      "user",
+      "plan"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "The solution for {topic} is based on {principle} and requires {action}.",
+    "placeholders": [
+      "topic",
+      "principle",
+      "action"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "A custom solution for {user} involves {solution} tailored to {need}.",
+    "placeholders": [
+      "user",
+      "solution",
+      "need"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Here is the solution: {solution}.",
+    "placeholders": [
+      "solution"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "The answer to {problem} is {solution}.",
+    "placeholders": [
+      "problem",
+      "solution"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "To tackle {topic}, use {solution}.",
+    "placeholders": [
+      "topic",
+      "solution"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "A key solution to {problem} is {approach}.",
+    "placeholders": [
+      "problem",
+      "approach"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "For {user}, the recommended solution is {strategy}.",
+    "placeholders": [
+      "user",
+      "strategy"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Implementing {tool} can solve {issue} effectively.",
+    "placeholders": [
+      "tool",
+      "issue"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "The best way to address {topic} is through {method}.",
+    "placeholders": [
+      "topic",
+      "method"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Our solution for {challenge} involves {action}.",
+    "placeholders": [
+      "challenge",
+      "action"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "By using {technology}, we overcome {obstacle}.",
+    "placeholders": [
+      "technology",
+      "obstacle"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "{Approach} is the most efficient solution for {problem}.",
+    "placeholders": [
+      "Approach",
+      "problem"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "A practical solution is to {verb} {object}.",
+    "placeholders": [
+      "verb",
+      "object"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "We solve {issue} by applying {principle}.",
+    "placeholders": [
+      "issue",
+      "principle"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "The solution to {user}'s problem is {answer}.",
+    "placeholders": [
+      "user",
+      "answer"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "To tackle {topic}, consider {option} as a solution.",
+    "placeholders": [
+      "topic",
+      "option"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "One effective solution for {challenge} is to implement {strategy} and {tool}.",
+    "placeholders": [
+      "challenge",
+      "strategy",
+      "tool"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "A comprehensive solution involves {step1}, followed by {step2}.",
+    "placeholders": [
+      "step1",
+      "step2"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "By combining {approach} with {technology}, we can solve {problem}.",
+    "placeholders": [
+      "approach",
+      "technology",
+      "problem"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "The recommended solution for {user} is to use {method} and {resource}.",
+    "placeholders": [
+      "user",
+      "method",
+      "resource"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "To resolve {issue}, start with {step} and then apply {technique}.",
+    "placeholders": [
+      "issue",
+      "step",
+      "technique"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Our solution to {topic} includes {component1} and {component2}.",
+    "placeholders": [
+      "topic",
+      "component1",
+      "component2"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "A proven solution is to adopt {practice} and monitor {metric}.",
+    "placeholders": [
+      "practice",
+      "metric"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "The solution for {challenge} requires {action} and {tool}.",
+    "placeholders": [
+      "challenge",
+      "action",
+      "tool"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Effective solution: use {approach} to address {problem}.",
+    "placeholders": [
+      "approach",
+      "problem"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "For {topic}, the solution lies in {method} and {strategy}.",
+    "placeholders": [
+      "topic",
+      "method",
+      "strategy"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "We propose a solution that integrates {element1} and {element2}.",
+    "placeholders": [
+      "element1",
+      "element2"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "To solve {issue}, implement {plan} and use {resource}.",
+    "placeholders": [
+      "issue",
+      "plan",
+      "resource"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "A step-by-step solution: first {step}, then {nextStep}.",
+    "placeholders": [
+      "step",
+      "nextStep"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "The solution to {user}'s challenge is {strategy} with {tool}.",
+    "placeholders": [
+      "user",
+      "strategy",
+      "tool"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "By focusing on {area}, we can find a solution to {problem}.",
+    "placeholders": [
+      "area",
+      "problem"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "One solution is to {verb} {object} and {verb2} {object2}.",
+    "placeholders": [
+      "verb",
+      "object",
+      "verb2",
+      "object2"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Address {topic} by applying {principle} and {technique}.",
+    "placeholders": [
+      "topic",
+      "principle",
+      "technique"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Our proposed solution for {challenge} involves {step1}, {step2}, and {step3}.",
+    "placeholders": [
+      "challenge",
+      "step1",
+      "step2",
+      "step3"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "A holistic solution to {problem} requires {approach}, {tool}, and {method}.",
+    "placeholders": [
+      "problem",
+      "approach",
+      "tool",
+      "method"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "The solution for {user} is to first {action}, then {action2}, and finally {action3}.",
+    "placeholders": [
+      "user",
+      "action",
+      "action2",
+      "action3"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "To overcome {obstacle}, implement {strategy} using {technology} and {resource}.",
+    "placeholders": [
+      "obstacle",
+      "strategy",
+      "technology",
+      "resource"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "An effective solution for {topic} combines {element1}, {element2}, and {element3}.",
+    "placeholders": [
+      "topic",
+      "element1",
+      "element2",
+      "element3"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "Our solution involves analyzing {data}, applying {model}, and testing {hypothesis}.",
+    "placeholders": [
+      "data",
+      "model",
+      "hypothesis"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "For {issue}, the best solution is to adopt {practice}, use {tool}, and monitor {metric}.",
+    "placeholders": [
+      "issue",
+      "practice",
+      "tool",
+      "metric"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "A complete solution includes {step1}, {step2}, {step3}, and {step4}.",
+    "placeholders": [
+      "step1",
+      "step2",
+      "step3",
+      "step4"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "To resolve {challenge}, we recommend {approach}, followed by {technique} and {evaluation}.",
+    "placeholders": [
+      "challenge",
+      "approach",
+      "technique",
+      "evaluation"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "The solution to {problem} is to {verb} {object} while using {tool} and {method}.",
+    "placeholders": [
+      "problem",
+      "verb",
+      "object",
+      "tool",
+      "method"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "By combining {strategy} with {technology}, we can solve {issue} and improve {metric}.",
+    "placeholders": [
+      "strategy",
+      "technology",
+      "issue",
+      "metric"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "A robust solution for {user} involves {component1}, {component2}, and {component3}.",
+    "placeholders": [
+      "user",
+      "component1",
+      "component2",
+      "component3"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "To address {topic}, implement {plan} with {resource} and {tool} for {goal}.",
+    "placeholders": [
+      "topic",
+      "plan",
+      "resource",
+      "tool",
+      "goal"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "The solution requires {action}, {action2}, and continuous {effort}.",
+    "placeholders": [
+      "action",
+      "action2",
+      "effort"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Our solution for {challenge} is based on {principle} and {practice}.",
+    "placeholders": [
+      "challenge",
+      "principle",
+      "practice"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "A solution that works: {approach} for {problem}.",
+    "placeholders": [
+      "approach",
+      "problem"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "For {topic}, the solution is straightforward: {method}.",
+    "placeholders": [
+      "topic",
+      "method"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "The solution to {issue} is {answer}.",
+    "placeholders": [
+      "issue",
+      "answer"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "We solve {problem} by {verb} {object}.",
+    "placeholders": [
+      "problem",
+      "verb",
+      "object"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Implement {solution} for {user} to address {challenge}.",
+    "placeholders": [
+      "solution",
+      "user",
+      "challenge"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "A solution: {action} with {tool}.",
+    "placeholders": [
+      "action",
+      "tool"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Key solution: use {technology} to solve {problem}.",
+    "placeholders": [
+      "technology",
+      "problem"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Here's a solution for {user} on {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "To address {issue}, {user} should consider {action}.",
+    "placeholders": [
+      "issue",
+      "user",
+      "action"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "A practical solution is {solution}.",
+    "placeholders": [
+      "solution"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Try {approach} to solve {problem}.",
+    "placeholders": [
+      "approach",
+      "problem"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "The best fix for {issue} involves {step}.",
+    "placeholders": [
+      "issue",
+      "step"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Consider {alternative} as a solution for {user}.",
+    "placeholders": [
+      "alternative",
+      "user"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "I recommend {method} for {topic}.",
+    "placeholders": [
+      "method",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "One possible solution is {option}.",
+    "placeholders": [
+      "option"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "To fix {error}, {user} can {action}.",
+    "placeholders": [
+      "error",
+      "user",
+      "action"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Use {tool} to resolve {challenge}.",
+    "placeholders": [
+      "tool",
+      "challenge"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "A key solution for {user} regarding {topic} is {strategy}.",
+    "placeholders": [
+      "user",
+      "topic",
+      "strategy"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "To overcome {obstacle}, try implementing {technique} and {tool}.",
+    "placeholders": [
+      "obstacle",
+      "technique",
+      "tool"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "{user} can solve {problem} by following {steps} and using {resource}.",
+    "placeholders": [
+      "user",
+      "problem",
+      "steps",
+      "resource"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "A comprehensive solution involves {action1}, {action2}, and {action3}.",
+    "placeholders": [
+      "action1",
+      "action2",
+      "action3"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "For {issue}, the recommended approach is {approach} combined with {method}.",
+    "placeholders": [
+      "issue",
+      "approach",
+      "method"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Address {challenge} by adopting {strategy} and monitoring {metric}.",
+    "placeholders": [
+      "challenge",
+      "strategy",
+      "metric"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "The solution for {user} includes {step1}, then {step2}, and finally {step3}.",
+    "placeholders": [
+      "user",
+      "step1",
+      "step2",
+      "step3"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "To resolve {conflict}, {user} should {action} and seek {support}.",
+    "placeholders": [
+      "conflict",
+      "user",
+      "action",
+      "support"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Consider {solution} as a way to improve {situation} for {user}.",
+    "placeholders": [
+      "solution",
+      "situation",
+      "user"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Implement {change} and {adjustment} to fix {problem}.",
+    "placeholders": [
+      "change",
+      "adjustment",
+      "problem"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "A proven solution for {topic} is {method}, which helps {goal}.",
+    "placeholders": [
+      "topic",
+      "method",
+      "goal"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "{user} can achieve {outcome} by deploying {strategy} and {tactic}.",
+    "placeholders": [
+      "user",
+      "outcome",
+      "strategy",
+      "tactic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "To mitigate {risk}, use {prevention} and {response} plans.",
+    "placeholders": [
+      "risk",
+      "prevention",
+      "response"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "The solution involves {component1}, {component2}, and ongoing {effort}.",
+    "placeholders": [
+      "component1",
+      "component2",
+      "effort"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "For {user}, the best course is {action} with {resource} support.",
+    "placeholders": [
+      "user",
+      "action",
+      "resource"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "A detailed solution for {issue} requires {analysis} and {implementation}.",
+    "placeholders": [
+      "issue",
+      "analysis",
+      "implementation"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Try {approach} to address {concern} and achieve {improvement}.",
+    "placeholders": [
+      "approach",
+      "concern",
+      "improvement"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "To solve {complexity}, break it down into {part1} and {part2}.",
+    "placeholders": [
+      "complexity",
+      "part1",
+      "part2"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "The recommended solution is {strategy}, which targets {root_cause}.",
+    "placeholders": [
+      "strategy",
+      "root_cause"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "For immediate relief, {user} can {quick_action} while planning {long_term}.",
+    "placeholders": [
+      "user",
+      "quick_action",
+      "long_term"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "A multi-step solution for {user} on {topic} includes {step_a}, {step_b}, and {step_c} to ensure {success}.",
+    "placeholders": [
+      "user",
+      "topic",
+      "step_a",
+      "step_b",
+      "step_c",
+      "success"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "To effectively resolve {problem}, {user} should first {action1}, then {action2}, and finally maintain {action3} with {tool}.",
+    "placeholders": [
+      "problem",
+      "user",
+      "action1",
+      "action2",
+      "action3",
+      "tool"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "The ultimate solution for {challenge} combines {approach}, {method}, and {technique}, while avoiding {pitfall}.",
+    "placeholders": [
+      "challenge",
+      "approach",
+      "method",
+      "technique",
+      "pitfall"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "For {user} dealing with {issue}, a comprehensive plan involves {step1} to {goal1}, {step2} to {goal2}, and {step3} for {goal3}.",
+    "placeholders": [
+      "user",
+      "issue",
+      "step1",
+      "goal1",
+      "step2",
+      "goal2",
+      "step3",
+      "goal3"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "Addressing {topic} requires {user} to implement {strategy}, which includes {component_a}, {component_b}, and ongoing {component_c}.",
+    "placeholders": [
+      "topic",
+      "user",
+      "strategy",
+      "component_a",
+      "component_b",
+      "component_c"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "A successful solution for {problem} starts with {step_one}, progresses to {step_two}, and concludes with {step_three} using {resource}.",
+    "placeholders": [
+      "problem",
+      "step_one",
+      "step_two",
+      "step_three",
+      "resource"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "To overcome {obstacle}, {user} can adopt {approach}, leverage {tool}, and monitor {metric} for continuous improvement.",
+    "placeholders": [
+      "obstacle",
+      "user",
+      "approach",
+      "tool",
+      "metric"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "The recommended solution for {user} on {topic} is to {action1}, {action2}, and {action3} while considering {factor}.",
+    "placeholders": [
+      "user",
+      "topic",
+      "action1",
+      "action2",
+      "action3",
+      "factor"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "For a thorough fix of {issue}, implement {solution_part1}, then {solution_part2}, and ensure {solution_part3} is in place.",
+    "placeholders": [
+      "issue",
+      "solution_part1",
+      "solution_part2",
+      "solution_part3"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "Solving {complex_problem} involves {technique1} for immediate results, {technique2} for medium-term gains, and {technique3} for long-term sustainability.",
+    "placeholders": [
+      "complex_problem",
+      "technique1",
+      "technique2",
+      "technique3"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "The best solution for {user} includes identifying {root_cause}, applying {fix}, and validating with {test}.",
+    "placeholders": [
+      "user",
+      "root_cause",
+      "fix",
+      "test"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "To resolve {situation}, {user} should start with {initial_action}, follow up with {secondary_action}, and complete with {final_action}.",
+    "placeholders": [
+      "situation",
+      "user",
+      "initial_action",
+      "secondary_action",
+      "final_action"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "A holistic solution for {topic} requires {strategy}, {tactics}, and {evaluation} to achieve {desired_outcome}.",
+    "placeholders": [
+      "topic",
+      "strategy",
+      "tactics",
+      "evaluation",
+      "desired_outcome"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "For {user} facing {challenge}, the solution path is {step1} for {reason1}, {step2} for {reason2}, and {step3} for {reason3}.",
+    "placeholders": [
+      "user",
+      "challenge",
+      "step1",
+      "reason1",
+      "step2",
+      "reason2",
+      "step3",
+      "reason3"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "The most effective solution for {problem} involves {method_a}, {method_b}, and {method_c} tailored to {user}'s needs.",
+    "placeholders": [
+      "problem",
+      "method_a",
+      "method_b",
+      "method_c",
+      "user"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "To address {issue} comprehensively, {user} should combine {approach} with {tool} and regularly review {progress}.",
+    "placeholders": [
+      "issue",
+      "user",
+      "approach",
+      "tool",
+      "progress"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "A proven solution for {topic} is to {action1}, then {action2}, and finally {action3}, ensuring {outcome}.",
+    "placeholders": [
+      "topic",
+      "action1",
+      "action2",
+      "action3",
+      "outcome"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "To solve {dilemma}, {user} can implement {solution1} for short-term relief and {solution2} for long-term stability.",
+    "placeholders": [
+      "dilemma",
+      "user",
+      "solution1",
+      "solution2"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "The recommended approach for {user} includes {phase1}, {phase2}, and {phase3} to fully resolve {problem}.",
+    "placeholders": [
+      "user",
+      "phase1",
+      "phase2",
+      "phase3",
+      "problem"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "For lasting resolution of {issue}, {user} must {action_a}, {action_b}, and {action_c} with support from {resource}.",
+    "placeholders": [
+      "issue",
+      "user",
+      "action_a",
+      "action_b",
+      "action_c",
+      "resource"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "The solution to {topic} is straightforward: {user} should implement {action}.",
+    "placeholders": [
+      "topic",
+      "user",
+      "action"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "For {user}, addressing {topic} requires a strategic approach focusing on {key_area}.",
+    "placeholders": [
+      "user",
+      "topic",
+      "key_area"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "A comprehensive solution for {topic} involves multiple steps, including {step1}, {step2}, and {step3}, which {user} can apply.",
+    "placeholders": [
+      "topic",
+      "step1",
+      "step2",
+      "step3",
+      "user"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "To solve {topic}, {user} should consider {option} as a primary solution.",
+    "placeholders": [
+      "topic",
+      "user",
+      "option"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "The most effective solution to {topic} for {user} is to adopt {method}.",
+    "placeholders": [
+      "topic",
+      "user",
+      "method"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "One solution to {topic} is {approach}, which {user} can tailor to their needs.",
+    "placeholders": [
+      "topic",
+      "approach",
+      "user"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "A viable solution for {topic} involves {user} leveraging {resource} and {tool}.",
+    "placeholders": [
+      "topic",
+      "user",
+      "resource",
+      "tool"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "The ideal solution for {topic} requires {user} to combine {element1}, {element2}, and {element3}.",
+    "placeholders": [
+      "topic",
+      "user",
+      "element1",
+      "element2",
+      "element3"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "For {topic}, {user} can find a solution by focusing on {priority}.",
+    "placeholders": [
+      "topic",
+      "user",
+      "priority"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "A practical solution to {topic} is for {user} to implement {strategy}.",
+    "placeholders": [
+      "topic",
+      "user",
+      "strategy"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "When dealing with {topic}, {user} should consider the solution of {action}.",
+    "placeholders": [
+      "topic",
+      "user",
+      "action"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "The solution to {topic} lies in {user} adopting a {adjective} approach.",
+    "placeholders": [
+      "topic",
+      "user",
+      "adjective"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "For {user}, the solution to {topic} is to integrate {component} into their workflow.",
+    "placeholders": [
+      "user",
+      "topic",
+      "component"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "A key solution for {topic} involves {user} using {technique} to overcome challenges.",
+    "placeholders": [
+      "topic",
+      "user",
+      "technique"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "The best solution for {topic} is a combination of {factor1} and {factor2}, as recommended for {user}.",
+    "placeholders": [
+      "topic",
+      "factor1",
+      "factor2",
+      "user"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "To effectively solve {topic}, {user} should follow these steps: {step1}, {step2}, and {step3}.",
+    "placeholders": [
+      "topic",
+      "user",
+      "step1",
+      "step2",
+      "step3"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "A robust solution to {topic} requires {user} to address {issue} directly.",
+    "placeholders": [
+      "topic",
+      "user",
+      "issue"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "For {topic}, the solution is simple: {user} must {action}.",
+    "placeholders": [
+      "topic",
+      "user",
+      "action"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "The solution to {topic} proposed for {user} is to utilize {tool} and {method}.",
+    "placeholders": [
+      "topic",
+      "user",
+      "tool",
+      "method"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "A creative solution for {topic} involves {user} thinking outside the box with {idea}.",
+    "placeholders": [
+      "topic",
+      "user",
+      "idea"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "The solution to {topic} often depends on {user} understanding {concept}.",
+    "placeholders": [
+      "topic",
+      "user",
+      "concept"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "For {user}, a tailored solution to {topic} can be achieved through {customization}.",
+    "placeholders": [
+      "user",
+      "topic",
+      "customization"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "The ultimate solution for {topic} is for {user} to embrace {change}.",
+    "placeholders": [
+      "topic",
+      "user",
+      "change"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "A solution to {topic} that works for {user} is to focus on {aspect}.",
+    "placeholders": [
+      "topic",
+      "user",
+      "aspect"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "The solution to {topic} involves a series of steps: first, {step1}; then, {step2}; finally, {step3}.",
+    "placeholders": [
+      "topic",
+      "step1",
+      "step2",
+      "step3"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "For {topic}, {user} can find a solution by applying {principle}.",
+    "placeholders": [
+      "topic",
+      "user",
+      "principle"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "A proven solution to {topic} is for {user} to adopt {practice}.",
+    "placeholders": [
+      "topic",
+      "user",
+      "practice"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "The solution to {topic} for {user} is to prioritize {priority} and {priority2}.",
+    "placeholders": [
+      "topic",
+      "user",
+      "priority",
+      "priority2"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "To solve {topic}, {user} must first identify the root cause, then implement {solution}.",
+    "placeholders": [
+      "topic",
+      "user",
+      "solution"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "A comprehensive solution for {topic} includes {component1}, {component2}, and {component3} for {user}.",
+    "placeholders": [
+      "topic",
+      "component1",
+      "component2",
+      "component3",
+      "user"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "The solution to {topic} is not one-size-fits-all; {user} needs to customize {approach}.",
+    "placeholders": [
+      "topic",
+      "user",
+      "approach"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "For {user}, the most practical solution to {topic} is {action}.",
+    "placeholders": [
+      "user",
+      "topic",
+      "action"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "A solution to {topic} can be found by {user} collaborating with {partner}.",
+    "placeholders": [
+      "topic",
+      "user",
+      "partner"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "The key to solving {topic} for {user} is to stay focused on {goal}.",
+    "placeholders": [
+      "topic",
+      "user",
+      "goal"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "A step-by-step solution to {topic} involves {step1}, {step2}, and {step3} for {user}.",
+    "placeholders": [
+      "topic",
+      "step1",
+      "step2",
+      "step3",
+      "user"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "To resolve {topic}, {user} should consider {alternative} as a solution.",
+    "placeholders": [
+      "topic",
+      "user",
+      "alternative"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "The solution to {topic} for {user} is to leverage {asset}.",
+    "placeholders": [
+      "topic",
+      "user",
+      "asset"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "A successful solution to {topic} requires {user} to think critically about {factor}.",
+    "placeholders": [
+      "topic",
+      "user",
+      "factor"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "For {topic}, the solution is to empower {user} with {knowledge}.",
+    "placeholders": [
+      "topic",
+      "user",
+      "knowledge"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "The solution to {topic} can be broken down into three parts: {part1}, {part2}, and {part3}.",
+    "placeholders": [
+      "topic",
+      "part1",
+      "part2",
+      "part3"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "A practical solution for {topic} is for {user} to implement {system}.",
+    "placeholders": [
+      "topic",
+      "user",
+      "system"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "To tackle {topic}, {user} needs a solution that includes {feature}.",
+    "placeholders": [
+      "topic",
+      "user",
+      "feature"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "The solution to {topic} for {user} is to adopt a {mindset} mindset.",
+    "placeholders": [
+      "topic",
+      "user",
+      "mindset"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "A multi-faceted solution to {topic} involves {strategy1}, {strategy2}, and {strategy3} for {user}.",
+    "placeholders": [
+      "topic",
+      "strategy1",
+      "strategy2",
+      "strategy3",
+      "user"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "For {topic}, the optimal solution is for {user} to balance {element1} and {element2}.",
+    "placeholders": [
+      "topic",
+      "user",
+      "element1",
+      "element2"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "The solution to {topic} lies in {user} harnessing {technology}.",
+    "placeholders": [
+      "topic",
+      "user",
+      "technology"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "A straightforward solution for {topic} is {user} following {guideline}.",
+    "placeholders": [
+      "topic",
+      "user",
+      "guideline"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "To address {topic}, {user} can implement a solution based on {model}.",
+    "placeholders": [
+      "topic",
+      "user",
+      "model"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "The solution to {topic} for {user} is to iterate on {process} until successful.",
+    "placeholders": [
+      "topic",
+      "user",
+      "process"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "A sustainable solution to {topic} requires {user} to commit to {practice}.",
+    "placeholders": [
+      "topic",
+      "user",
+      "practice"
+    ],
+    "length": "medium"
+  }
+]

@@ -1,0 +1,1630 @@
+[
+  {
+    "text": "The core challenge for {user} is that {topic} lacks scalability.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "A major problem with {topic} is its inability to handle {constraint}.",
+    "placeholders": [
+      "topic",
+      "constraint"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "{user} struggles with {topic} due to outdated infrastructure and limited resources available in {region}.",
+    "placeholders": [
+      "user",
+      "topic",
+      "region"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "The biggest issue facing {user} regarding {topic} is the lack of clear guidelines.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "When analyzing {topic}, we see that {user} continuously fails to meet deadlines because of {factor}.",
+    "placeholders": [
+      "topic",
+      "user",
+      "factor"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "One critical problem is that {topic} does not integrate well with existing systems, causing delays for {user}.",
+    "placeholders": [
+      "topic",
+      "user"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "The underlying difficulty for {user} is that {topic} requires specialized training that is not readily available in {location}.",
+    "placeholders": [
+      "user",
+      "topic",
+      "location"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "A recurring problem with {topic} is its high cost, which prevents {user} from adopting it fully.",
+    "placeholders": [
+      "topic",
+      "user"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "The analysis reveals that {user} cannot achieve {goal} due to limitations in {topic}.",
+    "placeholders": [
+      "user",
+      "goal",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "For {user}, the primary obstacle in {topic} is the steep learning curve and lack of support documentation.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "A significant problem is that {topic} generates inconsistent results when applied by {user} in {context}.",
+    "placeholders": [
+      "topic",
+      "user",
+      "context"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "The main challenge for {user} is that {topic} requires constant updates, which strains their limited budget and personnel in {department}.",
+    "placeholders": [
+      "user",
+      "topic",
+      "department"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "The problem with {topic} is that it does not address the specific needs of {user}.",
+    "placeholders": [
+      "topic",
+      "user"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Upon deeper analysis, the issue stems from {topic} being incompatible with {user}'s workflow.",
+    "placeholders": [
+      "topic",
+      "user"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "A critical issue for {user} is the absence of real-time data in {topic}, leading to poor decision-making.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "The problem analysis shows that {topic} fails to provide adequate security measures, putting {user} at risk.",
+    "placeholders": [
+      "topic",
+      "user"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "For {user} operating in {sector}, the main difficulty with {topic} is regulatory non-compliance and frequent policy changes.",
+    "placeholders": [
+      "user",
+      "sector",
+      "topic"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "The issue is that {topic} requires too much manual intervention from {user}.",
+    "placeholders": [
+      "topic",
+      "user"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "A key problem is the mismatch between {topic} capabilities and {user}'s expectations.",
+    "placeholders": [
+      "topic",
+      "user"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "The analysis highlights that {user} cannot scale their operations because {topic} has inherent performance bottlenecks.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "One of the most pressing problems is that {topic} lacks interoperability with other tools used by {user} in {industry}.",
+    "placeholders": [
+      "topic",
+      "user",
+      "industry"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "The core problem for {user} is that {topic} does not provide enough customization options.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "When examining {topic}, it becomes clear that {user} faces significant usability issues.",
+    "placeholders": [
+      "topic",
+      "user"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "The main problem is that {topic} is not designed to handle the volume of data generated by {user}.",
+    "placeholders": [
+      "topic",
+      "user"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "A serious problem is the lack of community support for {topic}, leaving {user} without troubleshooting resources.",
+    "placeholders": [
+      "topic",
+      "user"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "The analysis reveals that {user} in {region} struggles with {topic} due to poor internet connectivity and server latency.",
+    "placeholders": [
+      "user",
+      "region",
+      "topic"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "The issue is that {topic} forces {user} to rely on outdated methods.",
+    "placeholders": [
+      "topic",
+      "user"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "A significant problem is that {topic} introduces more complexity than value for {user}.",
+    "placeholders": [
+      "topic",
+      "user"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "For {user}, the main problem with {topic} is the high maintenance cost and frequent downtime.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "The problem analysis indicates that {topic} fails to meet the performance benchmarks required by {user} for {application}.",
+    "placeholders": [
+      "topic",
+      "user",
+      "application"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "The biggest challenge for {user} is that {topic} does not support collaboration features.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "A recurring problem is that {topic} has a steep price point, making it inaccessible for {user}.",
+    "placeholders": [
+      "topic",
+      "user"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "The analysis shows that {user} cannot trust {topic} because of frequent errors and data loss.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "One of the main issues is the lack of training materials for {topic}, which hinders {user} adoption.",
+    "placeholders": [
+      "topic",
+      "user"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "The problem for {user} is that {topic} has a rigid architecture that cannot adapt to changes in {market}.",
+    "placeholders": [
+      "user",
+      "topic",
+      "market"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "The core problem is that {topic} does not align with {user}'s strategic goals.",
+    "placeholders": [
+      "topic",
+      "user"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "A key problem is the absence of analytics features in {topic}, which {user} needs for reporting.",
+    "placeholders": [
+      "topic",
+      "user"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "The analysis reveals that {user} experiences frequent crashes when using {topic} under {workload}.",
+    "placeholders": [
+      "user",
+      "topic",
+      "workload"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "The problem is that {topic} lacks mobile support, limiting {user}'s ability to work remotely.",
+    "placeholders": [
+      "topic",
+      "user"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "For {user} in {sector}, the main problem with {topic} is the difficulty of integrating it with legacy systems.",
+    "placeholders": [
+      "user",
+      "sector",
+      "topic"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "A significant challenge is that {topic} does not offer multilingual support for {user}.",
+    "placeholders": [
+      "topic",
+      "user"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "The problem analysis shows that {topic} has a poor user interface, reducing productivity for {user}.",
+    "placeholders": [
+      "topic",
+      "user"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "The main issue is that {topic} requires too many resources, which {user} cannot afford.",
+    "placeholders": [
+      "topic",
+      "user"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Upon deeper analysis, the problem is that {topic} does not comply with {regulation}, causing legal risks for {user}.",
+    "placeholders": [
+      "topic",
+      "regulation",
+      "user"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "A recurring problem is that {topic} lacks version control, leading to confusion for {user}.",
+    "placeholders": [
+      "topic",
+      "user"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "The core challenge for {user} is that {topic} has a limited feature set compared to alternatives.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "The analysis indicates that {topic} fails to provide adequate customer support for {user} in {timezone}.",
+    "placeholders": [
+      "topic",
+      "user",
+      "timezone"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "A key problem is that {topic} is not user-friendly for non-technical {user}.",
+    "placeholders": [
+      "topic",
+      "user"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "The problem is that {topic} does not scale well when {user} expands to new {region}.",
+    "placeholders": [
+      "topic",
+      "user",
+      "region"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "For {user}, the main problem with {topic} is the lack of clear documentation and best practices.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "The core issue with {topic} is its failure to address {user}'s primary concerns.",
+    "placeholders": [
+      "topic",
+      "user"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "A deeper analysis reveals that {topic} suffers from a lack of {factor}.",
+    "placeholders": [
+      "topic",
+      "factor"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "When examining {topic}, it becomes clear that {problem} is the main obstacle.",
+    "placeholders": [
+      "topic",
+      "problem"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "The problem stems from {root_cause}, which directly impacts {stakeholder}.",
+    "placeholders": [
+      "root_cause",
+      "stakeholder"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "In the context of {topic}, the key challenge revolves around {issue}.",
+    "placeholders": [
+      "topic",
+      "issue"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "An important aspect of this problem is the disconnect between {variable_a} and {variable_b}.",
+    "placeholders": [
+      "variable_a",
+      "variable_b"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "The analysis indicates that {topic} is constrained by {limitation}, which prevents {goal}.",
+    "placeholders": [
+      "topic",
+      "limitation",
+      "goal"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "Users have consistently reported that {pain_point} undermines their experience with {topic}.",
+    "placeholders": [
+      "pain_point",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "A closer look at {topic} reveals systemic flaws in {area} that need immediate attention.",
+    "placeholders": [
+      "topic",
+      "area"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "The primary difficulty for {user} is the absence of {feature} in {topic}.",
+    "placeholders": [
+      "user",
+      "feature",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "This problem can be traced back to {origin}, which has cascading effects on {outcome}.",
+    "placeholders": [
+      "origin",
+      "outcome"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "One of the most pressing issues is that {topic} does not account for {factor}.",
+    "placeholders": [
+      "topic",
+      "factor"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "When analyzing {topic}, it is evident that {gap} hinders progress toward {goal}.",
+    "placeholders": [
+      "topic",
+      "gap",
+      "goal"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "The problem manifests as {symptom}, which affects {user} in {scenario}.",
+    "placeholders": [
+      "symptom",
+      "user",
+      "scenario"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "A critical flaw in {topic} is the mismatch between {aspect_a} and {aspect_b}.",
+    "placeholders": [
+      "topic",
+      "aspect_a",
+      "aspect_b"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "The underlying issue is that {topic} relies on {assumption}, which is no longer valid.",
+    "placeholders": [
+      "topic",
+      "assumption"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "For {user}, the most frustrating part is {obstacle} when using {topic}.",
+    "placeholders": [
+      "user",
+      "obstacle",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Analysis shows that {topic} lacks {resource}, creating a bottleneck in {process}.",
+    "placeholders": [
+      "topic",
+      "resource",
+      "process"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "The challenge is compounded by {factor}, which exacerbates existing tensions in {topic}.",
+    "placeholders": [
+      "factor",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "A significant problem is the inefficiency caused by {inefficiency} in {topic}.",
+    "placeholders": [
+      "inefficiency",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "The root cause of the issue is {cause}, leading to {effect} for {user}.",
+    "placeholders": [
+      "cause",
+      "effect",
+      "user"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "When evaluating {topic}, it becomes apparent that {component} is fundamentally broken.",
+    "placeholders": [
+      "topic",
+      "component"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "The problem is that {topic} fails to integrate {element}, resulting in {consequence}.",
+    "placeholders": [
+      "topic",
+      "element",
+      "consequence"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "Users often struggle with {difficulty} because {topic} lacks {support}.",
+    "placeholders": [
+      "difficulty",
+      "topic",
+      "support"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "A hidden issue is the lack of {transparency} in {topic}, which erodes trust.",
+    "placeholders": [
+      "transparency",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "The analysis highlights that {topic} is vulnerable to {threat}, compromising {security}.",
+    "placeholders": [
+      "topic",
+      "threat",
+      "security"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "One major obstacle is the complexity of {complexity} for {user} in {topic}.",
+    "placeholders": [
+      "complexity",
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "The problem arises from a conflict between {interest_a} and {interest_b} in {topic}.",
+    "placeholders": [
+      "interest_a",
+      "interest_b",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "A key finding is that {topic} does not scale well due to {limitation}.",
+    "placeholders": [
+      "topic",
+      "limitation"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "The issue is exacerbated by {external_factor}, which puts pressure on {topic}.",
+    "placeholders": [
+      "external_factor",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "In practice, {topic} creates friction because of {friction_source}.",
+    "placeholders": [
+      "topic",
+      "friction_source"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "The analysis uncovers that {topic} has a blind spot regarding {blind_spot}.",
+    "placeholders": [
+      "topic",
+      "blind_spot"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "A serious problem is the misalignment of {goal_a} and {goal_b} within {topic}.",
+    "placeholders": [
+      "goal_a",
+      "goal_b",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "The core issue is that {topic} prioritizes {priority} over {neglected_aspect}.",
+    "placeholders": [
+      "topic",
+      "priority",
+      "neglected_aspect"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "Users are dissatisfied because {topic} fails to deliver {promise}.",
+    "placeholders": [
+      "topic",
+      "promise"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "The problem is deeply rooted in {cultural_factor} affecting {topic}.",
+    "placeholders": [
+      "cultural_factor",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "A detailed analysis shows that {topic} has a design flaw in {part}.",
+    "placeholders": [
+      "topic",
+      "part"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "The main challenge is the lack of {skill} among {user} when dealing with {topic}.",
+    "placeholders": [
+      "skill",
+      "user",
+      "topic"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "This problem is characterized by {characteristic}, which makes {topic} ineffective.",
+    "placeholders": [
+      "characteristic",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "The analysis identifies that {topic} suffers from {syndrome}, a common pitfall.",
+    "placeholders": [
+      "topic",
+      "syndrome"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "A fundamental issue is the absence of {standard} in {topic}, causing inconsistency.",
+    "placeholders": [
+      "standard",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "The problem is that {topic} requires {requirement} that is not available.",
+    "placeholders": [
+      "topic",
+      "requirement"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "When looking at {topic}, the bottleneck is clearly {bottleneck} in the workflow.",
+    "placeholders": [
+      "topic",
+      "bottleneck"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "The issue becomes critical when {scenario} occurs, as {topic} cannot handle it.",
+    "placeholders": [
+      "scenario",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "A major problem is the dependency on {dependency}, which is unreliable.",
+    "placeholders": [
+      "dependency"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "The analysis reveals that {topic} has a feedback loop issue involving {loop}.",
+    "placeholders": [
+      "topic",
+      "loop"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Users point out that {topic} is not {adjective} enough for their needs.",
+    "placeholders": [
+      "topic",
+      "adjective"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "The crux of the problem is that {topic} ignores {important_aspect}, leading to failure.",
+    "placeholders": [
+      "topic",
+      "important_aspect"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "A subtle but significant issue is the cognitive load imposed by {topic} on {user}.",
+    "placeholders": [
+      "topic",
+      "user"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "The problem can be summarized as a case of {problem_type} in {topic}.",
+    "placeholders": [
+      "problem_type",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Upon examining the root causes of {topic}, {user} identified several underlying issues that require immediate attention.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "The problem of {topic} is far more complex than initially assumed by {user}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "A careful analysis reveals that {topic} stems from a combination of systemic failures and individual errors, as noted by {user}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "Key obstacles in {topic} include lack of resources, insufficient training, and poor communication among stakeholders.",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "The core challenge in {topic} is the misalignment between goals and available tools.",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "According to {user}, the primary issue with {topic} is the absence of a clear framework for decision-making.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "A deeper dive into {topic} shows that historical precedents have created a cycle of recurring problems.",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "The analysis of {topic} by {user} points to three major failure points: planning, execution, and review.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "One cannot overlook the fact that {topic} is exacerbated by external factors such as economic volatility and regulatory changes.",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "In the context of {topic}, the main problem is the lack of accountability among team members.",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "The problem with {topic} can be broken down into technical, organizational, and cultural components.",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Upon reviewing the data, {user} concluded that {topic} is not a single issue but a network of interrelated challenges.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "A critical flaw in {topic} is the over-reliance on outdated methods, as highlighted by {user}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "The situation regarding {topic} is further complicated by conflicting priorities and limited timeframes.",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "{user} discovered that the root of {topic} lies in a misunderstanding of fundamental principles.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Analyzing the problem of {topic} requires a multi-disciplinary approach that considers economic, social, and technical factors.",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "The most pressing issue in {topic} is the gap between current capabilities and desired outcomes.",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Through meticulous investigation, {user} identified that {topic} is primarily caused by inefficient processes.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "In the case of {topic}, the problem is not a lack of ideas but a failure to implement them effectively.",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "The core of the issue with {topic} is the resistance to change among key stakeholders.",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "A comprehensive analysis of {topic} reveals that the problem is deeply embedded in the organizational culture.",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "{user} argues that the difficulty with {topic} arises from a lack of standardized procedures.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "The problem of {topic} is often underestimated because its symptoms are mistaken for root causes.",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Unpacking the layers of {topic}, {user} found that each layer reveals another, more fundamental problem.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "A significant barrier in {topic} is the fragmentation of efforts across different departments.",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "The analysis shows that {topic} is a classic example of a 'wicked problem' with no simple solution.",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "In addressing {topic}, one must first acknowledge the inherent biases in the current approach.",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "{user} emphasizes that the problem with {topic} is not just technical but also political in nature.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "The failure to resolve {topic} in the past stems from an overemphasis on short-term fixes.",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "A thorough examination of {topic} indicates that the problem is perpetuated by feedback loops that reinforce negative patterns.",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "The primary difficulty with {topic} is the absence of a shared vision among participants.",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Regarding {topic}, the most critical issue is the lack of data to inform decision-making processes.",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "From {user}'s perspective, the problem with {topic} is that it has been approached with a one-size-fits-all solution.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "The analysis of {topic} reveals a pattern of recurring mistakes that have not been properly addressed.",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "A fundamental issue in {topic} is the disconnect between policy and practice on the ground.",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "The problem of {topic} is compounded by the fact that stakeholders often have conflicting interests.",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "Breaking down {topic}, {user} identified that the core issue is a lack of trust among team members.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "In the case of {topic}, the main problem is that previous solutions have only addressed symptoms, not causes.",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "The difficulty with {topic} is that it requires changes that are politically unpopular or logistically challenging.",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "Upon reflection, {user} realized that {topic} is a manifestation of deeper systemic issues.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "An analysis of {topic} shows that the problem is rooted in a failure to adapt to changing circumstances.",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "The most challenging aspect of {topic} is the uncertainty surrounding its long-term implications.",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "A critical review of {topic} highlights that the problem is exacerbated by information silos.",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "The problem with {topic} is that it has become a scapegoat for other, unaddressed issues in the organization.",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "In the context of {topic}, the primary challenge is to move from analysis to actionable insights.",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "{user} notes that the issue with {topic} is not unique but part of a broader trend.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "The problem of {topic} can be attributed to a combination of inertia and inadequate feedback mechanisms.",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "A thorough problem analysis of {topic} reveals that the issue is more about perception than reality.",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "In examining {topic}, {user} discovered that the problem is often misdiagnosed due to cognitive biases.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "The root cause of {topic} is a failure to prioritize long-term sustainability over short-term gains.",
+    "placeholders": [
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "{user} has identified a recurring issue with {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "The root cause of {topic} remains unclear to {user}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "{user} notes that {topic} leads to {problem}.",
+    "placeholders": [
+      "user",
+      "topic",
+      "problem"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "A detailed analysis by {user} reveals gaps in {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "{user} must evaluate how {topic} impacts {goal}.",
+    "placeholders": [
+      "user",
+      "topic",
+      "goal"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "The problem with {topic} is its inconsistency in {context}.",
+    "placeholders": [
+      "topic",
+      "context"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "For {user}, {topic} presents a barrier to {outcome}.",
+    "placeholders": [
+      "user",
+      "topic",
+      "outcome"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "{user} struggles to align {topic} with {standard}.",
+    "placeholders": [
+      "user",
+      "topic",
+      "standard"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Examining {topic} from {perspective} helps {user} identify flaws.",
+    "placeholders": [
+      "topic",
+      "perspective",
+      "user"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "The complexity of {topic} often overwhelms {user}.",
+    "placeholders": [
+      "topic",
+      "user"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "{user} traces the issue back to a missing {element} in {topic}.",
+    "placeholders": [
+      "user",
+      "element",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "A thorough analysis of {topic} reveals {number} key challenges.",
+    "placeholders": [
+      "topic",
+      "number"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "{user} must address the gap between {topic} and {requirement}.",
+    "placeholders": [
+      "user",
+      "topic",
+      "requirement"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "The primary obstacle in {topic} is the lack of {resource}.",
+    "placeholders": [
+      "topic",
+      "resource"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "{user} discovers that {topic} fails to meet {criterion}.",
+    "placeholders": [
+      "user",
+      "topic",
+      "criterion"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "To improve {topic}, {user} needs to understand its {aspect}.",
+    "placeholders": [
+      "topic",
+      "user",
+      "aspect"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "A deep dive into {topic} by {user} uncovers hidden {issues}.",
+    "placeholders": [
+      "topic",
+      "user",
+      "issues"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "{user} observes that {topic} causes delays in {process}.",
+    "placeholders": [
+      "user",
+      "topic",
+      "process"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "The analysis focuses on how {topic} affects {stakeholder}.",
+    "placeholders": [
+      "topic",
+      "stakeholder"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "{user} breaks down {topic} into {components} for clarity.",
+    "placeholders": [
+      "user",
+      "topic",
+      "components"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "An in-depth review by {user} shows {topic} is flawed in {area}.",
+    "placeholders": [
+      "user",
+      "topic",
+      "area"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "The challenge with {topic} is its inability to adapt to {change}.",
+    "placeholders": [
+      "topic",
+      "change"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "{user} hypothesizes that {topic} suffers from {cause}.",
+    "placeholders": [
+      "user",
+      "topic",
+      "cause"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "To solve {topic}, {user} must first diagnose {symptom}.",
+    "placeholders": [
+      "topic",
+      "user",
+      "symptom"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "A critical assessment of {topic} by {user} highlights {weakness}.",
+    "placeholders": [
+      "topic",
+      "user",
+      "weakness"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "{user} identifies a mismatch between {topic} and {expectation}.",
+    "placeholders": [
+      "user",
+      "topic",
+      "expectation"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "The problem of {topic} is compounded by {factor}.",
+    "placeholders": [
+      "topic",
+      "factor"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "{user} examines how {topic} evolves under {condition}.",
+    "placeholders": [
+      "user",
+      "topic",
+      "condition"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Analyzing {topic} from {viewpoint} reveals new insights for {user}.",
+    "placeholders": [
+      "topic",
+      "viewpoint",
+      "user"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "The core issue with {topic} is its reliance on {assumption}.",
+    "placeholders": [
+      "topic",
+      "assumption"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "{user} maps out the dependencies of {topic} to find bottlenecks.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "A systematic breakdown of {topic} helps {user} pinpoint errors.",
+    "placeholders": [
+      "topic",
+      "user"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "{user} realizes that {topic} requires a new {approach}.",
+    "placeholders": [
+      "user",
+      "topic",
+      "approach"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "The analysis suggests that {topic} is constrained by {limit}.",
+    "placeholders": [
+      "topic",
+      "limit"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "{user} investigates the relationship between {topic} and {factor}.",
+    "placeholders": [
+      "user",
+      "topic",
+      "factor"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "To understand {topic}, {user} examines its historical {trend}.",
+    "placeholders": [
+      "topic",
+      "user",
+      "trend"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "The difficulty with {topic} is its interaction with {system}.",
+    "placeholders": [
+      "topic",
+      "system"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "{user} categorizes the issues in {topic} into {groups}.",
+    "placeholders": [
+      "user",
+      "topic",
+      "groups"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "A closer look at {topic} shows that {user} underestimated {risk}.",
+    "placeholders": [
+      "topic",
+      "user",
+      "risk"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "The root cause analysis by {user} points to {origin}.",
+    "placeholders": [
+      "user",
+      "origin"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "{user} must reconcile {topic} with {reality}.",
+    "placeholders": [
+      "user",
+      "topic",
+      "reality"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "The problem in {topic} stems from a lack of {oversight}.",
+    "placeholders": [
+      "topic",
+      "oversight"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "An exhaustive review of {topic} by {user} lists {number} errors.",
+    "placeholders": [
+      "topic",
+      "user",
+      "number"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "{user} connects the dots between {topic} and {outcome}.",
+    "placeholders": [
+      "user",
+      "topic",
+      "outcome"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "The analysis reveals that {topic} operates under {misconception}.",
+    "placeholders": [
+      "topic",
+      "misconception"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "{user} simulates {topic} to test its response to {stimulus}.",
+    "placeholders": [
+      "user",
+      "topic",
+      "stimulus"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "A comparative study by {user} shows {topic} lags behind {benchmark}.",
+    "placeholders": [
+      "user",
+      "topic",
+      "benchmark"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "The challenge for {user} is to isolate the variable in {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "{user} documents how {topic} diverges from {plan}.",
+    "placeholders": [
+      "user",
+      "topic",
+      "plan"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "The analysis concludes that {topic} needs restructuring in {component}.",
+    "placeholders": [
+      "topic",
+      "component"
+    ],
+    "length": "long"
+  }
+]

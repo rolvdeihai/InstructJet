@@ -1,0 +1,1580 @@
+[
+  {
+    "text": "We thank {user} for their valuable contributions to this work.",
+    "placeholders": [
+      "user"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "The authors gratefully acknowledge {user} for insightful discussions on {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Special thanks to {user} and {institution} for providing the {resource} used in this study.",
+    "placeholders": [
+      "user",
+      "institution",
+      "resource"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "This research was supported by {grant_agency} under grant number {grant_number}.",
+    "placeholders": [
+      "grant_agency",
+      "grant_number"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "We are indebted to {user} for their meticulous proofreading of the manuscript.",
+    "placeholders": [
+      "user"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "The authors would like to express their sincere gratitude to {user} for {reason}.",
+    "placeholders": [
+      "user",
+      "reason"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "We acknowledge the use of {tool} developed by {user} at {institution}.",
+    "placeholders": [
+      "tool",
+      "user",
+      "institution"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "This work benefited from the {facility} at {institution}, managed by {user}.",
+    "placeholders": [
+      "facility",
+      "institution",
+      "user"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "We thank {user} for providing the {data} that made this analysis possible.",
+    "placeholders": [
+      "user",
+      "data"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "The authors appreciate the financial support from {organization}.",
+    "placeholders": [
+      "organization"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "We are grateful to {user} for their assistance with {task} during the project.",
+    "placeholders": [
+      "user",
+      "task"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "This paper is dedicated to {user} for their inspiration and guidance.",
+    "placeholders": [
+      "user"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "We acknowledge the {community} for fostering a collaborative environment.",
+    "placeholders": [
+      "community"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "The authors thank {user} and {user2} for their constructive feedback on the draft.",
+    "placeholders": [
+      "user",
+      "user2"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "We are thankful to {user} for providing access to the {dataset}.",
+    "placeholders": [
+      "user",
+      "dataset"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "This research was partially funded by {grant_agency}.",
+    "placeholders": [
+      "grant_agency"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "We acknowledge the technical support from {user} at {institution}.",
+    "placeholders": [
+      "user",
+      "institution"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "The authors wish to thank {user} for their editorial suggestions.",
+    "placeholders": [
+      "user"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "We thank the {team} at {organization} for their cooperation.",
+    "placeholders": [
+      "team",
+      "organization"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "This work would not have been possible without the {resource} provided by {user}.",
+    "placeholders": [
+      "resource",
+      "user"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "The authors acknowledge the support of {user} in the experimental setup.",
+    "placeholders": [
+      "user"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "We are grateful to {user} for their patience and expertise in {field}.",
+    "placeholders": [
+      "user",
+      "field"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "This study was made possible by a grant from {organization} to {user}.",
+    "placeholders": [
+      "organization",
+      "user"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "We thank {user} for their assistance with data collection and analysis.",
+    "placeholders": [
+      "user"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "The authors appreciate the administrative support from {department} at {institution}.",
+    "placeholders": [
+      "department",
+      "institution"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "We are indebted to {user} for their mentorship throughout this project.",
+    "placeholders": [
+      "user"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "This research used the {facility} at {institution}, which is supported by {grant_agency}.",
+    "placeholders": [
+      "facility",
+      "institution",
+      "grant_agency"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "The authors thank {user} for providing a critical review of the methodology.",
+    "placeholders": [
+      "user"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "We acknowledge the contributions of {user} in the early stages of this work.",
+    "placeholders": [
+      "user"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "We are grateful to {user} for sharing their {data} with us.",
+    "placeholders": [
+      "user",
+      "data"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "This work was supported in part by {grant_agency} and {organization}.",
+    "placeholders": [
+      "grant_agency",
+      "organization"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "The authors acknowledge the helpful comments from {user} during the conference.",
+    "placeholders": [
+      "user"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "We thank {user} for their assistance with the {software} used in this study.",
+    "placeholders": [
+      "user",
+      "software"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "This paper is the result of a collaboration between {institution} and {institution2}.",
+    "placeholders": [
+      "institution",
+      "institution2"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "The authors thank {user} for providing the {material} used in the experiments.",
+    "placeholders": [
+      "user",
+      "material"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "We are grateful to {user} for their guidance on the statistical analysis.",
+    "placeholders": [
+      "user"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "This research was conducted using the {resource} provided by {organization}.",
+    "placeholders": [
+      "resource",
+      "organization"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "The authors acknowledge the encouragement and support from {user}.",
+    "placeholders": [
+      "user"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "We thank the anonymous reviewers for their constructive feedback.",
+    "placeholders": [],
+    "length": "short"
+  },
+  {
+    "text": "We are thankful to {user} for their technical expertise in {area}.",
+    "placeholders": [
+      "user",
+      "area"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "This work was inspired by discussions with {user} and {user2}.",
+    "placeholders": [
+      "user",
+      "user2"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "The authors thank {user} for their assistance with the literature review.",
+    "placeholders": [
+      "user"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "We acknowledge the support of the {department} at {institution}.",
+    "placeholders": [
+      "department",
+      "institution"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "We are grateful to {user} for their time and effort in reviewing the manuscript.",
+    "placeholders": [
+      "user"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "This study was funded by {grant_agency} (grant number {grant_number}).",
+    "placeholders": [
+      "grant_agency",
+      "grant_number"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "The authors thank {user} for providing the {equipment} used in the experiments.",
+    "placeholders": [
+      "user",
+      "equipment"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "We acknowledge the contributions of {user} to the project management.",
+    "placeholders": [
+      "user"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "We are thankful to {user} for their hospitality during our visit to {institution}.",
+    "placeholders": [
+      "user",
+      "institution"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "This research was made possible by the {program} at {organization}.",
+    "placeholders": [
+      "program",
+      "organization"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "The authors thank {user} for their unwavering support and encouragement.",
+    "placeholders": [
+      "user"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "We thank {user} for their thoughtful contributions to {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "The authors are grateful to {user} for valuable discussions on {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "This work was supported by {funder} under grant {grantnumber}.",
+    "placeholders": [
+      "funder",
+      "grantnumber"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "We appreciate {user} for their assistance with {task}.",
+    "placeholders": [
+      "user",
+      "task"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Special thanks to {user} for providing {resource}.",
+    "placeholders": [
+      "user",
+      "resource"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "We acknowledge the support of {institution}.",
+    "placeholders": [
+      "institution"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Thanks to {user} for their feedback on the manuscript.",
+    "placeholders": [
+      "user"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "We are indebted to {user} for their guidance on {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "This project was funded by {funder}.",
+    "placeholders": [
+      "funder"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "We thank {user} for their technical support.",
+    "placeholders": [
+      "user"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "The authors acknowledge {user} for providing {data}.",
+    "placeholders": [
+      "user",
+      "data"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "We are grateful to {user} for their collaboration on {project}.",
+    "placeholders": [
+      "user",
+      "project"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Thanks to {user} and {user2} for their helpful comments.",
+    "placeholders": [
+      "user",
+      "user2"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "We thank {user} for access to {facility}.",
+    "placeholders": [
+      "user",
+      "facility"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "This work was partially supported by {funder}.",
+    "placeholders": [
+      "funder"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "We thank {user} for their expertise in {area}.",
+    "placeholders": [
+      "user",
+      "area"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "The authors would like to thank {user} for proofreading the manuscript.",
+    "placeholders": [
+      "user"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "We are grateful to {user} for their insightful suggestions that improved this work.",
+    "placeholders": [
+      "user"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "This research was made possible by a grant from {funder} (grant number {grantnumber}).",
+    "placeholders": [
+      "funder",
+      "grantnumber"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "We thank {user} for generously sharing their {resource} code.",
+    "placeholders": [
+      "user",
+      "resource"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "The authors acknowledge the technical assistance of {user} in the laboratory.",
+    "placeholders": [
+      "user"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "We appreciate the support of {institution} for providing computational resources.",
+    "placeholders": [
+      "institution"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Special thanks to {user} for organizing the workshop on {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "We thank {user} for their careful reading of the manuscript and constructive criticism.",
+    "placeholders": [
+      "user"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "This work was supported by the {funder} under award {grantnumber}.",
+    "placeholders": [
+      "funder",
+      "grantnumber"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "We are grateful to {user} for assistance with data collection.",
+    "placeholders": [
+      "user"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "The authors thank {user} for providing the {tool} software used in this analysis.",
+    "placeholders": [
+      "user",
+      "tool"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "We acknowledge {user} for their role in initiating this collaboration.",
+    "placeholders": [
+      "user"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Thanks to {user} for the stimulating discussions that shaped this project.",
+    "placeholders": [
+      "user"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "We appreciate the feedback from {user} on an earlier version of this paper.",
+    "placeholders": [
+      "user"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "This study would not have been possible without the support of {funder}.",
+    "placeholders": [
+      "funder"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "The authors thank {user} for their dedication to the project over the years.",
+    "placeholders": [
+      "user"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "We are grateful to {user} for providing access to their dataset.",
+    "placeholders": [
+      "user"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Thanks to {user} and the entire {team} team for their hard work.",
+    "placeholders": [
+      "user",
+      "team"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "We thank {user} for their guidance and mentorship throughout this research.",
+    "placeholders": [
+      "user"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "The authors wish to thank {user} for their invaluable assistance with {task}.",
+    "placeholders": [
+      "user",
+      "task"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "We acknowledge the financial support of {funder} through grant {grantnumber}.",
+    "placeholders": [
+      "funder",
+      "grantnumber"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "We thank {user} for their patience and collaboration during the peer review process.",
+    "placeholders": [
+      "user"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "The authors are grateful to {user} for sharing their expertise in {field}.",
+    "placeholders": [
+      "user",
+      "field"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "We appreciate the efforts of {user} in coordinating the experiments.",
+    "placeholders": [
+      "user"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "This work benefited from discussions with {user} and {user2}.",
+    "placeholders": [
+      "user",
+      "user2"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "We thank {user} for their thorough review of the methodology.",
+    "placeholders": [
+      "user"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "The authors acknowledge the support of the {institution} staff.",
+    "placeholders": [
+      "institution"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "We are grateful to {user} for providing the {material} samples.",
+    "placeholders": [
+      "user",
+      "material"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Thanks to {user} for their help with the statistical analysis.",
+    "placeholders": [
+      "user"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "We thank {user} for their encouragement and support.",
+    "placeholders": [
+      "user"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "The authors thank {user} for their contributions to the field work.",
+    "placeholders": [
+      "user"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "We appreciate the assistance of {user} with the literature review.",
+    "placeholders": [
+      "user"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Special thanks to {user} for their editorial suggestions.",
+    "placeholders": [
+      "user"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "We acknowledge {user} for their role in data curation.",
+    "placeholders": [
+      "user"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Thanks to {user} for the helpful feedback on {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "We appreciate {user}'s contribution to {project}.",
+    "placeholders": [
+      "user",
+      "project"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Special thanks to {user} for supporting {initiative}.",
+    "placeholders": [
+      "user",
+      "initiative"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Grateful to {user} for guidance on {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Thank you, {user}, for your work on {task}.",
+    "placeholders": [
+      "user",
+      "task"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Acknowledgment to {user} for {contribution}.",
+    "placeholders": [
+      "user",
+      "contribution"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Many thanks to {user} and {team} for {result}.",
+    "placeholders": [
+      "user",
+      "team",
+      "result"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "We thank {user} for reviewing the {document}.",
+    "placeholders": [
+      "user",
+      "document"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Appreciation to {user} for {action}.",
+    "placeholders": [
+      "user",
+      "action"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Thanks to {user} from {organization}.",
+    "placeholders": [
+      "user",
+      "organization"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "We acknowledge {user}'s efforts in {field}.",
+    "placeholders": [
+      "user",
+      "field"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Thank you, {user}, for your {quality}.",
+    "placeholders": [
+      "user",
+      "quality"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Gratitude to {user} for {support}.",
+    "placeholders": [
+      "user",
+      "support"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Thanks to {user} for {help} with {topic}.",
+    "placeholders": [
+      "user",
+      "help",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "We are thankful to {user}.",
+    "placeholders": [
+      "user"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "A big thank you to {user} for {contribution} to {project}.",
+    "placeholders": [
+      "user",
+      "contribution",
+      "project"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "We would like to express our sincere gratitude to {user} for their invaluable insights on {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Special acknowledgment goes to {user} and {user2} for their dedication to {cause}.",
+    "placeholders": [
+      "user",
+      "user2",
+      "cause"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "We deeply appreciate {user}'s patience and guidance throughout {process}.",
+    "placeholders": [
+      "user",
+      "process"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Thanks are due to {user} for providing {resource} which made {project} possible.",
+    "placeholders": [
+      "user",
+      "resource",
+      "project"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "We acknowledge the support of {organization} and {user} in {initiative}.",
+    "placeholders": [
+      "organization",
+      "user",
+      "initiative"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Grateful to {user} for their constructive criticism on {draft}.",
+    "placeholders": [
+      "user",
+      "draft"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Many thanks to {user} for coordinating {event} and ensuring its success.",
+    "placeholders": [
+      "user",
+      "event"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "We thank {user} for their generous {donation} to {fund}.",
+    "placeholders": [
+      "user",
+      "donation",
+      "fund"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Appreciation is extended to {user} for their technical expertise in {area}.",
+    "placeholders": [
+      "user",
+      "area"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "We are indebted to {user} for their mentorship during {period}.",
+    "placeholders": [
+      "user",
+      "period"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Thanks to {user} and the {team} for their hard work on {project}.",
+    "placeholders": [
+      "user",
+      "team",
+      "project"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "We acknowledge {user}'s role in advancing {field} through {work}.",
+    "placeholders": [
+      "user",
+      "field",
+      "work"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Our gratitude goes to {user} for {action} and {action2}.",
+    "placeholders": [
+      "user",
+      "action",
+      "action2"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "We are grateful to {user} for allowing us to use {resource}.",
+    "placeholders": [
+      "user",
+      "resource"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Acknowledgment to {user} for their leadership in {initiative}.",
+    "placeholders": [
+      "user",
+      "initiative"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "We would like to thank {user} for their collaboration on {study}.",
+    "placeholders": [
+      "user",
+      "study"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Special thanks to {user} for their assistance with {task} and {task2}.",
+    "placeholders": [
+      "user",
+      "task",
+      "task2"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "We appreciate the feedback from {user} and {user2} on {topic}.",
+    "placeholders": [
+      "user",
+      "user2",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "We extend our thanks to {user} for their continuous support of {project}.",
+    "placeholders": [
+      "user",
+      "project"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "The authors wish to thank {user} for {contribution} to {paper}.",
+    "placeholders": [
+      "user",
+      "contribution",
+      "paper"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "We are thankful to {user} for their time and effort in reviewing {manuscript}.",
+    "placeholders": [
+      "user",
+      "manuscript"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "We acknowledge the financial support from {organization} under grant {number}.",
+    "placeholders": [
+      "organization",
+      "number"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "We would like to acknowledge {user} for providing {data} and {analysis}.",
+    "placeholders": [
+      "user",
+      "data",
+      "analysis"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "We are deeply grateful to {user} for their encouragement and advice throughout {process}.",
+    "placeholders": [
+      "user",
+      "process"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "We wish to express our heartfelt thanks to {user} for their unwavering support of {initiative}.",
+    "placeholders": [
+      "user",
+      "initiative"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "We would like to extend our deepest gratitude to {user} and {user2} for their invaluable contributions to {project}, which significantly improved its quality.",
+    "placeholders": [
+      "user",
+      "user2",
+      "project"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "The authors are immensely grateful to {user} for their meticulous reading of the {manuscript} and for providing insightful suggestions that greatly enhanced the work.",
+    "placeholders": [
+      "user",
+      "manuscript"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "We acknowledge with sincere thanks the support of {organization} and {user} for providing the necessary {resources} and {facilities} for this research.",
+    "placeholders": [
+      "organization",
+      "user",
+      "resources",
+      "facilities"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "We owe a special debt of gratitude to {user} for their tireless efforts in coordinating {activity} and for their dedication to {cause}.",
+    "placeholders": [
+      "user",
+      "activity",
+      "cause"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "We are profoundly thankful to {user} for their mentorship, which has been instrumental in shaping {project} and our understanding of {topic}.",
+    "placeholders": [
+      "user",
+      "project",
+      "topic"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "We would like to recognize the contributions of {user} and {team}, whose hard work and perseverance made {achievement} possible.",
+    "placeholders": [
+      "user",
+      "team",
+      "achievement"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "We are grateful to {user} for their generous {donation} to {fund}, which enabled us to carry out {initiative} and reach {goal}.",
+    "placeholders": [
+      "user",
+      "donation",
+      "fund",
+      "initiative",
+      "goal"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "We acknowledge the valuable input from {user} during the {event} and their ongoing support for {organization}.",
+    "placeholders": [
+      "user",
+      "event",
+      "organization"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "We wish to thank {user} for their exceptional work on {task} and for their commitment to excellence in {field}.",
+    "placeholders": [
+      "user",
+      "task",
+      "field"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "We thank {user} for their valuable contributions to {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "The authors gratefully acknowledge {user} for insightful discussions on {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "We are deeply grateful to {user} for their unwavering support and guidance throughout this project on {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "Thanks to {user} for providing data and resources related to {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "We would like to express our sincere appreciation to {user} for their technical assistance with {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Special thanks to {user} for their critical reading of the manuscript and suggestions on {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "We acknowledge {user} for funding support through grant number {grant}.",
+    "placeholders": [
+      "user",
+      "grant"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "The authors thank {user} for their collaboration on experiments involving {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "We are indebted to {user} for their mentoring and encouragement during the work on {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "Thanks to {user} for access to {facility} which made this research possible.",
+    "placeholders": [
+      "user",
+      "facility"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "We appreciate {user} for helpful comments on an earlier version of this paper about {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Gratitude is extended to {user} for their patience and expertise in analyzing {dataset}.",
+    "placeholders": [
+      "user",
+      "dataset"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "We thank {user} for their dedication and hard work in collecting data on {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "Acknowledgment is given to {user} for providing software tools for {task}.",
+    "placeholders": [
+      "user",
+      "task"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "We are grateful to {user} for their continuous feedback and support on the {project}.",
+    "placeholders": [
+      "user",
+      "project"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "The authors wish to thank {user} for their administrative assistance in {department}.",
+    "placeholders": [
+      "user",
+      "department"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "We acknowledge the contribution of {user} who performed the simulations for {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Thanks to {user} for generously sharing their expertise in {field}.",
+    "placeholders": [
+      "user",
+      "field"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "We are thankful to {user} for their meticulous editing of the manuscript on {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "We thank {user} for their financial support through {foundation}.",
+    "placeholders": [
+      "user",
+      "foundation"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "The authors appreciate {user} for their efforts in organizing the workshop on {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "We extend our thanks to {user} for their assistance with laboratory equipment for {experiment}.",
+    "placeholders": [
+      "user",
+      "experiment"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "Grateful acknowledgment is made to {user} for their valuable input on the {report}.",
+    "placeholders": [
+      "user",
+      "report"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "We thank {user} for their tireless work in coordinating the {study}.",
+    "placeholders": [
+      "user",
+      "study"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Thanks to {user} for providing access to {archive} for historical data.",
+    "placeholders": [
+      "user",
+      "archive"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "We acknowledge the support of {user} in developing the methodology for {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "The authors thank {user} for their patience during the review process of {paper}.",
+    "placeholders": [
+      "user",
+      "paper"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "We are grateful to {user} for their permission to use {material}.",
+    "placeholders": [
+      "user",
+      "material"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Thanks to {user} for their invaluable help with data analysis for {project}.",
+    "placeholders": [
+      "user",
+      "project"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "We appreciate {user} for their constructive criticism that improved the quality of {work}.",
+    "placeholders": [
+      "user",
+      "work"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "Acknowledgment is due to {user} for their technical support in {lab}.",
+    "placeholders": [
+      "user",
+      "lab"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "We thank {user} for their generous donation of samples for {experiment}.",
+    "placeholders": [
+      "user",
+      "experiment"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "The authors wish to thank {user} for their encouragement and advice on {career}.",
+    "placeholders": [
+      "user",
+      "career"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "We are thankful to {user} for their assistance in preparing the {presentation}.",
+    "placeholders": [
+      "user",
+      "presentation"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Thanks to {user} for their collaboration on the {manuscript}.",
+    "placeholders": [
+      "user",
+      "manuscript"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "We acknowledge the help of {user} in recruiting participants for {study}.",
+    "placeholders": [
+      "user",
+      "study"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Gratitude is expressed to {user} for their insights into {theory}.",
+    "placeholders": [
+      "user",
+      "theory"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "We thank {user} for their patience and support during the writing of {book}.",
+    "placeholders": [
+      "user",
+      "book"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "The authors appreciate {user} for their help with coding for {software}.",
+    "placeholders": [
+      "user",
+      "software"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "We are grateful to {user} for their guidance in statistical analysis for {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "Thanks to {user} for providing access to {database}.",
+    "placeholders": [
+      "user",
+      "database"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "We acknowledge {user} for their efforts in organizing the {conference}.",
+    "placeholders": [
+      "user",
+      "conference"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "We thank {user} for their moral support throughout the {project}.",
+    "placeholders": [
+      "user",
+      "project"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "The authors wish to thank {user} for their valuable feedback on {draft}.",
+    "placeholders": [
+      "user",
+      "draft"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "We are indebted to {user} for their time and effort in reviewing {proposal}.",
+    "placeholders": [
+      "user",
+      "proposal"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "Grateful acknowledgment is given to {user} for their inspiration on {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "We thank {user} for their assistance with fieldwork in {location}.",
+    "placeholders": [
+      "user",
+      "location"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "The authors appreciate {user} for their contributions to the {team}.",
+    "placeholders": [
+      "user",
+      "team"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "We acknowledge the support of {user} in securing {funding}.",
+    "placeholders": [
+      "user",
+      "funding"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Thanks to {user} for their patience and understanding during the {process}.",
+    "placeholders": [
+      "user",
+      "process"
+    ],
+    "length": "long"
+  }
+]

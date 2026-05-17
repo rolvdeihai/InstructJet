@@ -9,6 +9,18 @@ interface ChatMessage {
   content: string;
 }
 
+interface ChatInterfaceProps {
+  messages: ChatMessage[];
+  onSendMessage: (message: string) => void;
+  isGenerating: boolean;
+  isSearching?: boolean;
+  webSearchEnabled?: boolean;
+  onToggleWebSearch?: () => void;
+  onStopGeneration?: () => void;
+  queuePosition?: number | null;
+  onInsertGuide?: () => void;  // new prop
+}
+
 export default function ChatInterface({
   messages,
   onSendMessage,
@@ -16,14 +28,10 @@ export default function ChatInterface({
   isSearching = false,
   webSearchEnabled = false,
   onToggleWebSearch,
-}: {
-  messages: ChatMessage[];
-  onSendMessage: (message: string) => void;
-  isGenerating: boolean;
-  isSearching?: boolean;
-  webSearchEnabled?: boolean;
-  onToggleWebSearch?: () => void;
-}) {
+  onStopGeneration,
+  queuePosition = null,
+  onInsertGuide,  // destructure new prop
+}: ChatInterfaceProps) {
   const [input, setInput] = useState('');
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
@@ -54,6 +62,19 @@ export default function ChatInterface({
       textareaRef.current.style.height = `${textareaRef.current.scrollHeight}px`;
     }
   };
+
+  const SendIcon = () => (
+    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <line x1="22" y1="2" x2="11" y2="13"></line>
+      <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+    </svg>
+  );
+
+  const StopIcon = () => (
+    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+    </svg>
+  );
 
   return (
     <div className="flex flex-col h-full bg-gray-50">
@@ -98,7 +119,7 @@ export default function ChatInterface({
             </div>
           </div>
         ))}
-        {(isSearching || isGenerating) && (
+        {(isSearching || isGenerating) && !queuePosition && (
           <div className="flex justify-start">
             <div className="bg-white border border-gray-200 rounded-lg p-3 text-gray-500">
               <div className="flex items-center space-x-2">
@@ -116,7 +137,45 @@ export default function ChatInterface({
         )}
         <div ref={messagesEndRef} />
       </div>
+
+      {/* Queue position banner - above the input form */}
+      {queuePosition !== null && queuePosition > 0 && (
+        <div className="px-4 pt-2">
+          <div className="bg-amber-50 border border-amber-200 rounded-lg p-2 flex items-center justify-between text-sm">
+            <div className="flex items-center space-x-2 text-amber-700">
+              <svg className="animate-spin h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+              </svg>
+              <span>
+                <strong>Queue position: {queuePosition}</strong> – Please wait. Your request will be processed shortly.
+              </span>
+            </div>
+            <button
+              onClick={onStopGeneration}
+              className="text-amber-600 hover:text-amber-800 text-xs font-medium"
+            >
+              Cancel
+            </button>
+          </div>
+        </div>
+      )}
+
       <form onSubmit={handleSubmit} className="border-t border-gray-200 p-4 bg-white">
+        <div className="flex items-center space-x-2 mb-2">
+          {onInsertGuide && (
+            <button
+              type="button"
+              onClick={onInsertGuide}
+              className="text-xs bg-gray-100 hover:bg-gray-200 px-2 py-1 rounded"
+            >
+              @guide
+            </button>
+          )}
+          <span className="text-xs text-gray-500">
+            Start your message with @guide to generate a guide
+          </span>
+        </div>
         <div className="flex space-x-2">
           <textarea
             ref={textareaRef}
@@ -129,7 +188,7 @@ export default function ChatInterface({
             placeholder="Describe the task... (Enter to send, Shift+Enter for new line)"
             rows={1}
             className="flex-1 resize-none border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary-500"
-            disabled={isGenerating || isSearching}
+            disabled={isGenerating || isSearching || (queuePosition !== null && queuePosition > 0)}
           />
           {onToggleWebSearch && (
             <button
@@ -145,13 +204,27 @@ export default function ChatInterface({
               🌐
             </button>
           )}
-          <button
-            type="submit"
-            disabled={!input.trim() || isGenerating || isSearching}
-            className="px-4 py-2 bg-primary-600 text-white rounded-lg disabled:opacity-50"
-          >
-            Send
-          </button>
+          {isGenerating && onStopGeneration ? (
+            <button
+              type="button"
+              onClick={onStopGeneration}
+              className="px-4 py-2 bg-red-500 text-white rounded-lg flex items-center justify-center"
+              title="Stop generating"
+            >
+              <StopIcon />
+              <span className="ml-1 hidden sm:inline">Stop</span>
+            </button>
+          ) : (
+            <button
+              type="submit"
+              disabled={!input.trim() || isGenerating || isSearching || (queuePosition !== null && queuePosition > 0)}
+              className="px-4 py-2 bg-primary-600 text-white rounded-lg disabled:opacity-50 flex items-center justify-center"
+              title="Send message"
+            >
+              <SendIcon />
+              <span className="ml-1 hidden sm:inline">Send</span>
+            </button>
+          )}
         </div>
         <div className="text-xs text-gray-500 mt-2 text-center">
           {webSearchEnabled ? (

@@ -1,5 +1,3 @@
-// src/app/guides/page.tsx
-
 import { redirect } from 'next/navigation';
 import { cookies } from 'next/headers';
 import { getUserFromSession } from '@/lib/auth';
@@ -16,7 +14,7 @@ export default async function GuidesPage() {
 
   const { data: guides, error } = await supabaseAdmin
     .from('guides')
-    .select('id, slug, title, created_at')
+    .select('id, slug, title, created_at, total_token_budget, token_budget_remaining')
     .eq('user_id', user.id)
     .order('created_at', { ascending: false });
 
@@ -47,16 +45,27 @@ export default async function GuidesPage() {
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {guides.map((guide) => (
-              <Link
-                key={guide.id}
-                href={`/guides/${guide.slug}`}
-                className="block bg-white rounded-xl shadow-md hover:shadow-lg transition p-6"
-              >
-                <h2 className="text-xl font-semibold text-gray-900 mb-2">{guide.title}</h2>
-                <p className="text-sm text-gray-500">
-                  Created {new Date(guide.created_at).toLocaleDateString()}
-                </p>
-              </Link>
+              <div key={guide.id} className="bg-white rounded-xl shadow-md hover:shadow-lg transition p-6 flex flex-col">
+                <Link href={`/guides/${guide.slug}`} className="flex-1">
+                  <h2 className="text-xl font-semibold text-gray-900 mb-2">{guide.title}</h2>
+                  <p className="text-sm text-gray-500 mb-1">
+                    Created {new Date(guide.created_at).toLocaleDateString()}
+                  </p>
+                  <div className="mt-2 text-xs text-gray-400">
+                    <span className="inline-block bg-blue-50 text-blue-700 px-2 py-0.5 rounded">
+                      🪙 Budget: {guide.token_budget_remaining || 0} / {guide.total_token_budget || 0} tokens
+                    </span>
+                  </div>
+                </Link>
+                <div className="mt-4 flex justify-end">
+                  <Link
+                    href={`/guides/${guide.slug}/edit`}
+                    className="text-sm text-primary-600 hover:text-primary-700 font-medium"
+                  >
+                    Edit Guide
+                  </Link>
+                </div>
+              </div>
             ))}
           </div>
         )}

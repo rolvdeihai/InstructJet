@@ -1,0 +1,1752 @@
+[
+  {
+    "text": "For instance, {user} might consider the impact of {topic} on daily life.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "An example of {concept} is how {user} uses it in {context}.",
+    "placeholders": [
+      "concept",
+      "user",
+      "context"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Take {user}'s approach to {topic}: it illustrates {key_idea}.",
+    "placeholders": [
+      "user",
+      "topic",
+      "key_idea"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Consider the case of {company}, which successfully implemented {strategy}.",
+    "placeholders": [
+      "company",
+      "strategy"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "A classic example is {phenomenon}, where {factor} plays a crucial role.",
+    "placeholders": [
+      "phenomenon",
+      "factor"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "To illustrate, {user} can look at how {process} works in {field}.",
+    "placeholders": [
+      "user",
+      "process",
+      "field"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "For example, when {user} applies {method}, the results are {outcome}.",
+    "placeholders": [
+      "user",
+      "method",
+      "outcome"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "One concrete example is the use of {tool} in {scenario}.",
+    "placeholders": [
+      "tool",
+      "scenario"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Think of {user}'s experience with {product}: it demonstrates {benefit}.",
+    "placeholders": [
+      "user",
+      "product",
+      "benefit"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "An illustrative case is {event}, which shows the importance of {principle}.",
+    "placeholders": [
+      "event",
+      "principle"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "For instance, {user} might recall the time {situation} occurred.",
+    "placeholders": [
+      "user",
+      "situation"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "A good example is how {user} used {technique} to solve {problem}.",
+    "placeholders": [
+      "user",
+      "technique",
+      "problem"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Consider the example of {country} adopting {policy} to address {issue}.",
+    "placeholders": [
+      "country",
+      "policy",
+      "issue"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Take, for example, the case of {organization} innovating in {industry}.",
+    "placeholders": [
+      "organization",
+      "industry"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "An example that comes to mind is {user}'s project on {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "For a real-world example, look at how {entity} handles {challenge}.",
+    "placeholders": [
+      "entity",
+      "challenge"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "One might consider the example of {experiment} in {field} as evidence.",
+    "placeholders": [
+      "experiment",
+      "field"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "To give an example, {user} could examine {data} from {source}.",
+    "placeholders": [
+      "user",
+      "data",
+      "source"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "A telling example is the story of {person} overcoming {obstacle}.",
+    "placeholders": [
+      "person",
+      "obstacle"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "For instance, in {context}, {user} observed that {observation}.",
+    "placeholders": [
+      "context",
+      "user",
+      "observation"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "An example of this is when {user} tried {approach} and succeeded.",
+    "placeholders": [
+      "user",
+      "approach"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Consider the example of {theory} applied to {real_world_case}.",
+    "placeholders": [
+      "theory",
+      "real_world_case"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Take the case of {city} implementing {solution} for {problem}.",
+    "placeholders": [
+      "city",
+      "solution",
+      "problem"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "A relevant example is how {user} leveraged {resource} to achieve {goal}.",
+    "placeholders": [
+      "user",
+      "resource",
+      "goal"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "For example, {user} might find that {strategy} works best in {situation}.",
+    "placeholders": [
+      "user",
+      "strategy",
+      "situation"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "One example is the transformation of {company} under {leadership}.",
+    "placeholders": [
+      "company",
+      "leadership"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "An illustration is provided by {study} on {topic}.",
+    "placeholders": [
+      "study",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "For instance, {user} can see the effect of {variable} in {experiment}.",
+    "placeholders": [
+      "user",
+      "variable",
+      "experiment"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Consider the example of {algorithm} used in {application}.",
+    "placeholders": [
+      "algorithm",
+      "application"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Take {user}'s case: they used {method} to improve {metric}.",
+    "placeholders": [
+      "user",
+      "method",
+      "metric"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "A prime example is {event}, which illustrates {concept}.",
+    "placeholders": [
+      "event",
+      "concept"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "For example, when {user} analyzes {data}, they find {pattern}.",
+    "placeholders": [
+      "user",
+      "data",
+      "pattern"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "An example from history is {historical_event} showing {lesson}.",
+    "placeholders": [
+      "historical_event",
+      "lesson"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Consider how {user} implemented {change} in {organization}.",
+    "placeholders": [
+      "user",
+      "change",
+      "organization"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "A case in point is {project} that achieved {result}.",
+    "placeholders": [
+      "project",
+      "result"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "For instance, {user} might refer to {example_text} as evidence.",
+    "placeholders": [
+      "user",
+      "example_text"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Take the example of {species} adapting to {environment}.",
+    "placeholders": [
+      "species",
+      "environment"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "An example of {principle} in action is {scenario}.",
+    "placeholders": [
+      "principle",
+      "scenario"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "For a practical example, {user} can try {technique} on {task}.",
+    "placeholders": [
+      "user",
+      "technique",
+      "task"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Consider the example of {team} using {tool} to collaborate.",
+    "placeholders": [
+      "team",
+      "tool"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "One example is the success of {campaign} by {organization}.",
+    "placeholders": [
+      "campaign",
+      "organization"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "For instance, {user} can examine the case of {patient} with {condition}.",
+    "placeholders": [
+      "user",
+      "patient",
+      "condition"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "An example worth noting is {innovation} in {field}.",
+    "placeholders": [
+      "innovation",
+      "field"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Take, for example, the situation where {user} encountered {challenge}.",
+    "placeholders": [
+      "user",
+      "challenge"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "A concrete example is the application of {theory} to {problem}.",
+    "placeholders": [
+      "theory",
+      "problem"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "For example, {user} might notice that {trend} is emerging in {industry}.",
+    "placeholders": [
+      "user",
+      "trend",
+      "industry"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Consider the example of {artist} using {medium} to express {theme}.",
+    "placeholders": [
+      "artist",
+      "medium",
+      "theme"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "An example from literature is {work} by {author}.",
+    "placeholders": [
+      "work",
+      "author"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "For instance, in {field}, {user} can apply {method} to {data}.",
+    "placeholders": [
+      "user",
+      "field",
+      "method",
+      "data"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Take the example of {system} designed for {purpose}.",
+    "placeholders": [
+      "system",
+      "purpose"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "For instance, {user} might use {tool} to solve {problem}.",
+    "placeholders": [
+      "user",
+      "tool",
+      "problem"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Consider {topic} as an example of how {concept} applies in real life.",
+    "placeholders": [
+      "topic",
+      "concept"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "A classic case is when {user} encountered {situation} and learned {lesson}.",
+    "placeholders": [
+      "user",
+      "situation",
+      "lesson"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Take {city}: its {landmark} demonstrates the impact of {factor}.",
+    "placeholders": [
+      "city",
+      "landmark",
+      "factor"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "To illustrate, {company} adopted {strategy} and saw {result} within {timeframe}.",
+    "placeholders": [
+      "company",
+      "strategy",
+      "result",
+      "timeframe"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "An example from {field} is {example_name}, where {key_feature} led to {outcome}.",
+    "placeholders": [
+      "field",
+      "example_name",
+      "key_feature",
+      "outcome"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Look at {animal}: its {adaptation} is a perfect example of evolution in action.",
+    "placeholders": [
+      "animal",
+      "adaptation"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Suppose {user} wants to {goal}. They could use {method} to achieve it.",
+    "placeholders": [
+      "user",
+      "goal",
+      "method"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "For example, when {event} happened, {people} responded by {action}.",
+    "placeholders": [
+      "event",
+      "people",
+      "action"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Think of {product}: its {feature} makes it ideal for {use_case}.",
+    "placeholders": [
+      "product",
+      "feature",
+      "use_case"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "A good demonstration is {process}, where {step} is critical for success.",
+    "placeholders": [
+      "process",
+      "step"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "In the context of {topic}, {example} shows how {principle} works.",
+    "placeholders": [
+      "topic",
+      "example",
+      "principle"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "One notable instance is {case_study}, which highlights the role of {element}.",
+    "placeholders": [
+      "case_study",
+      "element"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "As seen in {scenario}, {factor} can dramatically alter {outcome}.",
+    "placeholders": [
+      "scenario",
+      "factor",
+      "outcome"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Consider the case of {person}, who used {skill} to overcome {challenge}.",
+    "placeholders": [
+      "person",
+      "skill",
+      "challenge"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "An illustration from history: {event} changed the course of {nation}.",
+    "placeholders": [
+      "event",
+      "nation"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "For instance, {software} automates {task}, saving {hours} hours per week.",
+    "placeholders": [
+      "software",
+      "task",
+      "hours"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Take {ecosystem}: the relationship between {species1} and {species2} is a classic example of symbiosis.",
+    "placeholders": [
+      "ecosystem",
+      "species1",
+      "species2"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Consider how {company} used {technology} to reduce costs by {percentage}%.",
+    "placeholders": [
+      "company",
+      "technology",
+      "percentage"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "A concrete example is {project}, which achieved {goal} through {method}.",
+    "placeholders": [
+      "project",
+      "goal",
+      "method"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Think about {artist}: their work exemplifies the {style} movement.",
+    "placeholders": [
+      "artist",
+      "style"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "For example, {recipe} uses {ingredient} to create a {flavor} profile.",
+    "placeholders": [
+      "recipe",
+      "ingredient",
+      "flavor"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "In {country}, the policy of {policy} led to {effect} over {years} years.",
+    "placeholders": [
+      "country",
+      "policy",
+      "effect",
+      "years"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "A typical scenario: {user} opens {app}, clicks {button}, and sees {result}.",
+    "placeholders": [
+      "user",
+      "app",
+      "button",
+      "result"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Consider the experiment where {scientist} tested {hypothesis} and found {finding}.",
+    "placeholders": [
+      "scientist",
+      "hypothesis",
+      "finding"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "For instance, {language} uses {feature} to express {concept} differently.",
+    "placeholders": [
+      "language",
+      "feature",
+      "concept"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Take the case of {patient} who improved after {treatment}.",
+    "placeholders": [
+      "patient",
+      "treatment"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "An example from nature: {animal} migrates {distance} miles each year.",
+    "placeholders": [
+      "animal",
+      "distance"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Think of {sport}: the {technique} is key to mastering the game.",
+    "placeholders": [
+      "sport",
+      "technique"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "For example, {startup} grew from {size1} to {size2} in {months} months by focusing on {niche}.",
+    "placeholders": [
+      "startup",
+      "size1",
+      "size2",
+      "months",
+      "niche"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "Consider how {author} uses {device} in {book} to convey {theme}.",
+    "placeholders": [
+      "author",
+      "device",
+      "book",
+      "theme"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "A clear example is {algorithm}, which solves {problem} in {time} complexity.",
+    "placeholders": [
+      "algorithm",
+      "problem",
+      "time"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Take the {city} subway system: it transports {number} passengers daily.",
+    "placeholders": [
+      "city",
+      "number"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "For instance, {teacher} uses {method} to engage students in {subject}.",
+    "placeholders": [
+      "teacher",
+      "method",
+      "subject"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "In the world of {field}, {example} stands out due to {quality}.",
+    "placeholders": [
+      "field",
+      "example",
+      "quality"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Consider the case of {organization}, which implemented {system} to improve efficiency by {percent}%.",
+    "placeholders": [
+      "organization",
+      "system",
+      "percent"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "A practical example: {user} can use {tool} to create {output} in minutes.",
+    "placeholders": [
+      "user",
+      "tool",
+      "output"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Think about {movie}: its use of {technique} creates a {mood} atmosphere.",
+    "placeholders": [
+      "movie",
+      "technique",
+      "mood"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "For example, {plant} thrives in {condition} because of {adaptation}.",
+    "placeholders": [
+      "plant",
+      "condition",
+      "adaptation"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "In {history}, the {event} of {year} marked a turning point for {civilization}.",
+    "placeholders": [
+      "history",
+      "event",
+      "year",
+      "civilization"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Take the {device}: its {component} enables {function} efficiently.",
+    "placeholders": [
+      "device",
+      "component",
+      "function"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Consider how {team} used {strategy} to win the {competition}.",
+    "placeholders": [
+      "team",
+      "strategy",
+      "competition"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "An example from psychology: {experiment} showed that {stimulus} triggers {response}.",
+    "placeholders": [
+      "experiment",
+      "stimulus",
+      "response"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "For instance, {company}'s {product} reduced {issue} by {measure}.",
+    "placeholders": [
+      "company",
+      "product",
+      "issue",
+      "measure"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Think of {ecosystem} where {species} plays a key role in {process}.",
+    "placeholders": [
+      "ecosystem",
+      "species",
+      "process"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Take the example of {city}'s {initiative}, which cut {problem} by {percentage}% within {time}.",
+    "placeholders": [
+      "city",
+      "initiative",
+      "problem",
+      "percentage",
+      "time"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "A case in point: {user} achieved {goal} by following {steps} steps.",
+    "placeholders": [
+      "user",
+      "goal",
+      "steps"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Consider {song}: its {element} perfectly captures the {emotion} of the era.",
+    "placeholders": [
+      "song",
+      "element",
+      "emotion"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "For example, {language} uses {grammar_rule} to form {sentence_type}.",
+    "placeholders": [
+      "language",
+      "grammar_rule",
+      "sentence_type"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "An example from technology: {innovation} revolutionized {industry} by enabling {capability}.",
+    "placeholders": [
+      "innovation",
+      "industry",
+      "capability"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "For instance, {user} once explained {topic} using a simple analogy.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Consider the example of {topic} in {context}.",
+    "placeholders": [
+      "topic",
+      "context"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "A classic example is when {user} demonstrated {topic} by {action}.",
+    "placeholders": [
+      "user",
+      "topic",
+      "action"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Take, for example, the case of {topic} in {field}.",
+    "placeholders": [
+      "topic",
+      "field"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "To illustrate, suppose {user} is trying to {goal} with {topic}.",
+    "placeholders": [
+      "user",
+      "goal",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "An example of this is the way {topic} affects {outcome}.",
+    "placeholders": [
+      "topic",
+      "outcome"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "For example, when {user} applied {method} to {topic}, the results were surprising.",
+    "placeholders": [
+      "user",
+      "method",
+      "topic"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "Think of {topic} like {analogy}.",
+    "placeholders": [
+      "topic",
+      "analogy"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "A real-world example is {topic} in {place}.",
+    "placeholders": [
+      "topic",
+      "place"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "As an example, {user} showed that {topic} can be solved by {solution}.",
+    "placeholders": [
+      "user",
+      "topic",
+      "solution"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Here's an example: {topic} helps improve {aspect}.",
+    "placeholders": [
+      "topic",
+      "aspect"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "One notable example is the use of {topic} in {industry} to increase {metric}.",
+    "placeholders": [
+      "topic",
+      "industry",
+      "metric"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "For instance, {user} utilized {tool} to analyze {topic}.",
+    "placeholders": [
+      "user",
+      "tool",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Consider the example of {country} adopting {policy} for {topic}.",
+    "placeholders": [
+      "country",
+      "policy",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "A good example is the relationship between {topic} and {factor}.",
+    "placeholders": [
+      "topic",
+      "factor"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "To give an example, {user} measured the impact of {topic} on {variable}.",
+    "placeholders": [
+      "user",
+      "topic",
+      "variable"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Take {topic} as an example of {concept} in action.",
+    "placeholders": [
+      "topic",
+      "concept"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "For example, if {user} does {action}, then {result} occurs regarding {topic}.",
+    "placeholders": [
+      "user",
+      "action",
+      "result",
+      "topic"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "An example from history is {event} involving {topic}.",
+    "placeholders": [
+      "event",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Consider {topic} as a case study: it shows how {principle} works.",
+    "placeholders": [
+      "topic",
+      "principle"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "For instance, in {scenario}, {topic} plays a crucial role.",
+    "placeholders": [
+      "scenario",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "A typical example is when {topic} leads to {consequence}.",
+    "placeholders": [
+      "topic",
+      "consequence"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Let me give you an example: {user} used {topic} to solve {problem}.",
+    "placeholders": [
+      "user",
+      "topic",
+      "problem"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "For example, {topic} can be seen in everyday life, such as {situation}.",
+    "placeholders": [
+      "topic",
+      "situation"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "One concrete example is the application of {topic} in {domain}.",
+    "placeholders": [
+      "topic",
+      "domain"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "As an illustration, imagine {user} trying to teach {topic} to {audience}.",
+    "placeholders": [
+      "user",
+      "topic",
+      "audience"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Consider the example of {technology} revolutionizing {topic}.",
+    "placeholders": [
+      "technology",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "For instance, when {topic} is used in {field}, it improves {outcome} significantly.",
+    "placeholders": [
+      "topic",
+      "field",
+      "outcome"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "A famous example is {person} and their work on {topic}.",
+    "placeholders": [
+      "person",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Here's a practical example: {user} implemented {strategy} for {topic}.",
+    "placeholders": [
+      "user",
+      "strategy",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Take the example of {organism} adapting to {environment} via {topic}.",
+    "placeholders": [
+      "organism",
+      "environment",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "For example, {topic} is key to understanding {phenomenon}.",
+    "placeholders": [
+      "topic",
+      "phenomenon"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "An example from literature is {book} exploring {topic}.",
+    "placeholders": [
+      "book",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Consider the example of {company} using {topic} to achieve {goal}.",
+    "placeholders": [
+      "company",
+      "topic",
+      "goal"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "For instance, {user} found that {topic} correlates with {factor}.",
+    "placeholders": [
+      "user",
+      "topic",
+      "factor"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "A striking example is the effect of {topic} on {population}.",
+    "placeholders": [
+      "topic",
+      "population"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "To illustrate, consider {scenario} where {topic} is applied incorrectly.",
+    "placeholders": [
+      "scenario",
+      "topic"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "For example, {topic} can be broken down into {component}.",
+    "placeholders": [
+      "topic",
+      "component"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "A classic example in {field} is the use of {topic} for {purpose}.",
+    "placeholders": [
+      "field",
+      "topic",
+      "purpose"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Think of {topic} as an example of {category}.",
+    "placeholders": [
+      "topic",
+      "category"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "For instance, {user} demonstrated {topic} with a simple {object}.",
+    "placeholders": [
+      "user",
+      "topic",
+      "object"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "An example from nature is how {animal} uses {topic} for {behavior}.",
+    "placeholders": [
+      "animal",
+      "topic",
+      "behavior"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Consider the example of {city} implementing {topic} to reduce {issue}.",
+    "placeholders": [
+      "city",
+      "topic",
+      "issue"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "For example, {topic} is analogous to {analogy} in many ways.",
+    "placeholders": [
+      "topic",
+      "analogy"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "A well-known example is the {event} that changed {topic}.",
+    "placeholders": [
+      "event",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "To provide an example, {user} compared {topic} to {other}.",
+    "placeholders": [
+      "user",
+      "topic",
+      "other"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "For instance, in {situation}, {topic} fails because of {reason}.",
+    "placeholders": [
+      "situation",
+      "topic",
+      "reason"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "Take the example of {product} which uses {topic} to enhance {feature}.",
+    "placeholders": [
+      "product",
+      "topic",
+      "feature"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "An illustrative example is the story of {person} mastering {topic}.",
+    "placeholders": [
+      "person",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "For example, {topic} is like a {metaphor} for {concept}.",
+    "placeholders": [
+      "topic",
+      "metaphor",
+      "concept"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "For instance, {user} demonstrates {topic} perfectly.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Consider how {user} applied {concept} in {context}.",
+    "placeholders": [
+      "user",
+      "concept",
+      "context"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "A classic example of {topic} is when {user} achieved {result} by using {method}.",
+    "placeholders": [
+      "topic",
+      "user",
+      "result",
+      "method"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "Take {user}'s work on {project} as an example.",
+    "placeholders": [
+      "user",
+      "project"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "To illustrate {topic}, let's look at {user}'s approach to {challenge}.",
+    "placeholders": [
+      "topic",
+      "user",
+      "challenge"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "One notable example is {user}'s use of {tool} to solve {problem} in {domain}.",
+    "placeholders": [
+      "user",
+      "tool",
+      "problem",
+      "domain"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "An example of this is {user} in {situation}.",
+    "placeholders": [
+      "user",
+      "situation"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "For example, when {user} encountered {obstacle}, they used {strategy} to overcome it.",
+    "placeholders": [
+      "user",
+      "obstacle",
+      "strategy"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Consider {user}'s case study on {topic} where they implemented {solution} and got {outcome}.",
+    "placeholders": [
+      "user",
+      "topic",
+      "solution",
+      "outcome"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "Think of {user} as an example of {quality}.",
+    "placeholders": [
+      "user",
+      "quality"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "A great example is {user} demonstrating {skill} in {scenario}.",
+    "placeholders": [
+      "user",
+      "skill",
+      "scenario"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Take the example of {user} who used {technique} to improve {metric} by {value} percent.",
+    "placeholders": [
+      "user",
+      "technique",
+      "metric",
+      "value"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "Let's use {user} and {topic} as an example.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "For instance, {user} showed {trait} when handling {situation}.",
+    "placeholders": [
+      "user",
+      "trait",
+      "situation"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Here's a concrete example: {user} applied {theory} to {context} and achieved {result}.",
+    "placeholders": [
+      "user",
+      "theory",
+      "context",
+      "result"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "Example: {user} in {year}.",
+    "placeholders": [
+      "user",
+      "year"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "An illustrative example is {user}'s work on {project} at {company}.",
+    "placeholders": [
+      "user",
+      "project",
+      "company"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Consider how {user} leveraged {resource} to address {challenge} in {field}, resulting in {impact}.",
+    "placeholders": [
+      "user",
+      "resource",
+      "challenge",
+      "field",
+      "impact"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "Take {user} as an example of {behavior}.",
+    "placeholders": [
+      "user",
+      "behavior"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "For example, when {user} was in {role}, they used {strategy} to achieve {goal}.",
+    "placeholders": [
+      "user",
+      "role",
+      "strategy",
+      "goal"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "A specific example is {user}'s implementation of {system} in {organization} which led to {benefit}.",
+    "placeholders": [
+      "user",
+      "system",
+      "organization",
+      "benefit"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "Consider the example of {user} and {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "An example of {concept} is {user}'s experience with {event}.",
+    "placeholders": [
+      "concept",
+      "user",
+      "event"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "To give an example: {user} transformed {process} by introducing {innovation}, resulting in {improvement}.",
+    "placeholders": [
+      "user",
+      "process",
+      "innovation",
+      "improvement"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "Think of {user} as a case in point.",
+    "placeholders": [
+      "user"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Take {user}'s use of {method} in {context} as an example.",
+    "placeholders": [
+      "user",
+      "method",
+      "context"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "One compelling example is {user} who overcame {obstacle} by applying {principle} and achieved {success}.",
+    "placeholders": [
+      "user",
+      "obstacle",
+      "principle",
+      "success"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "Here's an example: {user} and {topic}.",
+    "placeholders": [
+      "user",
+      "topic"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "For instance, {user} exemplifies {quality} in {situation}.",
+    "placeholders": [
+      "user",
+      "quality",
+      "situation"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Consider the example of {user} who used {technology} to optimize {process} and cut {cost} by {percent}%.",
+    "placeholders": [
+      "user",
+      "technology",
+      "process",
+      "cost",
+      "percent"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "Example: {user} in action.",
+    "placeholders": [
+      "user"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "An example of this principle is {user}'s approach to {task}.",
+    "placeholders": [
+      "user",
+      "task"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Let's examine the example of {user} who implemented {strategy} in {domain} and saw {outcome} within {timeframe}.",
+    "placeholders": [
+      "user",
+      "strategy",
+      "domain",
+      "outcome",
+      "timeframe"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "Like {user} in {scenario}.",
+    "placeholders": [
+      "user",
+      "scenario"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "For example, {user} demonstrated {skill} by {action}.",
+    "placeholders": [
+      "user",
+      "skill",
+      "action"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "A detailed example is {user}'s project on {topic} where they used {tool} to achieve {result} under {constraint}.",
+    "placeholders": [
+      "user",
+      "topic",
+      "tool",
+      "result",
+      "constraint"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "Take {user} as an instance.",
+    "placeholders": [
+      "user"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Consider {user}'s example of {behavior} in {setting}.",
+    "placeholders": [
+      "user",
+      "behavior",
+      "setting"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Here is an example: {user} applied {technique} to {data} and obtained {insight} which improved {decision}.",
+    "placeholders": [
+      "user",
+      "technique",
+      "data",
+      "insight",
+      "decision"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "Example: {user} in {context}.",
+    "placeholders": [
+      "user",
+      "context"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "An example is {user} handling {situation} with {approach}.",
+    "placeholders": [
+      "user",
+      "situation",
+      "approach"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "Consider the case of {user} who utilized {resource} to solve {problem} in {industry}, resulting in {benefit}.",
+    "placeholders": [
+      "user",
+      "resource",
+      "problem",
+      "industry",
+      "benefit"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "Picture {user} as an example.",
+    "placeholders": [
+      "user"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "For instance, {user} serves as an example of {trait} in {field}.",
+    "placeholders": [
+      "user",
+      "trait",
+      "field"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "A prime example is {user}'s work on {initiative} which used {method} to increase {metric} by {amount}.",
+    "placeholders": [
+      "user",
+      "initiative",
+      "method",
+      "metric",
+      "amount"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "Example: {user} did {action}.",
+    "placeholders": [
+      "user",
+      "action"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "Take the example of {user} in {role} at {company}.",
+    "placeholders": [
+      "user",
+      "role",
+      "company"
+    ],
+    "length": "medium"
+  },
+  {
+    "text": "To illustrate, {user} harnessed {tool} to automate {task} and saved {time} hours per week.",
+    "placeholders": [
+      "user",
+      "tool",
+      "task",
+      "time"
+    ],
+    "length": "long"
+  },
+  {
+    "text": "Think of {user} as a typical example.",
+    "placeholders": [
+      "user"
+    ],
+    "length": "short"
+  },
+  {
+    "text": "For example, consider how {user} applied {concept} to {challenge} and achieved {success}.",
+    "placeholders": [
+      "user",
+      "concept",
+      "challenge",
+      "success"
+    ],
+    "length": "medium"
+  }
+]
