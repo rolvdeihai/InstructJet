@@ -17,7 +17,23 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: '3.11'
-          cache: 'pip'
+          cache: 'pip'               # cache pip packages automatically (simple)
+
+      - name: Cache Hugging Face models (GGUF)
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/huggingface/hub
+          key: ${{ runner.os }}-hf-models-${{ hashFiles('jet-ai/app.py') }}
+          restore-keys: |
+            ${{ runner.os }}-hf-models-
+
+      - name: Cache pip packages (manual, extra layer)
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-${{ hashFiles('jet-ai/requirements.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-
 
       - name: Install dependencies (with prebuilt llama-cpp-python)
         working-directory: ./jet-ai
@@ -28,18 +44,17 @@ jobs:
           WHEEL_URL="https://github.com/rolvdeihai/InstructJet/releases/download/v1.0/llama_cpp_python-0.3.20-py3-none-linux_x86_64.whl"
           pip install -U "$WHEEL_URL"
           
-          # Install remaining requirements (if requirements.txt exists)
+          # Install remaining requirements if requirements.txt exists
           if [ -f "requirements.txt" ]; then
             pip install -r requirements.txt
           else
-            # Fallback: install common packages
             pip install fastapi uvicorn huggingface_hub psutil pyngrok sentence-transformers torch tiktoken sumy
           fi
 
-      - name: Download NLTK punkt (for LexRank)
+      - name: Download NLTK punkt (for LexRank) – cached by NLTK
         working-directory: ./jet-ai
         run: |
-          python -c "import nltk; nltk.download('punkt')"
+          python -c "import nltk; nltk.download('punkt', quiet=True)"
 
       - name: Start server with ngrok
         working-directory: ./jet-ai

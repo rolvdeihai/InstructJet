@@ -424,46 +424,49 @@ async def generate_structured_answer(user_query: str, context: str, request_id: 
     sections = skeleton["sections"]
     logger.info(f"Selected skeleton '{skeleton['id']}' with sections {sections}")
 
-    # Prepare a list of templates (or fallback instruction)
+    # Build list of templates (or fallback)
     sections_info = []
     for section in sections:
         templates = SECTION_TEMPLATES.get(section, [])
         if templates:
-            chosen = templates[0]  # or selection logic
+            chosen = templates[0]
             sections_info.append({"section": section, "template": chosen["text"]})
         else:
             sections_info.append({"section": section, "template": None})
 
-    # Build prompt that asks for JSON
-    prompt = f"""You are a helpful assistant that fills placeholders in sentence templates.
+    # Build the instruction with proper model tags
+    instruction = f"""You are a helpful assistant that fills placeholders in sentence templates.
 
 Conversation context:
 {context}
 
 User query: {user_query}
 
-For each of the following sections, fill the template’s placeholders ({{...}}) with concrete, natural values based on the conversation.
+For each of the following sections, fill the template's placeholders ({{...}}) with concrete, natural values based on the conversation.
 Return ONLY a valid JSON object where keys are section names and values are the completed sentences.
 
 Sections:
 {json.dumps(sections_info, indent=2)}
 
-Example output format:
-{{
-  "interest_comment": "I'm really interested in chess strategies.",
-  "problem_analysis": "The core challenge for you is that chess content lacks scalability.",
-  "recommendation": "I highly recommend focusing on opening tutorials due to their exceptional engagement."
-}}
+Example format for sections {sections}:
+{json.dumps({s: f"Filled content for {s}" for s in sections}, indent=2)}
 
 Now produce the JSON object:"""
 
+    # Wrap with model instruction tags
+    prompt = f"<s>[INST] {instruction} [/INST]"
+    
     response = await model._generate_completion(prompt, max_tokens=600, temperature=0.3, request_id=request_id)
     if response == "CANCELLED":
         return "CANCELLED"
 
-    # Extract JSON from response (model might add extra text)
+    # If response is empty, fallback to a generic message
+    if not response or not response.strip():
+        logger.error("Model returned empty response")
+        return "I'm sorry, I couldn't generate a response at this time. Please try again."
+
+    # Extract JSON from response
     try:
-        # Find the first { and last }
         start = response.find('{')
         end = response.rfind('}') + 1
         if start != -1 and end > start:
@@ -472,8 +475,8 @@ Now produce the JSON object:"""
         else:
             raise ValueError("No JSON object found")
     except Exception as e:
-        logger.error(f"Failed to parse JSON response: {e}\nRaw response: {response}")
-        # Fallback: return raw response (still usable)
+        logger.error(f"Failed to parse JSON response: {e}\nRaw response: {response[:500]}")
+        # Fallback: return the raw response (might still be readable)
         return response
 
     # Reconstruct the final answer in section order
