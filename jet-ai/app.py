@@ -675,10 +675,25 @@ async def generate_section_endpoint(request: GenerateSectionRequest):
         if request.section_type.lower() == "flow":
             diagram = await model.generate_flow_diagram(request.context)
             return GenerateSectionResponse(content=diagram)
+        
         ctx = request.context
         if request.compress_input and count_tokens(ctx) > 1500:
             ctx = smart_summarize_text(ctx, target_tokens=1000)
-        prompt = f"<s>[INST] Write the '{request.section_type}' section (markdown, max 300 tokens). Context: {ctx} [/INST]"
+        
+        # CRITICAL: Force the model to use the context, not templates
+        prompt = f"""<s>[INST] You are helping create a guide. The user wants a guide about:
+
+{ctx}
+
+Now write ONLY the "{request.section_type}" section of that guide. 
+- Write real, specific content based on the user's request above.
+- Do NOT use placeholders like [topic], [action], or [something].
+- Do NOT add extra text like "Here is the section".
+- Use markdown for formatting (headings, bullet points, etc.).
+- Keep it under 300 words.
+
+{request.section_type}: [/INST]"""
+
         generated = await model._generate_completion(prompt, max_tokens=400, temperature=0.4, request_id=request_id)
         if generated == "CANCELLED":
             return GenerateSectionResponse(content="Cancelled")
@@ -691,7 +706,7 @@ async def generate_section_endpoint(request: GenerateSectionRequest):
     finally:
         await queue_status.release()
         active_request_ids.discard(request_id)
-
+        
 @app.post("/compress-query", response_model=CompressQueryResponse)
 async def compress_query_endpoint(request: CompressQueryRequest):
     request_id = "compress_" + str(uuid.uuid4())

@@ -294,15 +294,23 @@ export default function CreateGuideClient({ userId }: { userId: string }) {
     }
 
     try {
-      console.log('[DEBUG] Compressing query:', prompt);
-      const compressRes = await fetch(`${baseUrl}/compress-query`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ prompt }),
-      });
-      if (!compressRes.ok) throw new Error(`Compress failed: ${compressRes.status}`);
-      const { compressed } = await compressRes.json();
-      console.log('[DEBUG] Compressed context received');
+      let contextToUse = prompt;
+      
+      // Only compress if the prompt is longer than ~2000 characters (approx 500 tokens)
+      if (prompt.length > 2000) {
+        console.log('[DEBUG] Compressing long query:', prompt.slice(0, 100) + '...');
+        const compressRes = await fetch(`${baseUrl}/compress-query`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ prompt }),
+        });
+        if (!compressRes.ok) throw new Error(`Compress failed: ${compressRes.status}`);
+        const { compressed } = await compressRes.json();
+        contextToUse = compressed;
+        console.log('[DEBUG] Compressed context received');
+      } else {
+        console.log('[DEBUG] Skipping compression (short prompt, using original)');
+      }
 
       let fullGuide = '';
       for (let i = 0; i < sections.length; i++) {
@@ -314,7 +322,7 @@ export default function CreateGuideClient({ userId }: { userId: string }) {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
               section_type: sections[i],
-              compressed_context: compressed,
+              compressed_context: contextToUse,
               compress_input: false,
             }),
           });
