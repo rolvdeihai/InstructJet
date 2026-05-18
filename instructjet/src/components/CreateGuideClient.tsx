@@ -180,7 +180,6 @@ export default function CreateGuideClient({ userId }: { userId: string }) {
     if (!message.trim()) return;
     await addMessage('user', message);
 
-    // ✅ Generate requestId immediately
     const requestId = crypto.randomUUID();
     setCurrentRequestId(requestId);
 
@@ -214,7 +213,7 @@ export default function CreateGuideClient({ userId }: { userId: string }) {
         body: JSON.stringify({ 
           message, 
           context: contextString,
-          requestId   // ✅ send generated ID
+          requestId
         }),
         signal: abortControllerRef.current.signal,
       });
@@ -238,18 +237,32 @@ export default function CreateGuideClient({ userId }: { userId: string }) {
       if (data.response) {
         try {
           const parsed = JSON.parse(data.response);
+          
+          // 🚀 PREMIUM: complete_guide (full guide from DeepSeek)
+          if (parsed.action === 'complete_guide') {
+            // Display the full markdown guide in chat
+            await addMessage('assistant', parsed.content);
+            // Populate the preview area
+            setGuideContent(parsed.content);
+            setIsGenerating(false);
+            stopQueuePolling();
+            return;
+          }
+          
+          // FREE: generate_guide (triggers section-by-section)
           if (parsed.action === 'generate_guide') {
             await addMessage('assistant', `I'll generate a step‑by‑step guide...`);
             setIsGenerating(false);
             stopQueuePolling();
-            const sections = ['Overview', 'Prerequisites', 'Step-by-Step Instructions', 'Tools & Assets', 'Flow'];
+            const sections = parsed.sections || ['Overview', 'Prerequisites', 'Step-by-Step Instructions', 'Tools & Assets', 'Flow'];
             setGuideSections(sections);
             await generateGuideSections(parsed.summary, sections);
             return;
           }
         } catch (e) {
-          // Not JSON – normal response
+          // Not JSON – normal conversational response
         }
+        // Normal text response (non‑guide)
         await addMessage('assistant', data.response);
       } else {
         throw new Error('Empty response from AI');

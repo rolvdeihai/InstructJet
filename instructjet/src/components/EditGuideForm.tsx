@@ -62,8 +62,7 @@ export default function EditGuideForm({
       if (updateError) throw updateError;
 
       // Redirect to the guide page using the updated title
-      const slug = `${title.toLowerCase().replace(/[^a-z0-9]+/g, '-')}-${guideId.slice(0, 8)}`;
-      router.push(`/guides/${slug}`);
+      router.push(`/guides`);
       router.refresh();
     } catch (err: any) {
       console.error('Save error:', err);
