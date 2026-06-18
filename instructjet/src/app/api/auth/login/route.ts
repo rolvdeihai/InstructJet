@@ -1,5 +1,3 @@
-// scr/app/api/auth/login/route.ts
-
 import { NextResponse } from 'next/server';
 import { cookies } from 'next/headers';
 import { supabaseAdmin } from '@/lib/supabase-admin';
@@ -30,11 +28,20 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: 'Invalid credentials' }, { status: 401 });
     }
 
-    // Create session
+    // 🧹 DELETE any existing sessions for this user (to avoid multiple valid sessions)
+    await supabaseAdmin
+      .from('sessions')
+      .delete()
+      .eq('user_id', user.id);
+
+    // Create new session
     const sessionToken = await createSession(user.id);
 
-    // Set cookie (httpOnly, secure, sameSite)
+    // 🍪 Clear existing cookie first (if any)
     const cookieStore = await cookies();
+    cookieStore.delete('instructjet_session'); // remove old cookie
+    
+    // Set fresh cookie
     cookieStore.set('instructjet_session', sessionToken, {
       httpOnly: true,
       secure: process.env.NODE_ENV === 'production',

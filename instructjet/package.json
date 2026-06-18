@@ -9,7 +9,9 @@
     "supabase:push": "npx supabase db push"
   },
   "dependencies": {
+    "@headlessui/react": "^2.2.10",
     "@heroicons/react": "^2.2.0",
+    "@paddle/paddle-node-sdk": "^3.8.0",
     "@supabase/auth-helpers-nextjs": "^0.8.0",
     "@supabase/supabase-js": "^2.98.0",
     "@tailwindcss/typography": "^0.5.19",

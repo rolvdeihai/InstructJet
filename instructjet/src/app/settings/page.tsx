@@ -1,3 +1,5 @@
+// src/app/settings/page.tsx
+
 'use client';
 
 import { useState, useEffect, useMemo } from 'react';
@@ -5,6 +7,8 @@ import { useRouter } from 'next/navigation';
 import { useAuth } from '@/contexts/AuthContext';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+import { Dialog, Transition } from '@headlessui/react';
+import { Fragment, useRef } from 'react';
 
 interface UserProfile {
   id: string;
@@ -71,6 +75,15 @@ export default function SettingsPage() {
   // UI state
   const [loading, setLoading] = useState(true);
   const [message, setMessage] = useState<{ type: 'success' | 'error'; text: string } | null>(null);
+
+  const [refundModalOpen, setRefundModalOpen] = useState(false);
+  const [refundableTokens, setRefundableTokens] = useState(0);
+  const [refundableUntilDate, setRefundableUntilDate] = useState<string | null>(null);
+  const [refundAmount, setRefundAmount] = useState<number>(0);
+  const [bankHolder, setBankHolder] = useState('');
+  const [bankName, setBankName] = useState('');
+  const [bankAccount, setBankAccount] = useState('');
+  const [submittingRefund, setSubmittingRefund] = useState(false);
 
   // NEW: compute usage statistics from transactions
   const usageSummary = useMemo<UsageSummary>(() => {
@@ -270,6 +283,15 @@ export default function SettingsPage() {
       setMessage({ type: 'error', text: err.message });
     } finally {
       setCancelling(false);
+    }
+  };
+
+  const fetchRefundableInfo = async () => {
+    const res = await fetch('/api/user/refundable-tokens');
+    const data = await res.json();
+    if (res.ok) {
+      setRefundableTokens(data.totalRefundable);
+      setRefundableUntilDate(data.earliestExpiry ? new Date(data.earliestExpiry).toLocaleDateString() : null);
     }
   };
 
@@ -594,6 +616,15 @@ export default function SettingsPage() {
                         {tokenBalance?.package_tokens?.toLocaleString() || 0}
                       </p>
                       <p className="text-xs text-gray-500 mt-1">One-time purchase, never expire</p>
+                      <button
+                        onClick={() => {
+                          fetchRefundableInfo();
+                          setRefundModalOpen(true);
+                        }}
+                        className="mt-2 text-sm text-red-600 hover:text-red-700 font-medium"
+                      >
+                        Request Refund
+                      </button>
                     </div>
                   </div>
 
@@ -700,6 +731,137 @@ export default function SettingsPage() {
               {/* Keep purchase transactions separate if desired, but not necessary now */}
             </div>
           )}
+
+          <Transition appear show={refundModalOpen} as={Fragment}>
+            <Dialog as="div" className="relative z-50" onClose={() => setRefundModalOpen(false)}>
+              <Transition.Child
+                as={Fragment}
+                enter="ease-out duration-300"
+                enterFrom="opacity-0"
+                enterTo="opacity-100"
+                leave="ease-in duration-200"
+                leaveFrom="opacity-100"
+                leaveTo="opacity-0"
+              >
+                <div className="fixed inset-0 bg-black bg-opacity-25" />
+              </Transition.Child>
+
+              <div className="fixed inset-0 overflow-y-auto">
+                <div className="flex min-h-full items-center justify-center p-4 text-center">
+                  <Transition.Child
+                    as={Fragment}
+                    enter="ease-out duration-300"
+                    enterFrom="opacity-0 scale-95"
+                    enterTo="opacity-100 scale-100"
+                    leave="ease-in duration-200"
+                    leaveFrom="opacity-100 scale-100"
+                    leaveTo="opacity-0 scale-95"
+                  >
+                    <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
+                      <Dialog.Title as="h3" className="text-lg font-medium leading-6 text-gray-900">
+                        Request Package Token Refund
+                      </Dialog.Title>
+                      <div className="mt-2">
+                        <p className="text-sm text-gray-500">
+                          You can request a refund for package tokens purchased within the last 30 days.
+                        </p>
+                        <div className="mt-3 p-3 bg-gray-50 rounded-lg">
+                          <p className="text-sm font-medium text-gray-700">Refundable tokens: <span className="font-bold">{refundableTokens.toLocaleString()}</span></p>
+                          {refundableUntilDate && (
+                            <p className="text-xs text-gray-500 mt-1">
+                              Tokens purchased on or before {refundableUntilDate} are no longer refundable.
+                            </p>
+                          )}
+                        </div>
+                        <div className="mt-4 space-y-3">
+                          <div>
+                            <label className="block text-sm font-medium text-gray-700">Amount to refund (tokens)</label>
+                            <input
+                              type="number"
+                              min={1}
+                              max={refundableTokens}
+                              value={refundAmount}
+                              onChange={(e) => setRefundAmount(Number(e.target.value))}
+                              className="mt-1 w-full rounded-md border border-gray-300 px-3 py-2"
+                            />
+                          </div>
+                          <div>
+                            <label className="block text-sm font-medium text-gray-700">Bank Account Holder Name</label>
+                            <input
+                              type="text"
+                              value={bankHolder}
+                              onChange={(e) => setBankHolder(e.target.value)}
+                              className="mt-1 w-full rounded-md border border-gray-300 px-3 py-2"
+                            />
+                          </div>
+                          <div>
+                            <label className="block text-sm font-medium text-gray-700">Bank Name</label>
+                            <input
+                              type="text"
+                              value={bankName}
+                              onChange={(e) => setBankName(e.target.value)}
+                              className="mt-1 w-full rounded-md border border-gray-300 px-3 py-2"
+                            />
+                          </div>
+                          <div>
+                            <label className="block text-sm font-medium text-gray-700">Account Number</label>
+                            <input
+                              type="text"
+                              value={bankAccount}
+                              onChange={(e) => setBankAccount(e.target.value)}
+                              className="mt-1 w-full rounded-md border border-gray-300 px-3 py-2"
+                            />
+                          </div>
+                        </div>
+                      </div>
+
+                      <div className="mt-6 flex justify-end space-x-3">
+                        <button
+                          type="button"
+                          className="inline-flex justify-center rounded-md border border-transparent bg-gray-200 px-4 py-2 text-sm font-medium text-gray-900 hover:bg-gray-300"
+                          onClick={() => setRefundModalOpen(false)}
+                        >
+                          Cancel
+                        </button>
+                        <button
+                          type="button"
+                          disabled={submittingRefund || refundAmount <= 0 || refundAmount > refundableTokens || !bankHolder || !bankName || !bankAccount}
+                          onClick={async () => {
+                            setSubmittingRefund(true);
+                            const res = await fetch('/api/user/request-refund', {
+                              method: 'POST',
+                              headers: { 'Content-Type': 'application/json' },
+                              body: JSON.stringify({
+                                requestedTokens: refundAmount,
+                                bankHolderName: bankHolder,
+                                bankName: bankName,
+                                bankAccountNumber: bankAccount,
+                              }),
+                            });
+                            const data = await res.json();
+                            if (res.ok) {
+                              alert('Refund request submitted successfully. We will review it and contact you.');
+                              setRefundModalOpen(false);
+                              setRefundAmount(0);
+                              setBankHolder('');
+                              setBankName('');
+                              setBankAccount('');
+                            } else {
+                              alert(data.error || 'Failed to submit request');
+                            }
+                            setSubmittingRefund(false);
+                          }}
+                          className="inline-flex justify-center rounded-md border border-transparent bg-primary-600 px-4 py-2 text-sm font-medium text-white hover:bg-primary-700 disabled:opacity-50"
+                        >
+                          {submittingRefund ? 'Submitting...' : 'Submit Request'}
+                        </button>
+                      </div>
+                    </Dialog.Panel>
+                  </Transition.Child>
+                </div>
+              </div>
+            </Dialog>
+          </Transition>
         </div>
       </div>
       <Footer />

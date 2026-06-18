@@ -254,9 +254,17 @@ export default function CreateGuideClient({ userId }: { userId: string }) {
             await addMessage('assistant', `I'll generate a step‑by‑step guide...`);
             setIsGenerating(false);
             stopQueuePolling();
-            const sections = parsed.sections || ['Overview', 'Prerequisites', 'Step-by-Step Instructions', 'Tools & Assets', 'Flow'];
+            const sections =
+              parsed.sections || [
+                'Overview',
+                'Prerequisites',
+                'Step-by-Step Instructions',
+                'Tools & Assets',
+                'Flow',
+              ];
             setGuideSections(sections);
-            await generateGuideSections(parsed.summary, sections);
+            // 👇 Pass the full context built earlier in handleSendMessage
+            await generateGuideSections(parsed.summary, sections, contextString);
             return;
           }
         } catch (e) {
@@ -282,10 +290,14 @@ export default function CreateGuideClient({ userId }: { userId: string }) {
     }
   };
 
-  const generateGuideSections = async (prompt: string, sections: string[]) => {
+  const generateGuideSections = async (
+    prompt: string,
+    sections: string[],
+    fullContext?: string
+  ) => {
     setGeneratingSections(true);
     setGuideContent('');
-    
+
     const baseUrl = process.env.NEXT_PUBLIC_HF_API_BASE_URL;
     if (!baseUrl) {
       console.error('NEXT_PUBLIC_HF_API_BASE_URL is not defined');
@@ -294,39 +306,55 @@ export default function CreateGuideClient({ userId }: { userId: string }) {
     }
 
     try {
-      let contextToUse = prompt;
-      
-      // Only compress if the prompt is longer than ~2000 characters (approx 500 tokens)
-      if (prompt.length > 2000) {
-        console.log('[DEBUG] Compressing long query:', prompt.slice(0, 100) + '...');
-        const compressRes = await fetch(`${baseUrl}/compress-query`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ prompt }),
-        });
-        if (!compressRes.ok) throw new Error(`Compress failed: ${compressRes.status}`);
-        const { compressed } = await compressRes.json();
-        contextToUse = compressed;
-        console.log('[DEBUG] Compressed context received');
-      } else {
-        console.log('[DEBUG] Skipping compression (short prompt, using original)');
+      // Determine the context to use for section generation
+      let contextToUse = prompt; // fallback: use the summary directly
+
+      if (fullContext) {
+        // Compress the full conversation context before sending to the model
+        try {
+          console.log('[DEBUG] Compressing full context for guide sections...');
+          const compressRes = await fetch(`${baseUrl}/compress-query`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ prompt: fullContext }),
+          });
+          if (compressRes.ok) {
+            const { compressed } = await compressRes.json();
+            if (compressed) {
+              contextToUse = compressed;
+              console.log('[DEBUG] Context compressed successfully.');
+            }
+          } else {
+            console.warn('Compression failed, using uncompressed fullContext.');
+            contextToUse = fullContext; // fallback to full context if compression fails
+          }
+        } catch (err) {
+          console.error('Compression request error:', err);
+          contextToUse = fullContext; // fallback
+        }
       }
 
       let fullGuide = '';
       for (let i = 0; i < sections.length; i++) {
         setCurrentSectionIndex(i);
         try {
-          console.log(`[DEBUG] Generating section ${i+1}/${sections.length}: ${sections[i]}`);
+          console.log(
+            `[DEBUG] Generating section ${i + 1}/${sections.length}: ${sections[i]}`
+          );
           const response = await fetch(`${baseUrl}/generate-section`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
               section_type: sections[i],
-              compressed_context: contextToUse,
-              compress_input: false,
+              context: contextToUse, // compressed or original
+              compress_input: false, // already compressed, no need for server re‑compression
             }),
           });
-          if (!response.ok) throw new Error(`Section generation failed: ${response.status}`);
+
+          if (!response.ok) {
+            throw new Error(`Section generation failed: ${response.status}`);
+          }
+
           const data = await response.json();
           fullGuide += `\n\n## ${sections[i]}\n${data.content}`;
           setGuideContent(fullGuide);
@@ -338,7 +366,10 @@ export default function CreateGuideClient({ userId }: { userId: string }) {
       }
     } catch (err) {
       console.error('[ERROR] generateGuideSections failed:', err);
-      await addMessage('assistant', 'Failed to generate guide sections. Please try again.');
+      await addMessage(
+        'assistant',
+        'Failed to generate guide sections. Please try again.'
+      );
     } finally {
       setGeneratingSections(false);
       setCurrentSectionIndex(0);

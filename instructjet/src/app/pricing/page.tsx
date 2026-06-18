@@ -1,19 +1,71 @@
+// app/pricing/page.tsx
 'use client';
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useAuth } from '@/contexts/AuthContext';
-import PayPalSubscribeButton from '@/components/PaypalSubscribeButton';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 
 export default function PricingPage() {
   const { user, loading: authLoading } = useAuth();
   const [mounted, setMounted] = useState(false);
+  const [checkoutLoading, setCheckoutLoading] = useState<'subscription' | 'token' | null>(null);
 
   useEffect(() => {
     setMounted(true);
   }, []);
+
+  // Paddle checkout handlers
+  const handleSubscription = async () => {
+    if (!user) return;
+    setCheckoutLoading('subscription');
+    try {
+      const res = await fetch('/api/paddle/create-subscription', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ 
+          priceId: process.env.NEXT_PUBLIC_PADDLE_SUBSCRIPTION_PRICE_ID 
+        }),
+      });
+      const data = await res.json();
+      if (data.checkout_url) {
+        window.location.href = data.checkout_url;
+      } else {
+        throw new Error('No checkout URL returned');
+      }
+    } catch (error) {
+      alert('Failed to start subscription. Please try again.');
+      console.error(error);
+    } finally {
+      setCheckoutLoading(null);
+    }
+  };
+
+  const handleTokenPurchase = async () => {
+    if (!user) return;
+    setCheckoutLoading('token');
+    try {
+      const res = await fetch('/api/paddle/create-token-pack', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ 
+          priceId: process.env.NEXT_PUBLIC_PADDLE_TOKEN_PRICE_ID 
+        }),
+      });
+      const data = await res.json();
+      if (data.checkout_url) {
+        window.location.href = data.checkout_url;
+      } else {
+        throw new Error('No checkout URL returned');
+      }
+    } catch (error) {
+      alert('Failed to start token purchase. Please try again.');
+      console.error(error);
+    } finally {
+      setCheckoutLoading(null);
+    }
+  };
 
   if (!mounted) {
     return (
@@ -156,14 +208,13 @@ export default function PricingPage() {
                       Current Plan
                     </button>
                   ) : (
-                    <PayPalSubscribeButton
-                      userId={user.id}
-                      onSuccess={() => {
-                        alert('Subscription successful! Refreshing...');
-                        window.location.reload();
-                      }}
-                      onError={(err: any) => alert(err)}
-                    />
+                    <button
+                      onClick={handleSubscription}
+                      disabled={checkoutLoading === 'subscription'}
+                      className="w-full bg-primary-600 text-white py-3 rounded-xl font-bold hover:bg-primary-700 transition disabled:opacity-50 disabled:cursor-not-allowed"
+                    >
+                      {checkoutLoading === 'subscription' ? 'Redirecting...' : 'Subscribe Now'}
+                    </button>
                   )
                 ) : (
                   <Link href="/signup" className="block text-center bg-primary-600 text-white py-3 rounded-xl font-bold hover:bg-primary-700 transition">
@@ -173,7 +224,43 @@ export default function PricingPage() {
               </div>
             </div>
 
-            {/* Token packs upsell */}
+            {/* Token Packs Section with Paddle button */}
+            <div className="mt-20 border-t pt-12">
+              <div className="text-center mb-8">
+                <h2 className="text-3xl font-bold text-gray-900">Need extra tokens?</h2>
+                <p className="text-gray-600 mt-2">
+                  One‑time purchase – never expire. Perfect for high‑volume usage.
+                </p>
+              </div>
+              <div className="max-w-md mx-auto bg-gray-50 rounded-2xl p-8 shadow-md text-center">
+                <div className="text-4xl font-bold text-primary-600 mb-2">250,000 Tokens</div>
+                <div className="text-2xl font-bold text-gray-900 mb-6">$5 USD</div>
+                <div className="mb-6 text-sm text-gray-500">
+                  Use tokens for task creation, worker chat, AI model calls, and more.
+                </div>
+
+                {authLoading ? (
+                  <div className="text-center py-3">Loading...</div>
+                ) : user ? (
+                  <button
+                    onClick={handleTokenPurchase}
+                    disabled={checkoutLoading === 'token'}
+                    className="w-full bg-primary-600 text-white py-3 rounded-xl font-bold hover:bg-primary-700 transition disabled:opacity-50 disabled:cursor-not-allowed"
+                  >
+                    {checkoutLoading === 'token' ? 'Redirecting...' : 'Buy 250,000 Tokens ($5)'}
+                  </button>
+                ) : (
+                  <Link
+                    href="/signup"
+                    className="block w-full bg-primary-600 text-white py-3 rounded-xl font-bold hover:bg-primary-700 transition"
+                  >
+                    Sign up to buy tokens
+                  </Link>
+                )}
+              </div>
+            </div>
+
+            {/* Original link – keep for consistency */}
             <div className="mt-16 text-center">
               <p className="text-gray-600">
                 Need more tokens?{' '}
@@ -184,7 +271,7 @@ export default function PricingPage() {
               </p>
             </div>
 
-            {/* FAQ teaser */}
+            {/* FAQ */}
             <div className="mt-20 text-center border-t pt-12">
               <h3 className="text-2xl font-bold text-gray-900 mb-4">Frequently Asked Questions</h3>
               <div className="max-w-2xl mx-auto text-left space-y-4">

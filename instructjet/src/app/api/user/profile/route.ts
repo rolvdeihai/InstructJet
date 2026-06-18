@@ -1,3 +1,5 @@
+// src/app/api/user/profile/route.ts
+
 import { NextRequest, NextResponse } from 'next/server';
 import { supabaseAdmin } from '@/lib/supabase-admin';
 import { getCurrentUser } from '@/lib/session';
