@@ -300,7 +300,7 @@ export default function PricingPage() {
               Join hundreds of managers and teachers using InstructJet.
             </p>
             <Link
-              href="/signup"
+              href="/pricing"
               className="inline-block bg-white text-primary-700 px-8 py-3 rounded-full font-bold text-lg hover:shadow-xl transition transform hover:scale-105"
             >
               Start Free Trial

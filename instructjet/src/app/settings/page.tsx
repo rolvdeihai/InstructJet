@@ -43,7 +43,7 @@ interface UsageSummary {
 }
 
 export default function SettingsPage() {
-  const { user, logout } = useAuth();
+  const { user, logout, loading: authLoading } = useAuth();
   const router = useRouter();
   const [activeTab, setActiveTab] = useState<'account' | 'billing'>('account');
   const [profile, setProfile] = useState<UserProfile | null>(null);
@@ -113,12 +113,15 @@ export default function SettingsPage() {
   }, [transactions]);
 
   useEffect(() => {
+    if (authLoading) return; // still loading, do nothing
     if (!user) {
       router.push('/login');
       return;
     }
-    fetchUserData();
-  }, [user, router]);
+    if (user) {
+      fetchUserData();
+    }
+  }, [user, router, authLoading]);
 
   const fetchUserData = async () => {
     try {
@@ -271,7 +274,8 @@ export default function SettingsPage() {
     setCancelling(true);
     setMessage(null);
     try {
-      const res = await fetch('/api/paypal/cancel-subscription', {
+      // ✅ Use Paddle cancellation endpoint
+      const res = await fetch('/api/paddle/cancel-subscription', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
       });
@@ -315,7 +319,7 @@ export default function SettingsPage() {
   return (
     <>
       <Navbar />
-      <div className="min-h-screen bg-gray-50 py-12">
+      <div className="min-h-screen bg-gray-50 py-12 pt-20">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="mb-8">
             <h1 className="text-3xl font-bold text-gray-900">Settings</h1>

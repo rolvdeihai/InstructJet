@@ -1,3 +1,4 @@
+// app/api/paddle/cancel-subscription/route.ts
 import { NextRequest, NextResponse } from 'next/server';
 import { createClient } from '@supabase/supabase-js';
 import { getCurrentUser } from '@/lib/session';
@@ -7,6 +8,10 @@ const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY!;
 const supabaseAdmin = createClient(supabaseUrl, supabaseServiceKey);
 
 const PADDLE_API_KEY = process.env.PADDLE_API_KEY!;
+const PADDLE_ENV = process.env.PADDLE_ENVIRONMENT || 'sandbox';
+const PADDLE_API_BASE_URL = PADDLE_ENV === 'production'
+  ? 'https://api.paddle.com'
+  : 'https://sandbox-api.paddle.com';
 
 export async function POST(request: NextRequest) {
   try {
@@ -15,7 +20,7 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
-    // Get user's subscription_id (set by webhook on activation)
+    // Get user's subscription_id from Supabase
     const { data: dbUser, error: userError } = await supabaseAdmin
       .from('users')
       .select('subscription_id, plan_tier')
@@ -34,33 +39,43 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'No subscription ID found' }, { status: 400 });
     }
 
-    // Call Paddle API to cancel the subscription at period end
+    console.log(`Cancelling Paddle subscription: ${dbUser.subscription_id} for user ${user.id}`);
+
+    // Call Paddle API to cancel the subscription
     const response = await fetch(
-        `https://api.paddle.com/subscriptions/${dbUser.subscription_id}/cancel`,
-        {
-            method: 'POST',
-            headers: {
-            'Authorization': `Bearer ${PADDLE_API_KEY}`,
-            'Content-Type': 'application/json',
-            'Paddle-Version': '1',
-            },
-            body: JSON.stringify({
-            effective_from: 'next_billing_period',
-            }),
-        }
+      `${PADDLE_API_BASE_URL}/subscriptions/${dbUser.subscription_id}/cancel`,
+      {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${PADDLE_API_KEY}`,
+          'Content-Type': 'application/json',
+          'Paddle-Version': '1',
+        },
+        body: JSON.stringify({
+          effective_from: 'next_billing_period', // cancel at the end of current period
+        }),
+      }
     );
 
+    const responseData = await response.json();
+
     if (!response.ok) {
-      const errorData = await response.json();
-      console.error('Paddle cancel error:', errorData);
-      return NextResponse.json(
-        { error: 'Failed to cancel subscription in Paddle' },
-        { status: 500 }
-      );
+      console.error('Paddle cancel error:', JSON.stringify(responseData, null, 2));
+      // Handle specific error cases
+      if (responseData.error?.code === 'subscription_already_canceled') {
+        // Already canceled – treat as success for our side
+        console.log('Subscription already canceled in Paddle');
+      } else {
+        return NextResponse.json(
+          { error: responseData.error?.detail || 'Failed to cancel subscription in Paddle' },
+          { status: response.status }
+        );
+      }
+    } else {
+      console.log('Paddle subscription canceled successfully');
     }
 
-    // Update user in Supabase to free tier immediately (Paddle will send webhook later)
-    // But to keep UI consistent, downgrade now. Webhook will also run but should be idempotent.
+    // Update user in Supabase to free tier (immediate)
     await supabaseAdmin
       .from('users')
       .update({
@@ -72,7 +87,7 @@ export async function POST(request: NextRequest) {
       })
       .eq('id', user.id);
 
-    // Reset subscription tokens (package tokens remain)
+    // Reset subscription tokens
     await supabaseAdmin
       .from('token_balances')
       .update({ subscription_tokens: 0 })

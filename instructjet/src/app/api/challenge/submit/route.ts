@@ -1,3 +1,5 @@
+// src/app/api/challenge/submit/route.ts
+
 import { NextRequest, NextResponse } from 'next/server';
 import { getUserFromSession } from '@/lib/auth';
 import { cookies } from 'next/headers';
@@ -49,19 +51,30 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: 'You have already submitted a guide this week' }, { status: 400 });
   }
 
-  // Insert submission
-  const { error: insertError } = await supabaseAdmin
+  // ✅ Insert submission and return the new ID
+  const { data: inserted, error: insertError } = await supabaseAdmin
     .from('challenge_submissions')
     .insert({
       user_id: user.id,
       guide_url,
       week_start: weekStartStr,
       submitted_at: new Date().toISOString(),
-    });
-  if (insertError) {
+    })
+    .select('id')
+    .single();
+
+  if (insertError || !inserted) {
     console.error('Insert error:', insertError);
     return NextResponse.json({ error: 'Failed to submit' }, { status: 500 });
   }
 
-  return NextResponse.json({ success: true, message: 'Guide submitted successfully!' });
+  // Generate certificate URL
+  const baseUrl = process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000';
+  const certificateUrl = `${baseUrl}/certificates/${inserted.id}`;
+
+  return NextResponse.json({
+    success: true,
+    message: 'Guide submitted successfully!',
+    certificateUrl,
+  });
 }

@@ -5,7 +5,30 @@ import ChatInterface from './ChatInterface';
 import GuidePreview from './GuidePreview';
 import { supabase } from '@/lib/supabase-client';
 
+// ─── Tutorial Component ──────────────────────────────────────────────────────
+const GuideTutorial = ({ compact = false }: { compact?: boolean }) => (
+  <div className={compact ? "text-sm" : ""}>
+    <h3 className="text-xl font-semibold mb-2">📘 Welcome to the Guide Creator</h3>
+    <p className="mb-2">
+      Start by sending a message describing the guide you want. The AI will help you structure it step by step.
+    </p>
+    <ul className="list-disc list-inside space-y-1 text-sm">
+      <li>Be specific about your topic and audience.</li>
+      <li>Enable <strong>Web Search</strong> for current facts.</li>
+      <li>For free users: you'll get a section‑by‑section generation.</li>
+      <li>Premium users: receive a complete guide in one go.</li>
+      <li>Edit the preview, add a title, and publish.</li>
+      <li>Attach files for AI analysis to enrich your guide.</li>
+    </ul>
+    <p className="mt-3 text-xs text-blue-600">
+      💡 Need more help? Click the <strong>?</strong> button next to the title.
+    </p>
+  </div>
+);
+
+// ─── Main Component ──────────────────────────────────────────────────────────
 export default function CreateGuideClient({ userId }: { userId: string }) {
+  // ─── Core State ──────────────────────────────────────────────────────────
   const [messages, setMessages] = useState<Array<{ role: 'user' | 'assistant'; content: string }>>([]);
   const [guideContent, setGuideContent] = useState<string>('');
   const [sessionId, setSessionId] = useState<string | null>(null);
@@ -15,20 +38,28 @@ export default function CreateGuideClient({ userId }: { userId: string }) {
   const [generatingSections, setGeneratingSections] = useState(false);
   const [currentSectionIndex, setCurrentSectionIndex] = useState(0);
   const [guideSections, setGuideSections] = useState<string[]>([]);
-  
+  const [showGuideTutorial, setShowGuideTutorial] = useState(false);
+
+  // Web search & queue
   const [webSearchEnabled, setWebSearchEnabled] = useState(false);
   const [isSearching, setIsSearching] = useState(false);
   const [userPlan, setUserPlan] = useState<string>('free');
   const [queuePosition, setQueuePosition] = useState<number | null>(null);
   const pollingRef = useRef<NodeJS.Timeout | null>(null);
-  
-  // Token budget field for workers' chat
+
+  // Token budget
   const [tokenBudget, setTokenBudget] = useState<number>(5000);
   const [showBudgetHelp, setShowBudgetHelp] = useState(false);
 
+  // File upload (no bucket) – base64 only
+  const fileInputRef = useRef<HTMLInputElement>(null);
+  const [uploading, setUploading] = useState(false);
+
+  // Abort / request tracking
   const abortControllerRef = useRef<AbortController | null>(null);
   const [currentRequestId, setCurrentRequestId] = useState<string | null>(null);
 
+  // ─── Helpers ──────────────────────────────────────────────────────────────
   const fetchWithCreds = (url: string, options?: RequestInit) => {
     return fetch(url, {
       ...options,
@@ -40,6 +71,7 @@ export default function CreateGuideClient({ userId }: { userId: string }) {
     });
   };
 
+  // ─── Effects ──────────────────────────────────────────────────────────────
   useEffect(() => {
     const fetchUserPlan = async () => {
       try {
@@ -47,8 +79,6 @@ export default function CreateGuideClient({ userId }: { userId: string }) {
         if (res.ok) {
           const data = await res.json();
           setUserPlan(data.user?.plan_tier || 'free');
-        } else {
-          console.error('Failed to fetch user plan:', res.status);
         }
       } catch (err) {
         console.error('Error fetching user plan:', err);
@@ -61,6 +91,7 @@ export default function CreateGuideClient({ userId }: { userId: string }) {
     createNewSession();
   }, []);
 
+  // ─── Session Management ──────────────────────────────────────────────────
   const createNewSession = async () => {
     const { data, error } = await supabase
       .from('chat_sessions')
@@ -93,6 +124,7 @@ export default function CreateGuideClient({ userId }: { userId: string }) {
     }
   };
 
+  // ─── Web Search ──────────────────────────────────────────────────────────
   const fetchWebSearchSummary = async (query: string): Promise<string | null> => {
     try {
       const response = await fetchWithCreds('/api/web-search', {
@@ -110,9 +142,7 @@ export default function CreateGuideClient({ userId }: { userId: string }) {
       }
 
       const data = await response.json();
-      if (!data.results || data.results.length === 0) {
-        return null;
-      }
+      if (!data.results || data.results.length === 0) return null;
 
       const summary = data.results.map((r: any, idx: number) =>
         `${idx + 1}. ${r.title}\n   ${r.snippet}\n   Source: ${r.url}`
@@ -125,7 +155,7 @@ export default function CreateGuideClient({ userId }: { userId: string }) {
     }
   };
 
-  // Start polling /api/queue-status
+  // ─── Queue Polling ──────────────────────────────────────────────────────
   const startQueuePolling = () => {
     if (pollingRef.current) clearInterval(pollingRef.current);
     pollingRef.current = setInterval(async () => {
@@ -133,8 +163,6 @@ export default function CreateGuideClient({ userId }: { userId: string }) {
         const res = await fetch('/api/queue-status');
         if (!res.ok) return;
         const status = await res.json();
-        // Show queue position if there are queued requests.
-        // The user's position = number of queued + (1 if active > 0)
         if (status.queued > 0 || status.active > 0) {
           setQueuePosition(status.queued + (status.active > 0 ? 1 : 0));
         } else {
@@ -156,7 +184,6 @@ export default function CreateGuideClient({ userId }: { userId: string }) {
 
   const stopGeneration = async () => {
     if (currentRequestId) {
-      // Tell backend to cancel
       try {
         await fetch('/api/cancel', {
           method: 'POST',
@@ -176,6 +203,68 @@ export default function CreateGuideClient({ userId }: { userId: string }) {
     stopQueuePolling();
   };
 
+  // ─── File Upload (base64, no bucket) ──────────────────────────────────
+  const handleFileSelected = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    setUploading(true);
+    try {
+      const reader = new FileReader();
+      const base64 = await new Promise<string>((resolve, reject) => {
+        reader.onload = () => resolve(reader.result as string);
+        reader.onerror = reject;
+        reader.readAsDataURL(file);
+      });
+
+      await addMessage('assistant', `📎 **File attached:** ${file.name}\n\nAnalyzing...`);
+
+      // ✅ Fix: ensure extension is a string
+      const fileExtension = file.name.split('.').pop()?.toLowerCase() || '';
+      let fileType = '';
+      if (['png','jpg','jpeg','gif','webp'].includes(fileExtension)) fileType = 'image';
+      else if (['pdf'].includes(fileExtension)) fileType = 'application/pdf';
+      else if (['docx'].includes(fileExtension)) fileType = 'application/vnd.openxmlformats-officedocument.wordprocessingml.document';
+      else if (['doc'].includes(fileExtension)) fileType = 'application/msword';
+      else fileType = 'other';
+
+      const response = await fetch('/api/analyze-media', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          imageBase64: base64,
+          fileType: fileType,
+          fileName: file.name,
+          guideId: null,
+          updateDB: false,
+          userMessage: 'Please analyze this file for context to help create a guide.',
+        }),
+      });
+
+      const data = await response.json();
+      if (data.feedback) {
+        await addMessage('assistant', `📊 **AI Analysis**:\n${data.feedback}`);
+        if (data.ocrText && data.ocrText.length) {
+          await addMessage('assistant', `📝 **Text extracted from file** (for context):\n\`\`\`\n${data.ocrText.substring(0, 1500)}\n\`\`\``);
+        }
+      } else {
+        await addMessage('assistant', 'Sorry, could not analyze the file.');
+      }
+    } catch (err) {
+      console.error(err);
+      await addMessage('assistant', '❌ Failed to process file.');
+    } finally {
+      setUploading(false);
+      if (fileInputRef.current) fileInputRef.current.value = '';
+    }
+  };
+
+  const triggerFilePicker = () => {
+    if (fileInputRef.current) {
+      fileInputRef.current.click();
+    }
+  };
+
+  // ─── Main Send Message ──────────────────────────────────────────────────
   const handleSendMessage = async (message: string) => {
     if (!message.trim()) return;
     await addMessage('user', message);
@@ -210,10 +299,10 @@ export default function CreateGuideClient({ userId }: { userId: string }) {
       const response = await fetch('/api/chat', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ 
-          message, 
+        body: JSON.stringify({
+          message,
           context: contextString,
-          requestId
+          requestId,
         }),
         signal: abortControllerRef.current.signal,
       });
@@ -237,19 +326,17 @@ export default function CreateGuideClient({ userId }: { userId: string }) {
       if (data.response) {
         try {
           const parsed = JSON.parse(data.response);
-          
-          // 🚀 PREMIUM: complete_guide (full guide from DeepSeek)
+
+          // Premium: complete_guide
           if (parsed.action === 'complete_guide') {
-            // Display the full markdown guide in chat
             await addMessage('assistant', parsed.content);
-            // Populate the preview area
             setGuideContent(parsed.content);
             setIsGenerating(false);
             stopQueuePolling();
             return;
           }
-          
-          // FREE: generate_guide (triggers section-by-section)
+
+          // Free: generate_guide (section by section)
           if (parsed.action === 'generate_guide') {
             await addMessage('assistant', `I'll generate a step‑by‑step guide...`);
             setIsGenerating(false);
@@ -263,14 +350,12 @@ export default function CreateGuideClient({ userId }: { userId: string }) {
                 'Flow',
               ];
             setGuideSections(sections);
-            // 👇 Pass the full context built earlier in handleSendMessage
             await generateGuideSections(parsed.summary, sections, contextString);
             return;
           }
         } catch (e) {
           // Not JSON – normal conversational response
         }
-        // Normal text response (non‑guide)
         await addMessage('assistant', data.response);
       } else {
         throw new Error('Empty response from AI');
@@ -290,6 +375,7 @@ export default function CreateGuideClient({ userId }: { userId: string }) {
     }
   };
 
+  // ─── Section Generation ──────────────────────────────────────────────────
   const generateGuideSections = async (
     prompt: string,
     sections: string[],
@@ -306,13 +392,10 @@ export default function CreateGuideClient({ userId }: { userId: string }) {
     }
 
     try {
-      // Determine the context to use for section generation
-      let contextToUse = prompt; // fallback: use the summary directly
+      let contextToUse = prompt;
 
       if (fullContext) {
-        // Compress the full conversation context before sending to the model
         try {
-          console.log('[DEBUG] Compressing full context for guide sections...');
           const compressRes = await fetch(`${baseUrl}/compress-query`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -320,17 +403,13 @@ export default function CreateGuideClient({ userId }: { userId: string }) {
           });
           if (compressRes.ok) {
             const { compressed } = await compressRes.json();
-            if (compressed) {
-              contextToUse = compressed;
-              console.log('[DEBUG] Context compressed successfully.');
-            }
+            if (compressed) contextToUse = compressed;
           } else {
-            console.warn('Compression failed, using uncompressed fullContext.');
-            contextToUse = fullContext; // fallback to full context if compression fails
+            contextToUse = fullContext;
           }
         } catch (err) {
-          console.error('Compression request error:', err);
-          contextToUse = fullContext; // fallback
+          console.error('Compression error:', err);
+          contextToUse = fullContext;
         }
       }
 
@@ -338,16 +417,13 @@ export default function CreateGuideClient({ userId }: { userId: string }) {
       for (let i = 0; i < sections.length; i++) {
         setCurrentSectionIndex(i);
         try {
-          console.log(
-            `[DEBUG] Generating section ${i + 1}/${sections.length}: ${sections[i]}`
-          );
           const response = await fetch(`${baseUrl}/generate-section`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
               section_type: sections[i],
-              context: contextToUse, // compressed or original
-              compress_input: false, // already compressed, no need for server re‑compression
+              context: contextToUse,
+              compress_input: false,
             }),
           });
 
@@ -366,16 +442,14 @@ export default function CreateGuideClient({ userId }: { userId: string }) {
       }
     } catch (err) {
       console.error('[ERROR] generateGuideSections failed:', err);
-      await addMessage(
-        'assistant',
-        'Failed to generate guide sections. Please try again.'
-      );
+      await addMessage('assistant', 'Failed to generate guide sections. Please try again.');
     } finally {
       setGeneratingSections(false);
       setCurrentSectionIndex(0);
     }
   };
 
+  // ─── Publish Guide ────────────────────────────────────────────────────────
   const publishGuide = async () => {
     if (!guideContent) {
       alert('No guide content to publish');
@@ -391,7 +465,6 @@ export default function CreateGuideClient({ userId }: { userId: string }) {
 
     try {
       if (publishCost > 0) {
-        // Check balance
         const balanceRes = await fetchWithCreds('/api/tokens/balance', { method: 'GET' });
         if (!balanceRes.ok) {
           const err = await balanceRes.json();
@@ -404,7 +477,6 @@ export default function CreateGuideClient({ userId }: { userId: string }) {
           return;
         }
 
-        // Deduct tokens
         const deductRes = await fetchWithCreds('/api/tokens/deduct', {
           method: 'POST',
           body: JSON.stringify({
@@ -419,7 +491,6 @@ export default function CreateGuideClient({ userId }: { userId: string }) {
         }
       }
 
-      // Save guide with token budget
       const slug = `${title.toLowerCase().replace(/[^a-z0-9]+/g, '-')}-${Date.now().toString(36)}`;
       const { data, error } = await supabase
         .from('guides')
@@ -429,8 +500,8 @@ export default function CreateGuideClient({ userId }: { userId: string }) {
           title,
           content: guideContent,
           ai_generated: true,
-          total_token_budget: tokenBudget,        // NEW: set initial budget
-          token_budget_remaining: tokenBudget,    // NEW: remaining budget starts same
+          total_token_budget: tokenBudget,
+          token_budget_remaining: tokenBudget,
         })
         .select('slug')
         .single();
@@ -444,8 +515,10 @@ export default function CreateGuideClient({ userId }: { userId: string }) {
     }
   };
 
+  // ─── Render ──────────────────────────────────────────────────────────────
   return (
     <div className="flex h-screen pt-16">
+      {/* ─── Left Panel: Chat ────────────────────────────────────────────── */}
       <div className="w-1/2 border-r border-gray-200 flex flex-col">
         <ChatInterface
           messages={messages}
@@ -455,7 +528,18 @@ export default function CreateGuideClient({ userId }: { userId: string }) {
           webSearchEnabled={webSearchEnabled}
           onToggleWebSearch={() => setWebSearchEnabled(!webSearchEnabled)}
           onStopGeneration={stopGeneration}
-          queuePosition={queuePosition}   // 👈 add this line
+          queuePosition={queuePosition}
+          showWelcome={messages.length === 0}
+          onAttachFile={triggerFilePicker}
+          uploading={uploading}
+        />
+        {/* Hidden file input */}
+        <input
+          type="file"
+          ref={fileInputRef}
+          onChange={handleFileSelected}
+          accept="image/*,.pdf,.docx,.doc"
+          className="hidden"
         />
         {generatingSections && guideSections.length > 0 && (
           <div className="border-t border-gray-200 p-2 text-sm text-gray-500 text-center">
@@ -463,9 +547,12 @@ export default function CreateGuideClient({ userId }: { userId: string }) {
           </div>
         )}
       </div>
+
+      {/* ─── Right Panel: Preview + Controls ────────────────────────────── */}
       <div className="w-1/2 flex flex-col">
         <div className="p-4 border-b border-gray-200">
           <div className="flex flex-col space-y-3">
+            {/* Row 1: Title, Publish, New Guide, Help */}
             <div className="flex items-center gap-2">
               <input
                 type="text"
@@ -487,8 +574,29 @@ export default function CreateGuideClient({ userId }: { userId: string }) {
               >
                 New Guide
               </button>
+              <div className="relative">
+                <button
+                  type="button"
+                  onClick={() => setShowGuideTutorial(!showGuideTutorial)}
+                  className="text-gray-400 hover:text-gray-600 focus:outline-none"
+                  aria-label="Guide creation help"
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                </button>
+                {showGuideTutorial && (
+                  <div className="absolute right-0 mt-2 w-80 p-4 bg-white border border-gray-200 rounded-lg shadow-lg z-10">
+                    <GuideTutorial compact />
+                    <button onClick={() => setShowGuideTutorial(false)} className="mt-2 text-xs text-primary-600">
+                      Close
+                    </button>
+                  </div>
+                )}
+              </div>
             </div>
-            {/* Token Budget Input with Help Popup */}
+
+            {/* Row 2: Token Budget */}
             <div className="flex items-center gap-2">
               <label className="text-sm font-medium text-gray-700">Worker Chat Token Budget</label>
               <div className="relative inline-block">

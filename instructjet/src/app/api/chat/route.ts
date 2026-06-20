@@ -1,11 +1,11 @@
-// src/app/api/chat/route.ts
-
+// app/api/chat/route.ts
 import { NextRequest, NextResponse } from 'next/server';
 import { checkSufficientTokens, deductTokens } from '@/lib/token-manager';
 import { getUserFromSession } from '@/lib/auth';
 import { cookies } from 'next/headers';
 import { triggerGitHubWorkflow } from '@/lib/ai-server';
 import { supabaseAdmin } from '@/lib/supabase-admin';
+import { canUseDeepSeek, incrementDailyDeepSeekUsage } from '@/lib/daily-usage';
 
 const HF_API_URL = `${process.env.HF_API_BASE_URL}/chat`;
 const FETCH_TIMEOUT_MS = 600_000; // 10 minutes
@@ -34,6 +34,7 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
 
+  // Check token balance (1000 tokens per chat message)
   const hasTokens = await checkSufficientTokens(user.id, 1000);
   if (!hasTokens) {
     return NextResponse.json(
@@ -43,7 +44,6 @@ export async function POST(req: NextRequest) {
   }
 
   const { message, context, requestId } = await req.json();
-
   if (!requestId) {
     return NextResponse.json({ error: 'Missing requestId' }, { status: 400 });
   }
@@ -51,12 +51,24 @@ export async function POST(req: NextRequest) {
   const userPlan = await getUserPlan(user.id);
   const isPremium = userPlan === 'premium';
 
-  // Detect if this is an explicit guide request
+  // Detect explicit guide request
   const isExplicitGuideRequest =
     message.trim().startsWith('@guide') ||
     /\b(create|make|generate)\s+a\s+guide\b/i.test(message);
 
-  // Normal system instruction for conversation (used for free users and non‑guide premium)
+  // ─── Decide whether to use DeepSeek ───────────────────────────
+  let useDeepSeek = false;
+  let remainingQuota = 0;
+
+  if (isPremium) {
+    useDeepSeek = true;
+  } else {
+    // Free user: check daily quota (not evaluation)
+    const { allowed, remaining } = await canUseDeepSeek(user.id, false);
+    useDeepSeek = allowed;
+    remainingQuota = remaining;
+  }
+
   const normalSystemInstruction = `You are InstructJet AI, an expert at creating task guides. 
     Your job is to ask clarifying questions about the task: what needs to be done, who is the target worker, any common misunderstandings, required tools, etc. 
     After you have enough context (e.g., after 3-5 exchanges), output a JSON object with the following structure:
@@ -83,10 +95,12 @@ export async function POST(req: NextRequest) {
   let aborted = false;
   let serverStarting = false;
   let errorOccurred = false;
+  let fallbackSucceeded = false;
 
   try {
-    if (isPremium) {
-      // ---------- PREMIUM PATH ----------
+    if (useDeepSeek) {
+      // ─── DEEPSEEK PATH ──────────────────────────────────────────
+
       if (isExplicitGuideRequest) {
         // Generate full guide in one DeepSeek call
         const cleanedMessage = message.replace(/^@guide\s*/i, '').trim();
@@ -126,7 +140,7 @@ export async function POST(req: NextRequest) {
         const data = await response.json();
         let rawContent = data.choices[0]?.message?.content || '{}';
 
-        // Extract JSON
+        // Parse JSON
         let sectionsJson: Record<string, string> = {};
         try {
           const jsonMatch = rawContent.match(/\{[\s\S]*\}/);
@@ -152,15 +166,19 @@ export async function POST(req: NextRequest) {
           .map(([title, content]) => `## ${title}\n\n${content}`)
           .join('\n\n');
 
-        // Return special response for frontend
         assistantMessage = JSON.stringify({
           action: 'complete_guide',
           content: fullGuide,
           sections: sectionsJson,
         });
         queuePosition = 0;
+
+        // ✅ Increment daily usage for free users
+        if (!isPremium) {
+          await incrementDailyDeepSeekUsage(user.id);
+        }
       } else {
-        // Premium user normal conversation (not guide request)
+        // Normal conversation
         const deepseekMessages = [
           { role: 'system', content: normalSystemInstruction },
           { role: 'user', content: `Conversation history:\n${context || ''}\n\nUser: ${message}` },
@@ -190,9 +208,15 @@ export async function POST(req: NextRequest) {
         const data = await response.json();
         assistantMessage = data.choices[0]?.message?.content || 'Sorry, DeepSeek returned an empty response.';
         queuePosition = 0;
+
+        // ✅ Increment daily usage for free users
+        if (!isPremium) {
+          await incrementDailyDeepSeekUsage(user.id);
+        }
       }
     } else {
-      // ---------- FREE PATH: local HF API ----------
+      // ─── FALLBACK: LOCAL HF API (Free users beyond quota) ──────
+
       const response = await fetch(HF_API_URL, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -225,13 +249,45 @@ export async function POST(req: NextRequest) {
       aborted = true;
       assistantMessage = '';
     } else if (error.message?.includes('fetch') || error.code === 'ECONNREFUSED') {
-      if (!isPremium) {
-        await triggerGitHubWorkflow();
-        serverStarting = true;
-        assistantMessage = getServerStartingMessage();
+      // If DeepSeek failed, try HF fallback (only if we were using DeepSeek)
+      if (useDeepSeek) {
+        try {
+          const fallbackResponse = await fetch(HF_API_URL, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              question: message,
+              context: fullContext,
+              request_id: requestId,
+            }),
+            signal: combinedSignal,
+          });
+          if (fallbackResponse.ok) {
+            const data = await fallbackResponse.json();
+            assistantMessage = data.response;
+            queuePosition = data.queue_position;
+            // fallback succeeded – mark it so we don't set error flags
+            fallbackSucceeded = true;
+          } else {
+            // fallback request returned error
+            throw new Error('HF fallback failed');
+          }
+        } catch (fallbackError) {
+          console.error('Fallback to HF also failed:', fallbackError);
+          // fallback failed – set error
+          errorOccurred = true;
+          assistantMessage = 'Sorry, DeepSeek is currently unavailable and fallback also failed. Please try again later.';
+        }
       } else {
-        errorOccurred = true;
-        assistantMessage = 'Sorry, DeepSeek is currently unavailable. Please try again later.';
+        // HF failed for free user (original request was HF)
+        if (!isPremium) {
+          await triggerGitHubWorkflow();
+          serverStarting = true;
+          assistantMessage = getServerStartingMessage();
+        } else {
+          errorOccurred = true;
+          assistantMessage = 'Sorry, the AI service is currently unavailable. Please try again later.';
+        }
       }
     } else {
       errorOccurred = true;
@@ -243,8 +299,10 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ aborted: true, response: '' });
   }
 
-  // Deduct tokens for both premium and free (when response is valid)
-  if (!aborted && !errorOccurred && !serverStarting && !assistantMessage.includes('waking up')) {
+  // Deduct tokens only if response is valid (not aborted, not error, not server starting, not fallback that succeeded)
+  const shouldDeduct = !aborted && !errorOccurred && !serverStarting && !fallbackSucceeded && !assistantMessage.includes('waking up');
+
+  if (shouldDeduct) {
     await deductTokens(user.id, 1000, 'guide_chat', {
       message_length: message.length,
       had_error: false,
@@ -256,6 +314,7 @@ export async function POST(req: NextRequest) {
     queue_position: queuePosition,
     request_id: requestId,
     server_starting: serverStarting,
+    daily_quota_remaining: !isPremium ? remainingQuota : undefined,
   });
 }
 

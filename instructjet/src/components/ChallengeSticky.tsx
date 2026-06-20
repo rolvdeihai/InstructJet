@@ -1,3 +1,4 @@
+// src/components/ChallengeSticky.tsx
 "use client";
 
 import { useState, useEffect, useRef, useCallback } from "react";
@@ -107,10 +108,14 @@ export default function ChallengeSticky() {
       });
       const data = await res.json();
       if (res.ok) {
-        alert("Guide submitted! Good luck. Winners announced every Sunday.");
-        setGuideUrl("");
+        const data = await res.json();
+        alert(`✅ Guide submitted! Your certificate: ${data.certificateUrl}. Winners will be announced every Sunday!`);
+        setGuideUrl('');
         setShowPopup(false);
-        const statusRes = await fetch("/api/challenge/status");
+        // Optionally open the certificate in a new tab
+        window.open(data.certificateUrl, '_blank');
+        // Refresh status
+        const statusRes = await fetch('/api/challenge/status');
         if (statusRes.ok) setStatus(await statusRes.json());
       } else {
         alert(data.error || "Submission failed");

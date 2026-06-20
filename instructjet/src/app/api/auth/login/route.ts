@@ -1,3 +1,5 @@
+// src/app/api/auth/login/route.ts
+
 import { NextResponse } from 'next/server';
 import { cookies } from 'next/headers';
 import { supabaseAdmin } from '@/lib/supabase-admin';

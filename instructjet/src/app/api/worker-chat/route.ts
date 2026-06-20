@@ -1,9 +1,9 @@
-// src/app/api/worker-chat/route.ts
-
+// app/api/worker-chat/route.ts
 import { NextRequest, NextResponse } from 'next/server';
 import { supabaseAdmin } from '@/lib/supabase-admin';
 import { deductTokens, checkSufficientTokens } from '@/lib/token-manager';
 import { triggerGitHubWorkflow } from '@/lib/ai-server';
+import { canUseDeepSeek, incrementDailyDeepSeekUsage } from '@/lib/daily-usage';
 
 const HF_API_URL = `${process.env.HF_API_BASE_URL}/chat`;
 const FETCH_TIMEOUT_MS = 600_000;
@@ -32,7 +32,7 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: 'Invalid token amount' }, { status: 400 });
   }
 
-  // 1. Get the guide and its remaining budget (cap)
+  // 1. Get the guide and its remaining budget
   const { data: guide, error: guideError } = await supabaseAdmin
     .from('guides')
     .select('user_id, token_budget_remaining')
@@ -63,7 +63,23 @@ export async function POST(req: NextRequest) {
     );
   }
 
-  // 4. Prepare AI call with abort support
+  // 4. Determine if creator is premium
+  const userPlan = await getUserPlan(creatorUserId);
+  const isPremium = userPlan === 'premium';
+
+  // 5. Decide whether to use DeepSeek (based on creator's plan)
+  let useDeepSeek = false;
+  let remainingQuota = 0;
+
+  if (isPremium) {
+    useDeepSeek = true;
+  } else {
+    const { allowed, remaining } = await canUseDeepSeek(creatorUserId, false);
+    useDeepSeek = allowed;
+    remainingQuota = remaining;
+  }
+
+  // 6. Prepare AI call
   const systemPrompt = `You are a helpful assistant that answers questions about a task guide. The guide is about: ${guideContent}. 
 Answer the worker's question clearly and concisely. Use the conversation history if relevant.`;
 
@@ -78,19 +94,16 @@ Answer the worker's question clearly and concisely. Use the conversation history
   let aborted = false;
   let serverStarting = false;
   let errorOccurred = false;
-
-  // Check if the creator (guide owner) is premium
-  const userPlan = await getUserPlan(creatorUserId);
-  const isPremium = userPlan === 'premium';
+  let fallbackSucceeded = false;
 
   try {
-    if (isPremium) {
-      // --- DeepSeek API call ---
+    if (useDeepSeek) {
+      // ─── DEEPSEEK PATH ──────────────────────────────────────────
       const response = await fetch(DEEPSEEK_API_URL, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${process.env.DEEPSEEK_KEY}`,
+          Authorization: `Bearer ${process.env.DEEPSEEK_KEY}`,
         },
         body: JSON.stringify({
           model: DEEPSEEK_MODEL,
@@ -113,8 +126,13 @@ Answer the worker's question clearly and concisely. Use the conversation history
       const data = await response.json();
       assistantMessage = data.choices[0]?.message?.content || 'Sorry, DeepSeek returned an empty response.';
       queuePosition = 0;
+
+      // ✅ Increment daily usage for free users
+      if (!isPremium) {
+        await incrementDailyDeepSeekUsage(creatorUserId);
+      }
     } else {
-      // --- Local HF API call (free users) ---
+      // ─── LOCAL HF API (Free users beyond quota) ────────────────
       const response = await fetch(HF_API_URL, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -142,17 +160,47 @@ Answer the worker's question clearly and concisely. Use the conversation history
     }
   } catch (error: any) {
     console.error('Worker chat API error:', error);
+
     if (error.name === 'AbortError') {
       aborted = true;
       assistantMessage = '';
     } else if (error.message?.includes('fetch') || error.code === 'ECONNREFUSED') {
-      if (!isPremium) {
-        await triggerGitHubWorkflow();
-        serverStarting = true;
-        assistantMessage = getServerStartingMessage();
+      // If DeepSeek failed, try HF fallback (only if we were using DeepSeek)
+      if (useDeepSeek) {
+        try {
+          const fallbackResponse = await fetch(HF_API_URL, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              question: message,
+              context: fullContext,
+              request_id: requestId,
+            }),
+            signal: combinedSignal,
+          });
+          if (fallbackResponse.ok) {
+            const data = await fallbackResponse.json();
+            assistantMessage = data.response;
+            queuePosition = data.queue_position;
+            fallbackSucceeded = true;
+          } else {
+            throw new Error('HF fallback failed');
+          }
+        } catch (fallbackError) {
+          console.error('Fallback to HF also failed:', fallbackError);
+          errorOccurred = true;
+          assistantMessage = 'Sorry, DeepSeek is currently unavailable and fallback also failed. Please try again later.';
+        }
       } else {
-        errorOccurred = true;
-        assistantMessage = 'Sorry, DeepSeek is currently unavailable. Please try again later.';
+        // HF failed for free user (original request was HF)
+        if (!isPremium) {
+          await triggerGitHubWorkflow();
+          serverStarting = true;
+          assistantMessage = getServerStartingMessage();
+        } else {
+          errorOccurred = true;
+          assistantMessage = 'Sorry, the AI service is currently unavailable. Please try again later.';
+        }
       }
     } else {
       errorOccurred = true;
@@ -164,8 +212,10 @@ Answer the worker's question clearly and concisely. Use the conversation history
     return NextResponse.json({ aborted: true, response: '' });
   }
 
-  // Deduct tokens ONLY if server responded normally (not starting, not error)
-  if (!aborted && !errorOccurred && !serverStarting && !assistantMessage.includes('waking up')) {
+  // Deduct tokens ONLY if server responded normally (not starting, not error, not fallback from DeepSeek)
+  const shouldDeduct = !aborted && !errorOccurred && !serverStarting && !fallbackSucceeded && !assistantMessage.includes('waking up');
+
+  if (shouldDeduct) {
     const deduction = await deductTokens(creatorUserId, tokens, 'worker_chat', {
       guide_id: guideId,
       message_length: message.length,
@@ -175,6 +225,7 @@ Answer the worker's question clearly and concisely. Use the conversation history
       return NextResponse.json({ error: deduction.error }, { status: 500 });
     }
 
+    // Update guide budget cap
     const newBudgetRemaining = budgetRemaining - tokens;
     const { error: updateBudgetError } = await supabaseAdmin
       .from('guides')
@@ -194,6 +245,7 @@ Answer the worker's question clearly and concisely. Use the conversation history
     queue_position: queuePosition,
     request_id: requestId,
     server_starting: serverStarting,
+    daily_quota_remaining: !isPremium ? remainingQuota : undefined,
   });
 }
 

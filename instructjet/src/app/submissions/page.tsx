@@ -23,6 +23,7 @@ interface Submission {
   approval_status: 'pending' | 'approved' | 'rejected';
   created_at: string;
   worker_name: string | null;
+  worker_email: string | null;
   guide: {
     id: string;
     title: string;
@@ -76,7 +77,7 @@ export default function SubmissionsPage() {
     const guideIds = guides.map(g => g.id);
     const { data: media, error: mediaError } = await supabase
       .from('media_uploads')
-      .select('id, file_url, file_type, ai_score, ai_comment, approval_status, created_at, guide_id, worker_name')
+      .select('id, file_url, file_type, ai_score, ai_comment, approval_status, created_at, guide_id, worker_name, worker_email')
       .in('guide_id', guideIds)
       .not('ai_score', 'is', null)
       .order('created_at', { ascending: false });
@@ -138,6 +139,17 @@ export default function SubmissionsPage() {
       },
       `submission_${sub.id}_report.pdf`
     );
+  };
+
+  const sendReviewEmail = (sub: Submission) => {
+    if (!sub.worker_email) {
+      alert('No email address on file for this worker.');
+      return;
+    }
+    const subject = `Review for your submission to "${sub.guide.title}"`;
+    const body = `Dear worker,\n\nHere is the review of your submission:\n\n${sub.ai_comment || 'No comment provided.'}\n\nScore: ${sub.ai_score?.score ?? 'N/A'}/100\n\nStatus: ${sub.approval_status}\n\nBest regards,\nTask Giver`;
+    const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(sub.worker_email)}&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    window.open(gmailUrl, '_blank');
   };
 
   const toggleSelect = (id: string) => {
@@ -237,8 +249,21 @@ export default function SubmissionsPage() {
                   <div className="relative h-48 bg-gray-100 group">
                     {sub.file_type === 'image' ? (
                       <Image src={sub.file_url} alt="Work submission" fill className="object-cover" />
-                    ) : (
+                    ) : sub.file_type === 'video' ? (
                       <video src={sub.file_url} className="w-full h-full object-cover" controls />
+                    ) : (
+                      <div className="flex items-center justify-center h-full bg-gray-200">
+                        <div className="text-center">
+                          <div className="text-4xl mb-2">📄</div>
+                          <p className="text-sm text-gray-600">Document</p>
+                          <button
+                            onClick={() => downloadFile(sub.file_url, `submission_${sub.id}.${sub.file_url.split('.').pop()}`)}
+                            className="mt-2 px-3 py-1 bg-blue-600 text-white text-xs rounded hover:bg-blue-700"
+                          >
+                            Download
+                          </button>
+                        </div>
+                      </div>
                     )}
                     <button
                       onClick={() => downloadFile(sub.file_url, `submission_${sub.id}.${sub.file_type === 'image' ? 'jpg' : 'mp4'}`)}
@@ -318,6 +343,14 @@ export default function SubmissionsPage() {
                       className="mt-3 w-full py-1 text-sm bg-indigo-100 text-indigo-700 rounded hover:bg-indigo-200 transition"
                     >
                       📄 Download PDF Report
+                    </button>
+
+                    <button
+                      onClick={() => sendReviewEmail(sub)}
+                      disabled={!sub.worker_email}
+                      className="mt-2 w-full py-1 text-sm bg-blue-100 text-blue-700 rounded hover:bg-blue-200 transition disabled:opacity-50 disabled:cursor-not-allowed"
+                    >
+                      📧 Send Review via Gmail
                     </button>
 
                     {sub.approval_status === 'pending' && (
