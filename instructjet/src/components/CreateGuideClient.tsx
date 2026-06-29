@@ -19,6 +19,7 @@ const GuideTutorial = ({ compact = false }: { compact?: boolean }) => (
       <li>Premium users: receive a complete guide in one go.</li>
       <li>Edit the preview, add a title, and publish.</li>
       <li>Attach files for AI analysis to enrich your guide.</li>
+      <li>Tips: For tasks that can't be checked with OCR, simply create the guide to instruct the workers to document their work in detail so we can check their report instead. 😁</li>
     </ul>
     <p className="mt-3 text-xs text-blue-600">
       💡 Need more help? Click the <strong>?</strong> button next to the title.

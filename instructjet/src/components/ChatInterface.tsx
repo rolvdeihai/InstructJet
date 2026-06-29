@@ -102,6 +102,20 @@ export default function ChatInterface({
         <li>Edit the preview, add a title, and publish.</li>
         <li>Attach files for AI analysis to enrich your guide.</li>
       </ul>
+      <div className="mt-3 p-3 bg-blue-100 rounded-lg border border-blue-300 text-sm">
+        <strong className="block mb-1">💡 Pro Tip</strong>
+        <p>
+          If your task can't be verified automatically (e.g., no images or documents to scan), 
+          simply create a guide that asks workers to <strong>describe their work in detail</strong> 
+          – step by step, with explanations. 
+          The AI can then evaluate their written report for completeness and clarity, giving you 
+          confidence that the job was done right.
+        </p>
+        <p className="mt-1 text-xs text-blue-700">
+          Example: Instead of "Take a photo of the assembly", ask "Write a summary of the 
+          steps you followed and any challenges you encountered."
+        </p>
+      </div>
       <p className="mt-3 text-xs text-blue-600">
         💡 Need more help? Click the <strong>?</strong> button next to the title.
       </p>
