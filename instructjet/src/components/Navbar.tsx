@@ -4,12 +4,14 @@ import { useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '@/contexts/AuthContext';
+import ChallengePopup from '@/components/ChallengePopup';
 
 export default function Navbar() {
   const { user, logout } = useAuth();
   const router = useRouter();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isToolsDropdownOpen, setIsToolsDropdownOpen] = useState(false);
+  const [showChallengePopup, setShowChallengePopup] = useState(false);
 
   const handleLogout = async () => {
     await logout();
@@ -107,6 +109,16 @@ export default function Navbar() {
 
           {/* Right side: user / auth buttons */}
           <div className="hidden md:flex items-center space-x-4">
+            {/* Challenge Button with glowing effect */}
+            <button
+              onClick={() => setShowChallengePopup(true)}
+              className="relative group flex items-center gap-2 px-3 py-1.5 bg-gradient-to-r from-yellow-400 to-orange-500 text-white text-sm font-bold rounded-full shadow-lg hover:shadow-xl transition-all animate-pulse ring-2 ring-yellow-400/50 ring-offset-2"
+            >
+              <span className="text-lg">🏆</span>
+              <span className="hidden lg:inline">Challenge</span>
+              <span className="absolute -top-1 -right-1 w-2.5 h-2.5 bg-red-500 rounded-full animate-ping"></span>
+            </button>
+
             {user ? (
               <>
                 <span className="text-sm text-gray-700">Hello, {user.full_name || user.email}</span>
@@ -139,7 +151,13 @@ export default function Navbar() {
           </div>
 
           {/* Mobile menu button */}
-          <div className="md:hidden flex items-center">
+          <div className="md:hidden flex items-center space-x-2">
+            <button
+              onClick={() => setShowChallengePopup(true)}
+              className="text-xl"
+            >
+              🏆
+            </button>
             <button
               onClick={toggleMobileMenu}
               className="text-gray-700 hover:text-gray-900 focus:outline-none"
@@ -169,7 +187,6 @@ export default function Navbar() {
             Contact
           </Link>
 
-          {/* Mobile Tools dropdown */}
           <div>
             <button
               onClick={toggleToolsDropdown}
@@ -190,14 +207,14 @@ export default function Navbar() {
                 {user ? (
                   <>
                     <Link
-                      href="/create-guide"
+                      href="/create"
                       className="block text-gray-600 hover:text-primary-600 text-sm py-1"
                       onClick={() => { setIsToolsDropdownOpen(false); setIsMobileMenuOpen(false); }}
                     >
                       Create Guide
                     </Link>
                     <Link
-                      href="/my-guides"
+                      href="/guides"
                       className="block text-gray-600 hover:text-primary-600 text-sm py-1"
                       onClick={() => { setIsToolsDropdownOpen(false); setIsMobileMenuOpen(false); }}
                     >
@@ -231,7 +248,6 @@ export default function Navbar() {
             Pricing
           </Link>
 
-          {/* Mobile auth */}
           <div className="pt-2 border-t border-gray-200 space-y-2">
             {user ? (
               <>
@@ -271,6 +287,12 @@ export default function Navbar() {
           </div>
         </div>
       )}
+
+      {/* Challenge Popup */}
+      <ChallengePopup
+        isOpen={showChallengePopup}
+        onClose={() => setShowChallengePopup(false)}
+      />
     </nav>
   );
 }

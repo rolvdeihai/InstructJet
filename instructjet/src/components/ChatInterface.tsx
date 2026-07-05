@@ -22,6 +22,7 @@ interface ChatInterfaceProps {
   showWelcome?: boolean;
   onAttachFile?: () => void;
   uploading?: boolean;
+  hasGuide?: boolean; // new prop to indicate if a guide exists
 }
 
 export default function ChatInterface({
@@ -36,6 +37,7 @@ export default function ChatInterface({
   showWelcome = false,
   onAttachFile,
   uploading = false,
+  hasGuide = false,
 }: ChatInterfaceProps) {
   const [input, setInput] = useState('');
   const messagesEndRef = useRef<HTMLDivElement>(null);
@@ -83,6 +85,13 @@ export default function ChatInterface({
 
   const handleInsertGuide = () => {
     setInput(prev => '@guide ' + prev);
+    if (textareaRef.current) {
+      textareaRef.current.focus();
+    }
+  };
+
+  const handleInsertRevision = () => {
+    setInput(prev => '@revision ' + prev);
     if (textareaRef.current) {
       textareaRef.current.focus();
     }
@@ -240,6 +249,26 @@ export default function ChatInterface({
           <span className="text-xs text-gray-500">
             Add @guide to generate a guide
           </span>
+
+          <button
+            type="button"
+            onClick={handleInsertRevision}
+            className={`text-xs px-2 py-1 rounded ${
+              hasGuide
+                ? 'bg-gray-100 hover:bg-gray-200'
+                : 'bg-gray-200 text-gray-400 cursor-not-allowed'
+            }`}
+            disabled={!hasGuide}
+            title={hasGuide ? 'Add @revision to edit a section' : 'No guide exists yet'}
+          >
+            @revision
+          </button>
+          <span className="text-xs text-gray-500">
+            {hasGuide
+              ? 'Add @revision to edit a section'
+              : '(no guide to edit yet)'}
+          </span>
+
           {onAttachFile && (
             <button
               type="button"

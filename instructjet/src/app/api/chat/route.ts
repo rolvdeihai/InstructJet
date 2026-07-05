@@ -43,7 +43,7 @@ export async function POST(req: NextRequest) {
     );
   }
 
-  const { message, context, requestId } = await req.json();
+  const { message, context, requestId, guideContent, isRevision } = await req.json();
   if (!requestId) {
     return NextResponse.json({ error: 'Missing requestId' }, { status: 400 });
   }
@@ -51,7 +51,7 @@ export async function POST(req: NextRequest) {
   const userPlan = await getUserPlan(user.id);
   const isPremium = userPlan === 'premium';
 
-  // Detect explicit guide request
+  // Detect explicit guide request (full generation)
   const isExplicitGuideRequest =
     message.trim().startsWith('@guide') ||
     /\b(create|make|generate)\s+a\s+guide\b/i.test(message);
@@ -69,22 +69,35 @@ export async function POST(req: NextRequest) {
     remainingQuota = remaining;
   }
 
-  const normalSystemInstruction = `You are InstructJet AI, an expert at creating task guides. 
-    Your job is to ask clarifying questions about the task: what needs to be done, who is the target worker, any common misunderstandings, required tools, etc. 
-    After you have enough context (e.g., after 3-5 exchanges), output a JSON object with the following structure:
-    {"action": "generate_guide", "summary": "A concise summary of the task based on the conversation so far.", "sections": ["Overview", "Prerequisites", "Step-by-Step Instructions", "Tools & Assets", "Flow"]}
-    **Important for the Flow section**: When you later generate that section, it must contain a Mermaid flowchart diagram. Use \`\`\`mermaid ... \`\`\` syntax. Example:
-    \`\`\`mermaid
-    flowchart TD
-      A[Start] --> B[Step 1]
-      C -->|Yes| D[Step 2]
-      C -->|No| E[Step 3]
-      D --> F[End]
-      E --> F
-    \`\`\`
-    If you still need more info, just respond naturally asking for clarification. Do not output the guide directly; only output JSON when ready.`;
+  // ─── Base system instruction with guide context ──────────────
+  const baseSystemInstruction = `You are InstructJet AI, an expert at creating and revising task guides.
+The current guide content (in Markdown with ## section headers) is provided below. Use it to answer questions, suggest improvements, or make revisions.
 
-  const fullContext = `${normalSystemInstruction}\n\nConversation history:\n${context || ''}\n\nUser: ${message}\nAssistant:`;
+Current guide content:
+${guideContent || 'No guide has been generated yet.'}
+
+Your job is to assist the user in creating or refining guides.
+- If the user asks for a revision (indicated by isRevision=true), you MUST output a JSON object with exactly the sections that need to be changed.
+- For normal conversation, respond naturally with helpful text.
+- If you still need more info, ask clarifying questions.
+`;
+
+  // ─── Revision system instruction ──────────────────────────────
+  const revisionSystemInstruction = `You are an expert guide editor. The user wants to revise specific sections of the existing guide.
+The full guide is provided in the system context above.
+The user's revision request is: "${message}"
+
+You must output ONLY a valid JSON object with this structure:
+{
+  "type": "revision",
+  "sections": {
+    "SectionName1": "new markdown content for this section (including any subheadings)",
+    "SectionName2": "new markdown content for this section"
+  }
+}
+Only include sections that need to be changed. Do not include unchanged sections.
+If you are unsure about which sections to change, ask clarifying questions in natural language (not JSON).
+If the request is clear, output only the JSON.`;
 
   const abortSignal = req.signal;
   const timeoutSignal = AbortSignal.timeout(FETCH_TIMEOUT_MS);
@@ -101,8 +114,8 @@ export async function POST(req: NextRequest) {
     if (useDeepSeek) {
       // ─── DEEPSEEK PATH ──────────────────────────────────────────
 
+      // Case 1: Explicit guide generation (@guide or "create a guide")
       if (isExplicitGuideRequest) {
-        // Generate full guide in one DeepSeek call
         const cleanedMessage = message.replace(/^@guide\s*/i, '').trim();
 
         const deepseekMessages = [
@@ -173,14 +186,63 @@ export async function POST(req: NextRequest) {
         });
         queuePosition = 0;
 
-        // ✅ Increment daily usage for free users
+        // Increment daily usage for free users
         if (!isPremium) {
           await incrementDailyDeepSeekUsage(user.id);
         }
-      } else {
-        // Normal conversation
+      }
+      // Case 2: Revision request
+      else if (isRevision) {
+        if (!guideContent) {
+          // No guide to revise – respond with a helpful message
+          assistantMessage = "I don't see any guide to revise yet. Please generate a guide first using '@guide' or by asking me to create one.";
+        } else {
+          const deepseekMessages = [
+            {
+              role: 'system',
+              content: `${baseSystemInstruction}\n\n${revisionSystemInstruction}`,
+            },
+            {
+              role: 'user',
+              content: `User revision request: ${message}`,
+            },
+          ];
+
+          const response = await fetch(DEEPSEEK_API_URL, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              Authorization: `Bearer ${process.env.DEEPSEEK_KEY}`,
+            },
+            body: JSON.stringify({
+              model: DEEPSEEK_MODEL,
+              messages: deepseekMessages,
+              temperature: 0.3,
+              max_tokens: 1500,
+            }),
+            signal: combinedSignal,
+          });
+
+          if (!response.ok) {
+            const errorText = await response.text();
+            console.error('DeepSeek API error:', response.status, errorText);
+            throw new Error(`DeepSeek API error: ${response.status}`);
+          }
+
+          const data = await response.json();
+          assistantMessage = data.choices[0]?.message?.content || 'Sorry, DeepSeek returned an empty response.';
+          queuePosition = 0;
+
+          // Increment daily usage for free users
+          if (!isPremium) {
+            await incrementDailyDeepSeekUsage(user.id);
+          }
+        }
+      }
+      // Case 3: Normal conversation
+      else {
         const deepseekMessages = [
-          { role: 'system', content: normalSystemInstruction },
+          { role: 'system', content: baseSystemInstruction },
           { role: 'user', content: `Conversation history:\n${context || ''}\n\nUser: ${message}` },
         ];
 
@@ -209,7 +271,7 @@ export async function POST(req: NextRequest) {
         assistantMessage = data.choices[0]?.message?.content || 'Sorry, DeepSeek returned an empty response.';
         queuePosition = 0;
 
-        // ✅ Increment daily usage for free users
+        // Increment daily usage for free users
         if (!isPremium) {
           await incrementDailyDeepSeekUsage(user.id);
         }
@@ -217,12 +279,21 @@ export async function POST(req: NextRequest) {
     } else {
       // ─── FALLBACK: LOCAL HF API (Free users beyond quota) ──────
 
+      // For HF fallback, we do not support explicit revision JSON;
+      // we treat everything as normal chat (but we still include guide content in the context).
+      let fallbackContext = `${baseSystemInstruction}\n\nConversation history:\n${context || ''}\n\nUser: ${message}\nAssistant:`;
+
+      // If it's a revision, we can add an extra hint, but we won't enforce JSON.
+      if (isRevision) {
+        fallbackContext += `\n\nNote: The user wants to revise specific sections. Please respond with a clear explanation and suggest edits.`;
+      }
+
       const response = await fetch(HF_API_URL, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           question: message,
-          context: fullContext,
+          context: fallbackContext,
           request_id: requestId,
         }),
         signal: combinedSignal,
@@ -252,12 +323,13 @@ export async function POST(req: NextRequest) {
       // If DeepSeek failed, try HF fallback (only if we were using DeepSeek)
       if (useDeepSeek) {
         try {
+          const fallbackContext = `${baseSystemInstruction}\n\nConversation history:\n${context || ''}\n\nUser: ${message}\nAssistant:`;
           const fallbackResponse = await fetch(HF_API_URL, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
               question: message,
-              context: fullContext,
+              context: fallbackContext,
               request_id: requestId,
             }),
             signal: combinedSignal,
@@ -266,15 +338,12 @@ export async function POST(req: NextRequest) {
             const data = await fallbackResponse.json();
             assistantMessage = data.response;
             queuePosition = data.queue_position;
-            // fallback succeeded – mark it so we don't set error flags
             fallbackSucceeded = true;
           } else {
-            // fallback request returned error
             throw new Error('HF fallback failed');
           }
         } catch (fallbackError) {
           console.error('Fallback to HF also failed:', fallbackError);
-          // fallback failed – set error
           errorOccurred = true;
           assistantMessage = 'Sorry, DeepSeek is currently unavailable and fallback also failed. Please try again later.';
         }

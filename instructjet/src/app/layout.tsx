@@ -2,7 +2,6 @@
 import { AuthProvider } from '@/contexts/AuthContext';
 import ClientTokenResetWrapper from '@/components/ClientTokenResetWrapper';
 import './globals.css';
-import ClientChallenge from "@/components/ClientChallenge";
 import { PaddleProvider } from '@/components/PaddleProvider';
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -12,7 +11,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <AuthProvider>
           <ClientTokenResetWrapper>
             <PaddleProvider />
-            <ClientChallenge />
             {children}
           </ClientTokenResetWrapper>
         </AuthProvider>

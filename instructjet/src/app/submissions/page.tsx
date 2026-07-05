@@ -1,5 +1,3 @@
-// src/app/dashboard/submissions/page.tsx
-
 'use client';
 
 import { useAuth } from '@/contexts/AuthContext';
@@ -42,6 +40,7 @@ export default function SubmissionsPage() {
   const [deleting, setDeleting] = useState(false);
   const [editingId, setEditingId] = useState<string | null>(null);
   const [editCommentValue, setEditCommentValue] = useState('');
+  const [editScoreValue, setEditScoreValue] = useState<number | null>(null);
 
   useEffect(() => {
     if (!authLoading && !user) router.push('/login');
@@ -75,11 +74,12 @@ export default function SubmissionsPage() {
       return;
     }
     const guideIds = guides.map(g => g.id);
+    // ✅ Fetch ALL submissions, including those with ai_score = null or 0
     const { data: media, error: mediaError } = await supabase
       .from('media_uploads')
       .select('id, file_url, file_type, ai_score, ai_comment, approval_status, created_at, guide_id, worker_name, worker_email')
       .in('guide_id', guideIds)
-      .not('ai_score', 'is', null)
+      // .not('ai_score', 'is', null)   // ← REMOVED: now includes all
       .order('created_at', { ascending: false });
     if (mediaError) {
       console.error(mediaError);
@@ -102,18 +102,38 @@ export default function SubmissionsPage() {
     } else alert('Failed to update');
   };
 
-  const saveComment = async (id: string, newComment: string) => {
+  // ─── Edit: save both comment and score ──────────────────────────────────
+  const saveCommentAndScore = async (id: string, newComment: string, newScore: number | null) => {
+    const updateData: any = { ai_comment: newComment };
+    if (newScore !== null) {
+      // Preserve existing ai_score object but update the score
+      const current = submissions.find(s => s.id === id);
+      const currentScore = current?.ai_score || {};
+      updateData.ai_score = {
+        ...currentScore,
+        score: newScore,
+      };
+    }
     const { error } = await supabase
       .from('media_uploads')
-      .update({ ai_comment: newComment })
+      .update(updateData)
       .eq('id', id);
     if (!error) {
       setSubmissions(prev =>
-        prev.map(s => (s.id === id ? { ...s, ai_comment: newComment } : s))
+        prev.map(s => {
+          if (s.id === id) {
+            return {
+              ...s,
+              ai_comment: newComment,
+              ai_score: updateData.ai_score || s.ai_score,
+            };
+          }
+          return s;
+        })
       );
       setEditingId(null);
     } else {
-      alert('Failed to save comment');
+      alert('Failed to save changes');
     }
   };
 
@@ -212,7 +232,7 @@ export default function SubmissionsPage() {
               </button>
             )}
           </div>
-          <p className="text-gray-600 mb-6">Submitted work with evaluations. Edit comments and download PDF reports.</p>
+          <p className="text-gray-600 mb-6">Submitted work with evaluations. Edit comments and scores, then download PDF reports.</p>
 
           <div className="mb-6 flex gap-4">
             <input
@@ -285,15 +305,16 @@ export default function SubmissionsPage() {
                     <p className="text-sm text-gray-500 mt-1">Submitted: {new Date(sub.created_at).toLocaleDateString()}</p>
                     {sub.worker_name && <p className="text-sm text-gray-600 mt-1">Worker: {sub.worker_name}</p>}
                     
-                    {/* Editable Comment Section with Markdown Preview */}
+                    {/* ─── Editable Comment + Score ─────────────────────── */}
                     <div className="mt-2 p-2 bg-gray-50 rounded text-sm">
                       <div className="flex justify-between items-center">
-                        <span className="font-medium">Comment:</span>
+                        <span className="font-medium">Review:</span>
                         {editingId !== sub.id ? (
                           <button
                             onClick={() => {
                               setEditingId(sub.id);
                               setEditCommentValue(sub.ai_comment || '');
+                              setEditScoreValue(sub.ai_score?.score ?? null);
                             }}
                             className="text-xs text-blue-600 hover:underline"
                           >
@@ -302,7 +323,7 @@ export default function SubmissionsPage() {
                         ) : (
                           <div className="space-x-2">
                             <button
-                              onClick={() => saveComment(sub.id, editCommentValue)}
+                              onClick={() => saveCommentAndScore(sub.id, editCommentValue, editScoreValue)}
                               className="text-xs text-green-600 hover:underline"
                             >
                               Save
@@ -316,28 +337,52 @@ export default function SubmissionsPage() {
                           </div>
                         )}
                       </div>
+
                       {editingId === sub.id ? (
-                        <textarea
-                          value={editCommentValue}
-                          onChange={(e) => setEditCommentValue(e.target.value)}
-                          className="w-full mt-1 p-1 border rounded text-sm"
-                          rows={3}
-                          placeholder="Markdown supported"
-                        />
-                      ) : (
-                        <div className="prose prose-sm max-w-none mt-1 text-gray-700">
-                          <ReactMarkdown remarkPlugins={[remarkGfm]}>
-                            {sub.ai_comment || '*No comment provided.*'}
-                          </ReactMarkdown>
+                        <div className="mt-1 space-y-2">
+                          <div>
+                            <label className="text-xs text-gray-600">Score (0–100)</label>
+                            <input
+                              type="number"
+                              min="0"
+                              max="100"
+                              value={editScoreValue ?? ''}
+                              onChange={(e) => setEditScoreValue(e.target.value === '' ? null : Number(e.target.value))}
+                              className="w-full p-1 border rounded text-sm"
+                              placeholder="Leave blank for N/A"
+                            />
+                          </div>
+                          <div>
+                            <label className="text-xs text-gray-600">Comment (Markdown supported)</label>
+                            <textarea
+                              value={editCommentValue}
+                              onChange={(e) => setEditCommentValue(e.target.value)}
+                              className="w-full mt-1 p-1 border rounded text-sm"
+                              rows={3}
+                              placeholder="Markdown supported"
+                            />
+                          </div>
                         </div>
+                      ) : (
+                        <>
+                          <div className="mt-1 text-sm">
+                            <span className="font-medium">Score: </span>
+                            {sub.ai_score && typeof sub.ai_score === 'object' && 'score' in sub.ai_score ? (
+                              <span className="font-bold">{sub.ai_score.score}/100</span>
+                            ) : (
+                              <span className="text-gray-500">N/A</span>
+                            )}
+                          </div>
+                          <div className="prose prose-sm max-w-none mt-1 text-gray-700">
+                            <ReactMarkdown remarkPlugins={[remarkGfm]}>
+                              {sub.ai_comment || '*No comment provided.*'}
+                            </ReactMarkdown>
+                          </div>
+                        </>
                       )}
                     </div>
 
-                    {sub.ai_score && typeof sub.ai_score === 'object' && sub.ai_score.score && (
-                      <div className="mt-1 text-sm font-medium">Score: {sub.ai_score.score}/100</div>
-                    )}
-
-                    {/* PDF Download Button */}
+                    {/* ─── Actions ────────────────────────────────────────── */}
                     <button
                       onClick={() => downloadPDF(sub)}
                       className="mt-3 w-full py-1 text-sm bg-indigo-100 text-indigo-700 rounded hover:bg-indigo-200 transition"

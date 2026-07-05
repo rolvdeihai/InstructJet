@@ -27,11 +27,65 @@ const GuideTutorial = ({ compact = false }: { compact?: boolean }) => (
   </div>
 );
 
+// ─── Guide Section Helpers ──────────────────────────────────────────────
+const parseGuideSections = (markdown: string): { frontMatter: string; sections: Record<string, string> } => {
+  const sections: Record<string, string> = {};
+  const lines = markdown.split('\n');
+  let currentSection = '';
+  let currentContent: string[] = [];
+  let frontMatter: string[] = [];
+  let inFrontMatter = true;
+
+  for (const line of lines) {
+    const match = line.match(/^##\s+(.+)$/);
+    if (match) {
+      inFrontMatter = false;
+      if (currentSection) {
+        sections[currentSection] = currentContent.join('\n').trim();
+      }
+      currentSection = match[1].trim();
+      currentContent = [];
+    } else {
+      if (inFrontMatter) {
+        frontMatter.push(line);
+      } else {
+        currentContent.push(line);
+      }
+    }
+  }
+  if (currentSection) {
+    sections[currentSection] = currentContent.join('\n').trim();
+  }
+  return { frontMatter: frontMatter.join('\n').trim(), sections };
+};
+
+const reconstructGuide = (frontMatter: string, sections: Record<string, string>): string => {
+  const sectionStr = Object.entries(sections)
+    .map(([title, content]) => `## ${title}\n\n${content}`)
+    .join('\n\n');
+  return frontMatter ? `${frontMatter}\n\n${sectionStr}` : sectionStr;
+};
+
+const updateGuideSections = (
+  currentGuide: string,
+  updates: Record<string, string>
+): string => {
+  const { frontMatter, sections } = parseGuideSections(currentGuide);
+  let updated = false;
+  for (const [sectionName, newContent] of Object.entries(updates)) {
+    // Update existing section or add new one
+    sections[sectionName] = newContent;
+    updated = true;
+  }
+  return updated ? reconstructGuide(frontMatter, sections) : currentGuide;
+};
+
 // ─── Main Component ──────────────────────────────────────────────────────────
 export default function CreateGuideClient({ userId }: { userId: string }) {
   // ─── Core State ──────────────────────────────────────────────────────────
   const [messages, setMessages] = useState<Array<{ role: 'user' | 'assistant'; content: string }>>([]);
   const [guideContent, setGuideContent] = useState<string>('');
+  const [hasGuide, setHasGuide] = useState<boolean>(false);
   const [sessionId, setSessionId] = useState<string | null>(null);
   const [isGenerating, setIsGenerating] = useState(false);
   const [title, setTitle] = useState('');
@@ -106,6 +160,7 @@ export default function CreateGuideClient({ userId }: { userId: string }) {
     setSessionId(data.id);
     setMessages([]);
     setGuideContent('');
+    setHasGuide(false);
     setGuideSections([]);
     setTitle('');
     setGeneratingSections(false);
@@ -219,7 +274,6 @@ export default function CreateGuideClient({ userId }: { userId: string }) {
 
       await addMessage('assistant', `📎 **File attached:** ${file.name}\n\nAnalyzing...`);
 
-      // ✅ Fix: ensure extension is a string
       const fileExtension = file.name.split('.').pop()?.toLowerCase() || '';
       let fileType = '';
       if (['png','jpg','jpeg','gif','webp'].includes(fileExtension)) fileType = 'image';
@@ -268,7 +322,17 @@ export default function CreateGuideClient({ userId }: { userId: string }) {
   // ─── Main Send Message ──────────────────────────────────────────────────
   const handleSendMessage = async (message: string) => {
     if (!message.trim()) return;
-    await addMessage('user', message);
+
+    // Detect revision command
+    const isRevision = message.trim().startsWith('@revision');
+    const cleanedMessage = isRevision ? message.replace(/^@revision\s*/i, '').trim() : message;
+
+    if (isRevision && !hasGuide) {
+      await addMessage('assistant', "I don't see any guide to revise yet. Please generate a guide first using '@guide' or by asking me to create one.");
+      return;
+    }
+
+    await addMessage('user', message); // store original message for history
 
     const requestId = crypto.randomUUID();
     setCurrentRequestId(requestId);
@@ -276,10 +340,10 @@ export default function CreateGuideClient({ userId }: { userId: string }) {
     let searchSummary: string | null = null;
     if (webSearchEnabled) {
       setIsSearching(true);
-      searchSummary = await fetchWebSearchSummary(message);
+      searchSummary = await fetchWebSearchSummary(cleanedMessage);
       setIsSearching(false);
       if (searchSummary) {
-        await addMessage('assistant', `🔍 I searched the web for "${message}"...`);
+        await addMessage('assistant', `🔍 I searched the web for "${cleanedMessage}"...`);
       } else {
         await addMessage('assistant', `⚠️ Web search failed...`);
       }
@@ -301,9 +365,11 @@ export default function CreateGuideClient({ userId }: { userId: string }) {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          message,
+          message: cleanedMessage,
           context: contextString,
           requestId,
+          guideContent: guideContent, // always send current guide
+          isRevision,                 // tell API it's a revision request
         }),
         signal: abortControllerRef.current.signal,
       });
@@ -328,10 +394,22 @@ export default function CreateGuideClient({ userId }: { userId: string }) {
         try {
           const parsed = JSON.parse(data.response);
 
+          // Handle revision response
+          if (parsed.type === 'revision' && parsed.sections) {
+            const newGuide = updateGuideSections(guideContent, parsed.sections);
+            setGuideContent(newGuide);
+            setHasGuide(true);
+            await addMessage('assistant', `✅ I've updated the sections you requested.`);
+            setIsGenerating(false);
+            stopQueuePolling();
+            return;
+          }
+
           // Premium: complete_guide
           if (parsed.action === 'complete_guide') {
             await addMessage('assistant', parsed.content);
             setGuideContent(parsed.content);
+            setHasGuide(true);
             setIsGenerating(false);
             stopQueuePolling();
             return;
@@ -435,10 +513,12 @@ export default function CreateGuideClient({ userId }: { userId: string }) {
           const data = await response.json();
           fullGuide += `\n\n## ${sections[i]}\n${data.content}`;
           setGuideContent(fullGuide);
+          setHasGuide(true);
         } catch (err) {
           console.error(`Error generating section ${sections[i]}:`, err);
           fullGuide += `\n\n## ${sections[i]}\n*Failed to generate.*`;
           setGuideContent(fullGuide);
+          setHasGuide(true);
         }
       }
     } catch (err) {
@@ -516,6 +596,14 @@ export default function CreateGuideClient({ userId }: { userId: string }) {
     }
   };
 
+  // ─── Handle Guide Preview Changes ──────────────────────────────────────
+  const handleGuidePreviewChange = (newContent: string) => {
+    setGuideContent(newContent);
+    if (newContent.trim()) {
+      setHasGuide(true);
+    }
+  };
+
   // ─── Render ──────────────────────────────────────────────────────────────
   return (
     <div className="flex h-screen pt-16">
@@ -533,6 +621,7 @@ export default function CreateGuideClient({ userId }: { userId: string }) {
           showWelcome={messages.length === 0}
           onAttachFile={triggerFilePicker}
           uploading={uploading}
+          hasGuide={hasGuide}
         />
         {/* Hidden file input */}
         <input
@@ -633,7 +722,11 @@ export default function CreateGuideClient({ userId }: { userId: string }) {
             </div>
           </div>
         </div>
-        <GuidePreview content={guideContent} onChange={setGuideContent} />
+        <GuidePreview
+          content={guideContent}
+          onChange={handleGuidePreviewChange}
+          userId={userId}
+        />
       </div>
     </div>
   );
