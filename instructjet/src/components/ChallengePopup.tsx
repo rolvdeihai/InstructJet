@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { useAuth } from '@/contexts/AuthContext';
+import Link from 'next/link';
 
 const PRICING_LINK = "/pricing";
 const LOGIN_LINK = "/login";
@@ -19,6 +20,7 @@ export default function ChallengePopup({ isOpen, onClose }: ChallengePopupProps)
     canSubmit: boolean;
     alreadySubmitted: boolean;
     hasDeposit: boolean;
+    hasListing?: boolean;
     depositDate?: string;
     weekStart?: string;
     submittedAt?: string;
@@ -34,11 +36,11 @@ export default function ChallengePopup({ isOpen, onClose }: ChallengePopupProps)
           const data = await res.json();
           setStatus(data);
         } else {
-          setStatus({ canSubmit: false, alreadySubmitted: false, hasDeposit: false });
+          setStatus({ canSubmit: false, alreadySubmitted: false, hasDeposit: false, hasListing: false });
         }
       } catch (err) {
         console.error(err);
-        setStatus({ canSubmit: false, alreadySubmitted: false, hasDeposit: false });
+        setStatus({ canSubmit: false, alreadySubmitted: false, hasDeposit: false, hasListing: false });
       } finally {
         setLoadingStatus(false);
       }
@@ -63,10 +65,9 @@ export default function ChallengePopup({ isOpen, onClose }: ChallengePopupProps)
       });
       const data = await res.json();
       if (res.ok) {
-        alert(`✅ Guide submitted! Your certificate: ${data.certificateUrl}. Winners will be announced every Sunday!`);
+        alert(`✅ Guide submitted! Your certificate will be generated after the 7‑day holding period.`);
         setGuideUrl('');
         onClose();
-        window.open(data.certificateUrl, '_blank');
         // Refresh status
         const statusRes = await fetch('/api/challenge/status');
         if (statusRes.ok) setStatus(await statusRes.json());
@@ -82,6 +83,15 @@ export default function ChallengePopup({ isOpen, onClose }: ChallengePopupProps)
 
   if (!isOpen) return null;
 
+  // Determine steps
+  const steps = [
+    { id: 'deposit', label: 'Deposit', done: status?.hasDeposit || false },
+    { id: 'guide', label: 'Create & Sell', done: status?.hasListing || false },
+    { id: 'submit', label: 'Submit', done: status?.alreadySubmitted || false },
+    { id: 'wait', label: 'Wait 7 Days', done: false },
+    { id: 'reward', label: 'Claim Rewards', done: false },
+  ];
+
   return (
     <div className="fixed inset-0 bg-black/60 flex items-center justify-center z-[10000] p-4">
       <div className="bg-white rounded-2xl max-w-2xl w-full max-h-[85vh] overflow-y-auto shadow-2xl relative">
@@ -92,98 +102,149 @@ export default function ChallengePopup({ isOpen, onClose }: ChallengePopupProps)
         </button>
 
         <div className="p-6">
-          <div className="text-center mb-4">
-            <div className="text-4xl mb-2">📝</div>
-            <h2 className="text-2xl font-bold text-slate-800 font-syne">Weekly Guide Challenge</h2>
-            <p className="text-slate-500 text-sm mt-1">Create a guide that makes complex tasks simple. Win cash prizes every Sunday.</p>
+          <div className="text-center mb-6">
+            <div className="text-5xl mb-3">🏆</div>
+            <h2 className="text-3xl font-bold text-slate-800 font-syne">Guide Creator Challenge</h2>
+            <p className="text-slate-500 text-sm mt-1">Deposit, create, sell, and earn rewards — all while learning!</p>
+          </div>
+
+          {/* Progress Steps */}
+          <div className="flex justify-between items-center mb-6 px-2">
+            {steps.map((step, idx) => (
+              <div key={step.id} className="flex flex-col items-center flex-1">
+                <div className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold transition-colors ${
+                  step.done ? 'bg-green-500 text-white' : 'bg-gray-200 text-gray-500'
+                }`}>
+                  {step.done ? '✓' : idx + 1}
+                </div>
+                <p className="text-xs text-gray-600 mt-1 text-center">{step.label}</p>
+              </div>
+            ))}
           </div>
 
           <div className="space-y-4">
-            {/* Prizes */}
-            <div className="bg-amber-50 rounded-xl p-4 border border-amber-200">
-              <h3 className="font-bold text-amber-800">🎁 Prizes (Weekly)</h3>
-              <ul className="mt-2 space-y-1 text-sm text-amber-700">
-                <li>🥇 <strong>1st place: $50</strong></li>
-                <li>🥈 <strong>2nd place: $25</strong></li>
-                <li>🥉 <strong>3rd place: $10</strong></li>
+            {/* Rules */}
+            <div className="bg-gradient-to-br from-amber-50 to-orange-50 rounded-xl p-5 border border-amber-200">
+              <h3 className="font-bold text-amber-800 text-lg flex items-center gap-2">
+                <span>📋</span> Challenge Rules
+              </h3>
+              <ul className="mt-2 space-y-2 text-sm text-amber-800">
+                <li className="flex items-start gap-2">
+                  <span className="font-bold">1.</span>
+                  <span><strong>Deposit $5</strong> (fully withdrawable) – this ensures commitment.</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="font-bold">2.</span>
+                  <span><strong>Create a guide</strong> using our AI Guide Creator. Make it clear, simple, and valuable.</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="font-bold">3.</span>
+                  <span><strong>Sell the guide</strong> – list it as a private guide for sale on our platform.</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="font-bold">4.</span>
+                  <span><strong>Do not withdraw</strong> your deposit for 7 full days after submitting.</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="font-bold">5.</span>
+                  <span><strong>Submit</strong> your guide URL below to enter the challenge.</span>
+                </li>
               </ul>
             </div>
 
-            {/* How to participate */}
-            <div className="bg-slate-50 rounded-xl p-4">
-              <h3 className="font-bold text-slate-800 mb-2">📋 How to Participate</h3>
-              <ol className="list-decimal list-inside space-y-2 text-sm text-slate-600">
-                <li>
-                  <strong>Deposit $5 (withdrawable)</strong> – this ensures commitment.
-                  <p className="text-xs text-slate-500 mt-1 ml-6">Your submission is valid only if you keep the deposit for the full 7‑day challenge period. If you withdraw early, your submission is disqualified.</p>
+            {/* Reward */}
+            <div className="bg-gradient-to-br from-green-50 to-emerald-50 rounded-xl p-5 border border-green-200">
+              <h3 className="font-bold text-green-800 text-lg flex items-center gap-2">
+                <span>🎁</span> Your Reward
+              </h3>
+              <ul className="mt-2 space-y-2 text-sm text-green-800">
+                <li className="flex items-center gap-2">
+                  <span className="text-xl">📜</span>
+                  <span><strong>Sharable Certificate</strong> – showcase your achievement.</span>
                 </li>
-                <li>
-                  <strong>Create a guide</strong> using our AI Guide Creator. Focus on a complex topic and make it exceptionally easy to follow.
+                <li className="flex items-center gap-2">
+                  <span className="text-xl">🪙</span>
+                  <span><strong>+50,000 Tokens</strong> – boost your account for future guides.</span>
                 </li>
-                <li>
-                  <strong>Submit your guide URL</strong> using the form below.
-                </li>
-                <li>
-                  Winners are chosen every <strong>Sunday</strong> based on:
-                  <ul className="list-disc list-inside ml-4 mt-1 space-y-0.5 text-xs">
-                    <li>How complex the original topic is</li>
-                    <li>How simple and clear your guide makes it</li>
-                    <li>Use of analogies, examples, and no unnecessary jargon</li>
-                  </ul>
-                </li>
-              </ol>
+              </ul>
+              <p className="text-xs text-green-700 mt-3">
+                * Rewards are credited after the 7‑day holding period ends, provided you haven't withdrawn your deposit.
+              </p>
             </div>
 
-            {/* Tips */}
-            <div className="bg-blue-50 rounded-xl p-4">
-              <h3 className="font-bold text-blue-800 mb-2">💡 Tips for Winning</h3>
-              <ul className="list-disc list-inside text-sm text-blue-700 space-y-1">
-                <li>Break down complex steps into tiny, actionable pieces</li>
-                <li>Add real‑world analogies (e.g., "Think of it like making coffee...")</li>
-                <li>Include screenshots or diagrams (Mermaid flowcharts)</li>
-                <li>Keep sentences short and avoid technical terms unless explained</li>
-                <li>Test your guide with someone who knows nothing about the topic</li>
+            {/* Quick tips */}
+            <div className="bg-blue-50 rounded-xl p-4 border border-blue-200">
+              <h4 className="font-bold text-blue-800 flex items-center gap-2">
+                <span>💡</span> How to Win
+              </h4>
+              <ul className="list-disc list-inside text-sm text-blue-700 space-y-1 mt-1">
+                <li>Make your guide exceptionally clear and easy to follow.</li>
+                <li>Use analogies, examples, and visuals (Mermaid diagrams).</li>
+                <li>Price your guide competitively to attract buyers.</li>
+                <li>Share your guide on social media for more visibility.</li>
               </ul>
             </div>
 
             {!user ? (
               <div className="bg-gray-100 rounded-xl p-4 text-center">
-                <p className="text-gray-700">Please <a href={LOGIN_LINK} className="text-orange-600 font-medium underline">log in</a> to participate.</p>
+                <p className="text-gray-700">Please <Link href={LOGIN_LINK} className="text-orange-600 font-medium underline">log in</Link> to participate.</p>
               </div>
             ) : loadingStatus ? (
               <div className="text-center py-4 text-gray-500">Checking eligibility...</div>
             ) : status?.alreadySubmitted ? (
               <div className="bg-green-50 rounded-xl p-4 text-center">
-                <p className="text-green-700">✅ You've already submitted a guide for this week!</p>
-                <p className="text-xs text-green-600 mt-1">Winners announced every Sunday. Good luck!</p>
+                <p className="text-green-700 text-lg font-semibold">✅ You're in the challenge!</p>
+                <p className="text-sm text-green-600 mt-1">Your guide is submitted. Keep your deposit for 7 days to claim rewards.</p>
+                <p className="text-xs text-green-500 mt-2">Winners will be announced after the holding period.</p>
               </div>
             ) : !status?.hasDeposit ? (
               <div className="bg-yellow-50 rounded-xl p-4 text-center">
-                <p className="text-yellow-700">You need a <strong>$5 deposit</strong> to participate.</p>
+                <p className="text-yellow-700 text-sm">You need a <strong>$5 deposit</strong> to join the challenge.</p>
                 <button
                   onClick={handleDeposit}
-                  className="inline-block mt-2 px-4 py-2 bg-orange-600 text-white rounded-lg text-sm font-medium hover:bg-orange-700"
+                  className="inline-block mt-2 px-6 py-2 bg-orange-600 text-white rounded-lg text-sm font-medium hover:bg-orange-700 shadow-md transition-all hover:scale-105"
                 >
                   Deposit $5 (withdrawable)
                 </button>
-                <p className="text-xs text-yellow-600 mt-2">Your deposit must remain for the 7‑day challenge period.</p>
+                <p className="text-xs text-yellow-600 mt-2">Your deposit stays with you – it's refundable after the 7‑day period.</p>
+              </div>
+            ) : !status?.hasListing ? (
+              <div className="bg-blue-50 rounded-xl p-4 text-center">
+                <p className="text-blue-700 text-sm">✅ Deposit complete! Now you need to <strong>sell a guide</strong>.</p>
+                <Link href="/sell" className="inline-block mt-2 text-blue-600 font-medium hover:underline">
+                  Create a Listing →
+                </Link>
               </div>
             ) : status?.canSubmit ? (
-              <form onSubmit={handleSubmit} className="space-y-3">
-                <label className="block text-sm font-medium text-gray-700">Published Guide URL</label>
-                <input
-                  type="url"
-                  value={guideUrl}
-                  onChange={(e) => setGuideUrl(e.target.value)}
-                  placeholder="https://yourdomain.com/guides/your-guide-slug"
-                  required
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-orange-500 focus:border-orange-500"
-                />
-                <button type="submit" disabled={submitting} className="w-full px-4 py-2 bg-orange-600 text-white rounded-lg font-medium hover:bg-orange-700 disabled:opacity-50">
-                  {submitting ? "Submitting..." : "Submit Guide"}
+              <form onSubmit={handleSubmit} className="space-y-4 bg-slate-50 rounded-xl p-5 border border-slate-200">
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">Your Guide URL</label>
+                  <input
+                    type="url"
+                    value={guideUrl}
+                    onChange={(e) => setGuideUrl(e.target.value)}
+                    placeholder="https://yourdomain.com/guides/your-guide-slug"
+                    required
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition"
+                  />
+                  <p className="text-xs text-gray-500 mt-1">Make sure your guide is published and listed for sale.</p>
+                </div>
+                <button
+                  type="submit"
+                  disabled={submitting}
+                  className="w-full px-4 py-3 bg-orange-600 text-white rounded-lg font-semibold hover:bg-orange-700 disabled:opacity-50 transition-all shadow-md hover:shadow-lg"
+                >
+                  {submitting ? "Submitting..." : "🚀 Submit My Guide"}
                 </button>
               </form>
-            ) : null}
+            ) : (
+              <div className="bg-gray-100 rounded-xl p-4 text-center text-gray-700">
+                <p>Something's missing. Please make sure you have deposited $5 and created a listing.</p>
+                <Link href="/sell" className="inline-block mt-2 text-orange-600 font-medium hover:underline">
+                  Go to Sell Page →
+                </Link>
+              </div>
+            )}
           </div>
         </div>
       </div>

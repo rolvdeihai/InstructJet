@@ -1,3 +1,5 @@
+// src/app/api/tokens/deduct/route.ts
+
 import { NextRequest, NextResponse } from 'next/server';
 import { cookies } from 'next/headers';
 import { getUserFromSession } from '@/lib/auth';

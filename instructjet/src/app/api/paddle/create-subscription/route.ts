@@ -11,6 +11,10 @@ const PADDLE_API_KEY = process.env.PADDLE_API_KEY!;
 const APP_URL = process.env.NEXT_PUBLIC_APP_URL!;
 const SUBSCRIPTION_PRICE_ID = process.env.NEXT_PUBLIC_PADDLE_SUBSCRIPTION_PRICE_ID!;
 
+const PADDLE_API_BASE_URL = process.env.PADDLE_ENVIRONMENT === 'production'
+  ? 'https://api.paddle.com'
+  : 'https://sandbox-api.paddle.com';
+
 export async function POST(request: NextRequest) {
   try {
     const user = await getCurrentUser();
@@ -44,7 +48,7 @@ export async function POST(request: NextRequest) {
       email: dbUser.email,
     });
 
-    const response = await fetch('https://sandbox-api.paddle.com/transactions', {
+    const response = await fetch(`${PADDLE_API_BASE_URL}/transactions`, {
       method: 'POST',
       headers: {
         'Authorization': `Bearer ${paddleApiKey}`,
@@ -78,7 +82,7 @@ export async function POST(request: NextRequest) {
     if (!checkoutUrl) {
       console.warn('Checkout URL missing in initial response, fetching transaction...');
       const txId = transaction.id;
-      const getTx = await fetch(`https://sandbox-api.paddle.com/transactions/${txId}`, {
+      const getTx = await fetch(`${PADDLE_API_BASE_URL}/transactions/${txId}`, {
         headers: {
           'Authorization': `Bearer ${paddleApiKey}`,
           'Paddle-Version': '1',

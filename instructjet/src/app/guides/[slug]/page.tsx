@@ -6,6 +6,7 @@ import GuideView from '@/components/GuideView';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import WorkerChat from '@/components/WorkerChat';
+import PasswordGate from '@/components/PasswordGate';
 
 export default async function GuidePage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
@@ -20,21 +21,32 @@ export default async function GuidePage({ params }: { params: Promise<{ slug: st
     notFound();
   }
 
+  const isPrivate = guide.is_public === false;
+
   return (
     <main className="min-h-screen bg-gray-50">
       <Navbar />
       <div className="pt-24 pb-12 px-6 max-w-4xl mx-auto">
         <div className="bg-white rounded-xl shadow-md p-8 mb-8">
           <h1 className="text-3xl font-bold text-gray-900 mb-4">{guide.title}</h1>
-          <div className="prose max-w-none">
-            {/* The content is markdown; we'll render it in the client component */}
-            <GuideView content={guide.content} />
-          </div>
+
+          {isPrivate ? (
+            // Password-protected content
+            <PasswordGate guideId={guide.id} guideSlug={guide.slug}>
+              <GuideView content={guide.content} />
+            </PasswordGate>
+          ) : (
+            // Public content
+            <div className="prose max-w-none">
+              <GuideView content={guide.content} />
+            </div>
+          )}
         </div>
-        {/* Worker chat and upload area */}
+
+        {/* Worker chat area – remains visible for both public and private guides 
+            (you may optionally restrict it as well, but we keep it as is) */}
         <div className="bg-white rounded-xl shadow-md p-6">
           <h2 className="text-xl font-semibold text-gray-900 mb-4">Questions or clarifications?</h2>
-          {/* We'll add a client component for worker interaction */}
           <WorkerChat guideId={guide.id} guideTitle={guide.title} />
         </div>
       </div>

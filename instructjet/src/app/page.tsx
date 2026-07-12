@@ -81,7 +81,7 @@ export default function Home() {
               </Link>
             </div>
             <p className="mt-6 text-sm text-blue-200 opacity-80">
-              No credit card required · Free tier available · 14‑day premium trial
+              No credit card required · Free tier available · 7‑day premium trial
             </p>
           </div>
         </div>

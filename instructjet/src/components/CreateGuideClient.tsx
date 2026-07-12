@@ -4,6 +4,7 @@ import { useState, useEffect, useRef } from 'react';
 import ChatInterface from './ChatInterface';
 import GuidePreview from './GuidePreview';
 import { supabase } from '@/lib/supabase-client';
+import bcrypt from 'bcryptjs'; // npm install bcryptjs
 
 // ─── Tutorial Component ──────────────────────────────────────────────────────
 const GuideTutorial = ({ compact = false }: { compact?: boolean }) => (
@@ -114,6 +115,10 @@ export default function CreateGuideClient({ userId }: { userId: string }) {
   const abortControllerRef = useRef<AbortController | null>(null);
   const [currentRequestId, setCurrentRequestId] = useState<string | null>(null);
 
+  // ─── Privacy State ──────────────────────────────────────────────────────
+  const [isPublic, setIsPublic] = useState<boolean>(true);
+  const [privatePassword, setPrivatePassword] = useState<string>('');
+
   // ─── Helpers ──────────────────────────────────────────────────────────────
   const fetchWithCreds = (url: string, options?: RequestInit) => {
     return fetch(url, {
@@ -164,6 +169,9 @@ export default function CreateGuideClient({ userId }: { userId: string }) {
     setGuideSections([]);
     setTitle('');
     setGeneratingSections(false);
+    // Reset privacy to default
+    setIsPublic(true);
+    setPrivatePassword('');
   };
 
   const addMessage = async (role: 'user' | 'assistant', content: string) => {
@@ -541,6 +549,16 @@ export default function CreateGuideClient({ userId }: { userId: string }) {
       return;
     }
 
+    // If private, require a password
+    if (!isPublic && !privatePassword.trim()) {
+      alert('Please set a password for your private guide.');
+      return;
+    }
+    if (!isPublic && privatePassword.length < 4) {
+      alert('Password must be at least 4 characters.');
+      return;
+    }
+
     const publishCost = userPlan === 'basic' ? 0 : 5000;
     setSaving(true);
 
@@ -572,6 +590,12 @@ export default function CreateGuideClient({ userId }: { userId: string }) {
         }
       }
 
+      // Hash password if private
+      let passwordHash = null;
+      if (!isPublic && privatePassword) {
+        passwordHash = await bcrypt.hash(privatePassword, 10);
+      }
+
       const slug = `${title.toLowerCase().replace(/[^a-z0-9]+/g, '-')}-${Date.now().toString(36)}`;
       const { data, error } = await supabase
         .from('guides')
@@ -583,9 +607,12 @@ export default function CreateGuideClient({ userId }: { userId: string }) {
           ai_generated: true,
           total_token_budget: tokenBudget,
           token_budget_remaining: tokenBudget,
+          is_public: isPublic,
+          password_hash: passwordHash,
         })
         .select('slug')
         .single();
+
       if (error) throw error;
       window.location.href = `/guides/${data.slug}`;
     } catch (err: any) {
@@ -686,40 +713,78 @@ export default function CreateGuideClient({ userId }: { userId: string }) {
               </div>
             </div>
 
-            {/* Row 2: Token Budget */}
-            <div className="flex items-center gap-2">
-              <label className="text-sm font-medium text-gray-700">Worker Chat Token Budget</label>
-              <div className="relative inline-block">
-                <button
-                  type="button"
-                  onClick={() => setShowBudgetHelp(!showBudgetHelp)}
-                  className="text-gray-400 hover:text-gray-600 focus:outline-none"
-                  aria-label="Help"
-                >
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  </svg>
-                </button>
-                {showBudgetHelp && (
-                  <div className="absolute z-10 w-80 p-3 mt-2 bg-white border border-gray-200 rounded-lg shadow-lg text-sm text-gray-600 -left-32">
-                    <h4 className="font-semibold text-gray-800 mb-1">What is token budget?</h4>
-                    <p>Workers who ask questions about this guide will consume tokens from this budget (1000 tokens per message).</p>
-                    <p className="mt-1">Set a budget to control how many questions workers can ask. You can top it up later by editing the guide.</p>
-                    <p className="mt-1 text-xs text-gray-500">Recommended: 5000–20000 tokens for active guides.</p>
-                    <button onClick={() => setShowBudgetHelp(false)} className="mt-2 text-xs text-primary-600">Close</button>
-                  </div>
-                )}
+            {/* Row 2: Token Budget + Privacy Toggle */}
+            <div className="flex flex-wrap items-center gap-4">
+              {/* Token Budget */}
+              <div className="flex items-center gap-2 flex-1 min-w-[200px]">
+                <label className="text-sm font-medium text-gray-700 whitespace-nowrap">Worker Chat Budget</label>
+                <div className="relative inline-block">
+                  <button
+                    type="button"
+                    onClick={() => setShowBudgetHelp(!showBudgetHelp)}
+                    className="text-gray-400 hover:text-gray-600 focus:outline-none"
+                    aria-label="Help"
+                  >
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                  </button>
+                  {showBudgetHelp && (
+                    <div className="absolute z-10 w-80 p-3 mt-2 bg-white border border-gray-200 rounded-lg shadow-lg text-sm text-gray-600 -left-32">
+                      <h4 className="font-semibold text-gray-800 mb-1">What is token budget?</h4>
+                      <p>Workers who ask questions about this guide will consume tokens from this budget (1000 tokens per message).</p>
+                      <p className="mt-1">Set a budget to control how many questions workers can ask. You can top it up later by editing the guide.</p>
+                      <p className="mt-1 text-xs text-gray-500">Recommended: 5000–20000 tokens for active guides.</p>
+                      <button onClick={() => setShowBudgetHelp(false)} className="mt-2 text-xs text-primary-600">Close</button>
+                    </div>
+                  )}
+                </div>
+                <input
+                  type="number"
+                  value={tokenBudget}
+                  onChange={(e) => setTokenBudget(Math.max(0, parseInt(e.target.value) || 0))}
+                  min="0"
+                  step="1000"
+                  className="w-24 px-2 py-1 border rounded-lg text-sm"
+                />
+                <span className="text-xs text-gray-500">tokens</span>
               </div>
-              <input
-                type="number"
-                value={tokenBudget}
-                onChange={(e) => setTokenBudget(Math.max(0, parseInt(e.target.value) || 0))}
-                min="0"
-                step="1000"
-                className="w-32 px-2 py-1 border rounded-lg text-sm"
-              />
-              <span className="text-xs text-gray-500">tokens</span>
+
+              {/* Privacy Toggle */}
+              <div className="flex items-center gap-3">
+                <span className="text-sm font-medium text-gray-700">Privacy</span>
+                <button
+                  onClick={() => setIsPublic(!isPublic)}
+                  className={`relative w-12 h-6 rounded-full transition-colors duration-200 focus:outline-none ${
+                    isPublic ? 'bg-green-500' : 'bg-red-500'
+                  }`}
+                >
+                  <span
+                    className={`absolute top-1 left-1 w-4 h-4 bg-white rounded-full transition-transform duration-200 ${
+                      isPublic ? 'translate-x-6' : 'translate-x-0'
+                    }`}
+                  />
+                </button>
+                <span className="text-sm text-gray-600">
+                  {isPublic ? 'Public' : 'Private'}
+                </span>
+              </div>
             </div>
+
+            {/* Password field (only if private) */}
+            {!isPublic && (
+              <div className="flex items-center gap-2">
+                <label className="text-sm font-medium text-gray-700">Access Password</label>
+                <input
+                  type="text"
+                  value={privatePassword}
+                  onChange={(e) => setPrivatePassword(e.target.value)}
+                  placeholder="Set a password for this guide"
+                  className="flex-1 px-3 py-1 border rounded-lg text-sm"
+                />
+                <span className="text-xs text-gray-500">Min 4 characters</span>
+              </div>
+            )}
           </div>
         </div>
         <GuidePreview
