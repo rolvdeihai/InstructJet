@@ -1,8 +1,10 @@
+// src/app/listing/[listingId]/page.tsx
 import { notFound } from 'next/navigation';
 import { supabaseAdmin } from '@/lib/supabase-admin';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import Link from 'next/link';
+import { ViewTracker } from '@/components/ViewTracker';
 import {
   ArrowLeftIcon,
   UserIcon,
@@ -13,10 +15,7 @@ import {
   LockClosedIcon,
 } from '@heroicons/react/24/outline';
 
-export default async function ListingPage({ params }: { params: { listingId: string } }) {
-  const { listingId } = await params;
-
-  // Fetch listing
+async function getListing(listingId: string) {
   const { data: listing, error: listingError } = await supabaseAdmin
     .from('guide_listings')
     .select(`
@@ -26,6 +25,7 @@ export default async function ListingPage({ params }: { params: { listingId: str
       contact_info,
       price,
       active_until,
+      views,
       guide_id
     `)
     .eq('id', listingId)
@@ -33,38 +33,43 @@ export default async function ListingPage({ params }: { params: { listingId: str
     .gt('active_until', new Date().toISOString())
     .single();
 
-  if (listingError || !listing) {
-    console.error('Listing not found:', listingError);
-    notFound();
-  }
+  if (listingError || !listing) return null;
 
-  // Fetch guide
   const { data: guide, error: guideError } = await supabaseAdmin
     .from('guides')
     .select('id, slug, title, content, user_id')
     .eq('id', listing.guide_id)
     .single();
 
-  if (guideError || !guide) {
-    notFound();
-  }
+  if (guideError || !guide) return null;
 
-  // Fetch seller info from users table
-  const { data: seller, error: sellerError } = await supabaseAdmin
+  const { data: seller } = await supabaseAdmin
     .from('users')
     .select('id, full_name, email')
     .eq('id', guide.user_id)
     .single();
 
+  return { listing, guide, seller };
+}
+
+export default async function ListingPage({ params }: { params: { listingId: string } }) {
+  const { listingId } = await params;
+  const data = await getListing(listingId);
+
+  if (!data) {
+    notFound();
+  }
+
+  const { listing, guide, seller } = data;
   const sellerName = seller?.full_name || seller?.email || 'Unknown';
-  // Derive a username from email for profile link (if no username column)
   const username = seller?.email ? seller.email.split('@')[0] : 'unknown';
 
   return (
     <main className="min-h-screen bg-gray-50">
+      <ViewTracker type="listing" id={listing.id} />
+
       <Navbar />
 
-      {/* Hero Header Section with gradient */}
       <section className="relative pt-24 pb-8 px-6 overflow-hidden bg-gradient-to-br from-primary-600 via-blue-700 to-primary-800">
         <div className="absolute inset-0 opacity-10">
           <div className="absolute top-0 left-1/4 w-96 h-96 bg-white rounded-full blur-3xl animate-pulse" />
@@ -78,16 +83,15 @@ export default async function ListingPage({ params }: { params: { listingId: str
             <ArrowLeftIcon className="h-4 w-4 group-hover:-translate-x-1 transition-transform" />
             Back to Explore
           </Link>
-          <h1 className="text-3xl sm:text-4xl font-extrabold text-white mb-2">
-            {guide.title}
-          </h1>
-          <p className="text-blue-100 text-lg">
-            Premium guide available for purchase
-          </p>
+          <h1 className="text-3xl sm:text-4xl font-extrabold text-white mb-2">{guide.title}</h1>
+          <div className="flex items-center gap-4 text-white/80 text-sm">
+            <span>👁️ {listing.views || 0} views</span>
+            <span>•</span>
+            <span>Listed for sale</span>
+          </div>
         </div>
       </section>
 
-      {/* Main Content */}
       <div className="max-w-4xl mx-auto px-6 -mt-6 relative z-20 pb-16">
         <div className="bg-white rounded-2xl shadow-lg p-6 md:p-8 border border-gray-100">
           {/* Price and Status */}
@@ -154,10 +158,12 @@ export default async function ListingPage({ params }: { params: { listingId: str
               <LockClosedIcon className="h-5 w-5 text-gray-400" />
               Guide Preview (Blurred)
             </h2>
-            <div className="relative rounded-xl overflow-hidden border border-gray-200 bg-gray-50 p-6">
-              <div className="prose max-w-none opacity-30 blur-md pointer-events-none select-none">
+            <div className="relative rounded-xl border border-gray-200 bg-gray-50 min-h-[200px]">
+              {/* Blurred content */}
+              <div className="p-6 prose max-w-none opacity-30 blur-md pointer-events-none select-none">
                 <div dangerouslySetInnerHTML={{ __html: guide.content || '' }} />
               </div>
+              {/* Overlay */}
               <div className="absolute inset-0 flex items-center justify-center bg-white/60 backdrop-blur-sm rounded-xl">
                 <div className="text-center p-6 bg-white/80 rounded-xl shadow-md max-w-sm">
                   <LockClosedIcon className="h-12 w-12 text-gray-400 mx-auto mb-3" />

@@ -1,4 +1,3 @@
-// app/page.tsx
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
@@ -48,7 +47,6 @@ export default function Home() {
 
       {/* ─── HERO ─────────────────────────────────────────────────────── */}
       <section className="relative pt-32 pb-20 px-6 overflow-hidden bg-gradient-to-br from-primary-600 via-blue-700 to-primary-800">
-        {/* Animated background */}
         <div className="absolute inset-0 opacity-10">
           <div className="absolute top-0 left-1/4 w-96 h-96 bg-white rounded-full blur-3xl animate-pulse" />
           <div className="absolute bottom-0 right-1/4 w-72 h-72 bg-amber-300 rounded-full blur-3xl animate-pulse delay-1000" />
@@ -83,9 +81,13 @@ export default function Home() {
             <p className="mt-6 text-sm text-blue-200 opacity-80">
               No credit card required · Free tier available · 7‑day premium trial
             </p>
+            <div className="mt-4 flex flex-wrap justify-center gap-6 text-sm text-blue-200/80">
+              <span>✨ Explore community guides</span>
+              <span>💰 Sell your expertise</span>
+              <span>📊 AI‑powered feedback</span>
+            </div>
           </div>
         </div>
-        {/* Wave divider */}
         <div className="absolute bottom-0 left-0 right-0">
           <svg viewBox="0 0 1440 120" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full">
             <path d="M0 40L60 46.7C120 53.3 240 66.7 360 66.7C480 66.7 600 53.3 720 46.7C840 40 960 40 1080 46.7C1200 53.3 1320 66.7 1380 73.3L1440 80V120H0V40Z" fill="white" />
@@ -166,7 +168,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ─── FEATURES (enhanced) ────────────────────────────────────── */}
+      {/* ─── FEATURES ────────────────────────────────────────────────── */}
       <section className="py-20 px-6 bg-white">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
@@ -301,8 +303,45 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ─── FOUNDER / JETHRO ────────────────────────────────────── */}
+      {/* ─── EXPLORE & EARN ────────────────────────────────────────── */}
       <section className="py-20 px-6 bg-white">
+        <div className="max-w-6xl mx-auto">
+          <div className="text-center mb-16">
+            <span className="text-primary-600 font-semibold text-sm uppercase tracking-wider">New</span>
+            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mt-2 mb-4">
+              Explore, Share & Earn
+            </h2>
+            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+              Discover guides from the community, share your expertise, and even monetize your knowledge.
+            </p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-2xl p-8 border border-blue-100 hover:shadow-xl transition transform hover:-translate-y-1">
+              <div className="text-4xl mb-4">🔍</div>
+              <h3 className="text-xl font-bold text-gray-800 mb-2">Explore Public Guides</h3>
+              <p className="text-gray-600">
+                Browse a growing library of community‑created guides. Learn from others, get inspiration, and see how experts break down complex tasks.
+              </p>
+              <Link href="/explore" className="mt-4 inline-block text-primary-600 font-semibold hover:underline">
+                Explore now →
+              </Link>
+            </div>
+            <div className="bg-gradient-to-br from-amber-50 to-orange-50 rounded-2xl p-8 border border-amber-100 hover:shadow-xl transition transform hover:-translate-y-1">
+              <div className="text-4xl mb-4">💰</div>
+              <h3 className="text-xl font-bold text-gray-800 mb-2">Sell Your Guides</h3>
+              <p className="text-gray-600">
+                Turn your expertise into income. Create private guides, set a price, and list them for sale. Buyers contact you directly – we handle the visibility.
+              </p>
+              <Link href="/sell" className="mt-4 inline-block text-primary-600 font-semibold hover:underline">
+                Start selling →
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ─── FOUNDER / JETHRO ────────────────────────────────────── */}
+      <section className="py-20 px-6 bg-gray-50">
         <div className="max-w-4xl mx-auto flex flex-col md:flex-row items-center gap-12">
           <div className="flex-1">
             <div className="w-40 h-40 rounded-full bg-gradient-to-br from-primary-400 to-primary-600 flex items-center justify-center text-white text-5xl font-bold shadow-xl mx-auto md:mx-0">

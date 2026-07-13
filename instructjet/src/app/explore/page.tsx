@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useMemo } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import Link from 'next/link';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
@@ -9,9 +9,7 @@ import {
   FunnelIcon,
   XMarkIcon,
   UserIcon,
-  TagIcon,
   ClockIcon,
-  FireIcon,
   ShoppingBagIcon,
   DocumentTextIcon,
 } from '@heroicons/react/24/outline';
@@ -26,6 +24,7 @@ type ExploreItem = {
   description?: string;
   category?: string;
   price?: number;
+  language?: string;
   created_at: string;
   user: {
     id: string;
@@ -34,87 +33,120 @@ type ExploreItem = {
   };
 };
 
+const LANGUAGES = [
+  { code: '', label: 'All Languages', flag: '🌍' },
+  { code: 'en', label: 'English', flag: '🇬🇧' },
+  { code: 'es', label: 'Spanish', flag: '🇪🇸' },
+  { code: 'fr', label: 'French', flag: '🇫🇷' },
+  { code: 'de', label: 'German', flag: '🇩🇪' },
+  { code: 'zh', label: 'Chinese', flag: '🇨🇳' },
+  { code: 'ja', label: 'Japanese', flag: '🇯🇵' },
+  { code: 'ru', label: 'Russian', flag: '🇷🇺' },
+  { code: 'pt', label: 'Portuguese', flag: '🇵🇹' },
+  { code: 'it', label: 'Italian', flag: '🇮🇹' },
+  { code: 'nl', label: 'Dutch', flag: '🇳🇱' },
+  { code: 'ar', label: 'Arabic', flag: '🇸🇦' },
+  { code: 'hi', label: 'Hindi', flag: '🇮🇳' },
+  { code: 'id', label: 'Indonesian', flag: '🇮🇩' },
+];
+
+const getLanguageDisplay = (code: string) => {
+  const lang = LANGUAGES.find(l => l.code === code);
+  return lang ? `${lang.flag} ${lang.label}` : '🌍 Unknown';
+};
+
 export default function ExplorePage() {
   const [items, setItems] = useState<ExploreItem[]>([]);
   const [loading, setLoading] = useState(true);
+  const [loadingMore, setLoadingMore] = useState(false);
   const [error, setError] = useState('');
+  const [hasMore, setHasMore] = useState(true);
+  const [page, setPage] = useState(1);
+
+  // Filters
   const [searchTerm, setSearchTerm] = useState('');
   const [activeTab, setActiveTab] = useState<'recent' | 'sale' | 'public'>('recent');
-  const [selectedCategory, setSelectedCategory] = useState<string>('all');
+  const [selectedCategory, setSelectedCategory] = useState('');
+  const [selectedLanguage, setSelectedLanguage] = useState('');
   const [categories, setCategories] = useState<string[]>([]);
 
-  useEffect(() => {
-    fetchExploreItems();
-  }, []);
+  // Reset and fetch first page when filters change
+  const resetAndFetch = useCallback(async () => {
+    setPage(1);
+    setItems([]);
+    setHasMore(true);
+    await fetchItems(1, true);
+  }, [searchTerm, activeTab, selectedCategory, selectedLanguage]);
 
-  const fetchExploreItems = async () => {
+  const fetchItems = async (pageNum: number, replace = false) => {
     try {
-      const res = await fetch('/api/explore');
+      const params = new URLSearchParams({
+        page: String(pageNum),
+        limit: '12',
+        tab: activeTab,
+        language: selectedLanguage,
+        category: selectedCategory,
+        search: searchTerm,
+      });
+      const res = await fetch(`/api/explore?${params}`);
       if (!res.ok) {
-        throw new Error('Failed to fetch explore items');
+        const err = await res.json();
+        throw new Error(err.error || 'Failed to fetch');
       }
       const data = await res.json();
-      const fetchedItems: ExploreItem[] = data.items || [];
-      setItems(fetchedItems);
-
-      // Extract unique categories from listings
-      const cats = fetchedItems
-        .filter(item => item.type === 'listing' && item.category)
-        .map(item => item.category as string);
-      const uniqueCats = Array.from(new Set(cats));
-      setCategories(uniqueCats);
+      const newItems = data.items || [];
+      if (replace) {
+        setItems(newItems);
+      } else {
+        setItems(prev => [...prev, ...newItems]);
+      }
+      setHasMore(data.hasMore || false);
+      setPage(pageNum);
     } catch (err: any) {
-      console.error('Explore error:', err);
       setError(err.message);
-    } finally {
-      setLoading(false);
+      console.error(err);
     }
   };
 
-  // Filter and search logic
-  const filteredItems = useMemo(() => {
-    let filtered = [...items];
+  // Load more
+  const loadMore = async () => {
+    if (loadingMore || !hasMore) return;
+    setLoadingMore(true);
+    await fetchItems(page + 1, false);
+    setLoadingMore(false);
+  };
 
-    // Tab filter
-    if (activeTab === 'sale') {
-      filtered = filtered.filter(item => item.type === 'listing');
-    } else if (activeTab === 'public') {
-      filtered = filtered.filter(item => item.type === 'guide');
-    }
-    // 'recent' shows all, sorted by date
+  // Initial load and when filters change
+  useEffect(() => {
+    const fetchInitial = async () => {
+      setLoading(true);
+      setError('');
+      await fetchItems(1, true);
+      setLoading(false);
+    };
+    fetchInitial();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [searchTerm, activeTab, selectedCategory, selectedLanguage]);
 
-    // Category filter (only for listings)
-    if (selectedCategory !== 'all') {
-      filtered = filtered.filter(item => 
-        item.type === 'listing' && item.category === selectedCategory
-      );
-    }
+  // Fetch categories from all items (client‑side)
+  useEffect(() => {
+    // We'll fetch categories from the API on mount, or derive from items.
+    // For simplicity, we can just collect from items.
+    const cats = items
+      .filter(item => item.type === 'listing' && item.category)
+      .map(item => item.category as string);
+    const uniqueCats = Array.from(new Set(cats));
+    setCategories(uniqueCats);
+  }, [items]);
 
-    // Search
-    if (searchTerm.trim()) {
-      const term = searchTerm.toLowerCase().trim();
-      filtered = filtered.filter(item =>
-        item.title.toLowerCase().includes(term) ||
-        (item.description && item.description.toLowerCase().includes(term)) ||
-        (item.content && item.content.toLowerCase().includes(term)) ||
-        item.user.full_name.toLowerCase().includes(term) ||
-        item.user.username.toLowerCase().includes(term)
-      );
-    }
+  const clearFilters = () => {
+    setSearchTerm('');
+    setSelectedCategory('');
+    setSelectedLanguage('');
+    setActiveTab('recent');
+  };
 
-    // Sort by created_at (newest first)
-    filtered.sort((a, b) => 
-      new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
-    );
-
-    return filtered;
-  }, [items, activeTab, selectedCategory, searchTerm]);
-
-  // Clear search
-  const clearSearch = () => setSearchTerm('');
-
-  // Loading skeletons
-  if (loading) {
+  if (loading && items.length === 0) {
     return (
       <main className="min-h-screen bg-gray-50">
         <Navbar />
@@ -148,7 +180,6 @@ export default function ExplorePage() {
     <main className="min-h-screen bg-gray-50">
       <Navbar />
 
-      {/* Hero / Header Section with gradient */}
       <section className="relative pt-24 pb-8 px-6 overflow-hidden bg-gradient-to-br from-primary-600 via-blue-700 to-primary-800">
         <div className="absolute inset-0 opacity-10">
           <div className="absolute top-0 left-1/4 w-96 h-96 bg-white rounded-full blur-3xl animate-pulse" />
@@ -164,12 +195,10 @@ export default function ExplorePage() {
         </div>
       </section>
 
-      {/* Main Content */}
       <div className="max-w-7xl mx-auto px-6 -mt-6 relative z-20 pb-16">
         <div className="bg-white rounded-2xl shadow-lg p-6 border border-gray-100">
-          {/* Search and Filters */}
+          {/* Filters */}
           <div className="flex flex-col md:flex-row gap-4 mb-6">
-            {/* Search Bar */}
             <div className="relative flex-1">
               <MagnifyingGlassIcon className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400" />
               <input
@@ -181,7 +210,7 @@ export default function ExplorePage() {
               />
               {searchTerm && (
                 <button
-                  onClick={clearSearch}
+                  onClick={() => setSearchTerm('')}
                   className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600"
                 >
                   <XMarkIcon className="h-5 w-5" />
@@ -189,21 +218,29 @@ export default function ExplorePage() {
               )}
             </div>
 
-            {/* Category Filter (only if categories exist) */}
+            <select
+              value={selectedLanguage}
+              onChange={(e) => setSelectedLanguage(e.target.value)}
+              className="px-4 py-2.5 border border-gray-200 rounded-xl bg-white focus:ring-2 focus:ring-primary-500 focus:border-transparent appearance-none min-w-[180px]"
+            >
+              {LANGUAGES.map(lang => (
+                <option key={lang.code} value={lang.code}>
+                  {lang.flag} {lang.label}
+                </option>
+              ))}
+            </select>
+
             {categories.length > 0 && (
-              <div className="relative">
-                <select
-                  value={selectedCategory}
-                  onChange={(e) => setSelectedCategory(e.target.value)}
-                  className="pl-10 pr-8 py-2.5 border border-gray-200 rounded-xl bg-white focus:ring-2 focus:ring-primary-500 focus:border-transparent appearance-none"
-                >
-                  <option value="all">All Categories</option>
-                  {categories.map(cat => (
-                    <option key={cat} value={cat}>{cat}</option>
-                  ))}
-                </select>
-                <TagIcon className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400" />
-              </div>
+              <select
+                value={selectedCategory}
+                onChange={(e) => setSelectedCategory(e.target.value)}
+                className="px-4 py-2.5 border border-gray-200 rounded-xl bg-white focus:ring-2 focus:ring-primary-500 focus:border-transparent appearance-none min-w-[160px]"
+              >
+                <option value="">All Categories</option>
+                {categories.map(cat => (
+                  <option key={cat} value={cat}>{cat}</option>
+                ))}
+              </select>
             )}
           </div>
 
@@ -243,91 +280,101 @@ export default function ExplorePage() {
               Public Guides
             </button>
 
-            {/* Stats */}
             <div className="ml-auto text-sm text-gray-500 flex items-center gap-2">
-              <span className="font-medium">{filteredItems.length}</span>
-              <span>result{filteredItems.length !== 1 ? 's' : ''}</span>
+              <span className="font-medium">{items.length}</span>
+              <span>loaded</span>
+              {selectedLanguage && (
+                <span className="bg-blue-50 text-blue-700 px-2 py-0.5 rounded-full text-xs">
+                  {LANGUAGES.find(l => l.code === selectedLanguage)?.flag}
+                </span>
+              )}
             </div>
           </div>
 
           {/* Grid */}
-          {filteredItems.length === 0 ? (
+          {items.length === 0 && !loading ? (
             <div className="text-center py-12">
               <div className="text-gray-400 mb-3">
                 <FunnelIcon className="h-12 w-12 mx-auto" />
               </div>
               <p className="text-gray-500 text-lg">No guides or listings match your criteria</p>
               <button
-                onClick={() => {
-                  setSearchTerm('');
-                  setSelectedCategory('all');
-                  setActiveTab('recent');
-                }}
+                onClick={clearFilters}
                 className="mt-2 text-primary-600 hover:underline"
               >
                 Clear all filters
               </button>
             </div>
           ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {filteredItems.map((item) => (
-                <div
-                  key={item.type === 'guide' ? `g-${item.id}` : `l-${item.listingId}`}
-                  className="group relative bg-white rounded-xl shadow-md hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 overflow-hidden border border-gray-100"
-                >
-                  {/* Card content */}
-                  <div className="p-6 flex flex-col h-full">
-                    {/* Badge */}
-                    <div className="flex items-start justify-between mb-2">
-                      <span className={`inline-block text-xs font-semibold px-2 py-0.5 rounded-full ${
-                        item.type === 'listing'
-                          ? 'bg-yellow-100 text-yellow-800'
-                          : 'bg-blue-100 text-blue-800'
-                      }`}>
-                        {item.type === 'listing' ? 'For Sale' : 'Public Guide'}
-                      </span>
-                      {item.category && (
-                        <span className="text-xs text-gray-400 bg-gray-100 px-2 py-0.5 rounded-full">
-                          {item.category}
+            <>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {items.map((item) => (
+                  <div
+                    key={item.type === 'guide' ? `g-${item.id}` : `l-${item.listingId}`}
+                    className="group relative bg-white rounded-xl shadow-md hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 overflow-hidden border border-gray-100"
+                  >
+                    <div className="p-6 flex flex-col h-full">
+                      <div className="flex items-start justify-between mb-2">
+                        <span className={`inline-block text-xs font-semibold px-2 py-0.5 rounded-full ${
+                          item.type === 'listing'
+                            ? 'bg-yellow-100 text-yellow-800'
+                            : 'bg-blue-100 text-blue-800'
+                        }`}>
+                          {item.type === 'listing' ? 'For Sale' : 'Public Guide'}
                         </span>
-                      )}
-                    </div>
+                        <span className="text-xs bg-gray-100 text-gray-600 px-2 py-0.5 rounded-full flex items-center gap-1">
+                          {getLanguageDisplay(item.language || 'en')}
+                        </span>
+                      </div>
 
-                    <Link href={item.type === 'guide' ? `/guides/${item.slug}` : `/listing/${item.listingId}`} className="flex-1">
-                      <h2 className="text-xl font-bold text-gray-900 mb-2 group-hover:text-primary-600 transition-colors line-clamp-2">
-                        {item.title}
-                      </h2>
-                      <p className="text-sm text-gray-600 line-clamp-3 mb-3">
-                        {item.type === 'listing' ? item.description : item.content?.slice(0, 150)}
-                      </p>
-                      {item.type === 'listing' && item.price && (
-                        <p className="text-lg font-bold text-primary-600">
-                          ${item.price.toFixed(2)}
+                      <Link href={item.type === 'guide' ? `/guides/${item.slug}` : `/listing/${item.listingId}`} className="flex-1">
+                        <h2 className="text-xl font-bold text-gray-900 mb-2 group-hover:text-primary-600 transition-colors line-clamp-2">
+                          {item.title}
+                        </h2>
+                        <p className="text-sm text-gray-600 line-clamp-3 mb-3">
+                          {item.type === 'listing' ? item.description : item.content?.slice(0, 150)}
                         </p>
-                      )}
-                    </Link>
-
-                    {/* Author & Date */}
-                    <div className="mt-4 pt-4 border-t border-gray-100 flex items-center justify-between">
-                      <Link
-                        href={`/profile/${item.user.username}`}
-                        className="flex items-center gap-2 text-sm text-gray-600 hover:text-primary-600 transition-colors"
-                      >
-                        <UserIcon className="h-4 w-4" />
-                        <span>{item.user.full_name || item.user.username}</span>
+                        {item.type === 'listing' && item.price && (
+                          <p className="text-lg font-bold text-primary-600">
+                            ${item.price.toFixed(2)}
+                          </p>
+                        )}
                       </Link>
-                      <span className="text-xs text-gray-400">
-                        {new Date(item.created_at).toLocaleDateString(undefined, {
-                          month: 'short',
-                          day: 'numeric',
-                          year: 'numeric',
-                        })}
-                      </span>
+
+                      <div className="mt-4 pt-4 border-t border-gray-100 flex items-center justify-between">
+                        <Link
+                          href={`/profile/${item.user.username}`}
+                          className="flex items-center gap-2 text-sm text-gray-600 hover:text-primary-600 transition-colors"
+                        >
+                          <UserIcon className="h-4 w-4" />
+                          <span>{item.user.full_name || item.user.username}</span>
+                        </Link>
+                        <span className="text-xs text-gray-400">
+                          {new Date(item.created_at).toLocaleDateString(undefined, {
+                            month: 'short',
+                            day: 'numeric',
+                            year: 'numeric',
+                          })}
+                        </span>
+                      </div>
                     </div>
                   </div>
+                ))}
+              </div>
+
+              {/* Load More */}
+              {hasMore && (
+                <div className="mt-8 text-center">
+                  <button
+                    onClick={loadMore}
+                    disabled={loadingMore}
+                    className="px-6 py-3 bg-primary-600 text-white rounded-xl font-semibold hover:bg-primary-700 transition disabled:opacity-50"
+                  >
+                    {loadingMore ? 'Loading...' : 'Load More'}
+                  </button>
                 </div>
-              ))}
-            </div>
+              )}
+            </>
           )}
         </div>
       </div>

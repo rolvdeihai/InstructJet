@@ -15,10 +15,9 @@ export default async function EditGuidePage({ params }: EditGuidePageProps) {
   const user = await getUserFromSession(sessionToken);
   if (!user) redirect('/login');
 
-  // ✅ Include user_id in the select to check ownership
   const { data: guide, error } = await supabaseAdmin
     .from('guides')
-    .select('id, title, content, total_token_budget, token_budget_remaining, user_id')
+    .select('id, title, content, total_token_budget, token_budget_remaining, user_id, is_public, password_hash')
     .eq('slug', slug)
     .single();
 
@@ -27,7 +26,6 @@ export default async function EditGuidePage({ params }: EditGuidePageProps) {
     notFound();
   }
 
-  // Now guide.user_id exists
   if (guide.user_id !== user.id) {
     redirect('/guides');
   }
@@ -42,6 +40,8 @@ export default async function EditGuidePage({ params }: EditGuidePageProps) {
             initialTitle={guide.title}
             initialContent={guide.content}
             initialTokenBudget={guide.total_token_budget || 0}
+            initialIsPublic={guide.is_public ?? true}
+            initialHasPassword={!!guide.password_hash}
           />
         </div>
       </div>

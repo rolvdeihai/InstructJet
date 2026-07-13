@@ -5,6 +5,7 @@ import ChatInterface from './ChatInterface';
 import GuidePreview from './GuidePreview';
 import { supabase } from '@/lib/supabase-client';
 import bcrypt from 'bcryptjs'; // npm install bcryptjs
+import { franc } from 'franc-min';
 
 // ─── Tutorial Component ──────────────────────────────────────────────────────
 const GuideTutorial = ({ compact = false }: { compact?: boolean }) => (
@@ -538,6 +539,29 @@ export default function CreateGuideClient({ userId }: { userId: string }) {
     }
   };
 
+  const detectLanguage = (text: string): string => {
+    const lang = franc(text, { minLength: 3 }); // returns ISO 639-3 code
+    const langMap: Record<string, string> = {
+      'eng': 'en',
+      'spa': 'es',
+      'fra': 'fr',
+      'deu': 'de',
+      'zho': 'zh',
+      'jpn': 'ja',
+      'rus': 'ru',
+      'por': 'pt',
+      'ita': 'it',
+      'nld': 'nl',
+      'pol': 'pl',
+      'tur': 'tr',
+      'kor': 'ko',
+      'ara': 'ar',
+      'hin': 'hi',
+      'ind': 'id',
+    };
+    return langMap[lang] || 'en'; // fallback to English
+  };
+
   // ─── Publish Guide ────────────────────────────────────────────────────────
   const publishGuide = async () => {
     if (!guideContent) {
@@ -597,6 +621,8 @@ export default function CreateGuideClient({ userId }: { userId: string }) {
       }
 
       const slug = `${title.toLowerCase().replace(/[^a-z0-9]+/g, '-')}-${Date.now().toString(36)}`;
+      const language = detectLanguage(title + ' ' + guideContent);
+
       const { data, error } = await supabase
         .from('guides')
         .insert({
@@ -609,6 +635,7 @@ export default function CreateGuideClient({ userId }: { userId: string }) {
           token_budget_remaining: tokenBudget,
           is_public: isPublic,
           password_hash: passwordHash,
+          language, // <-- new field
         })
         .select('slug')
         .single();

@@ -4,13 +4,15 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { supabase } from '@/lib/supabase-client';
 import GuidePreview from './GuidePreview';
-import { useAuth } from '@/contexts/AuthContext';
+import bcrypt from 'bcryptjs';
 
 interface EditGuideFormProps {
   guideId: string;
   initialTitle: string;
   initialContent: string;
   initialTokenBudget: number;
+  initialIsPublic: boolean;
+  initialHasPassword: boolean;
 }
 
 export default function EditGuideForm({
@@ -18,12 +20,15 @@ export default function EditGuideForm({
   initialTitle,
   initialContent,
   initialTokenBudget,
+  initialIsPublic,
+  initialHasPassword,
 }: EditGuideFormProps) {
   const router = useRouter();
-  const { user } = useAuth();
   const [title, setTitle] = useState(initialTitle);
   const [content, setContent] = useState(initialContent);
   const [tokenBudget, setTokenBudget] = useState(initialTokenBudget);
+  const [isPublic, setIsPublic] = useState(initialIsPublic);
+  const [newPassword, setNewPassword] = useState('');
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [showBudgetHelp, setShowBudgetHelp] = useState(false);
@@ -43,26 +48,64 @@ export default function EditGuideForm({
       return;
     }
 
+    // Validate privacy
+    let passwordHash = null;
+    if (!isPublic) {
+      // If switching from public to private or changing password
+      if (!newPassword && !initialHasPassword) {
+        setError('Please set a password for the private guide');
+        return;
+      }
+      if (newPassword) {
+        if (newPassword.length < 4) {
+          setError('Password must be at least 4 characters');
+          return;
+        }
+        passwordHash = await bcrypt.hash(newPassword, 10);
+      } else {
+        // Keep existing password (no change) – we don't need to send anything
+        // but we must not set password_hash to null.
+        // We'll handle by not updating password_hash if newPassword is empty.
+        // But we need to keep the existing hash; we'll not include it in the update.
+        // We'll set a flag to skip updating password_hash.
+      }
+    } else {
+      // Public guide: remove password hash
+      passwordHash = null;
+    }
+
     setSaving(true);
     setError(null);
 
     try {
-      // Directly update the guide with the new budget as the remaining budget
+      const updateData: any = {
+        title,
+        content,
+        total_token_budget: tokenBudget,
+        token_budget_remaining: tokenBudget,
+        is_public: isPublic,
+        updated_at: new Date().toISOString(),
+      };
+
+      // Only update password_hash if:
+      // - we have a new password (private with new password)
+      // - we are making it public (set to null)
+      // - we are keeping private with no new password → do nothing (skip)
+      if (passwordHash !== undefined) {
+        updateData.password_hash = passwordHash;
+      }
+
+      // If we are setting private and newPassword is empty, but we already have a hash, we don't need to change it.
+      // So we don't include password_hash in updateData.
+
       const { error: updateError } = await supabase
         .from('guides')
-        .update({
-          title,
-          content,
-          total_token_budget: tokenBudget,        // optional: keep total same as remaining
-          token_budget_remaining: tokenBudget,    // ← directly set to new value
-          updated_at: new Date().toISOString(),
-        })
+        .update(updateData)
         .eq('id', guideId);
 
       if (updateError) throw updateError;
 
-      // Redirect to the guide page using the updated title
-      router.push(`/guides`);
+      router.push('/guides');
       router.refresh();
     } catch (err: any) {
       console.error('Save error:', err);
@@ -128,10 +171,51 @@ export default function EditGuideForm({
         </p>
       </div>
 
+      {/* Privacy Toggle */}
+      <div className="border-t border-gray-200 pt-4">
+        <div className="flex items-center gap-4">
+          <span className="text-sm font-medium text-gray-700">Privacy</span>
+          <button
+            type="button"
+            onClick={() => setIsPublic(!isPublic)}
+            className={`relative w-12 h-6 rounded-full transition-colors duration-200 focus:outline-none ${
+              isPublic ? 'bg-green-500' : 'bg-red-500'
+            }`}
+          >
+            <span
+              className={`absolute top-1 left-1 w-4 h-4 bg-white rounded-full transition-transform duration-200 ${
+                isPublic ? 'translate-x-6' : 'translate-x-0'
+              }`}
+            />
+          </button>
+          <span className="text-sm text-gray-600">
+            {isPublic ? 'Public' : 'Private'}
+          </span>
+        </div>
+
+        {!isPublic && (
+          <div className="mt-3">
+            <label className="block text-sm font-medium text-gray-700 mb-1">
+              {initialHasPassword ? 'Change Password (leave blank to keep current)' : 'Set Password'}
+            </label>
+            <input
+              type="text"
+              value={newPassword}
+              onChange={(e) => setNewPassword(e.target.value)}
+              placeholder={initialHasPassword ? 'New password (optional)' : 'Enter a password'}
+              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-primary-500 focus:border-primary-500"
+            />
+            {!initialHasPassword && (
+              <p className="text-xs text-gray-500 mt-1">Password must be at least 4 characters.</p>
+            )}
+          </div>
+        )}
+      </div>
+
       <div>
         <label className="block text-sm font-medium text-gray-700 mb-1">Guide Content (Markdown)</label>
         <div className="border border-gray-300 rounded-lg overflow-hidden" style={{ height: '500px' }}>
-          <GuidePreview content={content} onChange={setContent} />
+          <GuidePreview content={content} onChange={setContent} userId="" />
         </div>
         <p className="text-xs text-gray-500 mt-1">Supports Markdown formatting</p>
       </div>
