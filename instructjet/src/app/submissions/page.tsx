@@ -29,6 +29,228 @@ interface Submission {
   };
 }
 
+// ─── Submission Card Component (with Show More) ─────────────────────────
+function SubmissionCard({
+  sub,
+  onUpdateStatus,
+  onSaveCommentScore,
+  onDownloadFile,
+  onDownloadPDF,
+  onSendReview,
+  isSelected,
+  onToggleSelect,
+}: {
+  sub: Submission;
+  onUpdateStatus: (id: string, status: 'approved' | 'rejected') => void;
+  onSaveCommentScore: (id: string, comment: string, score: number | null) => void;
+  onDownloadFile: (url: string, filename: string) => void;
+  onDownloadPDF: (sub: Submission) => void;
+  onSendReview: (sub: Submission) => void;
+  isSelected: boolean;
+  onToggleSelect: (id: string) => void;
+}) {
+  const [expanded, setExpanded] = useState(false);
+  const [editingId, setEditingId] = useState<string | null>(null);
+  const [editCommentValue, setEditCommentValue] = useState('');
+  const [editScoreValue, setEditScoreValue] = useState<number | null>(null);
+
+  const isLongComment = (sub.ai_comment?.length || 0) > 200;
+
+  // ─── Edit handlers ──────────────────────────────────────────────────
+  const startEdit = () => {
+    setEditingId(sub.id);
+    setEditCommentValue(sub.ai_comment || '');
+    setEditScoreValue(sub.ai_score?.score ?? null);
+  };
+
+  const cancelEdit = () => setEditingId(null);
+
+  const saveEdit = () => {
+    onSaveCommentScore(sub.id, editCommentValue, editScoreValue);
+    setEditingId(null);
+  };
+
+  // ─── Render ──────────────────────────────────────────────────────
+  return (
+    <div className="border rounded-lg overflow-hidden shadow-sm hover:shadow-md transition relative">
+      {/* Checkbox */}
+      <div className="absolute top-2 left-2 z-10">
+        <input
+          type="checkbox"
+          checked={isSelected}
+          onChange={() => onToggleSelect(sub.id)}
+          className="w-4 h-4 rounded border-gray-300 text-primary-600 focus:ring-primary-500"
+        />
+      </div>
+
+      {/* Media Preview */}
+      <div className="relative h-48 bg-gray-100 group">
+        {sub.file_type === 'image' ? (
+          <Image src={sub.file_url} alt="Work submission" fill className="object-cover" />
+        ) : sub.file_type === 'video' ? (
+          <video src={sub.file_url} className="w-full h-full object-cover" controls />
+        ) : (
+          <div className="flex items-center justify-center h-full bg-gray-200">
+            <div className="text-center">
+              <div className="text-4xl mb-2">📄</div>
+              <p className="text-sm text-gray-600">Document</p>
+              <button
+                onClick={() => onDownloadFile(sub.file_url, `submission_${sub.id}.${sub.file_url.split('.').pop()}`)}
+                className="mt-2 px-3 py-1 bg-blue-600 text-white text-xs rounded hover:bg-blue-700"
+              >
+                Download
+              </button>
+            </div>
+          </div>
+        )}
+        <button
+          onClick={() => onDownloadFile(sub.file_url, `submission_${sub.id}.${sub.file_type === 'image' ? 'jpg' : 'mp4'}`)}
+          className="absolute bottom-2 right-2 bg-white bg-opacity-80 p-1 rounded shadow text-xs hover:bg-opacity-100"
+        >
+          ⬇️ Download
+        </button>
+      </div>
+
+      {/* Content */}
+      <div className="p-4">
+        <div className="flex justify-between items-start">
+          <Link href={`/guides/${sub.guide.slug}`} className="font-semibold text-primary-600 hover:underline">
+            {sub.guide.title}
+          </Link>
+          <span className={`px-2 py-1 text-xs rounded-full ${
+            sub.approval_status === 'approved' ? 'bg-green-100 text-green-800' :
+            sub.approval_status === 'rejected' ? 'bg-red-100 text-red-800' : 'bg-yellow-100 text-yellow-800'
+          }`}>{sub.approval_status}</span>
+        </div>
+        <p className="text-sm text-gray-500 mt-1">Submitted: {new Date(sub.created_at).toLocaleDateString()}</p>
+        {sub.worker_name && <p className="text-sm text-gray-600 mt-1">Worker: {sub.worker_name}</p>}
+        
+        {/* ─── Editable Review ─────────────────────────────────────── */}
+        <div className="mt-2 p-2 bg-gray-50 rounded text-sm">
+          <div className="flex justify-between items-center">
+            <span className="font-medium">Review:</span>
+            {editingId !== sub.id ? (
+              <button onClick={startEdit} className="text-xs text-blue-600 hover:underline">
+                Edit
+              </button>
+            ) : (
+              <div className="space-x-2">
+                <button onClick={saveEdit} className="text-xs text-green-600 hover:underline">Save</button>
+                <button onClick={cancelEdit} className="text-xs text-gray-500 hover:underline">Cancel</button>
+              </div>
+            )}
+          </div>
+
+          {editingId === sub.id ? (
+            <div className="mt-1 space-y-2">
+              <div>
+                <label className="text-xs text-gray-600">Score (0–100)</label>
+                <input
+                  type="number"
+                  min="0"
+                  max="100"
+                  value={editScoreValue ?? ''}
+                  onChange={(e) => setEditScoreValue(e.target.value === '' ? null : Number(e.target.value))}
+                  className="w-full p-1 border rounded text-sm"
+                  placeholder="Leave blank for N/A"
+                />
+              </div>
+              <div>
+                <label className="text-xs text-gray-600">Comment (Markdown supported)</label>
+                <textarea
+                  value={editCommentValue}
+                  onChange={(e) => setEditCommentValue(e.target.value)}
+                  className="w-full mt-1 p-1 border rounded text-sm"
+                  rows={3}
+                  placeholder="Markdown supported"
+                />
+              </div>
+            </div>
+          ) : (
+            <>
+              <div className="mt-1 text-sm">
+                <span className="font-medium">Score: </span>
+                {sub.ai_score && typeof sub.ai_score === 'object' && 'score' in sub.ai_score ? (
+                  <span className="font-bold">{sub.ai_score.score}/100</span>
+                ) : (
+                  <span className="text-gray-500">N/A</span>
+                )}
+              </div>
+
+              {/* ─── Comment with Show More ─────────────────────────── */}
+              {sub.ai_comment ? (
+                <div className="relative">
+                  <div
+                    className={`prose prose-sm max-w-none mt-1 text-gray-700 transition-all ${
+                      !expanded && isLongComment
+                        ? 'max-h-24 overflow-hidden'
+                        : 'max-h-none'
+                    }`}
+                  >
+                    <ReactMarkdown remarkPlugins={[remarkGfm]}>
+                      {sub.ai_comment}
+                    </ReactMarkdown>
+                  </div>
+
+                  {/* Gradient overlay when collapsed and long */}
+                  {!expanded && isLongComment && (
+                    <div className="absolute bottom-0 left-0 right-0 h-8 bg-gradient-to-t from-gray-50 to-transparent pointer-events-none" />
+                  )}
+
+                  {isLongComment && (
+                    <button
+                      onClick={() => setExpanded(!expanded)}
+                      className="mt-1 text-xs text-blue-600 hover:underline"
+                    >
+                      {expanded ? 'Show less' : 'Show more'}
+                    </button>
+                  )}
+                </div>
+              ) : (
+                <p className="text-gray-400 text-sm mt-1">*No comment provided.*</p>
+              )}
+            </>
+          )}
+        </div>
+
+        {/* ─── Actions ────────────────────────────────────────────── */}
+        <button
+          onClick={() => onDownloadPDF(sub)}
+          className="mt-3 w-full py-1 text-sm bg-indigo-100 text-indigo-700 rounded hover:bg-indigo-200 transition"
+        >
+          📄 Download PDF Report
+        </button>
+
+        <button
+          onClick={() => onSendReview(sub)}
+          disabled={!sub.worker_email}
+          className="mt-2 w-full py-1 text-sm bg-blue-100 text-blue-700 rounded hover:bg-blue-200 transition disabled:opacity-50 disabled:cursor-not-allowed"
+        >
+          📧 Send Review via Gmail
+        </button>
+
+        {sub.approval_status === 'pending' && (
+          <div className="mt-2 flex gap-2">
+            <button
+              onClick={() => onUpdateStatus(sub.id, 'approved')}
+              className="px-3 py-1 bg-green-600 text-white text-sm rounded hover:bg-green-700"
+            >
+              Approve
+            </button>
+            <button
+              onClick={() => onUpdateStatus(sub.id, 'rejected')}
+              className="px-3 py-1 bg-red-600 text-white text-sm rounded hover:bg-red-700"
+            >
+              Reject
+            </button>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+
+// ─── Main Page ──────────────────────────────────────────────────────────
 export default function SubmissionsPage() {
   const { user, loading: authLoading } = useAuth();
   const router = useRouter();
@@ -38,9 +260,6 @@ export default function SubmissionsPage() {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedIds, setSelectedIds] = useState<Set<string>>(new Set());
   const [deleting, setDeleting] = useState(false);
-  const [editingId, setEditingId] = useState<string | null>(null);
-  const [editCommentValue, setEditCommentValue] = useState('');
-  const [editScoreValue, setEditScoreValue] = useState<number | null>(null);
 
   useEffect(() => {
     if (!authLoading && !user) router.push('/login');
@@ -74,12 +293,10 @@ export default function SubmissionsPage() {
       return;
     }
     const guideIds = guides.map(g => g.id);
-    // ✅ Fetch ALL submissions, including those with ai_score = null or 0
     const { data: media, error: mediaError } = await supabase
       .from('media_uploads')
       .select('id, file_url, file_type, ai_score, ai_comment, approval_status, created_at, guide_id, worker_name, worker_email')
       .in('guide_id', guideIds)
-      // .not('ai_score', 'is', null)   // ← REMOVED: now includes all
       .order('created_at', { ascending: false });
     if (mediaError) {
       console.error(mediaError);
@@ -95,6 +312,7 @@ export default function SubmissionsPage() {
     setSelectedIds(new Set());
   };
 
+  // ─── Handlers passed to SubmissionCard ─────────────────────────────
   const updateApprovalStatus = async (id: string, newStatus: 'approved' | 'rejected') => {
     const { error } = await supabase.from('media_uploads').update({ approval_status: newStatus }).eq('id', id);
     if (!error) {
@@ -102,17 +320,12 @@ export default function SubmissionsPage() {
     } else alert('Failed to update');
   };
 
-  // ─── Edit: save both comment and score ──────────────────────────────────
   const saveCommentAndScore = async (id: string, newComment: string, newScore: number | null) => {
     const updateData: any = { ai_comment: newComment };
     if (newScore !== null) {
-      // Preserve existing ai_score object but update the score
       const current = submissions.find(s => s.id === id);
       const currentScore = current?.ai_score || {};
-      updateData.ai_score = {
-        ...currentScore,
-        score: newScore,
-      };
+      updateData.ai_score = { ...currentScore, score: newScore };
     }
     const { error } = await supabase
       .from('media_uploads')
@@ -131,7 +344,6 @@ export default function SubmissionsPage() {
           return s;
         })
       );
-      setEditingId(null);
     } else {
       alert('Failed to save changes');
     }
@@ -257,155 +469,17 @@ export default function SubmissionsPage() {
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {filtered.map((sub) => (
-                <div key={sub.id} className="border rounded-lg overflow-hidden shadow-sm hover:shadow-md transition relative">
-                  <div className="absolute top-2 left-2 z-10">
-                    <input
-                      type="checkbox"
-                      checked={selectedIds.has(sub.id)}
-                      onChange={() => toggleSelect(sub.id)}
-                      className="w-4 h-4 rounded border-gray-300 text-primary-600 focus:ring-primary-500"
-                    />
-                  </div>
-                  <div className="relative h-48 bg-gray-100 group">
-                    {sub.file_type === 'image' ? (
-                      <Image src={sub.file_url} alt="Work submission" fill className="object-cover" />
-                    ) : sub.file_type === 'video' ? (
-                      <video src={sub.file_url} className="w-full h-full object-cover" controls />
-                    ) : (
-                      <div className="flex items-center justify-center h-full bg-gray-200">
-                        <div className="text-center">
-                          <div className="text-4xl mb-2">📄</div>
-                          <p className="text-sm text-gray-600">Document</p>
-                          <button
-                            onClick={() => downloadFile(sub.file_url, `submission_${sub.id}.${sub.file_url.split('.').pop()}`)}
-                            className="mt-2 px-3 py-1 bg-blue-600 text-white text-xs rounded hover:bg-blue-700"
-                          >
-                            Download
-                          </button>
-                        </div>
-                      </div>
-                    )}
-                    <button
-                      onClick={() => downloadFile(sub.file_url, `submission_${sub.id}.${sub.file_type === 'image' ? 'jpg' : 'mp4'}`)}
-                      className="absolute bottom-2 right-2 bg-white bg-opacity-80 p-1 rounded shadow text-xs hover:bg-opacity-100"
-                    >
-                      ⬇️ Download
-                    </button>
-                  </div>
-                  <div className="p-4">
-                    <div className="flex justify-between items-start">
-                      <Link href={`/guides/${sub.guide.slug}`} className="font-semibold text-primary-600 hover:underline">
-                        {sub.guide.title}
-                      </Link>
-                      <span className={`px-2 py-1 text-xs rounded-full ${
-                        sub.approval_status === 'approved' ? 'bg-green-100 text-green-800' :
-                        sub.approval_status === 'rejected' ? 'bg-red-100 text-red-800' : 'bg-yellow-100 text-yellow-800'
-                      }`}>{sub.approval_status}</span>
-                    </div>
-                    <p className="text-sm text-gray-500 mt-1">Submitted: {new Date(sub.created_at).toLocaleDateString()}</p>
-                    {sub.worker_name && <p className="text-sm text-gray-600 mt-1">Worker: {sub.worker_name}</p>}
-                    
-                    {/* ─── Editable Comment + Score ─────────────────────── */}
-                    <div className="mt-2 p-2 bg-gray-50 rounded text-sm">
-                      <div className="flex justify-between items-center">
-                        <span className="font-medium">Review:</span>
-                        {editingId !== sub.id ? (
-                          <button
-                            onClick={() => {
-                              setEditingId(sub.id);
-                              setEditCommentValue(sub.ai_comment || '');
-                              setEditScoreValue(sub.ai_score?.score ?? null);
-                            }}
-                            className="text-xs text-blue-600 hover:underline"
-                          >
-                            Edit
-                          </button>
-                        ) : (
-                          <div className="space-x-2">
-                            <button
-                              onClick={() => saveCommentAndScore(sub.id, editCommentValue, editScoreValue)}
-                              className="text-xs text-green-600 hover:underline"
-                            >
-                              Save
-                            </button>
-                            <button
-                              onClick={() => setEditingId(null)}
-                              className="text-xs text-gray-500 hover:underline"
-                            >
-                              Cancel
-                            </button>
-                          </div>
-                        )}
-                      </div>
-
-                      {editingId === sub.id ? (
-                        <div className="mt-1 space-y-2">
-                          <div>
-                            <label className="text-xs text-gray-600">Score (0–100)</label>
-                            <input
-                              type="number"
-                              min="0"
-                              max="100"
-                              value={editScoreValue ?? ''}
-                              onChange={(e) => setEditScoreValue(e.target.value === '' ? null : Number(e.target.value))}
-                              className="w-full p-1 border rounded text-sm"
-                              placeholder="Leave blank for N/A"
-                            />
-                          </div>
-                          <div>
-                            <label className="text-xs text-gray-600">Comment (Markdown supported)</label>
-                            <textarea
-                              value={editCommentValue}
-                              onChange={(e) => setEditCommentValue(e.target.value)}
-                              className="w-full mt-1 p-1 border rounded text-sm"
-                              rows={3}
-                              placeholder="Markdown supported"
-                            />
-                          </div>
-                        </div>
-                      ) : (
-                        <>
-                          <div className="mt-1 text-sm">
-                            <span className="font-medium">Score: </span>
-                            {sub.ai_score && typeof sub.ai_score === 'object' && 'score' in sub.ai_score ? (
-                              <span className="font-bold">{sub.ai_score.score}/100</span>
-                            ) : (
-                              <span className="text-gray-500">N/A</span>
-                            )}
-                          </div>
-                          <div className="prose prose-sm max-w-none mt-1 text-gray-700">
-                            <ReactMarkdown remarkPlugins={[remarkGfm]}>
-                              {sub.ai_comment || '*No comment provided.*'}
-                            </ReactMarkdown>
-                          </div>
-                        </>
-                      )}
-                    </div>
-
-                    {/* ─── Actions ────────────────────────────────────────── */}
-                    <button
-                      onClick={() => downloadPDF(sub)}
-                      className="mt-3 w-full py-1 text-sm bg-indigo-100 text-indigo-700 rounded hover:bg-indigo-200 transition"
-                    >
-                      📄 Download PDF Report
-                    </button>
-
-                    <button
-                      onClick={() => sendReviewEmail(sub)}
-                      disabled={!sub.worker_email}
-                      className="mt-2 w-full py-1 text-sm bg-blue-100 text-blue-700 rounded hover:bg-blue-200 transition disabled:opacity-50 disabled:cursor-not-allowed"
-                    >
-                      📧 Send Review via Gmail
-                    </button>
-
-                    {sub.approval_status === 'pending' && (
-                      <div className="mt-2 flex gap-2">
-                        <button onClick={() => updateApprovalStatus(sub.id, 'approved')} className="px-3 py-1 bg-green-600 text-white text-sm rounded hover:bg-green-700">Approve</button>
-                        <button onClick={() => updateApprovalStatus(sub.id, 'rejected')} className="px-3 py-1 bg-red-600 text-white text-sm rounded hover:bg-red-700">Reject</button>
-                      </div>
-                    )}
-                  </div>
-                </div>
+                <SubmissionCard
+                  key={sub.id}
+                  sub={sub}
+                  onUpdateStatus={updateApprovalStatus}
+                  onSaveCommentScore={saveCommentAndScore}
+                  onDownloadFile={downloadFile}
+                  onDownloadPDF={downloadPDF}
+                  onSendReview={sendReviewEmail}
+                  isSelected={selectedIds.has(sub.id)}
+                  onToggleSelect={toggleSelect}
+                />
               ))}
             </div>
           )}
