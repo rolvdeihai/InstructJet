@@ -1,6 +1,7 @@
 // app/about/page.tsx
 'use client';
 
+import Image from 'next/image';
 import Link from 'next/link';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
@@ -13,8 +14,16 @@ export default function AboutPage() {
         <div className="max-w-4xl mx-auto px-6 py-12">
           {/* ─── Header ──────────────────────────────────────────── */}
           <div className="flex flex-col md:flex-row items-start md:items-center gap-6 mb-12">
-            <div className="w-24 h-24 rounded-full bg-gradient-to-br from-primary-500 to-primary-700 flex items-center justify-center text-white text-3xl font-bold flex-shrink-0 shadow-lg">
-              JL
+            {/* Profile Image – circle crop of jethro-tesla.jpeg */}
+            <div className="relative w-24 h-24 rounded-full overflow-hidden shadow-lg flex-shrink-0 bg-gray-200">
+              <Image
+                src="/jethro-tesla.jpeg"
+                alt="Jethro Lim"
+                fill
+                className="object-cover"
+                sizes="96px"
+                priority
+              />
             </div>
             <div>
               <h1 className="text-4xl font-extrabold text-gray-900">Jethro Lim</h1>

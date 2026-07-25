@@ -28,6 +28,15 @@ export default function PricingPage() {
           priceId: process.env.NEXT_PUBLIC_PADDLE_SUBSCRIPTION_PRICE_ID 
         }),
       });
+
+      // 👇 Handle 401 Unauthorized
+      if (res.status === 401) {
+        // Optionally sign out the user (if you have a logout function)
+        // await logout(); 
+        window.location.href = '/login';
+        return;
+      }
+
       const data = await res.json();
       if (data.checkout_url) {
         window.location.href = data.checkout_url;
@@ -53,6 +62,13 @@ export default function PricingPage() {
           priceId: process.env.NEXT_PUBLIC_PADDLE_TOKEN_PRICE_ID 
         }),
       });
+
+      // 👇 Handle 401 Unauthorized
+      if (res.status === 401) {
+        window.location.href = '/login';
+        return;
+      }
+
       const data = await res.json();
       if (data.checkout_url) {
         window.location.href = data.checkout_url;
