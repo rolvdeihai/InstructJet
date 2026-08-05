@@ -1,10 +1,12 @@
+// components/CreateGuideClient.tsx (or wherever it lives – adapt imports)
+
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
 import ChatInterface from './ChatInterface';
 import GuidePreview from './GuidePreview';
 import { supabase } from '@/lib/supabase-client';
-import bcrypt from 'bcryptjs'; // npm install bcryptjs
+import bcrypt from 'bcryptjs';
 import { franc } from 'franc-min';
 
 // ─── Tutorial Component ──────────────────────────────────────────────────────
@@ -75,7 +77,6 @@ const updateGuideSections = (
   const { frontMatter, sections } = parseGuideSections(currentGuide);
   let updated = false;
   for (const [sectionName, newContent] of Object.entries(updates)) {
-    // Update existing section or add new one
     sections[sectionName] = newContent;
     updated = true;
   }
@@ -119,6 +120,9 @@ export default function CreateGuideClient({ userId }: { userId: string }) {
   // ─── Privacy State ──────────────────────────────────────────────────────
   const [isPublic, setIsPublic] = useState<boolean>(true);
   const [privatePassword, setPrivatePassword] = useState<string>('');
+
+  // ─── Mobile Tab State ──────────────────────────────────────────────────
+  const [activeTab, setActiveTab] = useState<'chat' | 'guide'>('chat');
 
   // ─── Helpers ──────────────────────────────────────────────────────────────
   const fetchWithCreds = (url: string, options?: RequestInit) => {
@@ -170,9 +174,9 @@ export default function CreateGuideClient({ userId }: { userId: string }) {
     setGuideSections([]);
     setTitle('');
     setGeneratingSections(false);
-    // Reset privacy to default
     setIsPublic(true);
     setPrivatePassword('');
+    setActiveTab('chat'); // switch to chat tab on new guide
   };
 
   const addMessage = async (role: 'user' | 'assistant', content: string) => {
@@ -268,7 +272,7 @@ export default function CreateGuideClient({ userId }: { userId: string }) {
     stopQueuePolling();
   };
 
-  // ─── File Upload (base64, no bucket) ──────────────────────────────────
+  // ─── File Upload ──────────────────────────────────────────────────────────
   const handleFileSelected = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
@@ -332,7 +336,6 @@ export default function CreateGuideClient({ userId }: { userId: string }) {
   const handleSendMessage = async (message: string) => {
     if (!message.trim()) return;
 
-    // Detect revision command
     const isRevision = message.trim().startsWith('@revision');
     const cleanedMessage = isRevision ? message.replace(/^@revision\s*/i, '').trim() : message;
 
@@ -341,7 +344,7 @@ export default function CreateGuideClient({ userId }: { userId: string }) {
       return;
     }
 
-    await addMessage('user', message); // store original message for history
+    await addMessage('user', message);
 
     const requestId = crypto.randomUUID();
     setCurrentRequestId(requestId);
@@ -377,8 +380,8 @@ export default function CreateGuideClient({ userId }: { userId: string }) {
           message: cleanedMessage,
           context: contextString,
           requestId,
-          guideContent: guideContent, // always send current guide
-          isRevision,                 // tell API it's a revision request
+          guideContent: guideContent,
+          isRevision,
         }),
         signal: abortControllerRef.current.signal,
       });
@@ -403,7 +406,6 @@ export default function CreateGuideClient({ userId }: { userId: string }) {
         try {
           const parsed = JSON.parse(data.response);
 
-          // Handle revision response
           if (parsed.type === 'revision' && parsed.sections) {
             const newGuide = updateGuideSections(guideContent, parsed.sections);
             setGuideContent(newGuide);
@@ -414,7 +416,6 @@ export default function CreateGuideClient({ userId }: { userId: string }) {
             return;
           }
 
-          // Premium: complete_guide
           if (parsed.action === 'complete_guide') {
             await addMessage('assistant', parsed.content);
             setGuideContent(parsed.content);
@@ -424,7 +425,6 @@ export default function CreateGuideClient({ userId }: { userId: string }) {
             return;
           }
 
-          // Free: generate_guide (section by section)
           if (parsed.action === 'generate_guide') {
             await addMessage('assistant', `I'll generate a step‑by‑step guide...`);
             setIsGenerating(false);
@@ -540,7 +540,7 @@ export default function CreateGuideClient({ userId }: { userId: string }) {
   };
 
   const detectLanguage = (text: string): string => {
-    const lang = franc(text, { minLength: 3 }); // returns ISO 639-3 code
+    const lang = franc(text, { minLength: 3 });
     const langMap: Record<string, string> = {
       'eng': 'en',
       'spa': 'es',
@@ -559,7 +559,7 @@ export default function CreateGuideClient({ userId }: { userId: string }) {
       'hin': 'hi',
       'ind': 'id',
     };
-    return langMap[lang] || 'en'; // fallback to English
+    return langMap[lang] || 'en';
   };
 
   // ─── Publish Guide ────────────────────────────────────────────────────────
@@ -573,7 +573,6 @@ export default function CreateGuideClient({ userId }: { userId: string }) {
       return;
     }
 
-    // If private, require a password
     if (!isPublic && !privatePassword.trim()) {
       alert('Please set a password for your private guide.');
       return;
@@ -614,7 +613,6 @@ export default function CreateGuideClient({ userId }: { userId: string }) {
         }
       }
 
-      // Hash password if private
       let passwordHash = null;
       if (!isPublic && privatePassword) {
         passwordHash = await bcrypt.hash(privatePassword, 10);
@@ -635,7 +633,7 @@ export default function CreateGuideClient({ userId }: { userId: string }) {
           token_budget_remaining: tokenBudget,
           is_public: isPublic,
           password_hash: passwordHash,
-          language, // <-- new field
+          language,
         })
         .select('slug')
         .single();
@@ -658,167 +656,236 @@ export default function CreateGuideClient({ userId }: { userId: string }) {
     }
   };
 
-  // ─── Render ──────────────────────────────────────────────────────────────
-  return (
-    <div className="flex h-screen pt-16">
-      {/* ─── Left Panel: Chat ────────────────────────────────────────────── */}
-      <div className="w-1/2 border-r border-gray-200 flex flex-col">
-        <ChatInterface
-          messages={messages}
-          onSendMessage={handleSendMessage}
-          isGenerating={isGenerating || generatingSections}
-          isSearching={isSearching}
-          webSearchEnabled={webSearchEnabled}
-          onToggleWebSearch={() => setWebSearchEnabled(!webSearchEnabled)}
-          onStopGeneration={stopGeneration}
-          queuePosition={queuePosition}
-          showWelcome={messages.length === 0}
-          onAttachFile={triggerFilePicker}
-          uploading={uploading}
-          hasGuide={hasGuide}
-        />
-        {/* Hidden file input */}
+  // ─── Controls Component (shared) ──────────────────────────────────────
+  const GuideControls = () => (
+    <div className="p-4 border-b border-gray-200 space-y-3">
+      <div className="flex flex-wrap items-center gap-2">
         <input
-          type="file"
-          ref={fileInputRef}
-          onChange={handleFileSelected}
-          accept="image/*,.pdf,.docx,.doc"
-          className="hidden"
+          type="text"
+          placeholder="Guide Title"
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+          className="flex-1 min-w-[120px] px-3 py-2 border rounded-lg text-sm"
         />
-        {generatingSections && guideSections.length > 0 && (
-          <div className="border-t border-gray-200 p-2 text-sm text-gray-500 text-center">
-            Generating section {currentSectionIndex + 1}/{guideSections.length}: {guideSections[currentSectionIndex]}
-          </div>
-        )}
+        <button
+          onClick={publishGuide}
+          disabled={saving || !guideContent}
+          className="px-4 py-2 bg-primary-600 text-white rounded-lg disabled:opacity-50 text-sm"
+        >
+          {saving ? 'Publishing...' : 'Publish'}
+        </button>
+        <button
+          onClick={createNewSession}
+          className="px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 text-sm"
+        >
+          New Guide
+        </button>
+        <div className="relative">
+          <button
+            type="button"
+            onClick={() => setShowGuideTutorial(!showGuideTutorial)}
+            className="text-gray-400 hover:text-gray-600 focus:outline-none"
+            aria-label="Guide creation help"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+          </button>
+          {showGuideTutorial && (
+            <div className="absolute right-0 mt-2 w-72 p-4 bg-white border border-gray-200 rounded-lg shadow-lg z-10">
+              <GuideTutorial compact />
+              <button onClick={() => setShowGuideTutorial(false)} className="mt-2 text-xs text-primary-600">
+                Close
+              </button>
+            </div>
+          )}
+        </div>
       </div>
 
-      {/* ─── Right Panel: Preview + Controls ────────────────────────────── */}
-      <div className="w-1/2 flex flex-col">
-        <div className="p-4 border-b border-gray-200">
-          <div className="flex flex-col space-y-3">
-            {/* Row 1: Title, Publish, New Guide, Help */}
-            <div className="flex items-center gap-2">
-              <input
-                type="text"
-                placeholder="Guide Title"
-                value={title}
-                onChange={(e) => setTitle(e.target.value)}
-                className="flex-1 px-3 py-2 border rounded-lg"
-              />
-              <button
-                onClick={publishGuide}
-                disabled={saving || !guideContent}
-                className="px-4 py-2 bg-primary-600 text-white rounded-lg disabled:opacity-50"
-              >
-                {saving ? 'Publishing...' : 'Publish Guide'}
-              </button>
-              <button
-                onClick={createNewSession}
-                className="px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50"
-              >
-                New Guide
-              </button>
-              <div className="relative">
-                <button
-                  type="button"
-                  onClick={() => setShowGuideTutorial(!showGuideTutorial)}
-                  className="text-gray-400 hover:text-gray-600 focus:outline-none"
-                  aria-label="Guide creation help"
-                >
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  </svg>
-                </button>
-                {showGuideTutorial && (
-                  <div className="absolute right-0 mt-2 w-80 p-4 bg-white border border-gray-200 rounded-lg shadow-lg z-10">
-                    <GuideTutorial compact />
-                    <button onClick={() => setShowGuideTutorial(false)} className="mt-2 text-xs text-primary-600">
-                      Close
-                    </button>
-                  </div>
-                )}
-              </div>
-            </div>
-
-            {/* Row 2: Token Budget + Privacy Toggle */}
-            <div className="flex flex-wrap items-center gap-4">
-              {/* Token Budget */}
-              <div className="flex items-center gap-2 flex-1 min-w-[200px]">
-                <label className="text-sm font-medium text-gray-700 whitespace-nowrap">Worker Chat Budget</label>
-                <div className="relative inline-block">
-                  <button
-                    type="button"
-                    onClick={() => setShowBudgetHelp(!showBudgetHelp)}
-                    className="text-gray-400 hover:text-gray-600 focus:outline-none"
-                    aria-label="Help"
-                  >
-                    <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
-                  </button>
-                  {showBudgetHelp && (
-                    <div className="absolute z-10 w-80 p-3 mt-2 bg-white border border-gray-200 rounded-lg shadow-lg text-sm text-gray-600 -left-32">
-                      <h4 className="font-semibold text-gray-800 mb-1">What is token budget?</h4>
-                      <p>Workers who ask questions about this guide will consume tokens from this budget (1000 tokens per message).</p>
-                      <p className="mt-1">Set a budget to control how many questions workers can ask. You can top it up later by editing the guide.</p>
-                      <p className="mt-1 text-xs text-gray-500">Recommended: 5000–20000 tokens for active guides.</p>
-                      <button onClick={() => setShowBudgetHelp(false)} className="mt-2 text-xs text-primary-600">Close</button>
-                    </div>
-                  )}
-                </div>
-                <input
-                  type="number"
-                  value={tokenBudget}
-                  onChange={(e) => setTokenBudget(Math.max(0, parseInt(e.target.value) || 0))}
-                  min="0"
-                  step="1000"
-                  className="w-24 px-2 py-1 border rounded-lg text-sm"
-                />
-                <span className="text-xs text-gray-500">tokens</span>
-              </div>
-
-              {/* Privacy Toggle */}
-              <div className="flex items-center gap-3">
-                <span className="text-sm font-medium text-gray-700">Privacy</span>
-                <button
-                  onClick={() => setIsPublic(!isPublic)}
-                  className={`relative w-12 h-6 rounded-full transition-colors duration-200 focus:outline-none ${
-                    isPublic ? 'bg-green-500' : 'bg-red-500'
-                  }`}
-                >
-                  <span
-                    className={`absolute top-1 left-1 w-4 h-4 bg-white rounded-full transition-transform duration-200 ${
-                      isPublic ? 'translate-x-6' : 'translate-x-0'
-                    }`}
-                  />
-                </button>
-                <span className="text-sm text-gray-600">
-                  {isPublic ? 'Public' : 'Private'}
-                </span>
-              </div>
-            </div>
-
-            {/* Password field (only if private) */}
-            {!isPublic && (
-              <div className="flex items-center gap-2">
-                <label className="text-sm font-medium text-gray-700">Access Password</label>
-                <input
-                  type="text"
-                  value={privatePassword}
-                  onChange={(e) => setPrivatePassword(e.target.value)}
-                  placeholder="Set a password for this guide"
-                  className="flex-1 px-3 py-1 border rounded-lg text-sm"
-                />
-                <span className="text-xs text-gray-500">Min 4 characters</span>
+      <div className="flex flex-wrap items-center gap-4">
+        <div className="flex items-center gap-2 flex-1 min-w-[180px]">
+          <label className="text-sm font-medium text-gray-700 whitespace-nowrap">Worker Chat Budget</label>
+          <div className="relative inline-block">
+            <button
+              type="button"
+              onClick={() => setShowBudgetHelp(!showBudgetHelp)}
+              className="text-gray-400 hover:text-gray-600 focus:outline-none"
+              aria-label="Help"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+            </button>
+            {showBudgetHelp && (
+              <div className="absolute z-10 w-72 p-3 mt-2 bg-white border border-gray-200 rounded-lg shadow-lg text-sm text-gray-600 -left-20">
+                <h4 className="font-semibold text-gray-800 mb-1">What is token budget?</h4>
+                <p>Workers who ask questions about this guide will consume tokens from this budget (1000 tokens per message).</p>
+                <p className="mt-1">Set a budget to control how many questions workers can ask. You can top it up later by editing the guide.</p>
+                <p className="mt-1 text-xs text-gray-500">Recommended: 5000–20000 tokens for active guides.</p>
+                <button onClick={() => setShowBudgetHelp(false)} className="mt-2 text-xs text-primary-600">Close</button>
               </div>
             )}
           </div>
+          <input
+            type="number"
+            value={tokenBudget}
+            onChange={(e) => setTokenBudget(Math.max(0, parseInt(e.target.value) || 0))}
+            min="0"
+            step="1000"
+            className="w-20 px-2 py-1 border rounded-lg text-sm"
+          />
+          <span className="text-xs text-gray-500">tokens</span>
         </div>
-        <GuidePreview
-          content={guideContent}
-          onChange={handleGuidePreviewChange}
-          userId={userId}
-        />
+
+        <div className="flex items-center gap-3">
+          <span className="text-sm font-medium text-gray-700">Privacy</span>
+          <button
+            onClick={() => setIsPublic(!isPublic)}
+            className={`relative w-12 h-6 rounded-full transition-colors duration-200 focus:outline-none ${
+              isPublic ? 'bg-green-500' : 'bg-red-500'
+            }`}
+          >
+            <span
+              className={`absolute top-1 left-1 w-4 h-4 bg-white rounded-full transition-transform duration-200 ${
+                isPublic ? 'translate-x-6' : 'translate-x-0'
+              }`}
+            />
+          </button>
+          <span className="text-sm text-gray-600">
+            {isPublic ? 'Public' : 'Private'}
+          </span>
+        </div>
+      </div>
+
+      {!isPublic && (
+        <div className="flex items-center gap-2">
+          <label className="text-sm font-medium text-gray-700">Access Password</label>
+          <input
+            type="text"
+            value={privatePassword}
+            onChange={(e) => setPrivatePassword(e.target.value)}
+            placeholder="Set a password for this guide"
+            className="flex-1 px-3 py-1 border rounded-lg text-sm"
+          />
+          <span className="text-xs text-gray-500">Min 4 chars</span>
+        </div>
+      )}
+    </div>
+  );
+
+  // ─── Render ──────────────────────────────────────────────────────────────
+  return (
+    <div className="flex h-screen pt-16">
+      {/* ─── Hidden file input ────────────────────────────────────────────── */}
+      <input
+        type="file"
+        ref={fileInputRef}
+        onChange={handleFileSelected}
+        accept="image/*,.pdf,.docx,.doc"
+        className="hidden"
+      />
+
+      {/* ─── Desktop: two columns ─────────────────────────────────────────── */}
+      <div className="hidden md:flex flex-row w-full h-full overflow-hidden">
+        {/* Left: Chat */}
+        <div className="w-1/2 border-r border-gray-200 flex flex-col h-full">
+          <ChatInterface
+            messages={messages}
+            onSendMessage={handleSendMessage}
+            isGenerating={isGenerating || generatingSections}
+            isSearching={isSearching}
+            webSearchEnabled={webSearchEnabled}
+            onToggleWebSearch={() => setWebSearchEnabled(!webSearchEnabled)}
+            onStopGeneration={stopGeneration}
+            queuePosition={queuePosition}
+            showWelcome={messages.length === 0}
+            onAttachFile={triggerFilePicker}
+            uploading={uploading}
+            hasGuide={hasGuide}
+          />
+          {generatingSections && guideSections.length > 0 && (
+            <div className="border-t border-gray-200 p-2 text-sm text-gray-500 text-center">
+              Generating section {currentSectionIndex + 1}/{guideSections.length}: {guideSections[currentSectionIndex]}
+            </div>
+          )}
+        </div>
+
+        {/* Right: Guide Preview with Controls */}
+        <div className="w-1/2 flex flex-col h-full">
+          <GuideControls />
+          <GuidePreview
+            content={guideContent}
+            onChange={handleGuidePreviewChange}
+            userId={userId}
+          />
+        </div>
+      </div>
+
+      {/* ─── Mobile: tabbed layout ────────────────────────────────────────── */}
+      <div className="flex md:hidden flex-col h-full w-full overflow-hidden">
+        {/* Content area */}
+        <div className="flex-1 overflow-hidden">
+          {activeTab === 'chat' ? (
+            <div className="flex flex-col h-full">
+              <ChatInterface
+                messages={messages}
+                onSendMessage={handleSendMessage}
+                isGenerating={isGenerating || generatingSections}
+                isSearching={isSearching}
+                webSearchEnabled={webSearchEnabled}
+                onToggleWebSearch={() => setWebSearchEnabled(!webSearchEnabled)}
+                onStopGeneration={stopGeneration}
+                queuePosition={queuePosition}
+                showWelcome={messages.length === 0}
+                onAttachFile={triggerFilePicker}
+                uploading={uploading}
+                hasGuide={hasGuide}
+              />
+              {generatingSections && guideSections.length > 0 && (
+                <div className="border-t border-gray-200 p-2 text-sm text-gray-500 text-center">
+                  Generating section {currentSectionIndex + 1}/{guideSections.length}: {guideSections[currentSectionIndex]}
+                </div>
+              )}
+            </div>
+          ) : (
+            <div className="flex flex-col h-full">
+              <GuideControls />
+              <div className="flex-1 overflow-auto">
+                <GuidePreview
+                  content={guideContent}
+                  onChange={handleGuidePreviewChange}
+                  userId={userId}
+                />
+              </div>
+            </div>
+          )}
+        </div>
+
+        {/* Bottom tab bar */}
+        <div className="border-t border-gray-200 bg-white flex-shrink-0">
+          <div className="flex">
+            <button
+              onClick={() => setActiveTab('chat')}
+              className={`flex-1 py-3 text-center text-sm font-medium ${
+                activeTab === 'chat'
+                  ? 'text-primary-600 border-b-2 border-primary-600'
+                  : 'text-gray-500 hover:text-gray-700'
+              }`}
+            >
+              💬 Chat
+            </button>
+            <button
+              onClick={() => setActiveTab('guide')}
+              className={`flex-1 py-3 text-center text-sm font-medium ${
+                activeTab === 'guide'
+                  ? 'text-primary-600 border-b-2 border-primary-600'
+                  : 'text-gray-500 hover:text-gray-700'
+              }`}
+            >
+              📝 Edit Guide
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   );

@@ -29,7 +29,7 @@ const BONUS_REWARDS: Record<string, { emoji: string; label: string; description:
   },
   tokens: {
     emoji: '🪙',
-    label: '50,000 Extra Tokens',
+    label: '250,000 Extra Tokens',
     description: 'Boost your account with a massive token bonus – perfect for creating more guides, AI‑powered analysis, and advanced features. Never expire!',
   },
   voucher: {
@@ -188,7 +188,7 @@ export default function ChallengePopup({ isOpen, onClose }: ChallengePopupProps)
       `✅ Waited 7 days without withdrawing\n` +
       `✅ I'm ready to claim my GUARANTEED rewards:\n` +
       `   📜 Certificate of Achievement\n` +
-      `   🪙 50,000 tokens\n\n` +
+      `   🪙 250,000 tokens\n\n` +
       (bonus
         ? `PLUS my BONUS reward: ${bonus.emoji} ${bonus.label} – ${bonus.description}\n\n`
         : `(Bonus reward will be assigned upon verification.)\n\n`) +
@@ -533,7 +533,7 @@ export default function ChallengePopup({ isOpen, onClose }: ChallengePopupProps)
                         <span className="text-lg">📜</span> Certificate of Achievement
                       </span>
                       <span className="flex items-center gap-1 text-sm text-green-700 bg-white/60 px-2 py-1 rounded-full">
-                        <span className="text-lg">🪙</span> 50,000 Tokens
+                        <span className="text-lg">🪙</span> 250,000 Tokens
                       </span>
                     </div>
                   </div>

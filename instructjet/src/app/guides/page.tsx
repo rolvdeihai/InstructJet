@@ -12,6 +12,7 @@ import {
   EyeIcon,
   TrashIcon,
   PlusCircleIcon,
+  LinkIcon,
 } from '@heroicons/react/24/outline';
 
 export default function GuidesPage() {
@@ -24,6 +25,7 @@ export default function GuidesPage() {
   const [editingGuideId, setEditingGuideId] = useState<string | null>(null);
   const [isPublic, setIsPublic] = useState(false);
   const [password, setPassword] = useState('');
+  const [copiedGuideId, setCopiedGuideId] = useState<string | null>(null);
 
   useEffect(() => {
     if (!authLoading && !user) {
@@ -107,7 +109,6 @@ export default function GuidesPage() {
         body: JSON.stringify({ listingId }),
       });
       if (res.ok) {
-        // Remove from local state
         setListings(listings.filter(l => l.id !== listingId));
       } else {
         const err = await res.json();
@@ -115,6 +116,18 @@ export default function GuidesPage() {
       }
     } catch (err) {
       alert('Error removing listing');
+    }
+  };
+
+  const copyGuideLink = async (slug: string, guideId: string) => {
+    const url = `${window.location.origin}/guides/${slug}`;
+    try {
+      await navigator.clipboard.writeText(url);
+      setCopiedGuideId(guideId);
+      setTimeout(() => setCopiedGuideId(null), 2000);
+    } catch (err) {
+      // Fallback: prompt user to copy manually
+      prompt('Copy this link to share:', url);
     }
   };
 
@@ -189,7 +202,7 @@ export default function GuidesPage() {
                         </span>
                       </div>
                     </Link>
-                    <div className="mt-4 flex flex-wrap gap-2">
+                    <div className="mt-4 flex flex-wrap items-center gap-2">
                       <Link href={`/guides/${guide.slug}/edit`} className="text-sm text-primary-600 hover:text-primary-700 font-medium">
                         Edit
                       </Link>
@@ -203,6 +216,19 @@ export default function GuidesPage() {
                         className="text-sm text-gray-600 hover:text-gray-800 font-medium"
                       >
                         Privacy
+                      </button>
+                      {/* Share button */}
+                      <button
+                        onClick={() => copyGuideLink(guide.slug, guide.id)}
+                        className="text-sm text-blue-600 hover:text-blue-800 font-medium flex items-center gap-1"
+                        title="Copy share link"
+                      >
+                        <LinkIcon className="h-4 w-4" />
+                        {copiedGuideId === guide.id ? (
+                          <span className="text-green-600">Copied!</span>
+                        ) : (
+                          'Share'
+                        )}
                       </button>
                     </div>
 

@@ -7,8 +7,16 @@ import mermaid from 'mermaid';
 mermaid.initialize({
   startOnLoad: false,
   theme: 'base',
+  themeVariables: {
+    background: '#ffffff',
+    primaryColor: '#ffffff',
+    primaryTextColor: '#000000',
+    primaryBorderColor: '#cccccc',
+    lineColor: '#ff5722',           // ← change arrow/edge color here (e.g., orange)
+    tertiaryColor: '#f5f5f5',
+  },
   securityLevel: 'loose',
-  suppressErrorRendering: true, // 🔥 THIS FIXES YOUR ISSUE
+  suppressErrorRendering: true,
   flowchart: { useMaxWidth: true, htmlLabels: true },
 });
 

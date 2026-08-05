@@ -22,7 +22,7 @@ interface ChatInterfaceProps {
   showWelcome?: boolean;
   onAttachFile?: () => void;
   uploading?: boolean;
-  hasGuide?: boolean; // new prop to indicate if a guide exists
+  hasGuide?: boolean;
 }
 
 export default function ChatInterface({
@@ -114,14 +114,14 @@ export default function ChatInterface({
       <div className="mt-3 p-3 bg-blue-100 rounded-lg border border-blue-300 text-sm">
         <strong className="block mb-1">💡 Pro Tip</strong>
         <p>
-          If your task can't be verified automatically (e.g., no images or documents to scan), 
-          simply create a guide that asks workers to <strong>describe their work in detail</strong> 
-          – step by step, with explanations. 
-          The AI can then evaluate their written report for completeness and clarity, giving you 
+          If your task can't be verified automatically (e.g., no images or documents to scan),
+          simply create a guide that asks workers to <strong>describe their work in detail</strong>
+          – step by step, with explanations.
+          The AI can then evaluate their written report for completeness and clarity, giving you
           confidence that the job was done right.
         </p>
         <p className="mt-1 text-xs text-blue-700">
-          Example: Instead of "Take a photo of the assembly", ask "Write a summary of the 
+          Example: Instead of "Take a photo of the assembly", ask "Write a summary of the
           steps you followed and any challenges you encountered."
         </p>
       </div>
@@ -136,7 +136,8 @@ export default function ChatInterface({
       {/* ─── Message Area ──────────────────────────────────────────────── */}
       <div className="flex-1 overflow-y-auto p-4 space-y-4">
         {messages.length === 0 && showWelcome ? (
-          <div className="flex items-center justify-center h-full">
+          // Fix: remove centering, allow scrolling
+          <div className="h-full overflow-y-auto py-4">
             <WelcomeTutorial />
           </div>
         ) : (
@@ -236,24 +237,24 @@ export default function ChatInterface({
       )}
 
       {/* ─── Input Form ────────────────────────────────────────────────── */}
-      <form onSubmit={handleSubmit} className="border-t border-gray-200 p-4 bg-white">
-        {/* Toolbar */}
-        <div className="flex items-center space-x-2 mb-2 flex-wrap gap-1">
+      <form onSubmit={handleSubmit} className="border-t border-gray-200 p-3 bg-white">
+        {/* Toolbar – compact on mobile */}
+        <div className="flex flex-wrap items-center gap-1 mb-2">
           <button
             type="button"
             onClick={handleInsertGuide}
-            className="text-xs bg-gray-100 hover:bg-gray-200 px-2 py-1 rounded"
+            className="text-xs bg-gray-100 hover:bg-gray-200 px-2 py-1 rounded whitespace-nowrap"
           >
             @guide
           </button>
-          <span className="text-xs text-gray-500">
+          <span className="text-xs text-gray-500 hidden sm:inline">
             Add @guide to generate a guide
           </span>
 
           <button
             type="button"
             onClick={handleInsertRevision}
-            className={`text-xs px-2 py-1 rounded ${
+            className={`text-xs px-2 py-1 rounded whitespace-nowrap ${
               hasGuide
                 ? 'bg-gray-100 hover:bg-gray-200'
                 : 'bg-gray-200 text-gray-400 cursor-not-allowed'
@@ -263,7 +264,7 @@ export default function ChatInterface({
           >
             @revision
           </button>
-          <span className="text-xs text-gray-500">
+          <span className="text-xs text-gray-500 hidden sm:inline">
             {hasGuide
               ? 'Add @revision to edit a section'
               : '(no guide to edit yet)'}
@@ -274,19 +275,19 @@ export default function ChatInterface({
               type="button"
               onClick={onAttachFile}
               disabled={uploading}
-              className="text-xs bg-gray-100 hover:bg-gray-200 px-2 py-1 rounded disabled:opacity-50 flex items-center gap-1"
+              className="text-xs bg-gray-100 hover:bg-gray-200 px-2 py-1 rounded disabled:opacity-50 flex items-center gap-1 whitespace-nowrap"
             >
               {uploading ? (
                 <span className="inline-block animate-spin">⏳</span>
               ) : (
                 <span>📎</span>
               )}
-              {uploading ? 'Uploading...' : 'Attach File'}
+              {uploading ? 'Uploading...' : 'Attach'}
             </button>
           )}
         </div>
 
-        {/* Input row */}
+        {/* Input row – always at bottom */}
         <div className="flex space-x-2">
           <textarea
             ref={textareaRef}
@@ -296,9 +297,9 @@ export default function ChatInterface({
               adjustHeight();
             }}
             onKeyDown={handleKeyDown}
-            placeholder="Describe the task... (Enter to send, Shift+Enter for new line)"
+            placeholder="Describe the task... (Enter to send)"
             rows={1}
-            className="flex-1 resize-none border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary-500"
+            className="flex-1 resize-none border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary-500 min-h-[40px] max-h-[150px]"
             disabled={isGenerating || isSearching || (queuePosition !== null && queuePosition > 0) || uploading}
           />
           {onToggleWebSearch && (
