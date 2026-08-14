@@ -402,9 +402,18 @@ export default function Navbar() {
                     </Link>
                     <Link
                       href="/dashboard"
-                      className="flex items-center justify-center gap-2 bg-primary-600 text-white px-4 py-2.5 rounded-lg text-sm font-medium hover:bg-primary-700 transition-colors"
+                      className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-50 hover:text-primary-600 transition-colors"
                     >
+                      <UserCircleIcon className="h-5 w-5" />
                       Dashboard
+                    </Link>
+                    {/* ✅ Added Settings link here */}
+                    <Link
+                      href="/settings"
+                      className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-50 hover:text-primary-600 transition-colors"
+                    >
+                      <Cog6ToothIcon className="h-5 w-5" />
+                      Settings
                     </Link>
                     <button
                       onClick={() => {

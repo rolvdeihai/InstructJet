@@ -1,8 +1,8 @@
-// components/CreateGuideClient.tsx (or wherever it lives – adapt imports)
+// components/CreateGuideClient.tsx
 
 'use client';
 
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useCallback, memo } from 'react';
 import ChatInterface from './ChatInterface';
 import GuidePreview from './GuidePreview';
 import { supabase } from '@/lib/supabase-client';
@@ -31,7 +31,7 @@ const GuideTutorial = ({ compact = false }: { compact?: boolean }) => (
   </div>
 );
 
-// ─── Guide Section Helpers ──────────────────────────────────────────────
+// ─── Guide Section Helpers ──────────────────────────────────────────────────
 const parseGuideSections = (markdown: string): { frontMatter: string; sections: Record<string, string> } => {
   const sections: Record<string, string> = {};
   const lines = markdown.split('\n');
@@ -83,6 +83,160 @@ const updateGuideSections = (
   return updated ? reconstructGuide(frontMatter, sections) : currentGuide;
 };
 
+// ─── Memoized GuideControls Component ──────────────────────────────────────
+const GuideControls = memo(function GuideControls({
+  title,
+  setTitle,
+  saving,
+  guideContent,
+  publishGuide,
+  createNewSession,
+  showGuideTutorial,
+  setShowGuideTutorial,
+  tokenBudget,
+  setTokenBudget,
+  showBudgetHelp,
+  setShowBudgetHelp,
+  isPublic,
+  setIsPublic,
+  privatePassword,
+  setPrivatePassword,
+}: {
+  title: string;
+  setTitle: (t: string) => void;
+  saving: boolean;
+  guideContent: string;
+  publishGuide: () => void;
+  createNewSession: () => void;
+  showGuideTutorial: boolean;
+  setShowGuideTutorial: (v: boolean) => void;
+  tokenBudget: number;
+  setTokenBudget: (v: number) => void;
+  showBudgetHelp: boolean;
+  setShowBudgetHelp: (v: boolean) => void;
+  isPublic: boolean;
+  setIsPublic: (v: boolean) => void;
+  privatePassword: string;
+  setPrivatePassword: (v: string) => void;
+}) {
+  return (
+    <div className="p-4 border-b border-gray-200 space-y-3">
+      <div className="flex flex-wrap items-center gap-2">
+        <input
+          key="guide-title-input"
+          type="text"
+          placeholder="Guide Title"
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+          className="flex-1 min-w-[120px] px-3 py-2 border rounded-lg text-sm"
+        />
+        <button
+          onClick={publishGuide}
+          disabled={saving || !guideContent}
+          className="px-4 py-2 bg-primary-600 text-white rounded-lg disabled:opacity-50 text-sm"
+        >
+          {saving ? 'Publishing...' : 'Publish'}
+        </button>
+        <button
+          onClick={createNewSession}
+          className="px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 text-sm"
+        >
+          New Guide
+        </button>
+        <div className="relative">
+          <button
+            type="button"
+            onClick={() => setShowGuideTutorial(!showGuideTutorial)}
+            className="text-gray-400 hover:text-gray-600 focus:outline-none"
+            aria-label="Guide creation help"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+          </button>
+          {showGuideTutorial && (
+            <div className="absolute right-0 mt-2 w-72 p-4 bg-white border border-gray-200 rounded-lg shadow-lg z-10">
+              <GuideTutorial compact />
+              <button onClick={() => setShowGuideTutorial(false)} className="mt-2 text-xs text-primary-600">
+                Close
+              </button>
+            </div>
+          )}
+        </div>
+      </div>
+
+      <div className="flex flex-wrap items-center gap-4">
+        <div className="flex items-center gap-2 flex-1 min-w-[180px]">
+          <label className="text-sm font-medium text-gray-700 whitespace-nowrap">Worker Chat Budget</label>
+          <div className="relative inline-block">
+            <button
+              type="button"
+              onClick={() => setShowBudgetHelp(!showBudgetHelp)}
+              className="text-gray-400 hover:text-gray-600 focus:outline-none"
+              aria-label="Help"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+            </button>
+            {showBudgetHelp && (
+              <div className="absolute z-10 w-72 p-3 mt-2 bg-white border border-gray-200 rounded-lg shadow-lg text-sm text-gray-600 -left-20">
+                <h4 className="font-semibold text-gray-800 mb-1">What is token budget?</h4>
+                <p>Workers who ask questions about this guide will consume tokens from this budget (1000 tokens per message).</p>
+                <p className="mt-1">Set a budget to control how many questions workers can ask. You can top it up later by editing the guide.</p>
+                <p className="mt-1 text-xs text-gray-500">Recommended: 5000–20000 tokens for active guides.</p>
+                <button onClick={() => setShowBudgetHelp(false)} className="mt-2 text-xs text-primary-600">Close</button>
+              </div>
+            )}
+          </div>
+          <input
+            type="number"
+            value={tokenBudget}
+            onChange={(e) => setTokenBudget(Math.max(0, parseInt(e.target.value) || 0))}
+            min="0"
+            step="1000"
+            className="w-20 px-2 py-1 border rounded-lg text-sm"
+          />
+          <span className="text-xs text-gray-500">tokens</span>
+        </div>
+
+        <div className="flex items-center gap-3">
+          <span className="text-sm font-medium text-gray-700">Privacy</span>
+          <button
+            onClick={() => setIsPublic(!isPublic)}
+            className={`relative w-12 h-6 rounded-full transition-colors duration-200 focus:outline-none ${
+              isPublic ? 'bg-green-500' : 'bg-red-500'
+            }`}
+          >
+            <span
+              className={`absolute top-1 left-1 w-4 h-4 bg-white rounded-full transition-transform duration-200 ${
+                isPublic ? 'translate-x-6' : 'translate-x-0'
+              }`}
+            />
+          </button>
+          <span className="text-sm text-gray-600">
+            {isPublic ? 'Public' : 'Private'}
+          </span>
+        </div>
+      </div>
+
+      {!isPublic && (
+        <div className="flex items-center gap-2">
+          <label className="text-sm font-medium text-gray-700">Access Password</label>
+          <input
+            type="text"
+            value={privatePassword}
+            onChange={(e) => setPrivatePassword(e.target.value)}
+            placeholder="Set a password for this guide"
+            className="flex-1 px-3 py-1 border rounded-lg text-sm"
+          />
+          <span className="text-xs text-gray-500">Min 4 chars</span>
+        </div>
+      )}
+    </div>
+  );
+});
+
 // ─── Main Component ──────────────────────────────────────────────────────────
 export default function CreateGuideClient({ userId }: { userId: string }) {
   // ─── Core State ──────────────────────────────────────────────────────────
@@ -125,7 +279,7 @@ export default function CreateGuideClient({ userId }: { userId: string }) {
   const [activeTab, setActiveTab] = useState<'chat' | 'guide'>('chat');
 
   // ─── Helpers ──────────────────────────────────────────────────────────────
-  const fetchWithCreds = (url: string, options?: RequestInit) => {
+  const fetchWithCreds = useCallback((url: string, options?: RequestInit) => {
     return fetch(url, {
       ...options,
       credentials: 'include',
@@ -134,7 +288,7 @@ export default function CreateGuideClient({ userId }: { userId: string }) {
         ...(options?.headers || {}),
       },
     });
-  };
+  }, []);
 
   // ─── Effects ──────────────────────────────────────────────────────────────
   useEffect(() => {
@@ -150,14 +304,15 @@ export default function CreateGuideClient({ userId }: { userId: string }) {
       }
     };
     fetchUserPlan();
-  }, []);
+  }, [fetchWithCreds]);
 
   useEffect(() => {
     createNewSession();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // ─── Session Management ──────────────────────────────────────────────────
-  const createNewSession = async () => {
+  const createNewSession = useCallback(async () => {
     const { data, error } = await supabase
       .from('chat_sessions')
       .insert({ user_id: userId, guide_id: null })
@@ -176,10 +331,10 @@ export default function CreateGuideClient({ userId }: { userId: string }) {
     setGeneratingSections(false);
     setIsPublic(true);
     setPrivatePassword('');
-    setActiveTab('chat'); // switch to chat tab on new guide
-  };
+    setActiveTab('chat');
+  }, [userId]);
 
-  const addMessage = async (role: 'user' | 'assistant', content: string) => {
+  const addMessage = useCallback(async (role: 'user' | 'assistant', content: string) => {
     const newMessage = { role, content };
     setMessages(prev => [...prev, newMessage]);
     if (sessionId) {
@@ -191,10 +346,10 @@ export default function CreateGuideClient({ userId }: { userId: string }) {
         message_order: order,
       });
     }
-  };
+  }, [sessionId, messages.length]);
 
   // ─── Web Search ──────────────────────────────────────────────────────────
-  const fetchWebSearchSummary = async (query: string): Promise<string | null> => {
+  const fetchWebSearchSummary = useCallback(async (query: string): Promise<string | null> => {
     try {
       const response = await fetchWithCreds('/api/web-search', {
         method: 'POST',
@@ -222,10 +377,10 @@ export default function CreateGuideClient({ userId }: { userId: string }) {
       console.error('Web search fetch failed:', err);
       return null;
     }
-  };
+  }, [fetchWithCreds, addMessage]);
 
   // ─── Queue Polling ──────────────────────────────────────────────────────
-  const startQueuePolling = () => {
+  const startQueuePolling = useCallback(() => {
     if (pollingRef.current) clearInterval(pollingRef.current);
     pollingRef.current = setInterval(async () => {
       try {
@@ -241,17 +396,17 @@ export default function CreateGuideClient({ userId }: { userId: string }) {
         console.error('Queue polling error', err);
       }
     }, 2000);
-  };
+  }, []);
 
-  const stopQueuePolling = () => {
+  const stopQueuePolling = useCallback(() => {
     if (pollingRef.current) {
       clearInterval(pollingRef.current);
       pollingRef.current = null;
     }
     setQueuePosition(null);
-  };
+  }, []);
 
-  const stopGeneration = async () => {
+  const stopGeneration = useCallback(async () => {
     if (currentRequestId) {
       try {
         await fetch('/api/cancel', {
@@ -270,10 +425,10 @@ export default function CreateGuideClient({ userId }: { userId: string }) {
     }
     setIsGenerating(false);
     stopQueuePolling();
-  };
+  }, [currentRequestId, stopQueuePolling]);
 
   // ─── File Upload ──────────────────────────────────────────────────────────
-  const handleFileSelected = async (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleFileSelected = useCallback(async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
     setUploading(true);
@@ -324,16 +479,209 @@ export default function CreateGuideClient({ userId }: { userId: string }) {
       setUploading(false);
       if (fileInputRef.current) fileInputRef.current.value = '';
     }
-  };
+  }, [addMessage]);
 
-  const triggerFilePicker = () => {
+  const triggerFilePicker = useCallback(() => {
     if (fileInputRef.current) {
       fileInputRef.current.click();
     }
+  }, []);
+
+  // ─── Section Generation ──────────────────────────────────────────────────
+  const generateGuideSections = useCallback(async (
+    prompt: string,
+    sections: string[],
+    fullContext?: string
+  ) => {
+    setGeneratingSections(true);
+    setGuideContent('');
+
+    const baseUrl = process.env.NEXT_PUBLIC_HF_API_BASE_URL;
+    if (!baseUrl) {
+      console.error('NEXT_PUBLIC_HF_API_BASE_URL is not defined');
+      setGeneratingSections(false);
+      return;
+    }
+
+    try {
+      let contextToUse = prompt;
+
+      if (fullContext) {
+        try {
+          const compressRes = await fetch(`${baseUrl}/compress-query`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ prompt: fullContext }),
+          });
+          if (compressRes.ok) {
+            const { compressed } = await compressRes.json();
+            if (compressed) contextToUse = compressed;
+          } else {
+            contextToUse = fullContext;
+          }
+        } catch (err) {
+          console.error('Compression error:', err);
+          contextToUse = fullContext;
+        }
+      }
+
+      let fullGuide = '';
+      for (let i = 0; i < sections.length; i++) {
+        setCurrentSectionIndex(i);
+        try {
+          const response = await fetch(`${baseUrl}/generate-section`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              section_type: sections[i],
+              context: contextToUse,
+              compress_input: false,
+            }),
+          });
+
+          if (!response.ok) {
+            throw new Error(`Section generation failed: ${response.status}`);
+          }
+
+          const data = await response.json();
+          fullGuide += `\n\n## ${sections[i]}\n${data.content}`;
+          setGuideContent(fullGuide);
+          setHasGuide(true);
+        } catch (err) {
+          console.error(`Error generating section ${sections[i]}:`, err);
+          fullGuide += `\n\n## ${sections[i]}\n*Failed to generate.*`;
+          setGuideContent(fullGuide);
+          setHasGuide(true);
+        }
+      }
+    } catch (err) {
+      console.error('[ERROR] generateGuideSections failed:', err);
+      await addMessage('assistant', 'Failed to generate guide sections. Please try again.');
+    } finally {
+      setGeneratingSections(false);
+      setCurrentSectionIndex(0);
+    }
+  }, [addMessage]);
+
+  const detectLanguage = (text: string): string => {
+    const lang = franc(text, { minLength: 3 });
+    const langMap: Record<string, string> = {
+      'eng': 'en',
+      'spa': 'es',
+      'fra': 'fr',
+      'deu': 'de',
+      'zho': 'zh',
+      'jpn': 'ja',
+      'rus': 'ru',
+      'por': 'pt',
+      'ita': 'it',
+      'nld': 'nl',
+      'pol': 'pl',
+      'tur': 'tr',
+      'kor': 'ko',
+      'ara': 'ar',
+      'hin': 'hi',
+      'ind': 'id',
+    };
+    return langMap[lang] || 'en';
   };
 
-  // ─── Main Send Message ──────────────────────────────────────────────────
-  const handleSendMessage = async (message: string) => {
+  // ─── Publish Guide ────────────────────────────────────────────────────────
+  const publishGuide = useCallback(async () => {
+    if (!guideContent) {
+      alert('No guide content to publish');
+      return;
+    }
+    if (!title.trim()) {
+      alert('Please enter a title for the guide');
+      return;
+    }
+
+    if (!isPublic && !privatePassword.trim()) {
+      alert('Please set a password for your private guide.');
+      return;
+    }
+    if (!isPublic && privatePassword.length < 4) {
+      alert('Password must be at least 4 characters.');
+      return;
+    }
+
+    const publishCost = userPlan === 'basic' ? 0 : 5000;
+    setSaving(true);
+
+    try {
+      if (publishCost > 0) {
+        const balanceRes = await fetchWithCreds('/api/tokens/balance', { method: 'GET' });
+        if (!balanceRes.ok) {
+          const err = await balanceRes.json();
+          throw new Error(err.error || 'Failed to check token balance');
+        }
+        const { total_tokens } = await balanceRes.json();
+        if (total_tokens < publishCost) {
+          alert(`Insufficient tokens. Need ${publishCost} tokens to publish a guide. Please purchase more tokens or upgrade your plan.`);
+          setSaving(false);
+          return;
+        }
+
+        const deductRes = await fetchWithCreds('/api/tokens/deduct', {
+          method: 'POST',
+          body: JSON.stringify({
+            amount: publishCost,
+            feature: 'guide_publish',
+            metadata: { title, wordCount: guideContent.length }
+          }),
+        });
+        if (!deductRes.ok) {
+          const errorData = await deductRes.json();
+          throw new Error(errorData.error || 'Token deduction failed');
+        }
+      }
+
+      let passwordHash = null;
+      if (!isPublic && privatePassword) {
+        passwordHash = await bcrypt.hash(privatePassword, 10);
+      }
+
+      const slug = `${title.toLowerCase().replace(/[^a-z0-9]+/g, '-')}-${Date.now().toString(36)}`;
+      const language = detectLanguage(title + ' ' + guideContent);
+
+      const { data, error } = await supabase
+        .from('guides')
+        .insert({
+          user_id: userId,
+          slug,
+          title,
+          content: guideContent,
+          ai_generated: true,
+          total_token_budget: tokenBudget,
+          token_budget_remaining: tokenBudget,
+          is_public: isPublic,
+          password_hash: passwordHash,
+          language,
+        })
+        .select('slug')
+        .single();
+
+      if (error) throw error;
+      window.location.href = `/guides/${data.slug}`;
+    } catch (err: any) {
+      console.error('Publish error:', err);
+      alert(err.message || 'Failed to publish guide');
+    } finally {
+      setSaving(false);
+    }
+  }, [guideContent, title, isPublic, privatePassword, userPlan, fetchWithCreds, tokenBudget, userId]);
+
+  // ─── Handle Guide Preview Changes ──────────────────────────────────────
+  const handleGuidePreviewChange = useCallback((newContent: string) => {
+    setGuideContent(newContent);
+    if (newContent.trim()) {
+      setHasGuide(true);
+    }
+  }, []);
+
+  // ─── Main Send Message (memoized) ──────────────────────────────────────
+  const handleSendMessage = useCallback(async (message: string) => {
     if (!message.trim()) return;
 
     const isRevision = message.trim().startsWith('@revision');
@@ -461,317 +809,17 @@ export default function CreateGuideClient({ userId }: { userId: string }) {
       abortControllerRef.current = null;
       setCurrentRequestId(null);
     }
-  };
-
-  // ─── Section Generation ──────────────────────────────────────────────────
-  const generateGuideSections = async (
-    prompt: string,
-    sections: string[],
-    fullContext?: string
-  ) => {
-    setGeneratingSections(true);
-    setGuideContent('');
-
-    const baseUrl = process.env.NEXT_PUBLIC_HF_API_BASE_URL;
-    if (!baseUrl) {
-      console.error('NEXT_PUBLIC_HF_API_BASE_URL is not defined');
-      setGeneratingSections(false);
-      return;
-    }
-
-    try {
-      let contextToUse = prompt;
-
-      if (fullContext) {
-        try {
-          const compressRes = await fetch(`${baseUrl}/compress-query`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ prompt: fullContext }),
-          });
-          if (compressRes.ok) {
-            const { compressed } = await compressRes.json();
-            if (compressed) contextToUse = compressed;
-          } else {
-            contextToUse = fullContext;
-          }
-        } catch (err) {
-          console.error('Compression error:', err);
-          contextToUse = fullContext;
-        }
-      }
-
-      let fullGuide = '';
-      for (let i = 0; i < sections.length; i++) {
-        setCurrentSectionIndex(i);
-        try {
-          const response = await fetch(`${baseUrl}/generate-section`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-              section_type: sections[i],
-              context: contextToUse,
-              compress_input: false,
-            }),
-          });
-
-          if (!response.ok) {
-            throw new Error(`Section generation failed: ${response.status}`);
-          }
-
-          const data = await response.json();
-          fullGuide += `\n\n## ${sections[i]}\n${data.content}`;
-          setGuideContent(fullGuide);
-          setHasGuide(true);
-        } catch (err) {
-          console.error(`Error generating section ${sections[i]}:`, err);
-          fullGuide += `\n\n## ${sections[i]}\n*Failed to generate.*`;
-          setGuideContent(fullGuide);
-          setHasGuide(true);
-        }
-      }
-    } catch (err) {
-      console.error('[ERROR] generateGuideSections failed:', err);
-      await addMessage('assistant', 'Failed to generate guide sections. Please try again.');
-    } finally {
-      setGeneratingSections(false);
-      setCurrentSectionIndex(0);
-    }
-  };
-
-  const detectLanguage = (text: string): string => {
-    const lang = franc(text, { minLength: 3 });
-    const langMap: Record<string, string> = {
-      'eng': 'en',
-      'spa': 'es',
-      'fra': 'fr',
-      'deu': 'de',
-      'zho': 'zh',
-      'jpn': 'ja',
-      'rus': 'ru',
-      'por': 'pt',
-      'ita': 'it',
-      'nld': 'nl',
-      'pol': 'pl',
-      'tur': 'tr',
-      'kor': 'ko',
-      'ara': 'ar',
-      'hin': 'hi',
-      'ind': 'id',
-    };
-    return langMap[lang] || 'en';
-  };
-
-  // ─── Publish Guide ────────────────────────────────────────────────────────
-  const publishGuide = async () => {
-    if (!guideContent) {
-      alert('No guide content to publish');
-      return;
-    }
-    if (!title.trim()) {
-      alert('Please enter a title for the guide');
-      return;
-    }
-
-    if (!isPublic && !privatePassword.trim()) {
-      alert('Please set a password for your private guide.');
-      return;
-    }
-    if (!isPublic && privatePassword.length < 4) {
-      alert('Password must be at least 4 characters.');
-      return;
-    }
-
-    const publishCost = userPlan === 'basic' ? 0 : 5000;
-    setSaving(true);
-
-    try {
-      if (publishCost > 0) {
-        const balanceRes = await fetchWithCreds('/api/tokens/balance', { method: 'GET' });
-        if (!balanceRes.ok) {
-          const err = await balanceRes.json();
-          throw new Error(err.error || 'Failed to check token balance');
-        }
-        const { total_tokens } = await balanceRes.json();
-        if (total_tokens < publishCost) {
-          alert(`Insufficient tokens. Need ${publishCost} tokens to publish a guide. Please purchase more tokens or upgrade your plan.`);
-          setSaving(false);
-          return;
-        }
-
-        const deductRes = await fetchWithCreds('/api/tokens/deduct', {
-          method: 'POST',
-          body: JSON.stringify({
-            amount: publishCost,
-            feature: 'guide_publish',
-            metadata: { title, wordCount: guideContent.length }
-          }),
-        });
-        if (!deductRes.ok) {
-          const errorData = await deductRes.json();
-          throw new Error(errorData.error || 'Token deduction failed');
-        }
-      }
-
-      let passwordHash = null;
-      if (!isPublic && privatePassword) {
-        passwordHash = await bcrypt.hash(privatePassword, 10);
-      }
-
-      const slug = `${title.toLowerCase().replace(/[^a-z0-9]+/g, '-')}-${Date.now().toString(36)}`;
-      const language = detectLanguage(title + ' ' + guideContent);
-
-      const { data, error } = await supabase
-        .from('guides')
-        .insert({
-          user_id: userId,
-          slug,
-          title,
-          content: guideContent,
-          ai_generated: true,
-          total_token_budget: tokenBudget,
-          token_budget_remaining: tokenBudget,
-          is_public: isPublic,
-          password_hash: passwordHash,
-          language,
-        })
-        .select('slug')
-        .single();
-
-      if (error) throw error;
-      window.location.href = `/guides/${data.slug}`;
-    } catch (err: any) {
-      console.error('Publish error:', err);
-      alert(err.message || 'Failed to publish guide');
-    } finally {
-      setSaving(false);
-    }
-  };
-
-  // ─── Handle Guide Preview Changes ──────────────────────────────────────
-  const handleGuidePreviewChange = (newContent: string) => {
-    setGuideContent(newContent);
-    if (newContent.trim()) {
-      setHasGuide(true);
-    }
-  };
-
-  // ─── Controls Component (shared) ──────────────────────────────────────
-  const GuideControls = () => (
-    <div className="p-4 border-b border-gray-200 space-y-3">
-      <div className="flex flex-wrap items-center gap-2">
-        <input
-          type="text"
-          placeholder="Guide Title"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-          className="flex-1 min-w-[120px] px-3 py-2 border rounded-lg text-sm"
-        />
-        <button
-          onClick={publishGuide}
-          disabled={saving || !guideContent}
-          className="px-4 py-2 bg-primary-600 text-white rounded-lg disabled:opacity-50 text-sm"
-        >
-          {saving ? 'Publishing...' : 'Publish'}
-        </button>
-        <button
-          onClick={createNewSession}
-          className="px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 text-sm"
-        >
-          New Guide
-        </button>
-        <div className="relative">
-          <button
-            type="button"
-            onClick={() => setShowGuideTutorial(!showGuideTutorial)}
-            className="text-gray-400 hover:text-gray-600 focus:outline-none"
-            aria-label="Guide creation help"
-          >
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-            </svg>
-          </button>
-          {showGuideTutorial && (
-            <div className="absolute right-0 mt-2 w-72 p-4 bg-white border border-gray-200 rounded-lg shadow-lg z-10">
-              <GuideTutorial compact />
-              <button onClick={() => setShowGuideTutorial(false)} className="mt-2 text-xs text-primary-600">
-                Close
-              </button>
-            </div>
-          )}
-        </div>
-      </div>
-
-      <div className="flex flex-wrap items-center gap-4">
-        <div className="flex items-center gap-2 flex-1 min-w-[180px]">
-          <label className="text-sm font-medium text-gray-700 whitespace-nowrap">Worker Chat Budget</label>
-          <div className="relative inline-block">
-            <button
-              type="button"
-              onClick={() => setShowBudgetHelp(!showBudgetHelp)}
-              className="text-gray-400 hover:text-gray-600 focus:outline-none"
-              aria-label="Help"
-            >
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-              </svg>
-            </button>
-            {showBudgetHelp && (
-              <div className="absolute z-10 w-72 p-3 mt-2 bg-white border border-gray-200 rounded-lg shadow-lg text-sm text-gray-600 -left-20">
-                <h4 className="font-semibold text-gray-800 mb-1">What is token budget?</h4>
-                <p>Workers who ask questions about this guide will consume tokens from this budget (1000 tokens per message).</p>
-                <p className="mt-1">Set a budget to control how many questions workers can ask. You can top it up later by editing the guide.</p>
-                <p className="mt-1 text-xs text-gray-500">Recommended: 5000–20000 tokens for active guides.</p>
-                <button onClick={() => setShowBudgetHelp(false)} className="mt-2 text-xs text-primary-600">Close</button>
-              </div>
-            )}
-          </div>
-          <input
-            type="number"
-            value={tokenBudget}
-            onChange={(e) => setTokenBudget(Math.max(0, parseInt(e.target.value) || 0))}
-            min="0"
-            step="1000"
-            className="w-20 px-2 py-1 border rounded-lg text-sm"
-          />
-          <span className="text-xs text-gray-500">tokens</span>
-        </div>
-
-        <div className="flex items-center gap-3">
-          <span className="text-sm font-medium text-gray-700">Privacy</span>
-          <button
-            onClick={() => setIsPublic(!isPublic)}
-            className={`relative w-12 h-6 rounded-full transition-colors duration-200 focus:outline-none ${
-              isPublic ? 'bg-green-500' : 'bg-red-500'
-            }`}
-          >
-            <span
-              className={`absolute top-1 left-1 w-4 h-4 bg-white rounded-full transition-transform duration-200 ${
-                isPublic ? 'translate-x-6' : 'translate-x-0'
-              }`}
-            />
-          </button>
-          <span className="text-sm text-gray-600">
-            {isPublic ? 'Public' : 'Private'}
-          </span>
-        </div>
-      </div>
-
-      {!isPublic && (
-        <div className="flex items-center gap-2">
-          <label className="text-sm font-medium text-gray-700">Access Password</label>
-          <input
-            type="text"
-            value={privatePassword}
-            onChange={(e) => setPrivatePassword(e.target.value)}
-            placeholder="Set a password for this guide"
-            className="flex-1 px-3 py-1 border rounded-lg text-sm"
-          />
-          <span className="text-xs text-gray-500">Min 4 chars</span>
-        </div>
-      )}
-    </div>
-  );
+  }, [
+    hasGuide,
+    addMessage,
+    webSearchEnabled,
+    fetchWebSearchSummary,
+    messages,
+    guideContent,
+    startQueuePolling,
+    stopQueuePolling,
+    generateGuideSections,
+  ]);
 
   // ─── Render ──────────────────────────────────────────────────────────────
   return (
@@ -812,7 +860,24 @@ export default function CreateGuideClient({ userId }: { userId: string }) {
 
         {/* Right: Guide Preview with Controls */}
         <div className="w-1/2 flex flex-col h-full">
-          <GuideControls />
+          <GuideControls
+            title={title}
+            setTitle={setTitle}
+            saving={saving}
+            guideContent={guideContent}
+            publishGuide={publishGuide}
+            createNewSession={createNewSession}
+            showGuideTutorial={showGuideTutorial}
+            setShowGuideTutorial={setShowGuideTutorial}
+            tokenBudget={tokenBudget}
+            setTokenBudget={setTokenBudget}
+            showBudgetHelp={showBudgetHelp}
+            setShowBudgetHelp={setShowBudgetHelp}
+            isPublic={isPublic}
+            setIsPublic={setIsPublic}
+            privatePassword={privatePassword}
+            setPrivatePassword={setPrivatePassword}
+          />
           <GuidePreview
             content={guideContent}
             onChange={handleGuidePreviewChange}
@@ -849,7 +914,24 @@ export default function CreateGuideClient({ userId }: { userId: string }) {
             </div>
           ) : (
             <div className="flex flex-col h-full">
-              <GuideControls />
+              <GuideControls
+                title={title}
+                setTitle={setTitle}
+                saving={saving}
+                guideContent={guideContent}
+                publishGuide={publishGuide}
+                createNewSession={createNewSession}
+                showGuideTutorial={showGuideTutorial}
+                setShowGuideTutorial={setShowGuideTutorial}
+                tokenBudget={tokenBudget}
+                setTokenBudget={setTokenBudget}
+                showBudgetHelp={showBudgetHelp}
+                setShowBudgetHelp={setShowBudgetHelp}
+                isPublic={isPublic}
+                setIsPublic={setIsPublic}
+                privatePassword={privatePassword}
+                setPrivatePassword={setPrivatePassword}
+              />
               <div className="flex-1 overflow-auto">
                 <GuidePreview
                   content={guideContent}

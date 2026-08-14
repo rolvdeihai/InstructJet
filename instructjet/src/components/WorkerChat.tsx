@@ -416,6 +416,8 @@ export default function WorkerChat({ guideId, guideTitle }: WorkerChatProps) {
     const fileTypes: string[] = [];
 
     try {
+      console.log('[Submission] Starting upload of', files.length, 'files');
+
       // Upload all files in parallel
       const uploadPromises = files.map(async (file, index) => {
         const fileExt = file.name.split('.').pop();
@@ -465,11 +467,11 @@ export default function WorkerChat({ guideId, guideTitle }: WorkerChatProps) {
       });
 
       await Promise.all(uploadPromises);
+      console.log('[Submission] All files uploaded, mediaIds:', mediaIds);
 
       // ─── Step 2: Analyze all files with ONE API call ────────────────
       await addMessage('worker', `📤 **Analyzing submission**: ${files.length} file(s) (by ${workerName})...`);
 
-      // Single API call with arrays
       const response = await fetch('/api/analyze-media', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -485,16 +487,31 @@ export default function WorkerChat({ guideId, guideTitle }: WorkerChatProps) {
       });
 
       const data = await response.json();
+      console.log('[Submission] Analysis response:', data);
 
       if (!response.ok) {
         throw new Error(data.error || 'Analysis failed');
       }
 
-      const evaluation = data.feedback
-        ? { score: data.score || 50, comment: data.feedback }
-        : null;
+      // ─── Build evaluation, with robust fallback ──────────────────────
+      let evaluation = null;
+      if (data.feedback) {
+        // Preserve 0 score correctly
+        const score = (data.score !== undefined && data.score !== null) ? data.score : 50;
+        evaluation = {
+          score,
+          comment: data.feedback,
+        };
+      } else {
+        // If no feedback, create a placeholder so the modal still shows
+        evaluation = {
+          score: 0,
+          comment: 'No evaluation provided by AI. Please review the files manually.',
+        };
+      }
 
       // ─── Step 3: Show confirmation modal ────────────────────────────
+      console.log('[Submission] Setting pending submission with evaluation:', evaluation);
       setPendingSubmission({
         mediaIds,
         fileUrls,
@@ -506,8 +523,9 @@ export default function WorkerChat({ guideId, guideTitle }: WorkerChatProps) {
         evaluation,
       });
       setShowConfirmationModal(true);
+      console.log('[Submission] Modal should now be visible');
     } catch (err) {
-      console.error('Submission error:', err);
+      console.error('[Submission] Error:', err);
       await addMessage('assistant', '❌ Submission failed. Please try again.');
     } finally {
       setUploading(false);

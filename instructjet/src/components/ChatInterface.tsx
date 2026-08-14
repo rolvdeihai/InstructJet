@@ -1,6 +1,8 @@
+// src/components/ChatInterface.tsx
+
 'use client';
 
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, memo } from 'react';
 import Link from 'next/link';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
@@ -25,7 +27,7 @@ interface ChatInterfaceProps {
   hasGuide?: boolean;
 }
 
-export default function ChatInterface({
+function ChatInterface({
   messages,
   onSendMessage,
   isGenerating,
@@ -136,7 +138,6 @@ export default function ChatInterface({
       {/* ─── Message Area ──────────────────────────────────────────────── */}
       <div className="flex-1 overflow-y-auto p-4 space-y-4">
         {messages.length === 0 && showWelcome ? (
-          // Fix: remove centering, allow scrolling
           <div className="h-full overflow-y-auto py-4">
             <WelcomeTutorial />
           </div>
@@ -290,6 +291,7 @@ export default function ChatInterface({
         {/* Input row – always at bottom */}
         <div className="flex space-x-2">
           <textarea
+            key="chat-textarea" // 👈 static key prevents re‑creation
             ref={textareaRef}
             value={input}
             onChange={(e) => {
@@ -356,3 +358,6 @@ export default function ChatInterface({
     </div>
   );
 }
+
+// 👇 Wrap with React.memo to prevent re‑renders on parent state changes that don't affect props
+export default memo(ChatInterface);
