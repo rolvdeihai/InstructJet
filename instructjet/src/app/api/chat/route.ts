@@ -52,10 +52,8 @@ export async function POST(req: NextRequest) {
   const isPremium = userPlan === 'premium';
 
   // Detect explicit guide request (full generation)
-  const isExplicitGuideRequest =
-    message.trim().startsWith('@guide') ||
-    /\b(create|make|generate)\s+a\s+guide\b/i.test(message);
-
+  const isExplicitGuideRequest = message.trim().startsWith('@guide');
+  
   // ─── Decide whether to use DeepSeek ───────────────────────────
   let useDeepSeek = false;
   let remainingQuota = 0;
