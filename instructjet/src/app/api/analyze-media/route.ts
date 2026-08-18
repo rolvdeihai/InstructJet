@@ -297,40 +297,99 @@ async function performOCRFromBuffer(buffer: Buffer): Promise<string> {
 // ─── Document text extraction ──────────────────────────────────────────────
 async function extractTextFromBuffer(buffer: Buffer, mimeType: string, fileIdentifier: string): Promise<string> {
   let type = mimeType;
-  if (!type || type === 'application/octet-stream') {
+
+  // Infer MIME type from file extension if generic
+  if (!type || type === 'application/octet-stream' || type === 'document' || type === 'other') {
     const ext = fileIdentifier.split('.').pop()?.toLowerCase();
     if (ext === 'pdf') type = 'application/pdf';
     else if (ext === 'docx') type = 'application/vnd.openxmlformats-officedocument.wordprocessingml.document';
     else if (ext === 'doc') type = 'application/msword';
+    else if (ext === 'txt') type = 'text/plain';
+    else if (ext === 'png' || ext === 'jpg' || ext === 'jpeg' || ext === 'gif' || ext === 'webp') type = 'image';
   }
 
+  console.log(`[extractText] Processing ${fileIdentifier} with type: ${type}`);
+
   try {
+    // ─── PDF ──────────────────────────────────────────────────────
     if (type === 'application/pdf') {
-      const pdfModule = await import('pdf-parse');
-      const pdfParse = (pdfModule as any).default || pdfModule;
-      const data = await pdfParse(buffer);
-      return data.text || '[No text found in PDF]';
-    } else if (type === 'application/vnd.openxmlformats-officedocument.wordprocessingml.document') {
-      const result = await mammoth.extractRawText({ buffer });
-      return result.value || '[No text found in DOCX]';
-    } else if (type === 'application/msword') {
       try {
-        return buffer.toString('utf-8').slice(0, 10000) || '[No readable text in .doc file]';
-      } catch {
-        return '[.doc files are not supported for text extraction. Please upload a .docx or PDF.]';
-      }
-    } else {
-      try {
-        const text = buffer.toString('utf-8');
-        if (text.length > 100) return text.slice(0, 10000);
-        return '[Unsupported document format. Please upload PDF or DOCX.]';
-      } catch {
-        return `[Unsupported document type: ${mimeType}]`;
+        // Try dynamic import with proper error handling
+        const pdfParse = await import('pdf-parse');
+        // pdf-parse exports a default function, but sometimes it's nested
+        const parseFn = (pdfParse as any).default || pdfParse;
+        if (typeof parseFn !== 'function') {
+          throw new Error('pdf-parse did not return a function');
+        }
+        const data = await parseFn(buffer);
+        const text = data?.text || '';
+        return text.trim() || '[PDF was empty or had no extractable text]';
+      } catch (pdfError: any) {
+        console.error('[extractText] PDF parsing error:', pdfError);
+        // Fallback: try to extract text using a simpler approach
+        try {
+          // Some PDFs can be read as text if they're not binary
+          const text = buffer.toString('utf-8');
+          if (text.length > 100) {
+            return text.slice(0, 10000) + '\n\n[Note: Partial text extraction using fallback]';
+          }
+        } catch (_) {}
+        return `[Error parsing PDF: ${pdfError.message || 'unknown error'}]`;
       }
     }
-  } catch (err: any) {
-    console.error('Document extraction error:', err);
-    return `[Error extracting text: ${err.message || 'unknown'}]`;
+
+    // ─── DOCX ──────────────────────────────────────────────────────
+    else if (type === 'application/vnd.openxmlformats-officedocument.wordprocessingml.document') {
+      try {
+        // Dynamic import for mammoth
+        const mammoth = await import('mammoth');
+        const result = await mammoth.extractRawText({ buffer });
+        return result.value || '[No text found in DOCX]';
+      } catch (docxError: any) {
+        console.error('[extractText] DOCX parsing error:', docxError);
+        return `[Error parsing DOCX: ${docxError.message || 'unknown error'}]`;
+      }
+    }
+
+    // ─── DOC (older Word) ──────────────────────────────────────────
+    else if (type === 'application/msword') {
+      try {
+        const text = buffer.toString('utf-8');
+        if (text.length > 100) {
+          return text.slice(0, 10000);
+        }
+        return '[No readable text in .doc file]';
+      } catch (_) {
+        return '[.doc files are not fully supported. Please upload .docx or PDF.]';
+      }
+    }
+
+    // ─── Plain text ──────────────────────────────────────────────
+    else if (type === 'text/plain') {
+      try {
+        const text = buffer.toString('utf-8');
+        return text.slice(0, 10000);
+      } catch (_) {
+        return '[Could not read text file]';
+      }
+    }
+
+    // ─── Unsupported type ────────────────────────────────────────
+    else {
+      // Try to read as text anyway
+      try {
+        const text = buffer.toString('utf-8');
+        if (text.length > 100) {
+          return text.slice(0, 10000);
+        }
+        return `[Unsupported document type: ${type || 'unknown'}]`;
+      } catch (_) {
+        return `[Unsupported document type: ${type || 'unknown'}]`;
+      }
+    }
+  } catch (error: any) {
+    console.error('[extractText] Unexpected error:', error);
+    return `[Error extracting text: ${error.message || 'unknown'}]`;
   }
 }
 
