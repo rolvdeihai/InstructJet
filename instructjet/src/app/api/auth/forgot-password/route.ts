@@ -25,10 +25,10 @@ export async function POST(request: Request) {
 
     const data = await response.json();
     if (!data.success) {
-      return NextResponse.json(
-        { error: data.message || 'Failed to send verification code' },
-        { status: 500 }
-      );
+      const reason = data.error || data.message || 'Failed to send verification code';
+      console.error('Forgot password OTP failed:', email, reason);
+      const status = /wait before requesting/i.test(reason) ? 429 : 500;
+      return NextResponse.json({ error: reason }, { status });
     }
 
     return NextResponse.json({ message: 'Verification code sent to your email' });

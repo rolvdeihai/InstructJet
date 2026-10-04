@@ -21,7 +21,7 @@ export async function POST(request: Request) {
 
     const data = await response.json();
     if (!data.success) {
-      return NextResponse.json({ error: data.message || 'Invalid OTP' }, { status: 400 });
+      return NextResponse.json({ error: data.error || data.message || 'Invalid OTP' }, { status: 400 });
     }
 
     // Create a short-lived JWT that proves this email was just verified

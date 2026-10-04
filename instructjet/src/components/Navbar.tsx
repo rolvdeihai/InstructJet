@@ -24,7 +24,8 @@ import {
   GlobeAltIcon,
   ShoppingCartIcon,
   UserCircleIcon,
-  Cog6ToothIcon
+  Cog6ToothIcon,
+  AcademicCapIcon
 } from '@heroicons/react/24/outline';
 
 export default function Navbar() {
@@ -66,6 +67,7 @@ export default function Navbar() {
   const navLinks = [
     { href: '/', label: 'Home', icon: HomeIcon },
     { href: '/explore', label: 'Explore', icon: GlobeAltIcon },
+    { href: '/leadership', label: 'Leadership', icon: AcademicCapIcon },
     { href: '/about', label: 'About', icon: InformationCircleIcon },
     { href: '/contact', label: 'Contact', icon: EnvelopeIcon },
   ];
