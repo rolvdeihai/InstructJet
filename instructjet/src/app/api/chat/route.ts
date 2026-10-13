@@ -75,27 +75,33 @@ Current guide content:
 ${guideContent || 'No guide has been generated yet.'}
 
 Your job is to assist the user in creating or refining guides.
-- If the user asks for a revision (indicated by isRevision=true), you MUST output a JSON object with exactly the sections that need to be changed.
 - For normal conversation, respond naturally with helpful text.
 - If you still need more info, ask clarifying questions.
 `;
 
   // ─── Revision system instruction ──────────────────────────────
-  const revisionSystemInstruction = `You are an expert guide editor. The user wants to revise specific sections of the existing guide.
-The full guide is provided in the system context above.
-The user's revision request is: "${message}"
+  // The whole document goes to the model and the whole revised document comes
+  // back, so revisions can touch any part of it (titles, structure, new or
+  // removed sections, diagrams) rather than only predefined sections.
+  const revisionSystemInstruction = `You are InstructJet AI, an expert guide editor.
+You will receive a complete guide document in Markdown and a revision request.
+Rewrite the document so that it fully applies the requested revisions.
 
-You must output ONLY a valid JSON object with this structure:
-{
-  "type": "revision",
-  "sections": {
-    "SectionName1": "new markdown content for this section (including any subheadings)",
-    "SectionName2": "new markdown content for this section"
-  }
-}
-Only include sections that need to be changed. Do not include unchanged sections.
-If you are unsure about which sections to change, ask clarifying questions in natural language (not JSON).
-If the request is clear, output only the JSON.`;
+Rules:
+- Output the COMPLETE revised document, from the first line to the last, in Markdown.
+- Keep every part the user did not ask to change exactly as it is (wording, images, links, tables, mermaid diagrams).
+- You may add, remove, reorder or rename sections, headings and steps when the request calls for it.
+- Keep Mermaid diagrams valid and inside \`\`\`mermaid code blocks.
+- Do NOT add commentary, explanations or a preamble, and do NOT wrap the whole document in a code block.`;
+
+  const revisionUserMessage = `Current guide document:
+<<<DOCUMENT
+${guideContent || ''}
+DOCUMENT>>>
+
+Revision request: ${message}
+
+${context ? `Recent conversation (for context):\n${context}\n\n` : ''}Return the complete revised document now.`;
 
   const abortSignal = req.signal;
   const timeoutSignal = AbortSignal.timeout(FETCH_TIMEOUT_MS);
@@ -196,14 +202,8 @@ If the request is clear, output only the JSON.`;
           assistantMessage = "I don't see any guide to revise yet. Please generate a guide first using '@guide' or by asking me to create one.";
         } else {
           const deepseekMessages = [
-            {
-              role: 'system',
-              content: `${baseSystemInstruction}\n\n${revisionSystemInstruction}`,
-            },
-            {
-              role: 'user',
-              content: `User revision request: ${message}`,
-            },
+            { role: 'system', content: revisionSystemInstruction },
+            { role: 'user', content: revisionUserMessage },
           ];
 
           const response = await fetch(DEEPSEEK_API_URL, {
@@ -216,7 +216,7 @@ If the request is clear, output only the JSON.`;
               model: DEEPSEEK_MODEL,
               messages: deepseekMessages,
               temperature: 0.3,
-              max_tokens: 1500,
+              max_tokens: 8000,
             }),
             signal: combinedSignal,
           });
@@ -228,7 +228,20 @@ If the request is clear, output only the JSON.`;
           }
 
           const data = await response.json();
-          assistantMessage = data.choices[0]?.message?.content || 'Sorry, DeepSeek returned an empty response.';
+          const revised = extractRevisedDocument(data.choices[0]?.message?.content || '');
+          if (!revised) {
+            errorOccurred = true;
+            assistantMessage = 'Sorry, the AI did not return a revised guide. Please try rephrasing your revision.';
+          } else {
+            const truncated = data.choices[0]?.finish_reason === 'length';
+            assistantMessage = JSON.stringify({
+              type: 'revision',
+              content: revised,
+              summary: truncated
+                ? '⚠️ The guide is very long and the revision may have been cut off at the end. Please review the last section.'
+                : undefined,
+            });
+          }
           queuePosition = 0;
 
           // Increment daily usage for free users
@@ -279,12 +292,9 @@ If the request is clear, output only the JSON.`;
 
       // For HF fallback, we do not support explicit revision JSON;
       // we treat everything as normal chat (but we still include guide content in the context).
-      let fallbackContext = `${baseSystemInstruction}\n\nConversation history:\n${context || ''}\n\nUser: ${message}\nAssistant:`;
-
-      // If it's a revision, we can add an extra hint, but we won't enforce JSON.
-      if (isRevision) {
-        fallbackContext += `\n\nNote: The user wants to revise specific sections. Please respond with a clear explanation and suggest edits.`;
-      }
+      const fallbackContext = isRevision && guideContent
+        ? `${revisionSystemInstruction}\n\n${revisionUserMessage}`
+        : `${baseSystemInstruction}\n\nConversation history:\n${context || ''}\n\nUser: ${message}\nAssistant:`;
 
       const response = await fetch(HF_API_URL, {
         method: 'POST',
@@ -309,6 +319,11 @@ If the request is clear, output only the JSON.`;
         const data = await response.json();
         assistantMessage = data.response;
         queuePosition = data.queue_position;
+        // Only treat the reply as a document if it actually looks like one.
+        const revised = isRevision && guideContent ? extractRevisedDocument(assistantMessage || '') : null;
+        if (revised && /^#{1,3}\s/m.test(revised)) {
+          assistantMessage = JSON.stringify({ type: 'revision', content: revised });
+        }
       }
     }
   } catch (error: any) {
@@ -390,4 +405,14 @@ function getServerStartingMessage(): string {
 We have started the server. It usually takes 2–3 minutes to become ready.  
 Please wait a moment and then try again.  
 (No tokens were deducted for this attempt.)`;
+}
+
+// Strips wrappers the model sometimes adds around a revised document
+// (a ```markdown fence, or the <<<DOCUMENT markers echoed back).
+function extractRevisedDocument(raw: string): string | null {
+  let text = raw.trim();
+  const fenced = text.match(/^```(?:markdown|md)?\s*\n([\s\S]*?)\n```\s*$/i);
+  if (fenced) text = fenced[1].trim();
+  text = text.replace(/^<<<DOCUMENT\s*/, '').replace(/\s*DOCUMENT>>>$/, '').trim();
+  return text || null;
 }

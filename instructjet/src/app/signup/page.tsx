@@ -1,9 +1,10 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useAuth } from '@/contexts/AuthContext';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
+import { DEFAULT_LANGUAGE, detectLanguage, getSavedLanguage, setLanguage } from '@/lib/language';
 
 export default function Signup() {
   const { register } = useAuth();
@@ -22,6 +23,16 @@ export default function Signup() {
 
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
+
+  // Detect the visitor's language from their country while they fill in the
+  // form; it is applied once the account is created.
+  const detectedLanguage = useRef<Promise<string> | null>(null);
+  useEffect(() => {
+    if (getSavedLanguage()) return;
+    detectedLanguage.current = detectLanguage()
+      .then(result => result.language)
+      .catch(() => DEFAULT_LANGUAGE);
+  }, []);
 
   const handleSendOtp = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -85,6 +96,15 @@ export default function Signup() {
     setError('');
     try {
       await register(email, password, fullName, verificationToken);
+      const language = detectedLanguage.current ? await detectedLanguage.current : null;
+      if (language) {
+        setLanguage(language);
+        if (language !== DEFAULT_LANGUAGE) {
+          // Full load so the site translator starts in the new language.
+          window.location.href = '/dashboard';
+          return;
+        }
+      }
       router.push('/dashboard');
     } catch (err: any) {
       setError(err.message);

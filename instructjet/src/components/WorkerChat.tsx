@@ -15,6 +15,16 @@ interface WorkerChatProps {
 
 const MAX_TOTAL_SIZE_MB = 50;
 const MAX_TOTAL_SIZE_BYTES = MAX_TOTAL_SIZE_MB * 1024 * 1024;
+const ANALYZE_TIMEOUT_MS = 5 * 60 * 1000;
+
+// Reads a JSON body without throwing on HTML error pages (e.g. gateway timeouts).
+async function readJson(res: Response): Promise<any> {
+  try {
+    return await res.json();
+  } catch {
+    return { error: res.status === 504 ? 'The server took too long to analyze your files.' : `Request failed (${res.status})` };
+  }
+}
 
 export default function WorkerChat({ guideId, guideTitle }: WorkerChatProps) {
   const { user } = useAuth();
@@ -24,6 +34,7 @@ export default function WorkerChat({ guideId, guideTitle }: WorkerChatProps) {
   const [sessionId, setSessionId] = useState<string | null>(null);
   const [uploading, setUploading] = useState(false);
   const [uploadProgress, setUploadProgress] = useState<{ current: number; total: number } | null>(null);
+  const [analyzing, setAnalyzing] = useState(false);
   const [pendingConsultation, setPendingConsultation] = useState<{
     mediaId: string;
     fileUrl: string;
@@ -230,8 +241,9 @@ export default function WorkerChat({ guideId, guideTitle }: WorkerChatProps) {
             updateDB: false,
             userMessage: userMsg || 'Please analyze this file in the context of the guide.',
           }),
+          signal: AbortSignal.timeout(ANALYZE_TIMEOUT_MS),
         });
-        const data = await response.json();
+        const data = await readJson(response);
         if (data.feedback) {
           await addMessage('assistant', `📊 **AI Analysis**:\n${data.feedback}`);
           if (data.ocrText && data.ocrText.length) {
@@ -468,6 +480,8 @@ export default function WorkerChat({ guideId, guideTitle }: WorkerChatProps) {
 
       await Promise.all(uploadPromises);
       console.log('[Submission] All files uploaded, mediaIds:', mediaIds);
+      setUploadProgress(null);
+      setAnalyzing(true);
 
       // ─── Step 2: Analyze all files with ONE API call ────────────────
       await addMessage('worker', `📤 **Analyzing submission**: ${files.length} file(s) (by ${workerName})...`);
@@ -484,9 +498,10 @@ export default function WorkerChat({ guideId, guideTitle }: WorkerChatProps) {
           updateDB: false, // Preview only – don't save yet
           userMessage: 'Please analyze these files in the context of the guide.',
         }),
+        signal: AbortSignal.timeout(ANALYZE_TIMEOUT_MS),
       });
 
-      const data = await response.json();
+      const data = await readJson(response);
       console.log('[Submission] Analysis response:', data);
 
       if (!response.ok) {
@@ -524,11 +539,15 @@ export default function WorkerChat({ guideId, guideTitle }: WorkerChatProps) {
       });
       setShowConfirmationModal(true);
       console.log('[Submission] Modal should now be visible');
-    } catch (err) {
+    } catch (err: any) {
       console.error('[Submission] Error:', err);
-      await addMessage('assistant', '❌ Submission failed. Please try again.');
+      const reason = err?.name === 'TimeoutError'
+        ? 'The analysis took too long.'
+        : err?.message || 'Unknown error.';
+      await addMessage('assistant', `❌ Submission failed: ${reason} Please try again.`);
     } finally {
       setUploading(false);
+      setAnalyzing(false);
       setUploadProgress(null);
       if (fileInputRef.current) fileInputRef.current.value = '';
     }
@@ -556,10 +575,11 @@ export default function WorkerChat({ guideId, guideTitle }: WorkerChatProps) {
           updateDB: true, // Save to DB
           userMessage: 'Final evaluation for all files.',
         }),
+        signal: AbortSignal.timeout(ANALYZE_TIMEOUT_MS),
       });
 
       if (!response.ok) {
-        const err = await response.json();
+        const err = await readJson(response);
         throw new Error(err.error || 'Failed to finalize');
       }
 
@@ -693,6 +713,16 @@ export default function WorkerChat({ guideId, guideTitle }: WorkerChatProps) {
         </div>
       )}
 
+      {analyzing && (
+        <div className="mb-2 p-2 bg-blue-50 rounded text-sm text-blue-800 flex items-center gap-2">
+          <svg className="animate-spin h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+            <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+            <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
+          </svg>
+          Analyzing your submission — reading images can take up to a minute…
+        </div>
+      )}
+
       {pendingConsultation && (
         <div className="mb-2 p-2 bg-blue-50 rounded text-sm text-blue-800">
           📎 Pending file: {pendingConsultation.fileName} – type your question.
@@ -767,7 +797,7 @@ export default function WorkerChat({ guideId, guideTitle }: WorkerChatProps) {
           disabled={uploading}
           className="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 disabled:opacity-50"
         >
-          {uploading ? 'Uploading...' : '📤 Submit Work'}
+          {analyzing ? 'Analyzing...' : uploading ? 'Uploading...' : '📤 Submit Work'}
         </button>
         <p className="text-xs text-gray-500">
           Consult: single file + question. Submit: multiple files (max {MAX_TOTAL_SIZE_MB}MB total).

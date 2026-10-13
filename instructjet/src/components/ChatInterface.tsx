@@ -25,6 +25,9 @@ interface ChatInterfaceProps {
   onAttachFile?: () => void;
   uploading?: boolean;
   hasGuide?: boolean;
+  /** Replaces the create-page tutorial shown when there are no messages. */
+  welcome?: React.ReactNode;
+  placeholder?: string;
 }
 
 function ChatInterface({
@@ -40,6 +43,8 @@ function ChatInterface({
   onAttachFile,
   uploading = false,
   hasGuide = false,
+  welcome,
+  placeholder = 'Describe the task... (Enter to send)',
 }: ChatInterfaceProps) {
   const [input, setInput] = useState('');
   const messagesEndRef = useRef<HTMLDivElement>(null);
@@ -139,7 +144,7 @@ function ChatInterface({
       <div className="flex-1 overflow-y-auto p-4 space-y-4">
         {messages.length === 0 && showWelcome ? (
           <div className="h-full overflow-y-auto py-4">
-            <WelcomeTutorial />
+            {welcome ?? <WelcomeTutorial />}
           </div>
         ) : (
           messages.map((msg, idx) => (
@@ -261,13 +266,13 @@ function ChatInterface({
                 : 'bg-gray-200 text-gray-400 cursor-not-allowed'
             }`}
             disabled={!hasGuide}
-            title={hasGuide ? 'Add @revision to edit a section' : 'No guide exists yet'}
+            title={hasGuide ? 'Add @revision to have the AI rewrite the guide with your changes' : 'No guide exists yet'}
           >
             @revision
           </button>
           <span className="text-xs text-gray-500 hidden sm:inline">
             {hasGuide
-              ? 'Add @revision to edit a section'
+              ? 'Add @revision to rewrite the guide'
               : '(no guide to edit yet)'}
           </span>
 
@@ -299,7 +304,7 @@ function ChatInterface({
               adjustHeight();
             }}
             onKeyDown={handleKeyDown}
-            placeholder="Describe the task... (Enter to send)"
+            placeholder={placeholder}
             rows={1}
             className="flex-1 resize-none border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary-500 min-h-[40px] max-h-[150px]"
             disabled={isGenerating || isSearching || (queuePosition !== null && queuePosition > 0) || uploading}

@@ -4,9 +4,12 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { supabase } from '@/lib/supabase-client';
 import GuidePreview from './GuidePreview';
+import ChatInterface from './ChatInterface';
+import { useGuideChat } from '@/hooks/useGuideChat';
 import bcrypt from 'bcryptjs';
 
 interface EditGuideFormProps {
+  userId: string;
   guideId: string;
   initialTitle: string;
   initialContent: string;
@@ -16,6 +19,7 @@ interface EditGuideFormProps {
 }
 
 export default function EditGuideForm({
+  userId,
   guideId,
   initialTitle,
   initialContent,
@@ -32,6 +36,9 @@ export default function EditGuideForm({
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [showBudgetHelp, setShowBudgetHelp] = useState(false);
+  const [activeTab, setActiveTab] = useState<'chat' | 'guide'>('guide');
+
+  const chat = useGuideChat({ userId, guideId, guideContent: content, onGuideChange: setContent });
 
   const handleSave = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -115,8 +122,61 @@ export default function EditGuideForm({
     }
   };
 
+  const chatPanel = (
+    <div className="flex flex-col h-full">
+      <ChatInterface
+        messages={chat.messages}
+        onSendMessage={chat.handleSendMessage}
+        isGenerating={chat.isGenerating || chat.generatingSections}
+        isSearching={chat.isSearching}
+        webSearchEnabled={chat.webSearchEnabled}
+        onToggleWebSearch={chat.toggleWebSearch}
+        onStopGeneration={chat.stopGeneration}
+        queuePosition={chat.queuePosition}
+        showWelcome={chat.messages.length === 0}
+        onAttachFile={chat.triggerFilePicker}
+        uploading={chat.uploading}
+        hasGuide={chat.hasGuide}
+        placeholder="Ask about this guide, or @revision to change it..."
+        welcome={
+          <div className="max-w-md mx-auto bg-blue-50 border border-blue-200 rounded-lg p-6 text-blue-800">
+            <h3 className="text-lg font-semibold mb-2">✏️ Edit with AI</h3>
+            <p className="text-sm mb-2">Chat about this guide or let the AI rewrite it for you.</p>
+            <ul className="list-disc list-inside space-y-1 text-sm">
+              <li>Start a message with <strong>@revision</strong> to have the AI rewrite the whole guide with your changes, e.g. <em>@revision make the steps shorter and add a safety section</em>.</li>
+              <li>Ask questions without @revision to get suggestions first.</li>
+              <li>Changes appear in the editor right away; use Undo there if you don&apos;t like them.</li>
+              <li>Nothing is saved until you click <strong>Save Changes</strong>.</li>
+            </ul>
+          </div>
+        }
+      />
+      {chat.generatingSections && chat.guideSections.length > 0 && (
+        <div className="border-t border-gray-200 p-2 text-sm text-gray-500 text-center">
+          Generating section {chat.currentSectionIndex + 1}/{chat.guideSections.length}: {chat.guideSections[chat.currentSectionIndex]}
+        </div>
+      )}
+    </div>
+  );
+
   return (
-    <form onSubmit={handleSave} className="space-y-6">
+    <div className="flex flex-col md:flex-row h-[calc(100vh-4rem)] mt-16">
+      <input
+        type="file"
+        ref={chat.fileInputRef}
+        onChange={chat.handleFileSelected}
+        accept="image/*,.pdf,.docx,.doc"
+        className="hidden"
+      />
+
+      {/* Chat: left column on desktop, a tab on mobile */}
+      <div className={`${activeTab === 'chat' ? 'flex' : 'hidden'} md:flex flex-col md:w-2/5 flex-1 md:flex-none min-h-0 border-r border-gray-200`}>
+        {chatPanel}
+      </div>
+
+      <div className={`${activeTab === 'guide' ? 'flex' : 'hidden'} md:flex flex-col flex-1 min-h-0 overflow-y-auto`}>
+    <form onSubmit={handleSave} className="space-y-6 p-4 sm:p-6 max-w-4xl w-full mx-auto">
+      <h1 className="text-2xl font-bold text-gray-900">Edit Guide</h1>
       {error && (
         <div className="bg-red-50 text-red-800 p-3 rounded-lg text-sm">{error}</div>
       )}
@@ -214,8 +274,8 @@ export default function EditGuideForm({
 
       <div>
         <label className="block text-sm font-medium text-gray-700 mb-1">Guide Content (Markdown)</label>
-        <div className="border border-gray-300 rounded-lg overflow-hidden" style={{ height: '500px' }}>
-          <GuidePreview content={content} onChange={setContent} userId="" />
+        <div className="border border-gray-300 rounded-lg overflow-hidden" style={{ height: '600px' }}>
+          <GuidePreview content={content} onChange={setContent} userId={userId} />
         </div>
         <p className="text-xs text-gray-500 mt-1">Supports Markdown formatting</p>
       </div>
@@ -237,5 +297,23 @@ export default function EditGuideForm({
         </button>
       </div>
     </form>
+      </div>
+
+      {/* Mobile tab bar */}
+      <div className="md:hidden border-t border-gray-200 bg-white flex flex-shrink-0">
+        {(['chat', 'guide'] as const).map(tab => (
+          <button
+            key={tab}
+            type="button"
+            onClick={() => setActiveTab(tab)}
+            className={`flex-1 py-3 text-center text-sm font-medium ${
+              activeTab === tab ? 'text-primary-600 border-b-2 border-primary-600' : 'text-gray-500 hover:text-gray-700'
+            }`}
+          >
+            {tab === 'chat' ? '💬 AI Chat' : '📝 Edit Guide'}
+          </button>
+        ))}
+      </div>
+    </div>
   );
 }

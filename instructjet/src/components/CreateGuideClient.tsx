@@ -2,10 +2,11 @@
 
 'use client';
 
-import { useState, useEffect, useRef, useCallback, memo } from 'react';
+import { useState, useEffect, useCallback, memo } from 'react';
 import ChatInterface from './ChatInterface';
 import GuidePreview from './GuidePreview';
 import { supabase } from '@/lib/supabase-client';
+import { useGuideChat } from '@/hooks/useGuideChat';
 import bcrypt from 'bcryptjs';
 import { franc } from 'franc-min';
 
@@ -30,58 +31,6 @@ const GuideTutorial = ({ compact = false }: { compact?: boolean }) => (
     </p>
   </div>
 );
-
-// ─── Guide Section Helpers ──────────────────────────────────────────────────
-const parseGuideSections = (markdown: string): { frontMatter: string; sections: Record<string, string> } => {
-  const sections: Record<string, string> = {};
-  const lines = markdown.split('\n');
-  let currentSection = '';
-  let currentContent: string[] = [];
-  let frontMatter: string[] = [];
-  let inFrontMatter = true;
-
-  for (const line of lines) {
-    const match = line.match(/^##\s+(.+)$/);
-    if (match) {
-      inFrontMatter = false;
-      if (currentSection) {
-        sections[currentSection] = currentContent.join('\n').trim();
-      }
-      currentSection = match[1].trim();
-      currentContent = [];
-    } else {
-      if (inFrontMatter) {
-        frontMatter.push(line);
-      } else {
-        currentContent.push(line);
-      }
-    }
-  }
-  if (currentSection) {
-    sections[currentSection] = currentContent.join('\n').trim();
-  }
-  return { frontMatter: frontMatter.join('\n').trim(), sections };
-};
-
-const reconstructGuide = (frontMatter: string, sections: Record<string, string>): string => {
-  const sectionStr = Object.entries(sections)
-    .map(([title, content]) => `## ${title}\n\n${content}`)
-    .join('\n\n');
-  return frontMatter ? `${frontMatter}\n\n${sectionStr}` : sectionStr;
-};
-
-const updateGuideSections = (
-  currentGuide: string,
-  updates: Record<string, string>
-): string => {
-  const { frontMatter, sections } = parseGuideSections(currentGuide);
-  let updated = false;
-  for (const [sectionName, newContent] of Object.entries(updates)) {
-    sections[sectionName] = newContent;
-    updated = true;
-  }
-  return updated ? reconstructGuide(frontMatter, sections) : currentGuide;
-};
 
 // ─── Memoized GuideControls Component ──────────────────────────────────────
 const GuideControls = memo(function GuideControls({
@@ -240,36 +189,15 @@ const GuideControls = memo(function GuideControls({
 // ─── Main Component ──────────────────────────────────────────────────────────
 export default function CreateGuideClient({ userId }: { userId: string }) {
   // ─── Core State ──────────────────────────────────────────────────────────
-  const [messages, setMessages] = useState<Array<{ role: 'user' | 'assistant'; content: string }>>([]);
   const [guideContent, setGuideContent] = useState<string>('');
-  const [hasGuide, setHasGuide] = useState<boolean>(false);
-  const [sessionId, setSessionId] = useState<string | null>(null);
-  const [isGenerating, setIsGenerating] = useState(false);
   const [title, setTitle] = useState('');
   const [saving, setSaving] = useState(false);
-  const [generatingSections, setGeneratingSections] = useState(false);
-  const [currentSectionIndex, setCurrentSectionIndex] = useState(0);
-  const [guideSections, setGuideSections] = useState<string[]>([]);
   const [showGuideTutorial, setShowGuideTutorial] = useState(false);
-
-  // Web search & queue
-  const [webSearchEnabled, setWebSearchEnabled] = useState(false);
-  const [isSearching, setIsSearching] = useState(false);
   const [userPlan, setUserPlan] = useState<string>('free');
-  const [queuePosition, setQueuePosition] = useState<number | null>(null);
-  const pollingRef = useRef<NodeJS.Timeout | null>(null);
 
   // Token budget
   const [tokenBudget, setTokenBudget] = useState<number>(5000);
   const [showBudgetHelp, setShowBudgetHelp] = useState(false);
-
-  // File upload (no bucket) – base64 only
-  const fileInputRef = useRef<HTMLInputElement>(null);
-  const [uploading, setUploading] = useState(false);
-
-  // Abort / request tracking
-  const abortControllerRef = useRef<AbortController | null>(null);
-  const [currentRequestId, setCurrentRequestId] = useState<string | null>(null);
 
   // ─── Privacy State ──────────────────────────────────────────────────────
   const [isPublic, setIsPublic] = useState<boolean>(true);
@@ -277,6 +205,9 @@ export default function CreateGuideClient({ userId }: { userId: string }) {
 
   // ─── Mobile Tab State ──────────────────────────────────────────────────
   const [activeTab, setActiveTab] = useState<'chat' | 'guide'>('chat');
+
+  // ─── AI Chat ────────────────────────────────────────────────────────────
+  const chat = useGuideChat({ userId, guideContent, onGuideChange: setGuideContent });
 
   // ─── Helpers ──────────────────────────────────────────────────────────────
   const fetchWithCreds = useCallback((url: string, options?: RequestInit) => {
@@ -306,262 +237,16 @@ export default function CreateGuideClient({ userId }: { userId: string }) {
     fetchUserPlan();
   }, [fetchWithCreds]);
 
-  useEffect(() => {
-    createNewSession();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
   // ─── Session Management ──────────────────────────────────────────────────
+  const { resetChat } = chat;
   const createNewSession = useCallback(async () => {
-    const { data, error } = await supabase
-      .from('chat_sessions')
-      .insert({ user_id: userId, guide_id: null })
-      .select('id')
-      .single();
-    if (error) {
-      console.error('Failed to create session:', error);
-      return;
-    }
-    setSessionId(data.id);
-    setMessages([]);
     setGuideContent('');
-    setHasGuide(false);
-    setGuideSections([]);
     setTitle('');
-    setGeneratingSections(false);
     setIsPublic(true);
     setPrivatePassword('');
     setActiveTab('chat');
-  }, [userId]);
-
-  const addMessage = useCallback(async (role: 'user' | 'assistant', content: string) => {
-    const newMessage = { role, content };
-    setMessages(prev => [...prev, newMessage]);
-    if (sessionId) {
-      const order = messages.length;
-      await supabase.from('chat_messages').insert({
-        session_id: sessionId,
-        role,
-        content,
-        message_order: order,
-      });
-    }
-  }, [sessionId, messages.length]);
-
-  // ─── Web Search ──────────────────────────────────────────────────────────
-  const fetchWebSearchSummary = useCallback(async (query: string): Promise<string | null> => {
-    try {
-      const response = await fetchWithCreds('/api/web-search', {
-        method: 'POST',
-        body: JSON.stringify({ query, maxResults: 5 }),
-      });
-
-      if (!response.ok) {
-        if (response.status === 402) {
-          await addMessage('assistant', '⚠️ Insufficient tokens for web search. Please purchase more tokens.');
-          return null;
-        }
-        console.error('Web search API error:', response.status);
-        return null;
-      }
-
-      const data = await response.json();
-      if (!data.results || data.results.length === 0) return null;
-
-      const summary = data.results.map((r: any, idx: number) =>
-        `${idx + 1}. ${r.title}\n   ${r.snippet}\n   Source: ${r.url}`
-      ).join('\n\n');
-
-      return `Web search results for "${query}":\n\n${summary}`;
-    } catch (err) {
-      console.error('Web search fetch failed:', err);
-      return null;
-    }
-  }, [fetchWithCreds, addMessage]);
-
-  // ─── Queue Polling ──────────────────────────────────────────────────────
-  const startQueuePolling = useCallback(() => {
-    if (pollingRef.current) clearInterval(pollingRef.current);
-    pollingRef.current = setInterval(async () => {
-      try {
-        const res = await fetch('/api/queue-status');
-        if (!res.ok) return;
-        const status = await res.json();
-        if (status.queued > 0 || status.active > 0) {
-          setQueuePosition(status.queued + (status.active > 0 ? 1 : 0));
-        } else {
-          setQueuePosition(null);
-        }
-      } catch (err) {
-        console.error('Queue polling error', err);
-      }
-    }, 2000);
-  }, []);
-
-  const stopQueuePolling = useCallback(() => {
-    if (pollingRef.current) {
-      clearInterval(pollingRef.current);
-      pollingRef.current = null;
-    }
-    setQueuePosition(null);
-  }, []);
-
-  const stopGeneration = useCallback(async () => {
-    if (currentRequestId) {
-      try {
-        await fetch('/api/cancel', {
-          method: 'POST',
-          body: JSON.stringify({ requestId: currentRequestId }),
-          headers: { 'Content-Type': 'application/json' },
-        });
-      } catch (err) {
-        console.error('Cancel request failed', err);
-      }
-      setCurrentRequestId(null);
-    }
-    if (abortControllerRef.current) {
-      abortControllerRef.current.abort();
-      abortControllerRef.current = null;
-    }
-    setIsGenerating(false);
-    stopQueuePolling();
-  }, [currentRequestId, stopQueuePolling]);
-
-  // ─── File Upload ──────────────────────────────────────────────────────────
-  const handleFileSelected = useCallback(async (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (!file) return;
-    setUploading(true);
-    try {
-      const reader = new FileReader();
-      const base64 = await new Promise<string>((resolve, reject) => {
-        reader.onload = () => resolve(reader.result as string);
-        reader.onerror = reject;
-        reader.readAsDataURL(file);
-      });
-
-      await addMessage('assistant', `📎 **File attached:** ${file.name}\n\nAnalyzing...`);
-
-      const fileExtension = file.name.split('.').pop()?.toLowerCase() || '';
-      let fileType = '';
-      if (['png','jpg','jpeg','gif','webp'].includes(fileExtension)) fileType = 'image';
-      else if (['pdf'].includes(fileExtension)) fileType = 'application/pdf';
-      else if (['docx'].includes(fileExtension)) fileType = 'application/vnd.openxmlformats-officedocument.wordprocessingml.document';
-      else if (['doc'].includes(fileExtension)) fileType = 'application/msword';
-      else fileType = 'other';
-
-      const response = await fetch('/api/analyze-media', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          imageBase64: base64,
-          fileType: fileType,
-          fileName: file.name,
-          guideId: null,
-          updateDB: false,
-          userMessage: 'Please analyze this file for context to help create a guide.',
-        }),
-      });
-
-      const data = await response.json();
-      if (data.feedback) {
-        await addMessage('assistant', `📊 **AI Analysis**:\n${data.feedback}`);
-        if (data.ocrText && data.ocrText.length) {
-          await addMessage('assistant', `📝 **Text extracted from file** (for context):\n\`\`\`\n${data.ocrText.substring(0, 1500)}\n\`\`\``);
-        }
-      } else {
-        await addMessage('assistant', 'Sorry, could not analyze the file.');
-      }
-    } catch (err) {
-      console.error(err);
-      await addMessage('assistant', '❌ Failed to process file.');
-    } finally {
-      setUploading(false);
-      if (fileInputRef.current) fileInputRef.current.value = '';
-    }
-  }, [addMessage]);
-
-  const triggerFilePicker = useCallback(() => {
-    if (fileInputRef.current) {
-      fileInputRef.current.click();
-    }
-  }, []);
-
-  // ─── Section Generation ──────────────────────────────────────────────────
-  const generateGuideSections = useCallback(async (
-    prompt: string,
-    sections: string[],
-    fullContext?: string
-  ) => {
-    setGeneratingSections(true);
-    setGuideContent('');
-
-    const baseUrl = process.env.NEXT_PUBLIC_HF_API_BASE_URL;
-    if (!baseUrl) {
-      console.error('NEXT_PUBLIC_HF_API_BASE_URL is not defined');
-      setGeneratingSections(false);
-      return;
-    }
-
-    try {
-      let contextToUse = prompt;
-
-      if (fullContext) {
-        try {
-          const compressRes = await fetch(`${baseUrl}/compress-query`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ prompt: fullContext }),
-          });
-          if (compressRes.ok) {
-            const { compressed } = await compressRes.json();
-            if (compressed) contextToUse = compressed;
-          } else {
-            contextToUse = fullContext;
-          }
-        } catch (err) {
-          console.error('Compression error:', err);
-          contextToUse = fullContext;
-        }
-      }
-
-      let fullGuide = '';
-      for (let i = 0; i < sections.length; i++) {
-        setCurrentSectionIndex(i);
-        try {
-          const response = await fetch(`${baseUrl}/generate-section`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-              section_type: sections[i],
-              context: contextToUse,
-              compress_input: false,
-            }),
-          });
-
-          if (!response.ok) {
-            throw new Error(`Section generation failed: ${response.status}`);
-          }
-
-          const data = await response.json();
-          fullGuide += `\n\n## ${sections[i]}\n${data.content}`;
-          setGuideContent(fullGuide);
-          setHasGuide(true);
-        } catch (err) {
-          console.error(`Error generating section ${sections[i]}:`, err);
-          fullGuide += `\n\n## ${sections[i]}\n*Failed to generate.*`;
-          setGuideContent(fullGuide);
-          setHasGuide(true);
-        }
-      }
-    } catch (err) {
-      console.error('[ERROR] generateGuideSections failed:', err);
-      await addMessage('assistant', 'Failed to generate guide sections. Please try again.');
-    } finally {
-      setGeneratingSections(false);
-      setCurrentSectionIndex(0);
-    }
-  }, [addMessage]);
+    await resetChat();
+  }, [resetChat]);
 
   const detectLanguage = (text: string): string => {
     const lang = franc(text, { minLength: 3 });
@@ -675,151 +360,31 @@ export default function CreateGuideClient({ userId }: { userId: string }) {
   // ─── Handle Guide Preview Changes ──────────────────────────────────────
   const handleGuidePreviewChange = useCallback((newContent: string) => {
     setGuideContent(newContent);
-    if (newContent.trim()) {
-      setHasGuide(true);
-    }
   }, []);
 
-  // ─── Main Send Message (memoized) ──────────────────────────────────────
-  const handleSendMessage = useCallback(async (message: string) => {
-    if (!message.trim()) return;
-
-    const isRevision = message.trim().startsWith('@revision');
-    const cleanedMessage = isRevision ? message.replace(/^@revision\s*/i, '').trim() : message;
-
-    if (isRevision && !hasGuide) {
-      await addMessage('assistant', "I don't see any guide to revise yet. Please generate a guide first using '@guide' or by asking me to create one.");
-      return;
-    }
-
-    await addMessage('user', message);
-
-    const requestId = crypto.randomUUID();
-    setCurrentRequestId(requestId);
-
-    let searchSummary: string | null = null;
-    if (webSearchEnabled) {
-      setIsSearching(true);
-      searchSummary = await fetchWebSearchSummary(cleanedMessage);
-      setIsSearching(false);
-      if (searchSummary) {
-        await addMessage('assistant', `🔍 I searched the web for "${cleanedMessage}"...`);
-      } else {
-        await addMessage('assistant', `⚠️ Web search failed...`);
-      }
-    }
-
-    setIsGenerating(true);
-    startQueuePolling();
-
-    try {
-      const contextMessages = [...messages, { role: 'user', content: message }].slice(-10);
-      let contextString = contextMessages.map(m => `${m.role}: ${m.content}`).join('\n');
-      if (searchSummary) {
-        contextString = `[WEB SEARCH RESULTS]\n${searchSummary}\n\n[CONVERSATION HISTORY]\n${contextString}`;
-      }
-
-      abortControllerRef.current = new AbortController();
-
-      const response = await fetch('/api/chat', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          message: cleanedMessage,
-          context: contextString,
-          requestId,
-          guideContent: guideContent,
-          isRevision,
-        }),
-        signal: abortControllerRef.current.signal,
-      });
-
-      const data = await response.json();
-
-      if (data.aborted === true) {
-        console.log('Request aborted by user');
-        return;
-      }
-
-      if (!response.ok) {
-        throw new Error(data.error || `HTTP ${response.status}`);
-      }
-
-      if (data.queue_position > 0) {
-        setQueuePosition(data.queue_position);
-        setTimeout(() => setQueuePosition(null), 3000);
-      }
-
-      if (data.response) {
-        try {
-          const parsed = JSON.parse(data.response);
-
-          if (parsed.type === 'revision' && parsed.sections) {
-            const newGuide = updateGuideSections(guideContent, parsed.sections);
-            setGuideContent(newGuide);
-            setHasGuide(true);
-            await addMessage('assistant', `✅ I've updated the sections you requested.`);
-            setIsGenerating(false);
-            stopQueuePolling();
-            return;
-          }
-
-          if (parsed.action === 'complete_guide') {
-            await addMessage('assistant', parsed.content);
-            setGuideContent(parsed.content);
-            setHasGuide(true);
-            setIsGenerating(false);
-            stopQueuePolling();
-            return;
-          }
-
-          if (parsed.action === 'generate_guide') {
-            await addMessage('assistant', `I'll generate a step‑by‑step guide...`);
-            setIsGenerating(false);
-            stopQueuePolling();
-            const sections =
-              parsed.sections || [
-                'Overview',
-                'Prerequisites',
-                'Step-by-Step Instructions',
-                'Tools & Assets',
-                'Flow',
-              ];
-            setGuideSections(sections);
-            await generateGuideSections(parsed.summary, sections, contextString);
-            return;
-          }
-        } catch (e) {
-          // Not JSON – normal conversational response
-        }
-        await addMessage('assistant', data.response);
-      } else {
-        throw new Error('Empty response from AI');
-      }
-    } catch (err: any) {
-      if (err.name === 'AbortError') {
-        console.log('Request aborted by user');
-        return;
-      }
-      console.error('[ERROR] handleSendMessage failed:', err);
-      await addMessage('assistant', 'Sorry, I encountered an error. Please try again.');
-    } finally {
-      setIsGenerating(false);
-      stopQueuePolling();
-      abortControllerRef.current = null;
-      setCurrentRequestId(null);
-    }
-  }, [
-    hasGuide,
-    addMessage,
-    webSearchEnabled,
-    fetchWebSearchSummary,
-    messages,
-    guideContent,
-    startQueuePolling,
-    stopQueuePolling,
-    generateGuideSections,
-  ]);
+  const chatPanel = (
+    <>
+      <ChatInterface
+        messages={chat.messages}
+        onSendMessage={chat.handleSendMessage}
+        isGenerating={chat.isGenerating || chat.generatingSections}
+        isSearching={chat.isSearching}
+        webSearchEnabled={chat.webSearchEnabled}
+        onToggleWebSearch={chat.toggleWebSearch}
+        onStopGeneration={chat.stopGeneration}
+        queuePosition={chat.queuePosition}
+        showWelcome={chat.messages.length === 0}
+        onAttachFile={chat.triggerFilePicker}
+        uploading={chat.uploading}
+        hasGuide={chat.hasGuide}
+      />
+      {chat.generatingSections && chat.guideSections.length > 0 && (
+        <div className="border-t border-gray-200 p-2 text-sm text-gray-500 text-center">
+          Generating section {chat.currentSectionIndex + 1}/{chat.guideSections.length}: {chat.guideSections[chat.currentSectionIndex]}
+        </div>
+      )}
+    </>
+  );
 
   // ─── Render ──────────────────────────────────────────────────────────────
   return (
@@ -827,8 +392,8 @@ export default function CreateGuideClient({ userId }: { userId: string }) {
       {/* ─── Hidden file input ────────────────────────────────────────────── */}
       <input
         type="file"
-        ref={fileInputRef}
-        onChange={handleFileSelected}
+        ref={chat.fileInputRef}
+        onChange={chat.handleFileSelected}
         accept="image/*,.pdf,.docx,.doc"
         className="hidden"
       />
@@ -837,25 +402,7 @@ export default function CreateGuideClient({ userId }: { userId: string }) {
       <div className="hidden md:flex flex-row w-full h-full overflow-hidden">
         {/* Left: Chat */}
         <div className="w-1/2 border-r border-gray-200 flex flex-col h-full">
-          <ChatInterface
-            messages={messages}
-            onSendMessage={handleSendMessage}
-            isGenerating={isGenerating || generatingSections}
-            isSearching={isSearching}
-            webSearchEnabled={webSearchEnabled}
-            onToggleWebSearch={() => setWebSearchEnabled(!webSearchEnabled)}
-            onStopGeneration={stopGeneration}
-            queuePosition={queuePosition}
-            showWelcome={messages.length === 0}
-            onAttachFile={triggerFilePicker}
-            uploading={uploading}
-            hasGuide={hasGuide}
-          />
-          {generatingSections && guideSections.length > 0 && (
-            <div className="border-t border-gray-200 p-2 text-sm text-gray-500 text-center">
-              Generating section {currentSectionIndex + 1}/{guideSections.length}: {guideSections[currentSectionIndex]}
-            </div>
-          )}
+          {chatPanel}
         </div>
 
         {/* Right: Guide Preview with Controls */}
@@ -892,25 +439,7 @@ export default function CreateGuideClient({ userId }: { userId: string }) {
         <div className="flex-1 overflow-hidden">
           {activeTab === 'chat' ? (
             <div className="flex flex-col h-full">
-              <ChatInterface
-                messages={messages}
-                onSendMessage={handleSendMessage}
-                isGenerating={isGenerating || generatingSections}
-                isSearching={isSearching}
-                webSearchEnabled={webSearchEnabled}
-                onToggleWebSearch={() => setWebSearchEnabled(!webSearchEnabled)}
-                onStopGeneration={stopGeneration}
-                queuePosition={queuePosition}
-                showWelcome={messages.length === 0}
-                onAttachFile={triggerFilePicker}
-                uploading={uploading}
-                hasGuide={hasGuide}
-              />
-              {generatingSections && guideSections.length > 0 && (
-                <div className="border-t border-gray-200 p-2 text-sm text-gray-500 text-center">
-                  Generating section {currentSectionIndex + 1}/{guideSections.length}: {guideSections[currentSectionIndex]}
-                </div>
-              )}
+              {chatPanel}
             </div>
           ) : (
             <div className="flex flex-col h-full">

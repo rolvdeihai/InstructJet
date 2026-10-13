@@ -7,20 +7,25 @@ import { supabaseAdmin } from '@/lib/supabase-admin';
 import { jsonrepair } from 'jsonrepair';
 import { getCurrentUser } from '@/lib/session';
 import path from 'path';
-import mammoth from 'mammoth';
+import os from 'os';
+import fs from 'fs';
 
 // ─── Constants ──────────────────────────────────────────────────────────────
 const DEEPSEEK_API_URL = 'https://api.deepseek.com/v1/chat/completions';
 const DEEPSEEK_MODEL = 'deepseek-chat';
 const FETCH_TIMEOUT_MS = 120000;
+const DOWNLOAD_TIMEOUT_MS = 30000;
+const OCR_TIMEOUT_MS = 45000;
+
+export const maxDuration = 300;
+
+type OcrRunner = { recognize: (buffer: Buffer) => Promise<string>; terminate: () => Promise<void> };
 
 // ─── Main POST handler ─────────────────────────────────────────────────────
 export async function POST(req: NextRequest) {
   const user = await getCurrentUser();
-  if (!user) {
-    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
-  }
 
+  let ocr: OcrRunner | null = null;
   try {
     const body = await req.json();
     const {
@@ -47,6 +52,17 @@ export async function POST(req: NextRequest) {
 
     console.log('[analyze-media] Received:', { isMulti, ids, urls, guideId, updateDB });
 
+    // Workers submitting to a guide don't need an account; everything else does.
+    if (!user) {
+      if (!guideId) {
+        return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+      }
+      const { data: guideExists } = await supabaseAdmin.from('guides').select('id').eq('id', guideId).maybeSingle();
+      if (!guideExists) {
+        return NextResponse.json({ error: 'Guide not found' }, { status: 404 });
+      }
+    }
+
     // ─── If we have a single base64 (guide creation), handle separately ──
     if (imageBase64 && !isMulti) {
       // ... existing base64 handling (we keep it for backward compatibility)
@@ -67,12 +83,40 @@ export async function POST(req: NextRequest) {
       // Fetch file_url and file_type from DB for each mediaId
       const { data: mediaRows, error: mediaError } = await supabaseAdmin
         .from('media_uploads')
-        .select('id, file_url, file_type')
+        .select('id, file_url, file_type, guide_id, ai_score, ai_comment')
         .in('id', ids);
 
       if (mediaError) {
         console.error('[analyze-media] Error fetching media:', mediaError);
         return NextResponse.json({ error: 'Failed to fetch media records' }, { status: 500 });
+      }
+
+      if (guideId && mediaRows.some(row => row.guide_id !== guideId)) {
+        return NextResponse.json({ error: 'Media does not belong to this guide' }, { status: 403 });
+      }
+
+      // Finalizing a submission that was already evaluated during preview:
+      // reuse that evaluation instead of downloading + OCR-ing everything again.
+      const evaluated = mediaRows.find(row => row.ai_comment && row.ai_score?.score !== undefined);
+      if (updateDB && evaluated && mediaRows.length === ids.length) {
+        const { error: finalizeError } = await supabaseAdmin
+          .from('media_uploads')
+          .update({
+            ai_score: evaluated.ai_score,
+            ai_comment: evaluated.ai_comment,
+            approval_status: guideId ? 'pending' : null,
+            updated_at: new Date().toISOString(),
+          })
+          .in('id', ids);
+        if (finalizeError) {
+          console.error('[analyze-media] Finalize error:', finalizeError);
+          return NextResponse.json({ error: 'Failed to save submission' }, { status: 500 });
+        }
+        return NextResponse.json({
+          feedback: evaluated.ai_comment,
+          score: evaluated.ai_score.score,
+          files_processed: ids.length,
+        });
       }
 
       // Map the results
@@ -107,7 +151,7 @@ export async function POST(req: NextRequest) {
       try {
         console.log(`[analyze-media] Processing file ${i+1}/${count}: ${name}`);
         const accessibleUrl = await getAccessibleUrl(url);
-        const response = await fetch(accessibleUrl);
+        const response = await fetch(accessibleUrl, { signal: AbortSignal.timeout(DOWNLOAD_TIMEOUT_MS) });
         if (!response.ok) {
           throw new Error(`Failed to fetch file: ${response.status}`);
         }
@@ -117,7 +161,8 @@ export async function POST(req: NextRequest) {
         let text = '';
         const isImage = type === 'image' || type.startsWith('image/');
         if (isImage) {
-          text = await performOCRFromBuffer(buffer);
+          ocr ??= await createOcrRunner();
+          text = await ocr.recognize(buffer);
         } else {
           const contentType = response.headers.get('content-type') || type;
           text = await extractTextFromBuffer(buffer, contentType, name);
@@ -166,15 +211,16 @@ export async function POST(req: NextRequest) {
     );
 
     // ─── Update all media rows with the SAME evaluation ──────────────
-    if (updateDB && ids.length > 0) {
+    // Multi-file previews store the evaluation too, so confirming can reuse it.
+    if (ids.length > 0 && (updateDB || isMulti)) {
       console.log(`[analyze-media] Updating ${ids.length} media rows with evaluation`);
 
-      const updateData = {
+      const updateData: Record<string, any> = {
         ai_score: { score: evaluation.score, raw: evaluation },
         ai_comment: evaluation.comment,
-        approval_status: guideId ? 'pending' : null,
         updated_at: new Date().toISOString(),
       };
+      if (updateDB) updateData.approval_status = guideId ? 'pending' : null;
 
       const { error: updateError } = await supabaseAdmin
         .from('media_uploads')
@@ -197,6 +243,8 @@ export async function POST(req: NextRequest) {
   } catch (error: any) {
     console.error('Analysis error:', error);
     return NextResponse.json({ error: error.message || 'Analysis failed' }, { status: 500 });
+  } finally {
+    if (ocr) await ocr.terminate();
   }
 }
 
@@ -218,7 +266,12 @@ async function handleBase64(
     const isImage = fileType?.startsWith('image/') || fileType === 'image';
     let extractedText = '';
     if (isImage) {
-      extractedText = await performOCRFromBuffer(buffer);
+      const ocr = await createOcrRunner();
+      try {
+        extractedText = await ocr.recognize(buffer);
+      } finally {
+        await ocr.terminate();
+      }
     } else {
       const guessedType = fileType || 'application/octet-stream';
       extractedText = await extractTextFromBuffer(buffer, guessedType, fileName || 'file');
@@ -273,25 +326,59 @@ async function getAccessibleUrl(url: string): Promise<string> {
   return url;
 }
 
-// ─── OCR from buffer ──────────────────────────────────────────────────────
-async function performOCRFromBuffer(buffer: Buffer): Promise<string> {
-  console.log('🔍 OCR from buffer');
+// ─── OCR ──────────────────────────────────────────────────────────────────
+// One Tesseract worker per request, reused for every image. Every step is
+// bounded by a timeout: a stuck worker must degrade to "no text" rather than
+// leave the client waiting forever.
+function withTimeout<T>(promise: Promise<T>, ms: number, label: string): Promise<T> {
+  return new Promise((resolve, reject) => {
+    const timer = setTimeout(() => reject(new Error(`${label} timed out after ${ms / 1000}s`)), ms);
+    promise.then(
+      (value) => { clearTimeout(timer); resolve(value); },
+      (err) => { clearTimeout(timer); reject(err); }
+    );
+  });
+}
+
+async function createOcrRunner(): Promise<OcrRunner> {
   const workerPath = path.resolve(
     process.cwd(),
     'node_modules/tesseract.js/src/worker-script/node/index.js'
   );
-  let worker;
+  // Use the bundled eng.traineddata when present; otherwise download it.
+  // The cache must live in a writable dir (the app dir is read-only on serverless).
+  const hasLocalLang = fs.existsSync(path.join(process.cwd(), 'eng.traineddata'));
+  const workerPromise = createWorker('eng', 1, {
+    workerPath,
+    cachePath: os.tmpdir(),
+    ...(hasLocalLang ? { langPath: process.cwd(), gzip: false } : {}),
+  });
+
+  let worker: Awaited<typeof workerPromise> | null = null;
   try {
-    worker = await createWorker('eng', 1, { workerPath });
-    const { data: { text } } = await worker.recognize(buffer);
-    console.log(`✅ OCR extracted ${text.length} characters`);
-    return text.trim();
+    worker = await withTimeout(workerPromise, OCR_TIMEOUT_MS, 'OCR initialisation');
   } catch (err) {
-    console.error('OCR error:', err);
-    return '';
-  } finally {
-    if (worker) await worker.terminate();
+    console.error('OCR init error:', err);
+    workerPromise.then(w => w.terminate()).catch(() => {});
   }
+
+  return {
+    async recognize(buffer: Buffer) {
+      if (!worker) return '[Image text could not be read: OCR unavailable]';
+      try {
+        console.log('🔍 OCR from buffer');
+        const { data: { text } } = await withTimeout(worker.recognize(buffer), OCR_TIMEOUT_MS, 'OCR');
+        console.log(`✅ OCR extracted ${text.length} characters`);
+        return text.trim();
+      } catch (err) {
+        console.error('OCR error:', err);
+        return '[Image text could not be read]';
+      }
+    },
+    async terminate() {
+      if (worker) await worker.terminate().catch(() => {});
+    },
+  };
 }
 
 // ─── Document text extraction ──────────────────────────────────────────────

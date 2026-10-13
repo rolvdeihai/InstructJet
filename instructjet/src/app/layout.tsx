@@ -3,6 +3,7 @@ import { AuthProvider } from '@/contexts/AuthContext';
 import ClientTokenResetWrapper from '@/components/ClientTokenResetWrapper';
 import './globals.css';
 import { PaddleProvider } from '@/components/PaddleProvider';
+import SiteTranslator from '@/components/SiteTranslator';
 
 export const metadata = {
   title: {
@@ -86,6 +87,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <AuthProvider>
           <ClientTokenResetWrapper>
             <PaddleProvider />
+            <SiteTranslator />
             {children}
           </ClientTokenResetWrapper>
         </AuthProvider>

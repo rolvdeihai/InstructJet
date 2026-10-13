@@ -9,6 +9,100 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { Dialog, Transition } from '@headlessui/react';
 import { Fragment, useRef } from 'react';
+import {
+  LANGUAGES,
+  DEFAULT_LANGUAGE,
+  getCurrentLanguage,
+  setLanguage,
+  detectLanguage,
+  translateProxyUrl,
+} from '@/lib/language';
+
+function LanguageSettings() {
+  const [current, setCurrent] = useState(DEFAULT_LANGUAGE);
+  const [selected, setSelected] = useState(DEFAULT_LANGUAGE);
+  const [detecting, setDetecting] = useState(false);
+  const [detectNote, setDetectNote] = useState<string | null>(null);
+
+  useEffect(() => {
+    const lang = getCurrentLanguage();
+    setCurrent(lang);
+    setSelected(lang);
+  }, []);
+
+  const apply = (lang: string) => {
+    setLanguage(lang);
+    window.location.reload();
+  };
+
+  const detect = async () => {
+    setDetecting(true);
+    setDetectNote(null);
+    const { language, country } = await detectLanguage();
+    setSelected(language);
+    const name = LANGUAGES.find(l => l.code === language)?.name || language;
+    setDetectNote(country ? `Detected ${country} → ${name}` : `Using your browser language → ${name}`);
+    setDetecting(false);
+  };
+
+  return (
+    <div className="bg-white rounded-2xl shadow-md overflow-hidden">
+      <div className="px-6 py-4 border-b border-gray-200">
+        <h2 className="text-xl font-semibold text-gray-900">Language</h2>
+      </div>
+      <div className="p-6 space-y-4">
+        <p className="text-sm text-gray-600">
+          Choose the language InstructJet is shown in. Pages are translated automatically by Google Translate.
+        </p>
+        <div className="flex flex-col sm:flex-row gap-3">
+          <select
+            value={selected}
+            onChange={(e) => setSelected(e.target.value)}
+            translate="no"
+            className="notranslate flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:ring-primary-500 focus:border-primary-500 bg-white"
+          >
+            {LANGUAGES.map(l => (
+              <option key={l.code} value={l.code}>
+                {l.native}{l.native !== l.name ? ` (${l.name})` : ''}
+              </option>
+            ))}
+          </select>
+          <button
+            type="button"
+            onClick={detect}
+            disabled={detecting}
+            className="px-4 py-2 border border-gray-300 rounded-lg text-sm hover:bg-gray-50 disabled:opacity-50"
+          >
+            {detecting ? 'Detecting…' : '📍 Detect from my location'}
+          </button>
+          <button
+            type="button"
+            onClick={() => apply(selected)}
+            disabled={selected === current}
+            className="px-6 py-2 bg-primary-600 text-white rounded-lg font-medium hover:bg-primary-700 disabled:opacity-50 transition"
+          >
+            Apply
+          </button>
+        </div>
+        {detectNote && <p className="text-xs text-gray-500">{detectNote}. Click Apply to use it.</p>}
+        {current !== DEFAULT_LANGUAGE && (
+          <p className="text-xs text-gray-500">
+            Page not translating (e.g. blocked by an ad blocker)?{' '}
+            <a
+              href={typeof window !== 'undefined' ? translateProxyUrl(current, window.location.href) : '#'}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-primary-600 hover:underline"
+            >
+              Open it in Google Translate
+            </a>{' '}
+            instead.
+          </p>
+        )}
+      </div>
+    </div>
+  );
+}
 
 interface UserProfile {
   id: string;
@@ -363,6 +457,8 @@ export default function SettingsPage() {
           {/* Account Tab - unchanged */}
           {activeTab === 'account' && (
             <div className="space-y-6">
+              <LanguageSettings />
+
               {/* Profile Information Section */}
               <div className="bg-white rounded-2xl shadow-md overflow-hidden">
                 <div className="px-6 py-4 border-b border-gray-200">
