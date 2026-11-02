@@ -206,6 +206,9 @@ export default function GuidesPage() {
                       <Link href={`/guides/${guide.slug}/edit`} className="text-sm text-primary-600 hover:text-primary-700 font-medium">
                         Edit
                       </Link>
+                      <Link href={`/insights/${guide.id}`} className="text-sm text-blue-600 hover:text-blue-700 font-medium">
+                        Insights
+                      </Link>
                       {!guide.is_public && (
                         <Link href={`/sell?guide=${guide.id}`} className="text-sm text-yellow-600 hover:text-yellow-700 font-medium">
                           Sell

@@ -9,6 +9,9 @@ import { supabase } from '@/lib/supabase-client';
 import { useGuideChat } from '@/hooks/useGuideChat';
 import bcrypt from 'bcryptjs';
 import { franc } from 'franc-min';
+import TeamProfileQuestionnaire from './TeamProfileQuestionnaire';
+import { TeamProfile, summarizeTeamProfile } from '@/lib/team-profile';
+import { ReminderDraft, ReminderDraftFields, EMPTY_REMINDER_DRAFT, saveReminderDraft } from './GuideReminders';
 
 // ─── Tutorial Component ──────────────────────────────────────────────────────
 const GuideTutorial = ({ compact = false }: { compact?: boolean }) => (
@@ -50,6 +53,11 @@ const GuideControls = memo(function GuideControls({
   setIsPublic,
   privatePassword,
   setPrivatePassword,
+  teamProfile,
+  onEditTeamProfile,
+  reminders,
+  onToggleReminders,
+  onEditReminders,
 }: {
   title: string;
   setTitle: (t: string) => void;
@@ -67,6 +75,11 @@ const GuideControls = memo(function GuideControls({
   setIsPublic: (v: boolean) => void;
   privatePassword: string;
   setPrivatePassword: (v: string) => void;
+  teamProfile: TeamProfile | null;
+  onEditTeamProfile: () => void;
+  reminders: ReminderDraft;
+  onToggleReminders: () => void;
+  onEditReminders: () => void;
 }) {
   return (
     <div className="p-4 border-b border-gray-200 space-y-3">
@@ -169,6 +182,35 @@ const GuideControls = memo(function GuideControls({
         </div>
       </div>
 
+      <div className="flex items-center gap-2 text-sm">
+        <span className="font-medium text-gray-700 whitespace-nowrap">👥 Team</span>
+        <span className="flex-1 min-w-0 truncate text-gray-600" title={summarizeTeamProfile(teamProfile)}>
+          {summarizeTeamProfile(teamProfile) || <span className="text-gray-400">No team profile (generic guide)</span>}
+        </span>
+        <button type="button" onClick={onEditTeamProfile} className="text-xs text-primary-600 hover:text-primary-700 whitespace-nowrap">
+          {teamProfile ? 'Edit' : 'Add'}
+        </button>
+      </div>
+
+      <div className="flex items-center gap-2 text-sm">
+        <label className="flex items-center gap-2 font-medium text-gray-700 whitespace-nowrap">
+          <input type="checkbox" checked={reminders.enabled} onChange={onToggleReminders} className="h-4 w-4" />
+          🔔 Daily reminders
+        </label>
+        {reminders.enabled && (
+          <>
+            <span className="flex-1 min-w-0 truncate text-gray-600">
+              {reminders.workers.length
+                ? `${reminders.workers.length} worker${reminders.workers.length > 1 ? 's' : ''} will be emailed after publishing`
+                : <span className="text-amber-700">No workers added yet</span>}
+            </span>
+            <button type="button" onClick={onEditReminders} className="text-xs text-primary-600 hover:text-primary-700 whitespace-nowrap">
+              Edit
+            </button>
+          </>
+        )}
+      </div>
+
       {!isPublic && (
         <div className="flex items-center gap-2">
           <label className="text-sm font-medium text-gray-700">Access Password</label>
@@ -203,11 +245,20 @@ export default function CreateGuideClient({ userId }: { userId: string }) {
   const [isPublic, setIsPublic] = useState<boolean>(true);
   const [privatePassword, setPrivatePassword] = useState<string>('');
 
+  // ─── Team Profile (optional questionnaire before creating) ──────────────
+  const [teamProfile, setTeamProfile] = useState<TeamProfile | null>(null);
+  const [showQuestionnaire, setShowQuestionnaire] = useState(false);
+  const [lastTeamProfile, setLastTeamProfile] = useState<TeamProfile | null>(null);
+
+  // ─── Worker Reminders (saved after publish) ──────────────────────────────
+  const [reminders, setReminders] = useState<ReminderDraft>(EMPTY_REMINDER_DRAFT);
+  const [showReminders, setShowReminders] = useState(false);
+
   // ─── Mobile Tab State ──────────────────────────────────────────────────
   const [activeTab, setActiveTab] = useState<'chat' | 'guide'>('chat');
 
   // ─── AI Chat ────────────────────────────────────────────────────────────
-  const chat = useGuideChat({ userId, guideContent, onGuideChange: setGuideContent });
+  const chat = useGuideChat({ userId, guideContent, onGuideChange: setGuideContent, teamProfile });
 
   // ─── Helpers ──────────────────────────────────────────────────────────────
   const fetchWithCreds = useCallback((url: string, options?: RequestInit) => {
@@ -237,6 +288,24 @@ export default function CreateGuideClient({ userId }: { userId: string }) {
     fetchUserPlan();
   }, [fetchWithCreds]);
 
+  // Ask the team questions before the first message, prefilled from the last guide.
+  useEffect(() => {
+    const loadLastTeamProfile = async () => {
+      try {
+        const res = await fetchWithCreds('/api/user/team-profile', { method: 'GET' });
+        if (res.ok) {
+          const data = await res.json();
+          setLastTeamProfile(data.teamProfile || null);
+        }
+      } catch (err) {
+        console.error('Error fetching team profile:', err);
+      } finally {
+        setShowQuestionnaire(true);
+      }
+    };
+    loadLastTeamProfile();
+  }, [fetchWithCreds]);
+
   // ─── Session Management ──────────────────────────────────────────────────
   const { resetChat } = chat;
   const createNewSession = useCallback(async () => {
@@ -244,6 +313,7 @@ export default function CreateGuideClient({ userId }: { userId: string }) {
     setTitle('');
     setIsPublic(true);
     setPrivatePassword('');
+    setReminders(EMPTY_REMINDER_DRAFT);
     setActiveTab('chat');
     await resetChat();
   }, [resetChat]);
@@ -343,11 +413,18 @@ export default function CreateGuideClient({ userId }: { userId: string }) {
           is_public: isPublic,
           password_hash: passwordHash,
           language,
+          team_profile: teamProfile,
+          reminders_enabled: reminders.enabled && reminders.workers.length > 0,
+          reminder_message: reminders.message.trim() || null,
         })
-        .select('slug')
+        .select('id, slug')
         .single();
 
       if (error) throw error;
+      const reminderError = await saveReminderDraft(data.id, reminders);
+      if (reminderError) {
+        alert(`Guide published, but reminders could not be set up: ${reminderError}. You can add workers from the Edit page.`);
+      }
       window.location.href = `/guides/${data.slug}`;
     } catch (err: any) {
       console.error('Publish error:', err);
@@ -355,7 +432,15 @@ export default function CreateGuideClient({ userId }: { userId: string }) {
     } finally {
       setSaving(false);
     }
-  }, [guideContent, title, isPublic, privatePassword, userPlan, fetchWithCreds, tokenBudget, userId]);
+  }, [guideContent, title, isPublic, privatePassword, userPlan, fetchWithCreds, tokenBudget, userId, teamProfile, reminders]);
+
+  const openQuestionnaire = useCallback(() => setShowQuestionnaire(true), []);
+  const toggleReminders = useCallback(() => {
+    const enabled = !reminders.enabled;
+    setReminders({ ...reminders, enabled });
+    if (enabled && !reminders.workers.length) setShowReminders(true);
+  }, [reminders]);
+  const openReminders = useCallback(() => setShowReminders(true), []);
 
   // ─── Handle Guide Preview Changes ──────────────────────────────────────
   const handleGuidePreviewChange = useCallback((newContent: string) => {
@@ -389,6 +474,35 @@ export default function CreateGuideClient({ userId }: { userId: string }) {
   // ─── Render ──────────────────────────────────────────────────────────────
   return (
     <div className="flex h-screen pt-16">
+      {showQuestionnaire && (
+        <TeamProfileQuestionnaire
+          initialProfile={teamProfile || lastTeamProfile}
+          onSave={(profile) => { setTeamProfile(profile); setShowQuestionnaire(false); }}
+          onSkip={() => setShowQuestionnaire(false)}
+        />
+      )}
+      {showReminders && (
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
+          <div className="bg-white rounded-xl shadow-xl max-w-lg w-full max-h-[90vh] flex flex-col">
+            <div className="p-5 border-b border-gray-100">
+              <h2 className="text-lg font-semibold text-gray-900">🔔 Remind workers every day</h2>
+              <p className="text-sm text-gray-600 mt-1">Add the workers who must complete this guide and their deadline.</p>
+            </div>
+            <div className="p-5 overflow-y-auto">
+              <ReminderDraftFields value={reminders} onChange={setReminders} />
+            </div>
+            <div className="p-4 border-t border-gray-100 flex justify-end">
+              <button
+                type="button"
+                onClick={() => setShowReminders(false)}
+                className="px-4 py-2 bg-primary-600 text-white rounded-lg text-sm hover:bg-primary-700"
+              >
+                Done
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
       {/* ─── Hidden file input ────────────────────────────────────────────── */}
       <input
         type="file"
@@ -424,6 +538,11 @@ export default function CreateGuideClient({ userId }: { userId: string }) {
             setIsPublic={setIsPublic}
             privatePassword={privatePassword}
             setPrivatePassword={setPrivatePassword}
+            teamProfile={teamProfile}
+            onEditTeamProfile={openQuestionnaire}
+            reminders={reminders}
+            onToggleReminders={toggleReminders}
+            onEditReminders={openReminders}
           />
           <GuidePreview
             content={guideContent}
@@ -460,6 +579,11 @@ export default function CreateGuideClient({ userId }: { userId: string }) {
                 setIsPublic={setIsPublic}
                 privatePassword={privatePassword}
                 setPrivatePassword={setPrivatePassword}
+                teamProfile={teamProfile}
+                onEditTeamProfile={openQuestionnaire}
+                reminders={reminders}
+                onToggleReminders={toggleReminders}
+                onEditReminders={openReminders}
               />
               <div className="flex-1 overflow-auto">
                 <GuidePreview

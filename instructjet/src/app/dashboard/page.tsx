@@ -17,7 +17,9 @@ import {
   CurrencyDollarIcon,
   GlobeAltIcon,
   ShoppingCartIcon,
+  ChartBarIcon,
 } from '@heroicons/react/24/outline';
+import type { GuideInsightSummary } from '@/lib/team-insights';
 
 interface TokenBalance {
   subscription_tokens: number;
@@ -31,6 +33,8 @@ export default function Dashboard() {
   const [isVisible, setIsVisible] = useState(false);
   const [tokenBalance, setTokenBalance] = useState<TokenBalance | null>(null);
   const [loading, setLoading] = useState(true);
+  const [teamInsights, setTeamInsights] = useState<GuideInsightSummary[] | null>(null);
+  const [insightThreshold, setInsightThreshold] = useState(5);
 
   useEffect(() => {
     if (!authLoading && !user) {
@@ -45,6 +49,28 @@ export default function Dashboard() {
     if (user) {
       fetchTokenBalance();
     }
+  }, [user]);
+
+  // Team insights are analyzed lazily here (no cron): guides that collected
+  // enough new team questions/feedback get analyzed when the owner visits.
+  useEffect(() => {
+    if (!user) return;
+    let cancelled = false;
+    (async () => {
+      try {
+        const res = await fetch('/api/team-insights/refresh', { method: 'POST', credentials: 'include' });
+        if (!res.ok) throw new Error('Failed to refresh team insights');
+        const data = await res.json();
+        if (!cancelled) {
+          setTeamInsights(data.guides);
+          setInsightThreshold(data.threshold);
+        }
+      } catch (error) {
+        console.error('Error refreshing team insights:', error);
+        if (!cancelled) setTeamInsights([]);
+      }
+    })();
+    return () => { cancelled = true; };
   }, [user]);
 
   const fetchTokenBalance = async () => {
@@ -275,6 +301,70 @@ export default function Dashboard() {
                 </div>
               </Link>
             ))}
+          </div>
+        </div>
+
+        {/* Team Insights */}
+        <div
+          className={`mt-12 transition-all duration-1000 delay-500 ${
+            isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+          }`}
+        >
+          <div className="bg-white rounded-2xl shadow-lg p-6 border border-gray-100">
+            <div className="flex items-center gap-2 text-gray-700 mb-1">
+              <ChartBarIcon className="h-5 w-5 text-blue-600" />
+              <h3 className="font-semibold">Team Insights</h3>
+            </div>
+            <p className="text-sm text-gray-500 mb-4">
+              How well your team understands your guides, based on their questions and feedback — with AI suggestions to improve each SOP.
+            </p>
+
+            {teamInsights === null ? (
+              <div className="text-sm text-gray-500 flex items-center gap-2">
+                <svg className="animate-spin h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                  <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                  <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
+                </svg>
+                Checking for new team activity…
+              </div>
+            ) : teamInsights.length === 0 ? (
+              <p className="text-sm text-gray-600">
+                No team activity yet. Share a guide with your team — after {insightThreshold} questions or feedback you&apos;ll see their comprehension profile here.
+              </p>
+            ) : (
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                {teamInsights.map(g => (
+                  <Link
+                    key={g.guideId}
+                    href={`/insights/${g.guideId}`}
+                    className="block rounded-xl border border-gray-200 p-4 hover:border-blue-300 hover:shadow-md transition"
+                  >
+                    <div className="flex items-start justify-between gap-2">
+                      <h4 className="font-medium text-gray-900 line-clamp-2">{g.title}</h4>
+                      {g.pendingSuggestions > 0 && (
+                        <span className="shrink-0 px-2 py-0.5 rounded-full text-xs bg-green-100 text-green-800">
+                          {g.pendingSuggestions} suggestion{g.pendingSuggestions > 1 ? 's' : ''}
+                        </span>
+                      )}
+                    </div>
+                    <div className="mt-2 flex items-baseline gap-3 text-sm text-gray-600">
+                      {g.comprehensionScore !== null ? (
+                        <span>
+                          <span className="text-xl font-bold text-gray-900">{g.comprehensionScore}</span>
+                          <span className="text-gray-400">/100</span> comprehension
+                        </span>
+                      ) : (
+                        <span className="text-gray-500">Collecting signals…</span>
+                      )}
+                    </div>
+                    <div className="mt-2 text-xs text-gray-500">
+                      {g.totalSignals} questions &amp; feedback
+                      {g.newSignals > 0 && ` · ${Math.min(g.newSignals, insightThreshold)}/${insightThreshold} new until next analysis`}
+                    </div>
+                  </Link>
+                ))}
+              </div>
+            )}
           </div>
         </div>
 

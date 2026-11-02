@@ -6,6 +6,8 @@ import { cookies } from 'next/headers';
 import { triggerGitHubWorkflow } from '@/lib/ai-server';
 import { supabaseAdmin } from '@/lib/supabase-admin';
 import { canUseDeepSeek, incrementDailyDeepSeekUsage } from '@/lib/daily-usage';
+import { sanitizeTeamProfile, teamProfileToPrompt } from '@/lib/team-profile';
+import { jsonrepair } from 'jsonrepair';
 
 const HF_API_URL = `${process.env.HF_API_BASE_URL}/chat`;
 const FETCH_TIMEOUT_MS = 600_000; // 10 minutes
@@ -43,7 +45,11 @@ export async function POST(req: NextRequest) {
     );
   }
 
-  const { message, context, requestId, guideContent, isRevision } = await req.json();
+  const { message, context, requestId, guideContent, isRevision, teamProfile: rawTeamProfile } = await req.json();
+  const teamProfile = teamProfileToPrompt(sanitizeTeamProfile(rawTeamProfile));
+  const teamProfileBlock = teamProfile ? `
+
+${teamProfile}` : '';
   if (!requestId) {
     return NextResponse.json({ error: 'Missing requestId' }, { status: 400 });
   }
@@ -76,7 +82,7 @@ ${guideContent || 'No guide has been generated yet.'}
 
 Your job is to assist the user in creating or refining guides.
 - For normal conversation, respond naturally with helpful text.
-- If you still need more info, ask clarifying questions.
+- If you still need more info, ask clarifying questions.${teamProfileBlock}
 `;
 
   // ─── Revision system instruction ──────────────────────────────
@@ -92,7 +98,7 @@ Rules:
 - Keep every part the user did not ask to change exactly as it is (wording, images, links, tables, mermaid diagrams).
 - You may add, remove, reorder or rename sections, headings and steps when the request calls for it.
 - Keep Mermaid diagrams valid and inside \`\`\`mermaid code blocks.
-- Do NOT add commentary, explanations or a preamble, and do NOT wrap the whole document in a code block.`;
+- Do NOT add commentary, explanations or a preamble, and do NOT wrap the whole document in a code block.${teamProfileBlock}`;
 
   const revisionUserMessage = `Current guide document:
 <<<DOCUMENT
@@ -125,7 +131,7 @@ ${context ? `Recent conversation (for context):\n${context}\n\n` : ''}Return the
         const deepseekMessages = [
           {
             role: 'system',
-            content: `You are a guide generator. Output ONLY a valid JSON object with exactly these keys: "Overview", "Prerequisites", "Step-by-Step Instructions", "Tools & Assets", "Flow". Each value is a string containing the section content in markdown. The Flow section MUST include a Mermaid flowchart inside a \`\`\`mermaid code block. Do not add any extra text, explanations, or markdown outside the JSON.`,
+            content: `You are a guide generator. Output ONLY a valid JSON object with exactly these keys: "Overview", "Prerequisites", "Step-by-Step Instructions", "Tools & Assets", "Flow". Each value is a string containing the section content in markdown. The Flow section MUST include a Mermaid flowchart inside a \`\`\`mermaid code block. Do not add any extra text, explanations, or markdown outside the JSON.${teamProfileBlock}`,
           },
           {
             role: 'user',
@@ -143,7 +149,10 @@ ${context ? `Recent conversation (for context):\n${context}\n\n` : ''}Return the
             model: DEEPSEEK_MODEL,
             messages: deepseekMessages,
             temperature: 0.2,
-            max_tokens: 2000,
+            // Detailed guides (especially in non-English languages) easily exceed
+            // 2000 tokens; 8000 is deepseek-chat's maximum output.
+            max_tokens: 8000,
+            response_format: { type: 'json_object' },
           }),
           signal: combinedSignal,
         });
@@ -155,45 +164,34 @@ ${context ? `Recent conversation (for context):\n${context}\n\n` : ''}Return the
         }
 
         const data = await response.json();
-        let rawContent = data.choices[0]?.message?.content || '{}';
+        const rawContent: string = data.choices[0]?.message?.content || '';
+        const truncated = data.choices[0]?.finish_reason === 'length';
+        const sectionsJson = parseGuideSections(rawContent);
 
-        // Parse JSON
-        let sectionsJson: Record<string, string> = {};
-        try {
-          const jsonMatch = rawContent.match(/\{[\s\S]*\}/);
-          if (jsonMatch) {
-            sectionsJson = JSON.parse(jsonMatch[0]);
-          } else {
-            throw new Error('No JSON object found');
-          }
-        } catch (e) {
-          console.error('Failed to parse DeepSeek JSON', e);
-          // Fallback sections
-          sectionsJson = {
-            Overview: 'Failed to generate overview.',
-            Prerequisites: 'Failed to generate prerequisites.',
-            'Step-by-Step Instructions': 'Failed to generate steps.',
-            'Tools & Assets': 'Failed to generate tools.',
-            Flow: '```mermaid\ngraph TD\nA[Error] --> B[Try again]\n```',
-          };
-        }
-
-        // Build full markdown guide from JSON
-        const fullGuide = Object.entries(sectionsJson)
-          .map(([title, content]) => `## ${title}\n\n${content}`)
-          .join('\n\n');
-
-        assistantMessage = JSON.stringify({
-          action: 'complete_guide',
-          content: fullGuide,
-          sections: sectionsJson,
-        });
-        queuePosition = 0;
-
-        // Increment daily usage for free users
+        // Increment daily usage for free users (the DeepSeek call was made either way)
         if (!isPremium) {
           await incrementDailyDeepSeekUsage(user.id);
         }
+
+        if (!sectionsJson) {
+          console.error('Failed to parse DeepSeek guide JSON', { truncated, preview: rawContent.slice(0, 300) });
+          errorOccurred = true;
+          assistantMessage = 'Sorry, the AI could not generate the guide this time. Please try again, or describe the guide in a bit more detail. (No tokens were deducted.)';
+        } else {
+          // Build full markdown guide from JSON
+          const fullGuide = Object.entries(sectionsJson)
+            .map(([title, content]) => `## ${title}\n\n${content}`)
+            .join('\n\n');
+
+          assistantMessage = JSON.stringify({
+            action: 'complete_guide',
+            content: truncated
+              ? `${fullGuide}\n\n> ⚠️ This guide was too long and got cut off. Use @revision to shorten it or split it into several guides.`
+              : fullGuide,
+            sections: sectionsJson,
+          });
+        }
+        queuePosition = 0;
       }
       // Case 2: Revision request
       else if (isRevision) {
@@ -405,6 +403,34 @@ function getServerStartingMessage(): string {
 We have started the server. It usually takes 2–3 minutes to become ready.  
 Please wait a moment and then try again.  
 (No tokens were deducted for this attempt.)`;
+}
+
+const GUIDE_SECTION_KEYS = ['Overview', 'Prerequisites', 'Step-by-Step Instructions', 'Tools & Assets', 'Flow'];
+
+// Parses the @guide JSON. Truncated output (max_tokens reached) is repaired
+// with jsonrepair so the sections written so far are kept. Returns null if
+// nothing usable came back.
+function parseGuideSections(raw: string): Record<string, string> | null {
+  const start = raw.indexOf('{');
+  if (start === -1) return null;
+  let parsed: unknown;
+  try {
+    parsed = JSON.parse(raw.slice(start, raw.lastIndexOf('}') + 1));
+  } catch {
+    try {
+      parsed = JSON.parse(jsonrepair(raw.slice(start)));
+    } catch {
+      return null;
+    }
+  }
+  if (!parsed || typeof parsed !== 'object') return null;
+
+  const sections: Record<string, string> = {};
+  for (const key of GUIDE_SECTION_KEYS) {
+    const value = (parsed as Record<string, unknown>)[key];
+    if (typeof value === 'string' && value.trim()) sections[key] = value;
+  }
+  return Object.keys(sections).length ? sections : null;
 }
 
 // Strips wrappers the model sometimes adds around a revised document

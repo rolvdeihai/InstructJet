@@ -9,6 +9,7 @@
 
 import { useState, useEffect, useRef, useCallback } from 'react';
 import { supabase } from '@/lib/supabase-client';
+import { TeamProfile, teamProfileToPrompt } from '@/lib/team-profile';
 
 export type GuideChatMessage = { role: 'user' | 'assistant'; content: string };
 
@@ -26,9 +27,11 @@ interface UseGuideChatOptions {
   guideId?: string | null;
   guideContent: string;
   onGuideChange: (content: string) => void;
+  /** Optional team questionnaire answers; tailors generation to the audience. */
+  teamProfile?: TeamProfile | null;
 }
 
-export function useGuideChat({ userId, guideId = null, guideContent, onGuideChange }: UseGuideChatOptions) {
+export function useGuideChat({ userId, guideId = null, guideContent, onGuideChange, teamProfile = null }: UseGuideChatOptions) {
   const [messages, setMessages] = useState<GuideChatMessage[]>([]);
   const [sessionId, setSessionId] = useState<string | null>(null);
   const [isGenerating, setIsGenerating] = useState(false);
@@ -51,6 +54,8 @@ export function useGuideChat({ userId, guideId = null, guideContent, onGuideChan
   guideContentRef.current = guideContent;
   const onGuideChangeRef = useRef(onGuideChange);
   onGuideChangeRef.current = onGuideChange;
+  const teamProfileRef = useRef(teamProfile);
+  teamProfileRef.current = teamProfile;
 
   const hasGuide = guideContent.trim().length > 0;
 
@@ -249,6 +254,15 @@ export function useGuideChat({ userId, guideId = null, guideContent, onGuideChan
     }
 
     try {
+      const profilePrompt = teamProfileToPrompt(teamProfileRef.current);
+      if (profilePrompt) {
+        prompt = `${prompt}
+
+${profilePrompt}`;
+        if (fullContext) fullContext = `${fullContext}
+
+${profilePrompt}`;
+      }
       let contextToUse = prompt;
 
       if (fullContext) {
@@ -327,7 +341,9 @@ export function useGuideChat({ userId, guideId = null, guideContent, onGuideChan
     let searchSummary: string | null = null;
     if (webSearchEnabled) {
       setIsSearching(true);
-      searchSummary = await fetchWebSearchSummary(cleanedMessage);
+      // Search for the topic, not the "@guide" command itself.
+      const searchQuery = cleanedMessage.replace(/@guide\b/gi, '').trim() || cleanedMessage;
+      searchSummary = await fetchWebSearchSummary(searchQuery);
       setIsSearching(false);
       if (searchSummary) {
         await addMessage('assistant', `🔍 I searched the web for "${cleanedMessage}"...`);
@@ -357,6 +373,7 @@ export function useGuideChat({ userId, guideId = null, guideContent, onGuideChan
           requestId,
           guideContent: currentGuide,
           isRevision,
+          teamProfile: teamProfileRef.current,
         }),
         signal: abortControllerRef.current.signal,
       });

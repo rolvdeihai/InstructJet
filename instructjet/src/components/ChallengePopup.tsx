@@ -358,7 +358,7 @@ export default function ChallengePopup({ isOpen, onClose }: ChallengePopupProps)
         <div className="sm:hidden bg-gradient-to-r from-primary-600 to-primary-800 text-white rounded-t-2xl px-4 py-3 flex items-center gap-3 sticky top-0 z-10">
           <div className="relative w-10 h-10 rounded-full overflow-hidden border-2 border-white/60 flex-shrink-0">
             <Image
-              src="/jethro-tesla.jpeg"
+              src="/jethro-graduation.jpeg"
               alt="Jethro Lim – founder"
               fill
               className="object-cover"
@@ -395,7 +395,7 @@ export default function ChallengePopup({ isOpen, onClose }: ChallengePopupProps)
 
             <div className="relative w-24 h-24 rounded-full overflow-hidden border-2 border-white/60 shadow-lg mb-4">
               <Image
-                src="/jethro-tesla.jpeg"
+                src="/jethro-graduation.jpeg"
                 alt="Jethro Lim – founder"
                 fill
                 className="object-cover"

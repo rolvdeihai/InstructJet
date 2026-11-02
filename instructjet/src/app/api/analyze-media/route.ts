@@ -6,6 +6,8 @@ import { createWorker } from 'tesseract.js';
 import { supabaseAdmin } from '@/lib/supabase-admin';
 import { jsonrepair } from 'jsonrepair';
 import { getCurrentUser } from '@/lib/session';
+import { recordTeamSignal } from '@/lib/team-insights';
+import { markRemindersCompleted } from '@/lib/reminders';
 import path from 'path';
 import os from 'os';
 import fs from 'fs';
@@ -20,6 +22,38 @@ const OCR_TIMEOUT_MS = 45000;
 export const maxDuration = 300;
 
 type OcrRunner = { recognize: (buffer: Buffer) => Promise<string>; terminate: () => Promise<void> };
+
+// ─── Team insights + reminders ─────────────────────────────────────────────
+// Consultations and finalized submissions are team activity on the guide.
+// A finalized submission also stops that worker's daily reminders.
+async function recordGuideActivity(opts: {
+  guideId: string;
+  viewerId: string | null;
+  mediaIds: string[];
+  kind: 'question' | 'submission';
+  content: string;
+  answer: string;
+}) {
+  try {
+    const [{ data: guide }, { data: media }] = await Promise.all([
+      supabaseAdmin.from('guides').select('user_id').eq('id', opts.guideId).single(),
+      supabaseAdmin.from('media_uploads').select('worker_session_id, worker_email').in('id', opts.mediaIds),
+    ]);
+    if (opts.kind === 'submission') {
+      await markRemindersCompleted(opts.guideId, (media || []).map(m => m.worker_email));
+    }
+    if (guide && guide.user_id === opts.viewerId) return; // owner testing their own guide
+    await recordTeamSignal({
+      guideId: opts.guideId,
+      sessionId: media?.[0]?.worker_session_id || null,
+      kind: opts.kind,
+      content: opts.content,
+      answerExcerpt: opts.answer,
+    });
+  } catch (err) {
+    console.error('[analyze-media] Failed to record guide activity:', err);
+  }
+}
 
 // ─── Main POST handler ─────────────────────────────────────────────────────
 export async function POST(req: NextRequest) {
@@ -111,6 +145,16 @@ export async function POST(req: NextRequest) {
         if (finalizeError) {
           console.error('[analyze-media] Finalize error:', finalizeError);
           return NextResponse.json({ error: 'Failed to save submission' }, { status: 500 });
+        }
+        if (guideId) {
+          await recordGuideActivity({
+            guideId,
+            viewerId: user?.id || null,
+            mediaIds: ids,
+            kind: 'submission',
+            content: `Submitted ${ids.length} file(s) — score ${evaluated.ai_score.score}/100`,
+            answer: evaluated.ai_comment,
+          });
         }
         return NextResponse.json({
           feedback: evaluated.ai_comment,
@@ -232,6 +276,19 @@ export async function POST(req: NextRequest) {
       } else {
         console.log('[analyze-media] Update successful for all media');
       }
+    }
+
+    if (guideId && ids.length > 0 && (updateDB || !isMulti)) {
+      await recordGuideActivity({
+        guideId,
+        viewerId: user?.id || null,
+        mediaIds: ids,
+        kind: updateDB ? 'submission' : 'question',
+        content: updateDB
+          ? `Submitted ${count} file(s) — score ${evaluation.score}/100`
+          : `[File consultation: ${fileNamesForContext[0]}] ${userMessage}`,
+        answer: evaluation.comment,
+      });
     }
 
     return NextResponse.json({

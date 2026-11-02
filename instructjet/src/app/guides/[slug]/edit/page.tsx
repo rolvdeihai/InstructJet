@@ -18,7 +18,7 @@ export default async function EditGuidePage({ params }: EditGuidePageProps) {
 
   const { data: guide, error } = await supabaseAdmin
     .from('guides')
-    .select('id, title, content, total_token_budget, token_budget_remaining, user_id, is_public, password_hash')
+    .select('id, title, content, total_token_budget, token_budget_remaining, user_id, is_public, password_hash, team_profile')
     .eq('slug', slug)
     .single();
 
@@ -42,6 +42,7 @@ export default async function EditGuidePage({ params }: EditGuidePageProps) {
         initialTokenBudget={guide.total_token_budget || 0}
         initialIsPublic={guide.is_public ?? true}
         initialHasPassword={!!guide.password_hash}
+        teamProfile={guide.team_profile}
       />
     </main>
   );

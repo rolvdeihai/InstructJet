@@ -14,10 +14,10 @@ export default function AboutPage() {
         <div className="max-w-4xl mx-auto px-6 py-12">
           {/* ─── Header ──────────────────────────────────────────── */}
           <div className="flex flex-col md:flex-row items-start md:items-center gap-6 mb-12">
-            {/* Profile Image – circle crop of jethro-tesla.jpeg */}
+            {/* Profile Image – circle crop of jethro-graduation.jpeg */}
             <div className="relative w-24 h-24 rounded-full overflow-hidden shadow-lg flex-shrink-0 bg-gray-200">
               <Image
-                src="/jethro-tesla.jpeg"
+                src="/jethro-graduation.jpeg"
                 alt="Jethro Lim"
                 fill
                 className="object-cover"

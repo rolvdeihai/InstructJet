@@ -7,6 +7,9 @@ import GuidePreview from './GuidePreview';
 import ChatInterface from './ChatInterface';
 import { useGuideChat } from '@/hooks/useGuideChat';
 import bcrypt from 'bcryptjs';
+import Link from 'next/link';
+import { TeamProfile } from '@/lib/team-profile';
+import { GuideRemindersPanel } from './GuideReminders';
 
 interface EditGuideFormProps {
   userId: string;
@@ -16,6 +19,7 @@ interface EditGuideFormProps {
   initialTokenBudget: number;
   initialIsPublic: boolean;
   initialHasPassword: boolean;
+  teamProfile?: TeamProfile | null;
 }
 
 export default function EditGuideForm({
@@ -26,6 +30,7 @@ export default function EditGuideForm({
   initialTokenBudget,
   initialIsPublic,
   initialHasPassword,
+  teamProfile = null,
 }: EditGuideFormProps) {
   const router = useRouter();
   const [title, setTitle] = useState(initialTitle);
@@ -38,7 +43,7 @@ export default function EditGuideForm({
   const [showBudgetHelp, setShowBudgetHelp] = useState(false);
   const [activeTab, setActiveTab] = useState<'chat' | 'guide'>('guide');
 
-  const chat = useGuideChat({ userId, guideId, guideContent: content, onGuideChange: setContent });
+  const chat = useGuideChat({ userId, guideId, guideContent: content, onGuideChange: setContent, teamProfile });
 
   const handleSave = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -176,7 +181,12 @@ export default function EditGuideForm({
 
       <div className={`${activeTab === 'guide' ? 'flex' : 'hidden'} md:flex flex-col flex-1 min-h-0 overflow-y-auto`}>
     <form onSubmit={handleSave} className="space-y-6 p-4 sm:p-6 max-w-4xl w-full mx-auto">
-      <h1 className="text-2xl font-bold text-gray-900">Edit Guide</h1>
+      <div className="flex flex-wrap items-center justify-between gap-2">
+        <h1 className="text-2xl font-bold text-gray-900">Edit Guide</h1>
+        <Link href={`/insights/${guideId}`} className="text-sm text-primary-600 hover:text-primary-700 font-medium">
+          📊 Team insights
+        </Link>
+      </div>
       {error && (
         <div className="bg-red-50 text-red-800 p-3 rounded-lg text-sm">{error}</div>
       )}
@@ -270,6 +280,11 @@ export default function EditGuideForm({
             )}
           </div>
         )}
+      </div>
+
+      {/* Worker reminders – saved immediately, independent of "Save Changes" */}
+      <div className="p-4 border border-gray-200 rounded-lg bg-white">
+        <GuideRemindersPanel guideId={guideId} />
       </div>
 
       <div>

@@ -51,6 +51,9 @@ export default function WorkerChat({ guideId, guideTitle }: WorkerChatProps) {
   const abortControllerRef = useRef<AbortController | null>(null);
   const [currentRequestId, setCurrentRequestId] = useState<string | null>(null);
   const [queuePosition, setQueuePosition] = useState<number | null>(null);
+  const [showFeedback, setShowFeedback] = useState(false);
+  const [feedbackText, setFeedbackText] = useState('');
+  const [feedbackStatus, setFeedbackStatus] = useState<'idle' | 'sending' | 'sent' | 'error'>('idle');
 
   // ─── Confirmation Modal State ──────────────────────────────────────────
   const [showConfirmationModal, setShowConfirmationModal] = useState(false);
@@ -98,6 +101,15 @@ export default function WorkerChat({ guideId, guideTitle }: WorkerChatProps) {
     };
     fetchBudgetAndCreator();
   }, [guideId, user]);
+
+  // Reminder emails link here with ?email=&name= so the submission matches the reminder.
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const email = params.get('email');
+    const name = params.get('name');
+    if (email) setTempWorkerEmail(email);
+    if (name) setTempWorkerName(name);
+  }, []);
 
   const createSession = async () => {
     const { data, error } = await supabase
@@ -291,6 +303,7 @@ export default function WorkerChat({ guideId, guideTitle }: WorkerChatProps) {
           guideId,
           tokens: 1000,
           requestId,
+          sessionId,
         }),
         signal: combinedSignal,
       });
@@ -339,6 +352,26 @@ export default function WorkerChat({ guideId, guideTitle }: WorkerChatProps) {
       abortControllerRef.current = null;
       setCurrentRequestId(null);
       userAbortedRef.current = false;
+    }
+  };
+
+  // ─── Feedback about the guide (feeds the owner's team insights) ─────────
+  const sendFeedback = async () => {
+    if (feedbackText.trim().length < 3) return;
+    setFeedbackStatus('sending');
+    try {
+      const res = await fetch(`/api/guides/${guideId}/feedback`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ content: feedbackText.trim(), sessionId }),
+      });
+      if (!res.ok) throw new Error('Failed to send feedback');
+      setFeedbackText('');
+      setFeedbackStatus('sent');
+      setTimeout(() => { setShowFeedback(false); setFeedbackStatus('idle'); }, 2000);
+    } catch (err) {
+      console.error(err);
+      setFeedbackStatus('error');
     }
   };
 
@@ -802,6 +835,46 @@ export default function WorkerChat({ guideId, guideTitle }: WorkerChatProps) {
         <p className="text-xs text-gray-500">
           Consult: single file + question. Submit: multiple files (max {MAX_TOTAL_SIZE_MB}MB total).
         </p>
+      </div>
+
+      {/* ─── Guide feedback ─────────────────────────────────────────────── */}
+      <div className="mt-4 border-t border-gray-100 pt-3">
+        {!showFeedback ? (
+          <button
+            onClick={() => setShowFeedback(true)}
+            className="text-sm text-gray-500 hover:text-primary-600"
+          >
+            💡 Something unclear in this guide? Send feedback to the author
+          </button>
+        ) : (
+          <div className="space-y-2">
+            <textarea
+              value={feedbackText}
+              onChange={(e) => setFeedbackText(e.target.value)}
+              placeholder="What was confusing, missing or could be explained better?"
+              className="w-full border rounded-lg p-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary-500"
+              rows={3}
+              maxLength={2000}
+            />
+            <div className="flex items-center gap-2">
+              <button
+                onClick={sendFeedback}
+                disabled={feedbackText.trim().length < 3 || feedbackStatus === 'sending'}
+                className="px-3 py-1.5 bg-primary-600 text-white rounded-lg text-sm disabled:opacity-50"
+              >
+                {feedbackStatus === 'sending' ? 'Sending...' : 'Send feedback'}
+              </button>
+              <button
+                onClick={() => { setShowFeedback(false); setFeedbackStatus('idle'); }}
+                className="px-3 py-1.5 border rounded-lg text-sm"
+              >
+                Cancel
+              </button>
+              {feedbackStatus === 'sent' && <span className="text-sm text-green-600">✅ Thanks! Sent to the author.</span>}
+              {feedbackStatus === 'error' && <span className="text-sm text-red-600">Could not send. Please try again.</span>}
+            </div>
+          </div>
+        )}
       </div>
 
       {/* ─── Name Modal ────────────────────────────────────────────────── */}

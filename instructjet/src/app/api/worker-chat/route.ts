@@ -4,6 +4,9 @@ import { supabaseAdmin } from '@/lib/supabase-admin';
 import { deductTokens, checkSufficientTokens } from '@/lib/token-manager';
 import { triggerGitHubWorkflow } from '@/lib/ai-server';
 import { canUseDeepSeek, incrementDailyDeepSeekUsage } from '@/lib/daily-usage';
+import { getUserFromSession } from '@/lib/auth';
+import { recordTeamSignal } from '@/lib/team-insights';
+import { teamProfileToPrompt } from '@/lib/team-profile';
 
 const HF_API_URL = `${process.env.HF_API_BASE_URL}/chat`;
 const FETCH_TIMEOUT_MS = 600_000;
@@ -20,7 +23,7 @@ async function getUserPlan(userId: string): Promise<string> {
 }
 
 export async function POST(req: NextRequest) {
-  const { message, guideContent, context, guideId, tokens = 1000, requestId } = await req.json();
+  const { message, guideContent, context, guideId, tokens = 1000, requestId, sessionId } = await req.json();
 
   if (!guideId) {
     return NextResponse.json({ error: 'guideId is required' }, { status: 400 });
@@ -35,7 +38,7 @@ export async function POST(req: NextRequest) {
   // 1. Get the guide and its remaining budget
   const { data: guide, error: guideError } = await supabaseAdmin
     .from('guides')
-    .select('user_id, token_budget_remaining')
+    .select('user_id, token_budget_remaining, team_profile')
     .eq('id', guideId)
     .single();
 
@@ -80,8 +83,11 @@ export async function POST(req: NextRequest) {
   }
 
   // 6. Prepare AI call
+  const teamProfile = teamProfileToPrompt(guide.team_profile);
   const systemPrompt = `You are a helpful assistant that answers questions about a task guide. The guide is about: ${guideContent}. 
-Answer the worker's question clearly and concisely. Use the conversation history if relevant.`;
+Answer the worker's question clearly and concisely. Use the conversation history if relevant.${teamProfile ? `
+
+${teamProfile}` : ''}`;
 
   const fullContext = `${systemPrompt}\n\nConversation history:\n${context || ''}\n\nWorker: ${message}\nAssistant:`;
 
@@ -237,6 +243,18 @@ Answer the worker's question clearly and concisely. Use the conversation history
 
     if (updateBudgetError) {
       console.error('Failed to update guide budget cap:', updateBudgetError);
+    }
+
+    // Log the question for team insights, unless the owner is testing their own guide.
+    const viewer = await getUserFromSession(req.cookies.get('instructjet_session')?.value);
+    if (viewer?.id !== creatorUserId) {
+      await recordTeamSignal({
+        guideId,
+        sessionId,
+        kind: 'question',
+        content: message,
+        answerExcerpt: assistantMessage,
+      });
     }
   }
 
