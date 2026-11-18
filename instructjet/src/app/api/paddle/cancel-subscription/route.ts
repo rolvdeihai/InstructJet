@@ -23,7 +23,7 @@ export async function POST(request: NextRequest) {
     // Get user's subscription_id from Supabase
     const { data: dbUser, error: userError } = await supabaseAdmin
       .from('users')
-      .select('subscription_id, plan_tier')
+      .select('subscription_id, plan_tier, subscription_plan, subscription_status, current_period_end')
       .eq('id', user.id)
       .single();
 
@@ -35,8 +35,17 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'No active subscription to cancel' }, { status: 400 });
     }
 
+    if (dbUser.subscription_status === 'canceling') {
+      return NextResponse.json({ error: 'Your subscription is already set to end at the close of this billing period' }, { status: 400 });
+    }
+
+    // Access granted by our team (e.g. manual program enrollment) has no
+    // provider subscription to cancel and nothing will renew.
     if (!dbUser.subscription_id) {
-      return NextResponse.json({ error: 'No subscription ID found' }, { status: 400 });
+      return NextResponse.json(
+        { error: 'Your access was set up by our team and will not renew. Please contact us if you want to end it early.' },
+        { status: 400 }
+      );
     }
 
     console.log(`Cancelling Paddle subscription: ${dbUser.subscription_id} for user ${user.id}`);
@@ -75,28 +84,32 @@ export async function POST(request: NextRequest) {
       console.log('Paddle subscription canceled successfully');
     }
 
-    // Update user in Supabase to free tier (immediate)
+    // Keep access until the paid period ends. Paddle sends `subscription.canceled`
+    // at that point, and the webhook downgrades the user and ends program membership.
+    const endsAt: string | null =
+      responseData?.data?.scheduled_change?.effective_at ||
+      responseData?.data?.current_billing_period?.ends_at ||
+      dbUser.current_period_end ||
+      null;
+
     await supabaseAdmin
       .from('users')
       .update({
-        plan_tier: 'free',
-        subscription_plan: null,
-        subscription_status: 'canceled',
-        subscription_id: null,
-        current_period_end: null,
+        subscription_status: 'canceling',
+        current_period_end: endsAt ? new Date(endsAt).toISOString() : null,
         updated_at: new Date().toISOString(),
       })
       .eq('id', user.id);
 
-    // Reset subscription tokens
-    await supabaseAdmin
-      .from('token_balances')
-      .update({ subscription_tokens: 0 })
-      .eq('user_id', user.id);
+    const isProgram = dbUser.subscription_plan === 'business_program';
+    const until = endsAt ? ` on ${new Date(endsAt).toLocaleDateString('en-US', { dateStyle: 'medium' })}` : ' at the end of your billing period';
 
     return NextResponse.json({
       success: true,
-      message: 'Subscription cancelled. You have been downgraded to Free.',
+      endsAt,
+      message: isProgram
+        ? `Cancelled. You stay in the Business Support Program and keep Premium until it ends${until}. You will not be charged again.`
+        : `Cancelled. You keep Premium until it ends${until}. You will not be charged again.`,
     });
   } catch (error) {
     console.error('Cancel subscription error:', error);

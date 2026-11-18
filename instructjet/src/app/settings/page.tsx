@@ -112,6 +112,9 @@ interface UserProfile {
   subscription_id: string | null;
   subscribed_plan_id: string | null;
   plan_status: string | null;
+  subscription_plan: string | null;
+  subscription_status: string | null;
+  current_period_end: string | null;
 }
 
 interface TokenBalance {
@@ -357,11 +360,18 @@ export default function SettingsPage() {
   };
 
   const handleCancelSubscription = async () => {
+    const isProgram = profile?.subscription_plan === 'business_program';
+    const until = profile?.current_period_end
+      ? `until ${new Date(profile.current_period_end).toLocaleDateString(undefined, { dateStyle: 'medium' })}`
+      : 'until the end of your current billing period';
     const confirmed = confirm(
-      'Are you sure you want to cancel your subscription?\n\n' +
-      'You will be downgraded to the Free plan immediately.\n' +
-      'Your subscription tokens will reset to 0, but any purchased token packs will remain.\n\n' +
-      'This action cannot be undone.'
+      (isProgram
+        ? 'Are you sure you want to cancel your Business Support Program subscription?\n\n' +
+          `You will stay in the program and keep Premium ${until}. After that you leave the program, ` +
+          'program emails stop, and your account moves to the Free plan. You keep your SOPs, templates and certificates.\n\n'
+        : 'Are you sure you want to cancel your subscription?\n\n' +
+          `You will keep Premium ${until}, then move to the Free plan.\n\n`) +
+      'You will not be charged again. Subscription tokens reset to 0 when access ends; purchased token packs remain.'
     );
     if (!confirmed) return;
 
@@ -671,18 +681,29 @@ export default function SettingsPage() {
                   <div className="flex justify-between items-center pb-4 border-b border-gray-100">
                     <div>
                       <p className="text-sm text-gray-500">Current Plan</p>
-                      <p className="text-lg font-semibold text-gray-900 capitalize mt-1">
-                        {profile?.plan_tier || 'free'}
+                      <p className="text-lg font-semibold text-gray-900 mt-1">
+                        {profile?.plan_tier !== 'premium'
+                          ? 'Free'
+                          : profile?.subscription_plan === 'business_program'
+                            ? 'Business Support Program'
+                            : 'Premium'}
                       </p>
+                      {profile?.plan_tier === 'premium' && profile?.subscription_plan === 'business_program' && (
+                        <p className="text-xs text-gray-500 mt-0.5">Includes InstructJet Premium</p>
+                      )}
                     </div>
-                    {profile?.plan_tier === 'free' ? (
+                    {profile?.plan_tier !== 'premium' ? (
                       <a
                         href="/pricing"
                         className="px-4 py-2 bg-primary-600 text-white rounded-lg text-sm font-medium hover:bg-primary-700 transition"
                       >
                         Upgrade Plan
                       </a>
-                    ) : (
+                    ) : profile?.subscription_status === 'canceling' ? (
+                      <span className="px-3 py-1.5 bg-amber-50 text-amber-700 rounded-lg text-sm font-medium">
+                        Cancelled
+                      </span>
+                    ) : profile?.subscription_id ? (
                       <button
                         onClick={handleCancelSubscription}
                         disabled={cancelling}
@@ -690,13 +711,34 @@ export default function SettingsPage() {
                       >
                         {cancelling ? 'Cancelling...' : 'Cancel Subscription'}
                       </button>
+                    ) : (
+                      <a
+                        href="/contact"
+                        className="px-4 py-2 border border-gray-300 text-gray-700 rounded-lg text-sm font-medium hover:bg-gray-50 transition"
+                      >
+                        Contact us
+                      </a>
                     )}
                   </div>
-                  {profile?.plan_tier === 'premium' && (
-                    <p className="text-xs text-gray-500 -mt-3">
-                      Your premium features will remain until the end of your current billing cycle if you cancel.
-                    </p>
-                  )}
+                  {profile?.plan_tier === 'premium' && (() => {
+                    const isProgram = profile.subscription_plan === 'business_program';
+                    const date = profile.current_period_end
+                      ? new Date(profile.current_period_end).toLocaleDateString(undefined, { dateStyle: 'medium' })
+                      : null;
+                    let note: string;
+                    if (profile.subscription_status === 'canceling') {
+                      note = isProgram
+                        ? `Your subscription is cancelled. You stay in the program and keep Premium until ${date ?? 'the end of this billing period'}, and you will not be charged again.`
+                        : `Your subscription is cancelled. You keep Premium until ${date ?? 'the end of this billing period'}, and you will not be charged again.`;
+                    } else if (!profile.subscription_id) {
+                      note = `Your access was set up by our team and does not renew${date ? `. It runs until ${date}` : ''}. Contact us if you want to end it early.`;
+                    } else {
+                      note = isProgram
+                        ? 'If you cancel, you stay in the program and keep Premium until the end of your current billing period. You keep your SOPs, templates and certificates.'
+                        : 'If you cancel, your premium features remain until the end of your current billing period.';
+                    }
+                    return <p className="text-xs text-gray-500 -mt-3">{note}</p>;
+                  })()}
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl p-4">

@@ -257,6 +257,7 @@ function EditUser({ user, isSelf, onClose, onSaved, toast }: { user: User; isSel
           <select className={inputCls} value={f.subscription_status} onChange={(e) => setF({ ...f, subscription_status: e.target.value })}>
             <option value="">—</option>
             <option value="active">active</option>
+            <option value="canceling">canceling (ends at period end)</option>
             <option value="canceled">canceled</option>
             <option value="past_due">past_due</option>
           </select>

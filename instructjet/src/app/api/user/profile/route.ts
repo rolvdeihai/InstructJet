@@ -16,7 +16,7 @@ export async function GET(request: NextRequest) {
     // Fetch full user data including subscription fields
     const { data: fullUser, error: userError } = await supabaseAdmin
       .from('users')
-      .select('id, email, full_name, plan_tier, subscription_id, subscribed_plan_id, plan_status')
+      .select('id, email, full_name, plan_tier, subscription_id, subscribed_plan_id, plan_status, subscription_plan, subscription_status, current_period_end')
       .eq('id', user.id)
       .single();
 
@@ -92,7 +92,7 @@ export async function PATCH(request: NextRequest) {
         updated_at: new Date().toISOString()
       })
       .eq('id', user.id)
-      .select('id, email, full_name, plan_tier, subscription_id, subscribed_plan_id, plan_status')
+      .select('id, email, full_name, plan_tier, subscription_id, subscribed_plan_id, plan_status, subscription_plan, subscription_status, current_period_end')
       .single();
 
     if (updateError) {
