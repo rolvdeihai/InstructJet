@@ -2,6 +2,8 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { createClient } from '@supabase/supabase-js';
 import { getCurrentUser } from '@/lib/session';
+import { PROGRAM_PRICE_ID } from '@/lib/program/config';
+import { getParticipantByUserId } from '@/lib/program/server';
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
 const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY!;
@@ -22,8 +24,21 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
+    // plan: 'premium' (default, /pricing) or 'business_program' (/leadership)
+    const body = await request.json().catch(() => ({}));
+    const isProgram = body?.plan === 'business_program';
+
+    if (isProgram) {
+      const participant = await getParticipantByUserId(user.id);
+      if (participant?.status === 'active') {
+        return NextResponse.json({ error: 'You are already in the Business Support Program', redirect: '/leadership-info' }, { status: 409 });
+      }
+    }
+
     const paddleApiKey = process.env.PADDLE_API_KEY?.trim();
-    const subscriptionPriceId = process.env.NEXT_PUBLIC_PADDLE_SUBSCRIPTION_PRICE_ID?.trim();
+    const subscriptionPriceId = isProgram
+      ? PROGRAM_PRICE_ID
+      : process.env.NEXT_PUBLIC_PADDLE_SUBSCRIPTION_PRICE_ID?.trim();
     const appUrl = process.env.NEXT_PUBLIC_APP_URL?.trim();
 
     if (!paddleApiKey || !subscriptionPriceId || !appUrl) {
@@ -57,10 +72,14 @@ export async function POST(request: NextRequest) {
       },
       body: JSON.stringify({
         items: [{ price_id: subscriptionPriceId, quantity: 1 }],
-        custom_data: { user_id: user.id },
+        custom_data: { user_id: user.id, plan: isProgram ? 'business_program' : 'premium' },
         customer_email: dbUser.email,
-        success_url: `${appUrl}/pricing?subscription=success`,
-        cancel_url: `${appUrl}/pricing?subscription=cancelled`,
+        success_url: isProgram
+          ? `${appUrl}/leadership-info?welcome=1`
+          : `${appUrl}/pricing?subscription=success`,
+        cancel_url: isProgram
+          ? `${appUrl}/leadership?subscription=cancelled#pricing`
+          : `${appUrl}/pricing?subscription=cancelled`,
       }),
     });
 

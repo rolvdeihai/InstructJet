@@ -2,6 +2,8 @@
 import { NextRequest, NextResponse } from 'next/server';
 import crypto from 'crypto';
 import { createClient } from '@supabase/supabase-js';
+import { PROGRAM_PRICE_ID } from '@/lib/program/config';
+import { enrollParticipant } from '@/lib/program/server';
 
 // ============================================================
 // Supabase Client
@@ -60,6 +62,23 @@ async function getUserIdFromSubscription(subscription: any): Promise<string | nu
 }
 
 // ============================================================
+// Helper: Is this the Business Support Program subscription?
+// ============================================================
+async function isProgramSubscription(subscription: any): Promise<boolean> {
+  if (subscription.items?.some((item: any) => item.price?.id === PROGRAM_PRICE_ID)) return true;
+  if (subscription.custom_data?.plan === 'business_program') return true;
+  if (subscription.transaction_id) {
+    try {
+      const transaction = await getTransaction(subscription.transaction_id);
+      return transaction.custom_data?.plan === 'business_program';
+    } catch {
+      return false;
+    }
+  }
+  return false;
+}
+
+// ============================================================
 // Signature Verification (Paddle Billing) with Full Debug
 // ============================================================
 function verifyPaddleSignature(
@@ -96,7 +115,8 @@ function verifyPaddleSignature(
     return false;
   }
 
-  const dataToSign = rawBody + ':' + ts;
+  // Paddle signs `${ts}:${rawBody}` (timestamp first)
+  const dataToSign = ts + ':' + rawBody;
   console.log('DataToSign length:', dataToSign.length);
   console.log('DataToSign first 200:', dataToSign.slice(0, 200));
 
@@ -143,7 +163,7 @@ export async function POST(request: NextRequest) {
 
   // TEMPORARY: Bypass verification for testing
   // Remove this line after debugging
-  const BYPASS_VERIFICATION = true;
+  const BYPASS_VERIFICATION = false;
 
   // 3. Verify signature
   const isValid = verifyPaddleSignature(rawBody, signature, PADDLE_WEBHOOK_SECRET);
@@ -214,11 +234,14 @@ async function processPaddleEvent(event: any) {
         return;
       }
 
-      // Grant premium access immediately
+      const isProgram = await isProgramSubscription(subscription);
+
+      // Grant premium access immediately (program members get premium benefits too)
       await supabaseAdmin
         .from('users')
         .update({
           plan_tier: 'premium',
+          subscription_plan: isProgram ? 'business_program' : 'premium',
           subscription_status: 'active',
           subscription_id: subscription.id,
           current_period_end: subscription.next_billed_at ? new Date(subscription.next_billed_at).toISOString() : null,
@@ -233,6 +256,11 @@ async function processPaddleEvent(event: any) {
           last_token_reset: new Date().toISOString(),
         })
         .eq('user_id', userId);
+
+      if (isProgram) {
+        await enrollParticipant(userId, { source: 'paddle', subscriptionId: subscription.id });
+        console.log(`🎓 User ${userId} enrolled in the Business Support Program`);
+      }
 
       console.log(`✅ Subscription created for user ${userId} (access granted)`);
       break;
@@ -277,11 +305,19 @@ async function processPaddleEvent(event: any) {
         .from('users')
         .update({
           plan_tier: 'free',
+          subscription_plan: null,
           subscription_status: 'canceled',
           subscription_id: null,
           current_period_end: null,
         })
         .eq('id', userId);
+
+      // Program members whose program subscription ended leave the program
+      await supabaseAdmin
+        .from('program_participants')
+        .update({ status: 'canceled', updated_at: new Date().toISOString() })
+        .eq('user_id', userId)
+        .eq('subscription_id', subscription.id);
 
       await supabaseAdmin
         .from('token_balances')

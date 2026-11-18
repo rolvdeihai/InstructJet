@@ -96,16 +96,18 @@ export default function Signup() {
     setError('');
     try {
       await register(email, password, fullName, verificationToken);
+      const nextParam = new URLSearchParams(window.location.search).get('next');
+      const destination = nextParam && nextParam.startsWith('/') && !nextParam.startsWith('//') ? nextParam : '/dashboard';
       const language = detectedLanguage.current ? await detectedLanguage.current : null;
       if (language) {
         setLanguage(language);
         if (language !== DEFAULT_LANGUAGE) {
           // Full load so the site translator starts in the new language.
-          window.location.href = '/dashboard';
+          window.location.href = destination;
           return;
         }
       }
-      router.push('/dashboard');
+      router.push(destination);
     } catch (err: any) {
       setError(err.message);
     } finally {

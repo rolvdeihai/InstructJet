@@ -18,6 +18,8 @@ import {
   GlobeAltIcon,
   ShoppingCartIcon,
   ChartBarIcon,
+  AcademicCapIcon,
+  ShieldCheckIcon,
 } from '@heroicons/react/24/outline';
 import type { GuideInsightSummary } from '@/lib/team-insights';
 
@@ -35,6 +37,7 @@ export default function Dashboard() {
   const [loading, setLoading] = useState(true);
   const [teamInsights, setTeamInsights] = useState<GuideInsightSummary[] | null>(null);
   const [insightThreshold, setInsightThreshold] = useState(5);
+  const [inProgram, setInProgram] = useState(false);
 
   useEffect(() => {
     if (!authLoading && !user) {
@@ -49,6 +52,15 @@ export default function Dashboard() {
     if (user) {
       fetchTokenBalance();
     }
+  }, [user]);
+
+  // Business Support Program members get a shortcut to their Leadership Info page
+  useEffect(() => {
+    if (!user) return;
+    fetch('/api/program/me')
+      .then((r) => (r.ok ? r.json() : null))
+      .then((d) => setInProgram(!!d?.participant))
+      .catch(() => setInProgram(false));
   }, [user]);
 
   // Team insights are analyzed lazily here (no cron): guides that collected
@@ -128,7 +140,35 @@ export default function Dashboard() {
     },
   ];
 
+  const programActions = [
+    ...(inProgram
+      ? [
+          {
+            title: 'Leadership Info',
+            description: 'Business Support Program: your business profile, capstone and community.',
+            href: '/leadership-info',
+            icon: AcademicCapIcon,
+            bgGradient: 'from-slate-800 to-slate-950',
+            textColor: 'text-white',
+          },
+        ]
+      : []),
+    ...(user.role === 'admin'
+      ? [
+          {
+            title: 'Admin Dashboard',
+            description: 'Users, program participants, catalog, lessons and email schedule.',
+            href: '/admin',
+            icon: ShieldCheckIcon,
+            bgGradient: 'from-rose-600 to-rose-800',
+            textColor: 'text-white',
+          },
+        ]
+      : []),
+  ];
+
   const actions = [
+    ...programActions,
     {
       title: 'Create New Guide',
       description: 'Start a new task guide using AI assistance.',

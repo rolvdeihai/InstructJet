@@ -1,7 +1,8 @@
 // src/components/LeadershipLanding.tsx
 'use client';
 
-import { useEffect, useState } from 'react';
+import { createContext, useContext, useEffect, useState } from 'react';
+import { useAuth } from '@/contexts/AuthContext';
 import Image from 'next/image';
 import {
   ArrowRightIcon,
@@ -16,6 +17,7 @@ import {
   CalendarDaysIcon,
 } from '@heroicons/react/24/outline';
 import { LEADERSHIP_COPY, type LeadershipCopy, type LeadershipLocale } from '@/lib/leadership-copy';
+import type { ProgramCheckout } from '@/lib/program/config';
 
 /* ─── Programme constants (edit here) ───────────────────────────── */
 const PRICE = 150_000;
@@ -35,22 +37,16 @@ const COMPANIES = [
 const PILLAR_IMAGES: Record<'business' | 'leadership', (string | null)[]> = {
   business: [
     '/program/job-seekers.png',
-    '/program/education.png',
-    '/program/internships.png',
     '/program/networking.jpg',
     '/program/investor-pitching.png',
-    '/program/bazaar.jpg',
     '/program/community.png',
     '/program/website.jpg',
   ],
   leadership: [
-    '/program/tailored.jpg',
     '/program/coaching.png',
     '/program/skills.png',
-    '/program/mentorship.png',
     '/program/tools.png',
     '/program/ai-employees.jpg',
-    '/program/templates.jpg',
     '/program/certification.jpg',
   ],
 };
@@ -81,15 +77,146 @@ function Heading({ children, dark = false, className = '' }: { children: React.R
   );
 }
 
+// CTAs scroll to the application form, or to the subscribe button when checkout is available
+const CtaContext = createContext<{ href: string; label: string | null }>({ href: '#apply', label: null });
+
 function PrimaryCTA({ label, className = '' }: { label: string; className?: string }) {
+  const cta = useContext(CtaContext);
   return (
     <a
-      href="#apply"
+      href={cta.href}
       className={`group inline-flex items-center justify-center gap-2 rounded-full bg-primary-500 px-7 py-4 text-base font-semibold text-white shadow-lg shadow-primary-500/25 transition hover:bg-primary-600 hover:shadow-primary-600/30 ${className}`}
     >
-      {label}
+      {cta.label || label}
       <ArrowRightIcon className="h-4 w-4 transition group-hover:translate-x-1" />
     </a>
+  );
+}
+
+/* ─── Subscribe (non-Indonesian visitors) ───────────────────────── */
+const SUBSCRIBE_COPY = {
+  cta: 'Join the program',
+  subscribe: 'Subscribe & join',
+  redirecting: 'Redirecting to checkout…',
+  signup: 'Create an account to join',
+  already: 'Go to your program page',
+  perks: 'Includes InstructJet Premium with monthly tokens',
+  cancel: 'Cancel anytime from your settings',
+  failed: 'Could not start checkout. Please try again.',
+};
+
+const RETURN_TO = encodeURIComponent('/leadership#pricing');
+
+// Copy that talks about "apply first, pay Rp150.000 after a fit call" does not
+// apply when visitors can subscribe directly.
+function withSubscribeCopy(t: LeadershipCopy): LeadershipCopy {
+  return {
+    ...t,
+    hero: {
+      ...t.hero,
+      eyebrow: 'InstructJet · SaaS business support · Weekly',
+      fullProgramme: 'Business Support Program',
+      meta: { ...t.hero.meta, apply: 'Instant access after checkout' },
+    },
+    pricing: {
+      ...t.pricing,
+      title: 'One weekly price. Everything included.',
+      body: 'Less than the cost of a coffee a day, for support that changes how your whole business grows.',
+      tagline: 'Weekly subscription · tailored to your business',
+      fullProgramme: 'Business Support Program',
+    },
+    faq: {
+      ...t.faq,
+      items: t.faq.items
+        .filter((f) => !f.q.startsWith('Rp150'))
+        .map((f) =>
+          f.q.startsWith('What if the programme isn’t right for me?')
+            ? { ...f, a: 'You can cancel your subscription any time from your settings, and it will not renew. Questions before joining? Send them through the form below and we will answer honestly.' }
+            : f.q.startsWith('What happens after the 3 months?')
+              ? { q: 'What happens if I cancel?', a: 'You keep your redesigned SOPs, your templates, your certificates and your website. Claude Cowork and InstructJet Premium access lasts while your subscription is active.' }
+              : f
+        ),
+    },
+    apply: {
+      ...t.apply,
+      eyebrow: 'How to join',
+      body: 'Subscribe, tell us about your business, and your program starts the same day. Prefer to talk first? Send us your questions with the form and we reply within 2 working days.',
+      steps: [
+        { title: 'Subscribe', body: 'Secure checkout. InstructJet Premium is included.' },
+        { title: 'Tell us about your business', body: 'Your business profile lets us match events, investors, courses and communities to you.' },
+      ],
+      startTitle: 'Start',
+      startBody: () => 'Daily leadership lessons, weekly hand-picked opportunities and the community, from day one.',
+    },
+    form: { ...t.form, note: 'Questions only. Joining happens through the subscribe button above.' },
+    sticky: { ...t.sticky, label: 'Business Support Program' },
+    impact: {
+      ...t.impact,
+      yearly: (amount: string, roi: string) =>
+        roi ? `${amount} a year, or ${roi}× a year of the programme.` : `${amount} a year.`,
+    },
+  };
+}
+
+function SubscribeButton({ className = '' }: { className?: string }) {
+  const { user, loading } = useAuth();
+  const [busy, setBusy] = useState(false);
+  const [error, setError] = useState('');
+  const base =
+    'flex w-full items-center justify-center gap-2 rounded-full bg-primary-500 px-7 py-4 text-base font-semibold text-white shadow-lg shadow-primary-500/25 transition hover:bg-primary-600 disabled:opacity-60 ' +
+    className;
+
+  if (!loading && !user) {
+    return (
+      <a href={'/signup?next=' + RETURN_TO} className={base}>
+        {SUBSCRIBE_COPY.signup}
+        <ArrowRightIcon className="h-4 w-4" />
+      </a>
+    );
+  }
+  if (user?.subscription_plan === 'business_program') {
+    return (
+      <a href="/leadership-info" className={base}>
+        {SUBSCRIBE_COPY.already}
+        <ArrowRightIcon className="h-4 w-4" />
+      </a>
+    );
+  }
+
+  const start = async () => {
+    setBusy(true);
+    setError('');
+    try {
+      const res = await fetch('/api/paddle/create-subscription', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ plan: 'business_program' }),
+      });
+      if (res.status === 401) {
+        window.location.href = '/login?next=' + RETURN_TO;
+        return;
+      }
+      const data = await res.json();
+      if (data.redirect) {
+        window.location.href = data.redirect;
+        return;
+      }
+      if (!data.checkout_url) throw new Error(data.error || SUBSCRIBE_COPY.failed);
+      window.location.href = data.checkout_url;
+    } catch (e) {
+      setError((e as Error).message || SUBSCRIBE_COPY.failed);
+      setBusy(false);
+    }
+  };
+
+  return (
+    <div>
+      <button onClick={start} disabled={busy || loading} className={base}>
+        {busy ? SUBSCRIBE_COPY.redirecting : SUBSCRIBE_COPY.subscribe}
+        {!busy && <ArrowRightIcon className="h-4 w-4" />}
+      </button>
+      {error && <p className="mt-3 rounded-lg bg-red-500/10 px-3 py-2 text-sm text-red-300">{error}</p>}
+    </div>
   );
 }
 
@@ -103,16 +230,16 @@ function SourceLink({ source }: { source: { label: string; url: string } }) {
 
 function PillarGrid({ pillars, images }: { pillars: LeadershipCopy['program']['business']; images: (string | null)[] }) {
   return (
-    <div className="grid gap-px overflow-hidden rounded-3xl border border-white/10 bg-white/10 sm:grid-cols-2 lg:grid-cols-4">
+    <div className="grid gap-px overflow-hidden rounded-3xl border border-white/10 bg-white/10 sm:grid-cols-2 lg:grid-cols-5">
       {pillars.map((p, i) => (
-        <div key={p.title} className="group bg-slate-950 p-7 transition hover:bg-slate-900">
+        <div key={p.title} className="group bg-slate-950 p-7 transition hover:bg-slate-900 sm:odd:last:col-span-2 lg:odd:last:col-span-1">
           {images[i] && (
             <div className="relative -mx-7 -mt-7 mb-7 aspect-[16/10] overflow-hidden bg-slate-900">
               <Image
                 src={images[i]}
                 alt={p.title}
                 fill
-                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 20vw"
                 className="object-cover transition duration-500 group-hover:scale-105"
               />
             </div>
@@ -199,8 +326,22 @@ function TestimonialSlider({ t }: { t: LeadershipCopy['testimonials'] }) {
 }
 
 /* ─── Business impact calculator ────────────────────────────────── */
-function ImpactCalculator({ t, numberLocale }: { t: LeadershipCopy['impact']; numberLocale: string }) {
-  const [revenue, setRevenue] = useState(50_000_000);
+// Indonesian visitors see Rupiah against the Rp150.000 fee; subscribers see the
+// Paddle currency and compare against a year of the subscription.
+interface CalculatorMoney {
+  currency: string;
+  yearlyCost: number | null;
+}
+
+function ImpactCalculator({ t, numberLocale, money }: { t: LeadershipCopy['impact']; numberLocale: string; money?: CalculatorMoney | null }) {
+  const range = money
+    ? { min: 500, max: 200_000, step: 500, initial: 5_000 }
+    : { min: 5_000_000, max: 1_000_000_000, step: 5_000_000, initial: 50_000_000 };
+  const formatMoney = money
+    ? (n: number) => new Intl.NumberFormat('en-US', { style: 'currency', currency: money.currency, maximumFractionDigits: 0 }).format(Math.round(n))
+    : rupiah;
+  const cost = money ? money.yearlyCost : PRICE;
+  const [revenue, setRevenue] = useState(range.initial);
   const [lifts, setLifts] = useState<Record<string, number>>(() =>
     Object.fromEntries(t.lifts.map((l) => [l.key, l.initial]))
   );
@@ -214,7 +355,7 @@ function ImpactCalculator({ t, numberLocale }: { t: LeadershipCopy['impact']; nu
   const extraMonthly = revenue * (factor - 1);
   const extraYearly = extraMonthly * 12;
   const threeYearFactor = factor ** 3; // the same lifts repeated each year
-  const roi = extraYearly / PRICE;
+  const roi = cost ? extraYearly / cost : null;
 
   return (
     <div className="grid gap-8 lg:grid-cols-5">
@@ -223,14 +364,14 @@ function ImpactCalculator({ t, numberLocale }: { t: LeadershipCopy['impact']; nu
           <div className="flex items-baseline justify-between gap-4">
             <label className="text-sm font-medium text-slate-700">{t.revenue}</label>
             <span className="shrink-0 whitespace-nowrap font-(family-name:--font-display) text-2xl font-semibold text-slate-900 tabular-nums">
-              {rupiah(revenue)}
+              {formatMoney(revenue)}
             </span>
           </div>
           <input
             type="range"
-            min={5_000_000}
-            max={1_000_000_000}
-            step={5_000_000}
+            min={range.min}
+            max={range.max}
+            step={range.step}
             value={revenue}
             onChange={(e) => setRevenue(Number(e.target.value))}
             className="mt-3 w-full accent-primary-500"
@@ -274,11 +415,11 @@ function ImpactCalculator({ t, numberLocale }: { t: LeadershipCopy['impact']; nu
         <div>
           <p className="text-sm text-slate-400">{t.extra}</p>
           <p className="mt-1 break-words font-(family-name:--font-display) text-3xl font-semibold tabular-nums text-white">
-            {rupiah(extraMonthly)}
+            {formatMoney(extraMonthly)}
             <span className="text-base font-normal text-slate-400">{t.perMonth}</span>
           </p>
           <p className="mt-1 text-sm text-slate-300">
-            {t.yearly(rupiah(extraYearly), roi >= 10 ? Math.round(roi).toLocaleString(numberLocale) : decimal(roi))}
+            {t.yearly(formatMoney(extraYearly), roi === null ? '' : roi >= 10 ? Math.round(roi).toLocaleString(numberLocale) : decimal(roi))}
           </p>
         </div>
         <div className="my-6 h-px bg-white/10" />
@@ -458,8 +599,22 @@ function ApplicationForm({ t, locale }: { t: LeadershipCopy['form']; locale: Lea
 }
 
 /* ─── Page ──────────────────────────────────────────────────────── */
-export default function LeadershipLanding({ locale }: { locale: LeadershipLocale }) {
-  const t = LEADERSHIP_COPY[locale];
+export default function LeadershipLanding({
+  locale,
+  checkout = null,
+  canSwitch = true,
+}: {
+  locale: LeadershipLocale;
+  checkout?: ProgramCheckout | null;
+  canSwitch?: boolean;
+}) {
+  const t = checkout ? withSubscribeCopy(LEADERSHIP_COPY[locale]) : LEADERSHIP_COPY[locale];
+  const cta = checkout ? { href: '#pricing', label: SUBSCRIBE_COPY.cta } : { href: '#apply', label: null };
+  const priceText = checkout?.priceLabel ? checkout.priceLabel + (checkout.intervalLabel ?? '') : '';
+  const perDayText =
+    checkout?.yearlyCost && checkout.currency
+      ? new Intl.NumberFormat('en-US', { style: 'currency', currency: checkout.currency, maximumFractionDigits: 2 }).format(checkout.yearlyCost / 365)
+      : null;
   const [showStickyCta, setShowStickyCta] = useState(false);
 
   useEffect(() => {
@@ -475,6 +630,7 @@ export default function LeadershipLanding({ locale }: { locale: LeadershipLocale
   }, []);
 
   return (
+    <CtaContext.Provider value={cta}>
     <main lang={locale} className="bg-[#FAF8F5] text-slate-700 antialiased">
       {/* ═══ HERO ═══════════════════════════════════════════════════ */}
       <section className="relative overflow-hidden bg-slate-950 pt-28 pb-20 sm:pt-36 sm:pb-28">
@@ -495,9 +651,11 @@ export default function LeadershipLanding({ locale }: { locale: LeadershipLocale
           <div className="lg:col-span-7">
             <div className="flex flex-wrap items-center justify-between gap-4">
               <Eyebrow dark>{t.hero.eyebrow}</Eyebrow>
-              <a href={t.switchHref} className="text-sm text-slate-400 underline underline-offset-4 hover:text-white">
-                {t.switchLabel}
-              </a>
+              {canSwitch && (
+                <a href={t.switchHref} className="text-sm text-slate-400 underline underline-offset-4 hover:text-white">
+                  {t.switchLabel}
+                </a>
+              )}
             </div>
             <h1 className="mt-6 font-(family-name:--font-display) text-4xl font-semibold leading-[1.05] tracking-tight text-white sm:text-6xl lg:text-7xl">
               {t.hero.titleBefore}
@@ -555,14 +713,37 @@ export default function LeadershipLanding({ locale }: { locale: LeadershipLocale
               <div className="flex items-end justify-between">
                 <div>
                   <p className="text-xs uppercase tracking-wider text-slate-400">{t.hero.fullProgramme}</p>
-                  <p className="font-(family-name:--font-display) text-4xl font-semibold text-white">{rupiah(PRICE)}</p>
+                  {checkout?.priceLabel ? (
+                    <p className="font-(family-name:--font-display) text-4xl font-semibold text-white">
+                      {checkout.priceLabel}
+                      {checkout.intervalLabel && <span className="text-lg font-normal text-slate-400">{checkout.intervalLabel}</span>}
+                    </p>
+                  ) : (
+                    <p className="font-(family-name:--font-display) text-4xl font-semibold text-white">{checkout ? SUBSCRIBE_COPY.cta : rupiah(PRICE)}</p>
+                  )}
                 </div>
-                <p className="text-right text-sm text-slate-400">
-                  ≈ {rupiah(PRICE / PROGRAM_DAYS)}
-                  <br />
-                  {t.hero.perDay}
-                </p>
+                {checkout ? (
+                  perDayText && (
+                    <p className="text-right text-sm text-slate-400">
+                      ≈ {perDayText}
+                      <br />
+                      {t.hero.perDay}
+                    </p>
+                  )
+                ) : (
+                  <p className="text-right text-sm text-slate-400">
+                    ≈ {rupiah(PRICE / PROGRAM_DAYS)}
+                    <br />
+                    {t.hero.perDay}
+                  </p>
+                )}
               </div>
+              {checkout && (
+                <>
+                  <SubscribeButton className="mt-6" />
+                  <p className="mt-3 text-center text-xs text-slate-400">{SUBSCRIBE_COPY.cancel}</p>
+                </>
+              )}
             </div>
           </div>
         </div>
@@ -732,7 +913,11 @@ export default function LeadershipLanding({ locale }: { locale: LeadershipLocale
             <p className="mt-6 text-lg text-slate-600">{t.impact.body}</p>
           </div>
           <div className="mt-14">
-            <ImpactCalculator t={t.impact} numberLocale={t.numberLocale} />
+            <ImpactCalculator
+              t={t.impact}
+              numberLocale={t.numberLocale}
+              money={checkout ? { currency: checkout.currency || 'USD', yearlyCost: checkout.yearlyCost } : null}
+            />
           </div>
         </div>
       </section>
@@ -977,12 +1162,27 @@ export default function LeadershipLanding({ locale }: { locale: LeadershipLocale
             </div>
             <div className="flex flex-col justify-center border-t border-white/10 bg-white/[0.03] p-8 sm:p-12 lg:col-span-2 lg:border-l lg:border-t-0">
               <p className="text-sm text-slate-400">{t.pricing.fullProgramme}</p>
-              <p className="mt-2 font-(family-name:--font-display) text-5xl font-semibold text-white">{rupiah(PRICE)}</p>
-              <p className="mt-2 text-slate-400">{t.pricing.oneTime(rupiah(PRICE / PROGRAM_DAYS))}</p>
-              <PrimaryCTA label={t.cta} className="mt-8 w-full" />
+              {checkout ? (
+                <>
+                  <p className="mt-2 font-(family-name:--font-display) text-5xl font-semibold text-white">
+                    {checkout.priceLabel || SUBSCRIBE_COPY.cta}
+                    {checkout.priceLabel && checkout.intervalLabel && (
+                      <span className="text-lg font-normal text-slate-400">{checkout.intervalLabel}</span>
+                    )}
+                  </p>
+                  <p className="mt-2 text-slate-400">{SUBSCRIBE_COPY.perks}</p>
+                  <SubscribeButton className="mt-8" />
+                </>
+              ) : (
+                <>
+                  <p className="mt-2 font-(family-name:--font-display) text-5xl font-semibold text-white">{rupiah(PRICE)}</p>
+                  <p className="mt-2 text-slate-400">{t.pricing.oneTime(rupiah(PRICE / PROGRAM_DAYS))}</p>
+                  <PrimaryCTA label={t.cta} className="mt-8 w-full" />
+                </>
+              )}
               <div className="mt-6 space-y-3 text-sm text-slate-400">
                 <p className="flex gap-2">
-                  <ShieldCheckIcon className="h-5 w-5 shrink-0 text-amber-300" /> {t.pricing.noPayment}
+                  <ShieldCheckIcon className="h-5 w-5 shrink-0 text-amber-300" /> {checkout ? SUBSCRIBE_COPY.cancel : t.pricing.noPayment}
                 </p>
                 <p className="flex gap-2">
                   <ClockIcon className="h-5 w-5 shrink-0 text-amber-300" /> {t.pricing.seats(COHORT_SEATS)}
@@ -1047,13 +1247,16 @@ export default function LeadershipLanding({ locale }: { locale: LeadershipLocale
         <div className="flex items-center justify-between gap-4">
           <div>
             <p className="text-xs text-slate-500">{t.sticky.label}</p>
-            <p className="font-(family-name:--font-display) text-xl font-semibold text-slate-900">{rupiah(PRICE)}</p>
+            <p className="font-(family-name:--font-display) text-xl font-semibold text-slate-900">
+              {checkout ? priceText : rupiah(PRICE)}
+            </p>
           </div>
-          <a href="#apply" className="rounded-full bg-primary-500 px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-primary-500/25">
-            {t.sticky.cta}
+          <a href={cta.href} className="rounded-full bg-primary-500 px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-primary-500/25">
+            {checkout ? SUBSCRIBE_COPY.cta : t.sticky.cta}
           </a>
         </div>
       </div>
     </main>
+    </CtaContext.Provider>
   );
 }

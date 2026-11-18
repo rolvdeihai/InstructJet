@@ -240,6 +240,16 @@ export default function Navbar() {
                         <Cog6ToothIcon className="h-5 w-5 text-gray-400" />
                         Settings
                       </Link>
+                      {user.role === 'admin' && (
+                        <Link
+                          href="/admin"
+                          className="flex items-center gap-3 px-4 py-2.5 text-sm text-gray-700 hover:bg-primary-50 hover:text-primary-700 transition-colors"
+                          onClick={() => setIsUserMenuOpen(false)}
+                        >
+                          <Cog6ToothIcon className="h-5 w-5 text-gray-400" />
+                          Admin
+                        </Link>
+                      )}
                       <hr className="my-1 border-gray-200" />
                       <button
                         onClick={() => {

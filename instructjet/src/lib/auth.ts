@@ -48,11 +48,14 @@ export async function getUserFromSession(token: string | undefined) {
   // 3. Fetch the user from users table with all required fields
   const { data: user, error: userError } = await supabaseAdmin
     .from('users')
-    .select('id, email, full_name, plan_tier, current_period_end')
+    .select('id, email, full_name, plan_tier, current_period_end, role, is_active, subscription_plan')
     .eq('id', session.user_id)
     .single();
 
   if (userError || !user) return null;
+
+  // Deactivated accounts lose access immediately (admin dashboard)
+  if (user.is_active === false) return null;
 
   return user;
 }

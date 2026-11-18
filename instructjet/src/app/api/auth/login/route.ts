@@ -30,6 +30,10 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: 'Invalid credentials' }, { status: 401 });
     }
 
+    if (user.is_active === false) {
+      return NextResponse.json({ error: 'This account has been deactivated. Please contact support.' }, { status: 403 });
+    }
+
     // 🧹 DELETE any existing sessions for this user (to avoid multiple valid sessions)
     await supabaseAdmin
       .from('sessions')

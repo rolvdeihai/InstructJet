@@ -9,6 +9,8 @@ interface User {
   full_name: string | null;
   plan_tier: string;
   current_period_end?: string | null;
+  role?: string | null;
+  subscription_plan?: string | null;
 }
 
 interface AuthContextType {
@@ -52,7 +54,9 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       throw new Error(data.error || 'Login failed');
     }
     setUser(data.user);
-    router.push('/dashboard');
+    // ?next=/some/path (same-site only) sends the user back where they came from
+    const next = new URLSearchParams(window.location.search).get('next');
+    router.push(next && next.startsWith('/') && !next.startsWith('//') ? next : '/dashboard');
   };
 
   // Updated register to accept verificationToken

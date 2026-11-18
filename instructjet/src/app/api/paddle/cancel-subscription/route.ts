@@ -80,6 +80,7 @@ export async function POST(request: NextRequest) {
       .from('users')
       .update({
         plan_tier: 'free',
+        subscription_plan: null,
         subscription_status: 'canceled',
         subscription_id: null,
         current_period_end: null,
