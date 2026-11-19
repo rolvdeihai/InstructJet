@@ -43,6 +43,19 @@
   Checkout returns to `/leadership-info?welcome=1`, which waits for the webhook.
 - **/leadership-info**: business profile (drives matching), capstone (opens 90 days after
   `subscribed_at` or when the admin unlocks it), Discord link and email opt-out.
+- **Help requests** (`/leadership-info?tab=requests`, migration
+  `20261119000000_program_requests.sql`): active participants request a **helper / worker**
+  (toggle; role, what they need help with, skills, commitment, work mode, wage range +
+  currency + period, or *Volunteer / unpaid*, start date) or **funding / investment** (type, amount, use of funds,
+  traction, equity, pitch deck). Every active admin user, plus `PROGRAM_ADMIN_EMAILS`
+  (optional, comma separated), is emailed a summary with a link to **Admin → Help requests**.
+  There the admin approves or disapproves; the message box starts with the default text
+  for that request type and decision and can be edited per request. The defaults are edited
+  in **Admin → Help requests → ⚙ Default messages** (saved in `program_settings.request_messages`,
+  migration `20261119010000_request_default_messages.sql`); blank ones fall back to the
+  built-in `DEFAULT_DECISION_MESSAGE` in `src/lib/program/requests.ts`. The participant is emailed the decision
+  and message (untick "Email the participant" to skip), and also sees it on their page.
+  Participants can withdraw pending requests; at most 5 can be pending at once.
 - **Capstone → claim**: draft → submitted → claimed (shows in Admin → Capstones as
   "Eligible") → approved / needs revision / Claude Cowork granted.
 - **Daily email** (one per participant per day, only if something is due):

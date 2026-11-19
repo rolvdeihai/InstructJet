@@ -1,12 +1,13 @@
 // src/components/admin/AdminDashboard.tsx
 'use client';
 
-import { useCallback, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { Notice } from './ui';
 import OverviewTab from './OverviewTab';
 import UsersTab from './UsersTab';
 import ParticipantsTab from './ParticipantsTab';
 import CapstonesTab from './CapstonesTab';
+import RequestsTab from './RequestsTab';
 import CatalogTab from './CatalogTab';
 import LessonsTab from './LessonsTab';
 
@@ -14,6 +15,7 @@ const TABS = [
   { id: 'overview', label: 'Overview & emails' },
   { id: 'users', label: 'Users' },
   { id: 'participants', label: 'Program participants' },
+  { id: 'requests', label: 'Help requests' },
   { id: 'capstones', label: 'Capstones & claims' },
   { id: 'catalog', label: 'Catalog' },
   { id: 'lessons', label: 'Crash-course lessons' },
@@ -25,6 +27,12 @@ export default function AdminDashboard({ adminId }: { adminId: string }) {
   const [msg, setMsg] = useState<{ tone: 'success' | 'error'; text: string } | null>(null);
   const toast = useCallback((tone: 'success' | 'error', text: string) => setMsg({ tone, text }), []);
   const clear = useCallback(() => setMsg(null), []);
+
+  // Deep link from admin emails: /admin?tab=requests
+  useEffect(() => {
+    const t = new URLSearchParams(window.location.search).get('tab');
+    if (t && TABS.some((x) => x.id === t)) setTab(t as TabId);
+  }, []);
 
   return (
     <main className="min-h-screen bg-gray-50 px-4 pb-20 pt-24 sm:px-6">
@@ -47,6 +55,7 @@ export default function AdminDashboard({ adminId }: { adminId: string }) {
           {tab === 'overview' && <OverviewTab toast={toast} />}
           {tab === 'users' && <UsersTab toast={toast} adminId={adminId} />}
           {tab === 'participants' && <ParticipantsTab toast={toast} />}
+          {tab === 'requests' && <RequestsTab toast={toast} />}
           {tab === 'capstones' && <CapstonesTab toast={toast} />}
           {tab === 'catalog' && <CatalogTab toast={toast} />}
           {tab === 'lessons' && <LessonsTab toast={toast} />}

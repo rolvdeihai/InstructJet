@@ -3,6 +3,7 @@
 // Server-only helpers for the Business Support Program.
 import { NextRequest } from 'next/server';
 import { supabaseAdmin } from '@/lib/supabase-admin';
+import { mergeDecisionMessages, type DecisionMessages } from './requests';
 
 export interface ProgramSettings {
   id: number;
@@ -17,6 +18,7 @@ export interface ProgramSettings {
   last_daily_run_at: string | null;
   last_scrape_at: string | null;
   last_scrape_result: unknown;
+  request_messages?: unknown;
 }
 
 export async function getProgramSettings(): Promise<ProgramSettings> {
@@ -27,6 +29,12 @@ export async function getProgramSettings(): Promise<ProgramSettings> {
   // Row missing (migration seeds it, but be defensive)
   const { data: created } = await supabaseAdmin.from('program_settings').upsert({ id: 1 }).select('*').single();
   return { ...created, discord_url: created?.discord_url || process.env.PROGRAM_DISCORD_URL || null };
+}
+
+/** Default approve / disapprove messages for help requests (admin overrides + built-ins). */
+export async function getDecisionMessages(): Promise<DecisionMessages> {
+  const { data } = await supabaseAdmin.from('program_settings').select('request_messages').eq('id', 1).maybeSingle();
+  return mergeDecisionMessages(data?.request_messages);
 }
 
 export async function getParticipantByUserId(userId: string) {

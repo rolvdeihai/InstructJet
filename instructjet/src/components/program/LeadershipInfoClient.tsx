@@ -20,6 +20,22 @@ import {
   type CapstoneProject,
   type ProgramProfile,
 } from '@/lib/program/config';
+import {
+  COMMITMENTS,
+  CURRENCIES,
+  FUNDING_TYPES,
+  HELPER_KINDS,
+  REQUEST_STATUS_LABEL,
+  REQUEST_TYPE_LABEL,
+  requestTitle,
+  UNPAID,
+  WAGE_PERIODS,
+  WORK_MODES,
+  type FundingDetails,
+  type HelperDetails,
+  type RequestStatus,
+  type RequestType,
+} from '@/lib/program/requests';
 
 interface Capstone {
   id: string;
@@ -42,7 +58,8 @@ interface ProgramState {
   discordUrl: string | null;
 }
 
-type Tab = 'profile' | 'capstone' | 'community';
+type Tab = 'profile' | 'requests' | 'capstone' | 'community';
+const TAB_IDS: Tab[] = ['profile', 'requests', 'capstone', 'community'];
 
 const input =
   'w-full rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm text-gray-900 focus:border-primary-500 focus:outline-none focus:ring-2 focus:ring-primary-500/20';
@@ -462,6 +479,302 @@ function CapstoneSection({ state, onChanged }: { state: ProgramState; onChanged:
   );
 }
 
+/* ─── Help requests: helper / worker, funding / investment ───── */
+interface HelpRequest {
+  id: string;
+  type: RequestType;
+  status: RequestStatus;
+  details: Record<string, string>;
+  admin_message: string | null;
+  reviewed_at: string | null;
+  created_at: string;
+}
+
+const REQUEST_TONE: Record<RequestStatus, string> = {
+  pending: 'bg-blue-100 text-blue-800',
+  approved: 'bg-green-100 text-green-800',
+  rejected: 'bg-red-100 text-red-800',
+  withdrawn: 'bg-gray-100 text-gray-600',
+};
+
+function HelperForm({ d, set }: { d: HelperDetails; set: (k: keyof HelperDetails, v: string) => void }) {
+  const unpaid = d.wage_period === UNPAID;
+  const on = (k: keyof HelperDetails) => (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => set(k, e.target.value);
+  return (
+    <div className="grid gap-4 sm:grid-cols-2">
+      <div className="sm:col-span-2">
+        <span className={label}>I am looking for a</span>
+        <div className="inline-flex rounded-full border border-gray-300 bg-gray-50 p-1">
+          {HELPER_KINDS.map((k) => (
+            <button
+              type="button"
+              key={k.value}
+              onClick={() => set('kind', k.value)}
+              className={`rounded-full px-5 py-1.5 text-sm font-semibold transition ${d.kind === k.value ? 'bg-primary-600 text-white shadow' : 'text-gray-700 hover:text-gray-900'}`}
+            >
+              {k.label}
+            </button>
+          ))}
+        </div>
+        <p className="mt-1 text-xs text-gray-500">{HELPER_KINDS.find((k) => k.value === d.kind)?.hint}</p>
+      </div>
+      <div className="sm:col-span-2">
+        <Field title="Role title" required hint="e.g. Social media admin, Barista, Bookkeeper, Delivery driver">
+          <input className={input} value={d.role_title || ''} onChange={on('role_title')} maxLength={150} />
+        </Field>
+      </div>
+      <div className="sm:col-span-2">
+        <Field title="What do you need help with?" required hint="The tasks, the problem to solve, and what a good result looks like.">
+          <textarea className={input} rows={4} value={d.help_needed || ''} onChange={on('help_needed')} maxLength={3000} />
+        </Field>
+      </div>
+      <div className="sm:col-span-2">
+        <Field title="Skills or experience needed">
+          <textarea className={input} rows={2} value={d.skills || ''} onChange={on('skills')} maxLength={1000} />
+        </Field>
+      </div>
+      <Field title="Commitment">
+        <select className={input} value={d.commitment || ''} onChange={on('commitment')}>
+          <option value="">Select…</option>
+          {COMMITMENTS.map((c) => (
+            <option key={c}>{c}</option>
+          ))}
+        </select>
+      </Field>
+      <Field title="Work mode">
+        <select className={input} value={d.work_mode || ''} onChange={on('work_mode')}>
+          <option value="">Select…</option>
+          {WORK_MODES.map((c) => (
+            <option key={c}>{c}</option>
+          ))}
+        </select>
+      </Field>
+      <Field title="Location" hint="City or area, if on-site or hybrid">
+        <input className={input} value={d.location || ''} onChange={on('location')} maxLength={150} />
+      </Field>
+      <Field title="How many people?">
+        <input className={input} inputMode="numeric" value={d.headcount || ''} onChange={on('headcount')} maxLength={6} placeholder="1" />
+      </Field>
+      <div className="sm:col-span-2">
+        <span className={label}>
+          Wage you can offer<span className="text-primary-600"> *</span>
+        </span>
+        <div className={`grid gap-2 ${unpaid ? 'sm:grid-cols-[1fr_3fr]' : 'grid-cols-2 sm:grid-cols-[1fr_0.8fr_1fr_1fr]'}`}>
+          <select className={input} value={d.wage_period || ''} onChange={on('wage_period')} aria-label="Wage period">
+            <option value="">Paid…</option>
+            {WAGE_PERIODS.map((c) => (
+              <option key={c}>{c}</option>
+            ))}
+          </select>
+          {unpaid ? (
+            <p className="self-center text-sm text-gray-500">No wage: this is a volunteer / unpaid role.</p>
+          ) : (
+            <>
+              <select className={input} value={d.wage_currency || 'IDR'} onChange={on('wage_currency')} aria-label="Currency">
+                {CURRENCIES.map((c) => (
+                  <option key={c}>{c}</option>
+                ))}
+              </select>
+              <input className={input} inputMode="decimal" placeholder="From" value={d.wage_min || ''} onChange={on('wage_min')} aria-label="Wage from" />
+              <input className={input} inputMode="decimal" placeholder="To (optional)" value={d.wage_max || ''} onChange={on('wage_max')} aria-label="Wage to" />
+            </>
+          )}
+        </div>
+      </div>
+      <Field title="Start date">
+        <input type="date" className={input} value={d.start_date || ''} onChange={on('start_date')} />
+      </Field>
+      <div className="sm:col-span-2">
+        <Field title="Anything else?">
+          <textarea className={input} rows={2} value={d.notes || ''} onChange={on('notes')} maxLength={2000} />
+        </Field>
+      </div>
+    </div>
+  );
+}
+
+function FundingForm({ d, set }: { d: FundingDetails; set: (k: keyof FundingDetails, v: string) => void }) {
+  const on = (k: keyof FundingDetails) => (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => set(k, e.target.value);
+  return (
+    <div className="grid gap-4 sm:grid-cols-2">
+      <Field title="Type of funding" required>
+        <select className={input} value={d.funding_type || ''} onChange={on('funding_type')}>
+          <option value="">Select…</option>
+          {FUNDING_TYPES.map((c) => (
+            <option key={c}>{c}</option>
+          ))}
+        </select>
+      </Field>
+      <div>
+        <span className={label}>
+          Amount you want to raise<span className="text-primary-600"> *</span>
+        </span>
+        <div className="grid grid-cols-[0.8fr_2fr] gap-2">
+          <select className={input} value={d.currency || 'IDR'} onChange={on('currency')} aria-label="Currency">
+            {CURRENCIES.map((c) => (
+              <option key={c}>{c}</option>
+            ))}
+          </select>
+          <input className={input} inputMode="decimal" value={d.amount || ''} onChange={on('amount')} aria-label="Amount" />
+        </div>
+      </div>
+      <div className="sm:col-span-2">
+        <Field title="How will you use the funds?" required hint="e.g. 40% inventory, 30% marketing, 30% second outlet">
+          <textarea className={input} rows={3} value={d.use_of_funds || ''} onChange={on('use_of_funds')} maxLength={3000} />
+        </Field>
+      </div>
+      <div className="sm:col-span-2">
+        <Field title="Traction so far" hint="Revenue, growth, customers, partnerships — numbers help.">
+          <textarea className={input} rows={3} value={d.traction || ''} onChange={on('traction')} maxLength={2000} />
+        </Field>
+      </div>
+      <Field title="Equity you would offer" hint="For equity investment, e.g. 10%">
+        <input className={input} value={d.equity_offered || ''} onChange={on('equity_offered')} maxLength={200} />
+      </Field>
+      <Field title="When do you need it?" hint="e.g. within 3 months">
+        <input className={input} value={d.timeline || ''} onChange={on('timeline')} maxLength={200} />
+      </Field>
+      <Field title="Raised funding before?" hint="From whom and how much, if any">
+        <input className={input} value={d.raised_before || ''} onChange={on('raised_before')} maxLength={500} />
+      </Field>
+      <Field title="Pitch deck or business plan link">
+        <input className={input} value={d.pitch_deck_url || ''} onChange={on('pitch_deck_url')} placeholder="https://" maxLength={500} />
+      </Field>
+      <div className="sm:col-span-2">
+        <Field title="Anything else?">
+          <textarea className={input} rows={2} value={d.notes || ''} onChange={on('notes')} maxLength={2000} />
+        </Field>
+      </div>
+    </div>
+  );
+}
+
+function RequestsSection({ inactive }: { inactive: boolean }) {
+  const [list, setList] = useState<HelpRequest[] | null>(null);
+  const [type, setType] = useState<RequestType>('helper');
+  const [helper, setHelper] = useState<HelperDetails>({ kind: 'helper', wage_currency: 'IDR' });
+  const [funding, setFunding] = useState<FundingDetails>({ currency: 'IDR' });
+  const [busy, setBusy] = useState(false);
+  const [msg, setMsg] = useState<{ tone: 'success' | 'error'; text: string } | null>(null);
+
+  const load = useCallback(async () => {
+    const res = await fetch('/api/program/requests', { cache: 'no-store' });
+    const data = await res.json().catch(() => ({}));
+    setList(res.ok ? data.requests : []);
+  }, []);
+
+  useEffect(() => {
+    load();
+  }, [load]);
+
+  const submit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setBusy(true);
+    setMsg(null);
+    try {
+      const res = await fetch('/api/program/requests', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ type, details: type === 'helper' ? helper : funding }),
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || 'Failed to send request');
+      setMsg({ tone: 'success', text: 'Request sent. Our team will review it and email you the decision.' });
+      if (type === 'helper') setHelper({ kind: helper.kind, wage_currency: helper.wage_currency });
+      else setFunding({ currency: funding.currency });
+      load();
+    } catch (err) {
+      setMsg({ tone: 'error', text: (err as Error).message });
+    } finally {
+      setBusy(false);
+    }
+  };
+
+  const withdraw = async (id: string) => {
+    const res = await fetch('/api/program/requests', {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ id, action: 'withdraw' }),
+    });
+    if (res.ok) load();
+  };
+
+  return (
+    <div className="space-y-6">
+      <form onSubmit={submit} className={card}>
+        <h3 className="text-lg font-semibold text-gray-900">Ask us for help</h3>
+        <p className="mt-1 text-sm text-gray-600">
+          Need people on your team or money to grow? Tell us what you need and our team will review it and help connect you.
+        </p>
+        <div className="mt-4 grid grid-cols-2 gap-2">
+          {(['helper', 'funding'] as const).map((t) => (
+            <button
+              type="button"
+              key={t}
+              onClick={() => {
+                setType(t);
+                setMsg(null);
+              }}
+              className={`rounded-xl border px-4 py-3 text-left text-sm transition ${type === t ? 'border-primary-600 bg-primary-50 ring-2 ring-primary-500/20' : 'border-gray-200 bg-white hover:border-gray-300'}`}
+            >
+              <span className="block font-semibold text-gray-900">{t === 'helper' ? 'Request a helper / worker' : 'Request funding / investment'}</span>
+              <span className="mt-0.5 block text-xs text-gray-500">
+                {t === 'helper' ? 'Find people to help with tasks or join your team' : 'Investor introductions, loans, grants and advice'}
+              </span>
+            </button>
+          ))}
+        </div>
+
+        <fieldset disabled={inactive || busy} className="mt-6 disabled:opacity-70">
+          {type === 'helper' ? (
+            <HelperForm d={helper} set={(k, v) => setHelper({ ...helper, [k]: v })} />
+          ) : (
+            <FundingForm d={funding} set={(k, v) => setFunding({ ...funding, [k]: v })} />
+          )}
+        </fieldset>
+
+        {msg && <div className="mt-4"><Banner tone={msg.tone}>{msg.text}</Banner></div>}
+        <button
+          type="submit"
+          disabled={inactive || busy}
+          className="mt-5 w-full rounded-full bg-primary-600 px-6 py-3 font-semibold text-white transition hover:bg-primary-700 disabled:opacity-60 sm:w-auto"
+        >
+          {busy ? 'Sending…' : 'Send request'}
+        </button>
+      </form>
+
+      <div className={card}>
+        <h3 className="text-lg font-semibold text-gray-900">Your requests</h3>
+        {list === null && <p className="mt-3 text-sm text-gray-500">Loading…</p>}
+        {list?.length === 0 && <p className="mt-3 text-sm text-gray-500">You have not sent any requests yet.</p>}
+        <ul className="mt-3 space-y-3">
+          {list?.map((r) => (
+            <li key={r.id} className="rounded-xl border border-gray-100 bg-gray-50 p-4">
+              <div className="flex flex-wrap items-start justify-between gap-2">
+                <div className="min-w-0">
+                  <p className="font-semibold text-gray-900">{requestTitle(r.type, r.details)}</p>
+                  <p className="text-xs text-gray-500">
+                    {REQUEST_TYPE_LABEL[r.type]} · sent {new Date(r.created_at).toLocaleDateString('en-US', { day: 'numeric', month: 'short', year: 'numeric' })}
+                  </p>
+                </div>
+                <span className={`rounded-full px-3 py-1 text-xs font-semibold ${REQUEST_TONE[r.status]}`}>{REQUEST_STATUS_LABEL[r.status]}</span>
+              </div>
+              {r.admin_message && (r.status === 'approved' || r.status === 'rejected') && (
+                <p className="mt-3 whitespace-pre-wrap rounded-lg bg-white p-3 text-sm text-gray-700">{r.admin_message}</p>
+              )}
+              {r.status === 'pending' && (
+                <button onClick={() => withdraw(r.id)} className="mt-2 text-xs font-medium text-gray-500 hover:text-red-600 hover:underline">
+                  Withdraw request
+                </button>
+              )}
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  );
+}
+
 /* ─── Community & emails ─────────────────────────────────────── */
 function CommunitySection({ state, onChanged }: { state: ProgramState; onChanged: () => void }) {
   const [saving, setSaving] = useState(false);
@@ -542,7 +855,10 @@ export default function LeadershipInfoClient() {
       return;
     }
     let cancelled = false;
-    const welcome = new URLSearchParams(window.location.search).get('welcome') === '1';
+    const params = new URLSearchParams(window.location.search);
+    const welcome = params.get('welcome') === '1';
+    const linkedTab = params.get('tab') as Tab | null;
+    if (linkedTab && TAB_IDS.includes(linkedTab)) setTab(linkedTab);
     (async () => {
       let data = await load();
       // Right after checkout the Paddle webhook may still be on its way
@@ -594,6 +910,7 @@ export default function LeadershipInfoClient() {
   const inactive = state.participant.status !== 'active';
   const tabs: { id: Tab; label: string; badge?: string }[] = [
     { id: 'profile', label: 'Business profile', badge: state.profileComplete ? undefined : 'To do' },
+    { id: 'requests', label: 'Get help' },
     { id: 'capstone', label: 'Capstone', badge: state.capstoneUnlocked && (!state.capstone || state.capstone.status === 'draft') ? 'Open' : undefined },
     { id: 'community', label: 'Community & emails' },
   ];
@@ -637,6 +954,7 @@ export default function LeadershipInfoClient() {
           {tab === 'profile' && (
             <ProfileForm initial={state.profile} onSaved={(complete, profile) => setState({ ...state, profile, profileComplete: complete })} />
           )}
+          {tab === 'requests' && <RequestsSection inactive={inactive} />}
           {tab === 'capstone' && <CapstoneSection key={state.capstone?.status || 'new'} state={state} onChanged={load} />}
           {tab === 'community' && <CommunitySection state={state} onChanged={load} />}
         </div>
