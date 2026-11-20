@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import SocialLinks from '@/components/SocialLinks';
 
 export default function Footer() {
   return (
@@ -10,6 +11,7 @@ export default function Footer() {
             <p className="text-gray-400 text-sm">
               Create clear task guides with AI. Share them with a link. Let workers submit evidence for feedback.
             </p>
+            <SocialLinks variant="dark" className="mt-5" />
           </div>
           <div>
             <h4 className="text-md font-semibold mb-4">Product</h4>

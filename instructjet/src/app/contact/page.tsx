@@ -5,6 +5,7 @@ import { useState } from 'react';
 import Link from 'next/link';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+import SocialLinks from '@/components/SocialLinks';
 
 export default function ContactPage() {
   const [name, setName] = useState('');
@@ -151,6 +152,12 @@ export default function ContactPage() {
             <p className="text-gray-500 text-sm mt-2">
               We aim to respond within 1 business day.
             </p>
+            <div className="mt-4 pt-4 border-t border-gray-200">
+              <p className="text-gray-600 text-sm mb-3">
+                Follow us for updates, or join our Discord community to ask questions and meet other users:
+              </p>
+              <SocialLinks showLabels />
+            </div>
           </div>
 
           <div className="mt-12 text-center">

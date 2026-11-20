@@ -4,6 +4,18 @@ import ClientTokenResetWrapper from '@/components/ClientTokenResetWrapper';
 import './globals.css';
 import { PaddleProvider } from '@/components/PaddleProvider';
 import SiteTranslator from '@/components/SiteTranslator';
+import { SOCIAL_LINKS } from '@/lib/social';
+
+// Organization structured data: lets search engines tie the official social
+// profiles to instructjet.com (sameAs), which helps with brand trust/knowledge panels.
+const organizationJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: 'InstructJet',
+  url: 'https://instructjet.com',
+  logo: 'https://instructjet.com/instructjet_logo.png',
+  sameAs: SOCIAL_LINKS.map((s) => s.href),
+};
 
 export const metadata = {
   title: {
@@ -84,6 +96,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en">
       <body>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(organizationJsonLd).replace(/</g, '\\u003c'),
+          }}
+        />
         <AuthProvider>
           <ClientTokenResetWrapper>
             <PaddleProvider />

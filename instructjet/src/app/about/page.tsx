@@ -5,6 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+import SocialLinks from '@/components/SocialLinks';
 
 export default function AboutPage() {
   return (
@@ -187,6 +188,15 @@ export default function AboutPage() {
                 </a>
               </div>
             </div>
+          </div>
+
+          {/* ─── Connect ───────────────────────────────────────────── */}
+          <div className="mt-12 bg-gray-50 rounded-xl p-6 border border-gray-100 text-center">
+            <h2 className="text-xl font-bold text-gray-800">Connect with InstructJet</h2>
+            <p className="text-gray-600 text-sm mt-1 mb-4">
+              Follow our updates on LinkedIn and Instagram, or join the community on Discord.
+            </p>
+            <SocialLinks showLabels className="justify-center" />
           </div>
 
           {/* ─── Back to Home ──────────────────────────────────────── */}
